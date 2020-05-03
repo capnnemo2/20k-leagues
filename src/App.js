@@ -1,14 +1,15 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Nav from "./Nav/Nav";
+import Header from "./Header/Header";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <nav>Nav</nav>
+      <Nav />
       <main>
-        <header>
-          <h1>Hero</h1>
-        </header>
+        <Header />
 
         <section>Section 1</section>
 
