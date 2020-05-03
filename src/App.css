@@ -29,3 +29,12 @@ section {
 section:nth-child(even) {
   background-color: #ddd;
 }
+
+a {
+  text-decoration: none;
+  color: darkblue;
+}
+
+footer {
+  font-size: 0.7em;
+}

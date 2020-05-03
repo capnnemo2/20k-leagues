@@ -1,0 +1,17 @@
+.nav-container {
+  display: flex;
+}
+
+.nav-container a:first-child {
+  margin-right: auto;
+}
+
+.nav-container a {
+  padding: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.nav-container a:hover {
+  color: deepskyblue;
+}

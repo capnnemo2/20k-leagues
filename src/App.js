@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Nav from "./Nav/Nav";
 import Header from "./Header/Header";
+import Home from "./Home/Home";
+import Dashboard from "./Dashboard/Dashboard";
 import "./App.css";
 
 function App() {
@@ -10,16 +12,12 @@ function App() {
       <Nav />
       <main>
         <Header />
-
-        <section>Section 1</section>
-
-        <section>Section 2</section>
-
-        <section>Section 3</section>
-
-        <section>Section 4</section>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
+        </Switch>
       </main>
-      <footer>Footer</footer>
+      <footer>&copy;2020 Ben Hernandez</footer>
     </div>
   );
 }
