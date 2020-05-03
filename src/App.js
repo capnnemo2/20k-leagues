@@ -4,6 +4,7 @@ import Nav from "./Nav/Nav";
 import Header from "./Header/Header";
 import Home from "./Home/Home";
 import Dashboard from "./Dashboard/Dashboard";
+import Profile from "./Profile/Profile";
 import DiveDetails from "./DiveDetails/DiveDetails";
 import "./App.css";
 
@@ -16,6 +17,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/profile" component={Profile} />
           <Route path="/dive-details" component={DiveDetails} />
         </Switch>
       </main>

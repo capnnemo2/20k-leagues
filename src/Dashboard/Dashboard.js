@@ -6,6 +6,10 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div className="Dashboard">
+        <section>
+          You should be able to access your account profile:
+          <Link to="/profile"> My Profile</Link>
+        </section>
         <section>Maybe you will be able to filter the dives listed?</section>
 
         <section>

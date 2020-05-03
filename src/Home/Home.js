@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default class Home extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export default class Home extends React.Component {
 
         <section>
           Although the animals you can find might be severely limited.
+          <Link to="/login"></Link>
         </section>
       </div>
     );
