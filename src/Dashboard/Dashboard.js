@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Dashboard.css";
 
 export default class Dashboard extends React.Component {
@@ -9,7 +10,10 @@ export default class Dashboard extends React.Component {
 
         <section>
           Your dives will be listed here, perhaps as cards, maybe just a plain
-          list?
+          list? They will only display some basic info here: dive #,
+          location/country, date, site. If you click, it will take you to see
+          more details.
+          <Link to="/dive-details"> Example</Link>
         </section>
 
         <section>
