@@ -5,7 +5,13 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className="Home">
-        <section>This is the home/landing page.</section>
+        <section>
+          <p>This is the home/landing page.</p>
+          <p>
+            <Link to="/login">Login</Link> to an existing account. Or
+            <Link to="/sign-up"> create</Link> a new account.
+          </p>
+        </section>
 
         <section>This app is a dive log.</section>
 
@@ -13,7 +19,6 @@ export default class Home extends React.Component {
 
         <section>
           Although the animals you can find might be severely limited.
-          <Link to="/login"></Link>
         </section>
       </div>
     );

@@ -8,6 +8,7 @@ export default class Nav extends React.Component {
       <div className="nav-container">
         <Link to="/">20k Leagues</Link>
         <Link to="/dashboard">My Log</Link>
+        <Link to="/profile">My Profile</Link>
       </div>
     );
   }

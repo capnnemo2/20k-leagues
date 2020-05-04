@@ -7,10 +7,15 @@ export default class Dashboard extends React.Component {
     return (
       <div className="Dashboard">
         <section>
+          <h2>User_name's Dive Log</h2>
           You should be able to access your account profile:
           <Link to="/profile"> My Profile</Link>
         </section>
-        <section>Maybe you will be able to filter the dives listed?</section>
+        <section>
+          Maybe you will be able to filter the dives listed? Search keyword from
+          description? Some way to find that dive where x happened, but you
+          don't remember which dive it was.
+        </section>
 
         <section>
           Your dives will be listed here, perhaps as cards, maybe just a plain

@@ -35,6 +35,10 @@ a {
   color: darkblue;
 }
 
+a:hover {
+  color: deepskyblue;
+}
+
 footer {
   font-size: 0.7em;
 }
