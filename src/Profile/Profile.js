@@ -8,11 +8,13 @@ export default class Profile extends React.Component {
       <div className="Profile">
         <section>
           <h2>My Profile</h2>
+          My email: bob@gmail.com
+          <br />
           <Link to="/edit-profile">Edit profile</Link>
         </section>
-        <section>My email: bob@gmail.com</section>
         <section>
           <h2>Certifications</h2>
+          <hr />
           <ul className="certifications">
             <li>
               <ul className="cert">
@@ -38,6 +40,22 @@ export default class Profile extends React.Component {
                 <li>Diver number: 2345nmb435</li>
               </ul>
             </li>
+          </ul>
+          <h3>Diver Specialities</h3>
+          <hr />
+          <ul>
+            <li>Boat Diver</li>
+            <li>Emergency Oxygen Provider</li>
+            <li>Peak Performance Buoyancy</li>
+            <li>Navigation</li>
+          </ul>
+          <h3>Instructor Specialities</h3>
+          <hr />
+          <ul>
+            <li>Boat Diver</li>
+            <li>Emergency Oxygen Provider</li>
+            <li>Peak Performance Buoyancy</li>
+            <li>Navigation</li>
           </ul>
         </section>
         <section>

@@ -10,9 +10,9 @@ export default class SignUp extends React.Component {
         </header>
         <form>
           <div className="input-fields">
-            <fieldset>
+            <fieldset className="sign-up-input">
               <legend>Account information</legend>
-              <div className="sign-up-input">
+              <div>
                 <label htmlFor="first_name">First Name: </label>
                 <input
                   type="text"
@@ -24,7 +24,7 @@ export default class SignUp extends React.Component {
                 />
               </div>
 
-              <div className="sign-up-input">
+              <div>
                 <label htmlFor="email">Email: </label>
                 <input
                   type="text"
@@ -36,7 +36,7 @@ export default class SignUp extends React.Component {
                 />
               </div>
 
-              <div className="sign-up-input">
+              <div>
                 <label htmlFor="password">Password: </label>
                 <input
                   type="password"
@@ -47,102 +47,90 @@ export default class SignUp extends React.Component {
                 />
               </div>
             </fieldset>
-            <fieldset>
+            <fieldset className="sign-up-input">
               <legend>Current Certification Level</legend>
               <fieldset>
                 <legend>Agency</legend>
                 <label>
-                  <input type="radio" name="agency" />
+                  <input type="radio" name="agency" required />
                   PADI
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="agency" />
-                  NAUI
+                  <input type="radio" name="agency" required />
+                  SSI
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="agency" />
-                  CSS
+                  <input type="radio" name="agency" required />
+                  Other:
                 </label>
-                <br />
-                <label>
-                  <input type="radio" name="agency" />
-                  CMAS
-                </label>
-                <br />
-                <label>
-                  <input type="radio" name="agency" />
-                  BSAC
-                </label>
-                <br />
-                <label>
-                  <input type="radio" name="agency" />
-                  Other
-                </label>
-                <br />
-                <label htmlFor="other">If 'other', please specify: </label>
+                {/* is there a better way to write-in for other? */}
+                <label htmlFor="other"> </label>
                 <input type="text" name="other" />
               </fieldset>
               <fieldset>
                 <legend>Certification</legend>
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Scuba Diver
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Open Water Diver
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Advanced Open Water Diver
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Rescue Diver
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Divemaster
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Assistant Instructor
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Open Water Scuba Instructor
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Master Scuba Diver Trainer
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   IDC Staff Instructor
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Master Scuba Instructor
                 </label>
                 <br />
                 <label>
-                  <input type="radio" name="cert" />
+                  <input type="radio" name="cert" required />
                   Course Director
                 </label>
+                <br />
+                <label htmlFor="cert-num">Certification Number: </label>
+                <input type="text" name="cert-num" required />
               </fieldset>
             </fieldset>
-            <fieldset>
+            <fieldset className="sign-up-input">
               <legend>Animal Wishlist</legend>
               Check what you've already seen!
               <br />

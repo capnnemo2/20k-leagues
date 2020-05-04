@@ -1,4 +1,12 @@
 .input-fields {
   display: flex;
   flex-direction: column;
+  width: 95%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.sign-up-input {
+  width: 70%;
+  margin: 0 auto;
 }
