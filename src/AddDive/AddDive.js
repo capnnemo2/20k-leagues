@@ -215,6 +215,29 @@ export default class AddDive extends React.Component {
                 Drift dive
               </label>
             </fieldset>
+            <fieldset>
+              <legend>Rating</legend>
+              <label>
+                <input type="radio" name="rating" />
+                One seastar
+              </label>
+              <label>
+                <input type="radio" name="rating" />
+                Two seastars
+              </label>
+              <label>
+                <input type="radio" name="rating" />
+                Three seastars
+              </label>
+              <label>
+                <input type="radio" name="rating" />
+                Four seastars
+              </label>
+              <label>
+                <input type="radio" name="rating" />
+                Five seastars
+              </label>
+            </fieldset>
           </div>
           <button type="submit">Log dive</button>
           <button type="button">Cancel</button>

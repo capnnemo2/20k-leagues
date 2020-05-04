@@ -33,6 +33,26 @@ export default class Dashboard extends React.Component {
         <section>
           This section will just have simple statistics: total # of dives, total
           time under water deepest dive, longest dive, etc.
+          <h2>Dive Stats</h2>
+          <ul>
+            <li>Total Dives:</li>
+            <li>
+              <ul>
+                <li>Deepest Dive:</li>
+                <li>Avg Dive Depth:</li>
+                <li>Shallowest Dive:</li>
+              </ul>
+            </li>
+            <br />
+            <li>
+              <ul>
+                <li>Longest Dive:</li>
+                <li>Avg Dive Time:</li>
+                <li>Shortest Dive:</li>
+                <li>Total Time Spent Underwater:</li>
+              </ul>
+            </li>
+          </ul>
         </section>
 
         <section>

@@ -13,7 +13,7 @@ export default class Home extends React.Component {
           </p>
         </section>
 
-        <section>This app is a dive log.</section>
+        <section>This is a digital dive log.</section>
 
         <section>
           This app is also maybe somehow an animal finder. Or at least a way to

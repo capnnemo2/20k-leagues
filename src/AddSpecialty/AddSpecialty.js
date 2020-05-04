@@ -14,6 +14,7 @@ export default class AddSpecialty extends React.Component {
                 Diver
               </label>
               <br />
+              {/* maybe disable instructor if the diver hasn't entered a pro cert? */}
               <label>
                 <input type="radio" name="diver" />
                 Instructor
