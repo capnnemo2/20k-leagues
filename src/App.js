@@ -8,7 +8,7 @@ import SignUp from "./SignUp/SignUp";
 import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import Profile from "./Profile/Profile";
-import EditProfile from "./EditProfile/EditProfile";
+import AddCert from "./AddCert/AddCert";
 import DiveDetails from "./DiveDetails/DiveDetails";
 import AddDive from "./AddDive/AddDive";
 
@@ -26,7 +26,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/profile" component={Profile} />
-          <Route path="/edit-profile" component={EditProfile} />
+          <Route path="/add-cert" component={AddCert} />
           <Route path="/dive-details" component={DiveDetails} />
           <Route path="/add-dive" component={AddDive} />
         </Switch>

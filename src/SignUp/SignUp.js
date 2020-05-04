@@ -125,9 +125,14 @@ export default class SignUp extends React.Component {
                   <input type="radio" name="cert" required />
                   Course Director
                 </label>
-                <br />
+              </fieldset>
+              <fieldset>
+                <legend>The Numbers</legend>
                 <label htmlFor="cert-num">Certification Number: </label>
                 <input type="text" name="cert-num" required />
+                <br />
+                <label htmlFor="cert-date">Date certified: </label>
+                <input type="month" name="cert-date" required />
               </fieldset>
             </fieldset>
             <fieldset className="sign-up-input">
