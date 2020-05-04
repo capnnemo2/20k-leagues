@@ -9,14 +9,15 @@ export default class AddDive extends React.Component {
           <h2>Log a New Dive</h2>
         </header>
         <form>
-          <div className="new-dive-form">
-            <fieldset>
+          <div className="input-fields">
+            <fieldset className="sign-up-input">
               <legend>Essentials</legend>
               <div>
                 <label htmlFor="date">Date: </label>
                 <input
                   type="date"
                   name="date"
+                  id="date"
                   aria-label="Enter the date of the dive"
                   aria-required="true"
                   required
@@ -27,6 +28,7 @@ export default class AddDive extends React.Component {
                 <input
                   type="text"
                   name="site"
+                  id="site"
                   aria-label="Enter the name of the dive site"
                   aria-required="true"
                   required
@@ -37,6 +39,7 @@ export default class AddDive extends React.Component {
                 <input
                   type="text"
                   name="country"
+                  id="country"
                   aria-label="Enter the country of the dive"
                   aira-required="true"
                   required
@@ -44,13 +47,14 @@ export default class AddDive extends React.Component {
               </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset className="sign-up-input">
               <legend>Dive Stats</legend>
               <div>
                 <label htmlFor="depth">Max depth (ft): </label>
                 <input
-                  type="text"
+                  type="number"
                   name="depth"
+                  id="depth"
                   aria-label="Enter the maximum depth"
                 />
               </div>
@@ -59,6 +63,7 @@ export default class AddDive extends React.Component {
                 <input
                   type="number"
                   name="dive-time"
+                  id="dive-time"
                   aria-label="Enter the dive duration"
                 />
               </div>
@@ -67,18 +72,20 @@ export default class AddDive extends React.Component {
                 <input
                   type="number"
                   name="temp"
+                  id="temp"
                   aria-label="Enter the water temperature"
                 />
               </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset className="sign-up-input">
               <legend>People</legend>
               <div>
                 <label htmlFor="shop">Dive shop: </label>
                 <input
                   type="text"
                   name="shop"
+                  id="shop"
                   aria-label="Enter the dive shop"
                 />
               </div>
@@ -87,6 +94,7 @@ export default class AddDive extends React.Component {
                 <input
                   type="text"
                   name="guide"
+                  id="guide"
                   aria-label="Enter your dive guide"
                 />
               </div>
@@ -95,13 +103,14 @@ export default class AddDive extends React.Component {
                 <input
                   type="text"
                   name="buddy"
+                  id="buddy"
                   aria-label="Enter your dive buddy"
                 />
               </div>
             </fieldset>
 
             <div>
-              <fieldset>
+              <fieldset className="sign-up-input">
                 <legend>Visibility</legend>
                 <label>
                   <input type="radio" name="viz"></input>I couldn't see my own
@@ -128,18 +137,19 @@ export default class AddDive extends React.Component {
                 </label>
               </fieldset>
             </div>
-            <fieldset>
+            <fieldset className="sign-up-input">
               <legend>Sights</legend>
               <div>
                 <label htmlFor="description">Description: </label>
                 <textarea
                   name="description"
+                  id="description"
                   rows="4"
                   cols="50"
                   aria-label="Describe your dive"
                 />
               </div>
-              <fieldset>
+              <fieldset className="sign-up-input">
                 <legend>Animal Wishlist</legend>
                 <label>
                   <input type="checkbox" name="whale-shark" />
@@ -188,18 +198,18 @@ export default class AddDive extends React.Component {
               </fieldset>
             </fieldset>
 
-            <fieldset>
+            <fieldset className="sign-up-input">
               <legend>Dive Type</legend>
               <label>
                 <input type="radio" name="dive-type" />
                 Shore dive
               </label>
-
+              <br />
               <label>
                 <input type="radio" name="dive-type" />
                 Boat dive
               </label>
-
+              <br />
               <label>
                 <input type="checkbox" name="drift" />
                 Drift dive

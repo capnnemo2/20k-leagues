@@ -9,6 +9,7 @@ import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import Profile from "./Profile/Profile";
 import AddCert from "./AddCert/AddCert";
+import AddSpecialty from "./AddSpecialty/AddSpecialty";
 import DiveDetails from "./DiveDetails/DiveDetails";
 import AddDive from "./AddDive/AddDive";
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/profile" component={Profile} />
           <Route path="/add-cert" component={AddCert} />
+          <Route path="/add-specialty" component={AddSpecialty} />
           <Route path="/dive-details" component={DiveDetails} />
           <Route path="/add-dive" component={AddDive} />
         </Switch>

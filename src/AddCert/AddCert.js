@@ -94,13 +94,14 @@ export default class AddCert extends React.Component {
             <fieldset className="sign-up-input">
               <legend>The Numbers</legend>
               <label htmlFor="cert-num">Certification Number: </label>
-              <input type="text" name="cert-num" required />
+              <input type="text" name="cert-num" id="cert-num" required />
               <br />
               <label htmlFor="cert-date">Date certified: </label>
-              <input type="month" name="cert-date" required />
+              <input type="month" name="cert-date" id="cert-date" required />
             </fieldset>
           </div>
-          <button type="submit">Add Cert</button>
+          <button type="submit">Submit</button>
+          <button type="button">Cancel</button>
         </form>
       </div>
     );

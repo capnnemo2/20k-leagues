@@ -17,6 +17,7 @@ export default class SignUp extends React.Component {
                 <input
                   type="text"
                   name="first_name"
+                  id="first_name"
                   aria-label="Enter your first name"
                   aria-required="true"
                   placeholder="Barbara"
@@ -29,6 +30,7 @@ export default class SignUp extends React.Component {
                 <input
                   type="text"
                   name="email"
+                  id="email"
                   aria-label="Enter your email address"
                   aria-required="true"
                   placeholder="barb@email.com"
@@ -41,6 +43,7 @@ export default class SignUp extends React.Component {
                 <input
                   type="password"
                   name="password"
+                  id="password"
                   aria-label="Create your password"
                   aria-required="true"
                   required
@@ -129,10 +132,10 @@ export default class SignUp extends React.Component {
               <fieldset>
                 <legend>The Numbers</legend>
                 <label htmlFor="cert-num">Certification Number: </label>
-                <input type="text" name="cert-num" required />
+                <input type="text" name="cert-num" id="cert-num" required />
                 <br />
                 <label htmlFor="cert-date">Date certified: </label>
-                <input type="month" name="cert-date" required />
+                <input type="month" name="cert-date" id="cert-date" required />
               </fieldset>
             </fieldset>
             <fieldset className="sign-up-input">
@@ -186,7 +189,8 @@ export default class SignUp extends React.Component {
             </fieldset>
           </div>
 
-          <button type="submit">Sign Up</button>
+          <button type="submit">Submit</button>
+          <button type="button">Cancel</button>
         </form>
       </div>
     );

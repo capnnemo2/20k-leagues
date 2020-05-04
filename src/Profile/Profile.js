@@ -40,13 +40,16 @@ export default class Profile extends React.Component {
             </li>
           </ul>
           <h3>Diver Specialities</h3>
+          <Link to="/add-specialty">Add specialities</Link>
           <ul>
             <li>Boat Diver</li>
             <li>Emergency Oxygen Provider</li>
             <li>Peak Performance Buoyancy</li>
             <li>Navigation</li>
           </ul>
+          {/* if we get fancy, only render this next section if the diver has a pro cert */}
           <h3>Instructor Specialities</h3>
+          <Link to="/add-specialty">Add specialities</Link>
           <ul>
             <li>Boat Diver</li>
             <li>Emergency Oxygen Provider</li>
