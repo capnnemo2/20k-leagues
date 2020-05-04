@@ -9,6 +9,7 @@ import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import Profile from "./Profile/Profile";
 import DiveDetails from "./DiveDetails/DiveDetails";
+import AddDive from "./AddDive/AddDive";
 
 import "./App.css";
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/profile" component={Profile} />
           <Route path="/dive-details" component={DiveDetails} />
+          <Route path="/add-dive" component={AddDive} />
         </Switch>
       </main>
       <footer>&copy;2020 Ben Hernandez</footer>

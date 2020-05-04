@@ -8,10 +8,15 @@ export default class Dashboard extends React.Component {
       <div className="Dashboard">
         <section>
           <h2>User_name's Dive Log</h2>
-          You should be able to access your account profile:
-          <Link to="/profile"> My Profile</Link>
+          <p>
+            Access your account profile:
+            <Link to="/profile"> My Profile</Link>
+          </p>
         </section>
         <section>
+          <p>
+            Log a dive: <Link to="/add-dive">Add new dive</Link>{" "}
+          </p>
           Maybe you will be able to filter the dives listed? Search keyword from
           description? Some way to find that dive where x happened, but you
           don't remember which dive it was.
@@ -26,8 +31,8 @@ export default class Dashboard extends React.Component {
         </section>
 
         <section>
-          This section will just have simple statistics: total # of dives,
-          deepest dive, longest dive, etc.
+          This section will just have simple statistics: total # of dives, total
+          time under water deepest dive, longest dive, etc.
         </section>
 
         <section>
