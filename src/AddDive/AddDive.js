@@ -75,6 +75,14 @@ export default class AddDive extends React.Component {
             <fieldset>
               <legend>People</legend>
               <div>
+                <label htmlFor="shop">Dive shop: </label>
+                <input
+                  type="text"
+                  name="shop"
+                  aria-label="Enter the dive shop"
+                />
+              </div>
+              <div>
                 <label htmlFor="guide">Divemaster/Guide: </label>
                 <input
                   type="text"

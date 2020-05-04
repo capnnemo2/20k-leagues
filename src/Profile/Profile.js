@@ -1,5 +1,6 @@
 import React from "react";
 import "./Profile.css";
+import { Link } from "react-router-dom";
 
 export default class Profile extends React.Component {
   render() {
@@ -7,6 +8,7 @@ export default class Profile extends React.Component {
       <div className="Profile">
         <section>
           <h2>My Profile</h2>
+          <Link to="/edit-profile">Edit profile</Link>
         </section>
         <section>My email: bob@gmail.com</section>
         <section>

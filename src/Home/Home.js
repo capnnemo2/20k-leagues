@@ -15,11 +15,12 @@ export default class Home extends React.Component {
 
         <section>This app is a dive log.</section>
 
-        <section>This app is also maybe somehow an animal finder.</section>
-
         <section>
-          Although the animals you can find might be severely limited.
+          This app is also maybe somehow an animal finder. Or at least a way to
+          keep track of your animal wishlist.
         </section>
+
+        <section>Scroll down here to see a sample dashboard.</section>
       </div>
     );
   }
