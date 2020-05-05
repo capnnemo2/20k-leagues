@@ -224,18 +224,22 @@ export default class AddDive extends React.Component {
                 <input type="radio" name="rating" />
                 One seastar
               </label>
+              {"  "}
               <label>
                 <input type="radio" name="rating" />
                 Two seastars
               </label>
+              {"  "}
               <label>
                 <input type="radio" name="rating" />
                 Three seastars
               </label>
+              {"  "}
               <label>
                 <input type="radio" name="rating" />
                 Four seastars
               </label>
+              {"  "}
               <label>
                 <input type="radio" name="rating" />
                 Five seastars

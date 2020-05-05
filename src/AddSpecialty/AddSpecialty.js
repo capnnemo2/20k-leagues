@@ -2,6 +2,10 @@ import React from "react";
 import "./AddSpecialty.css";
 
 export default class AddSpecialty extends React.Component {
+  handleClickCancel = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     return (
       <div className="AddSpecialty">
@@ -100,7 +104,9 @@ export default class AddSpecialty extends React.Component {
             </fieldset>
           </div>
           <button type="submit">Submit</button>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={this.handleClickCancel}>
+            Cancel
+          </button>
         </form>
       </div>
     );

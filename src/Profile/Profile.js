@@ -12,8 +12,8 @@ export default class Profile extends React.Component {
           <h2>My Profile</h2>
           <p>My email: {user.email}</p>
         </section>
-        <section>
-          <h2>Certifications</h2>
+        <fieldset>
+          <legend>Certifications</legend>
           <Link to="/add-cert">Add cert</Link>
           <ul className="certifications">
             {user.certs.map((cert) => (
@@ -27,24 +27,28 @@ export default class Profile extends React.Component {
               </li>
             ))}
           </ul>
-          <h3>Diver Specialties</h3>
+        </fieldset>
+        <fieldset>
+          <legend>Diver Specialties</legend>
           <Link to="/add-specialty">Add specialties</Link>
           <ul>
             {user.specialties.map((spec) => (
               <li key={spec}>{spec}</li>
             ))}
           </ul>
+        </fieldset>
+        <fieldset>
           {/* if we get fancy, only render this next section if the diver has a pro cert */}
-          <h3>Instructor Specialties</h3>
+          <legend>Instructor Specialties</legend>
           <Link to="/add-specialty">Add specialties</Link>
           <ul>
             {user.instructorSpecialties.map((spec) => (
               <li key={spec}>{spec}</li>
             ))}
           </ul>
-        </section>
-        <section>
-          <h2>Animal Wishlist</h2>
+        </fieldset>
+        <fieldset>
+          <legend>Animal Wishlist</legend>
           <p>
             Here are some of the big deal creatures. Which ones would you like
             to see? Which ones have you already seen?
@@ -82,7 +86,7 @@ export default class Profile extends React.Component {
             <li>Ornate Ghost Pipefish</li>
             <li>Leaf Scorpionfish</li>
           </ul>
-        </section>
+        </fieldset>
       </div>
     );
   }

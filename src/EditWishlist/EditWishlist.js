@@ -5,6 +5,11 @@ export default class EditWishlist extends React.Component {
   state = {
     wishlist: [],
   };
+
+  handleClickCancel = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     return (
       <div className="EditWishlist">
@@ -129,7 +134,9 @@ export default class EditWishlist extends React.Component {
             </fieldset>
           </div>
           <button type="submit">Submit</button>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={this.handleClickCancel}>
+            Cancel
+          </button>
         </form>
       </div>
     );

@@ -6,7 +6,10 @@ export default class Home extends React.Component {
     return (
       <div className="Home">
         <section>
-          <p>This is the home/landing page.</p>
+          This is a digital dive log with an animal wishlist tracker.
+        </section>
+
+        <section>
           <p>
             <Link to="/login">Login</Link> to an existing account. Or
             <Link to="/sign-up"> create</Link> a new account. Check out the{" "}
@@ -14,14 +17,7 @@ export default class Home extends React.Component {
           </p>
         </section>
 
-        <section>This is a digital dive log.</section>
-
-        <section>
-          This app is also maybe somehow an animal finder. Or at least a way to
-          keep track of your animal wishlist.
-        </section>
-
-        <section>Scroll down here to see a sample dashboard.</section>
+        <section>Scroll down to see a sample dashboard.</section>
       </div>
     );
   }
