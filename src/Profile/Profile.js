@@ -64,9 +64,11 @@ export default class Profile extends React.Component {
             to see? Which ones have you already seen?
           </p>
           <p>
-            Maybe animals not on your personal list are faded, shaded, dark.
-            Animals on your list are normal colors. Animals on your list that
-            you have seen have a sweet check mark (or something more fun).{" "}
+            You can customize which animals appear on your wishlist in your log.
+            Here is where you select which animals appear there. Maybe animals
+            not on your personal list are faded, shaded, dark. Animals on your
+            list are normal colors. Animals on your list that you have seen have
+            a sweet check mark (or something more fun).{" "}
           </p>
 
           <ul>
@@ -79,6 +81,20 @@ export default class Profile extends React.Component {
             <li>Manatee</li>
             <li>Manta Ray</li>
             <li>Seahorse</li>
+            {/* other animals */}
+            <li>Dragon Moray</li>
+            <li>Ribbon Eel</li>
+            <li>Mandarin Fish</li>
+            <li>Frog Fish</li>
+            <li>Mimic Octopus</li>
+            <li>Pygmy Seahorse</li>
+            <li>Leafy Seadragon</li>
+            <li>Blue-Ringed Octopus</li>
+            <li>Flamboyant Cuttlefish</li>
+            <li>Harlequin Shrimp</li>
+            <li>Orangutan Crab</li>
+            <li>Ornate Ghost Pipefish</li>
+            <li>Leaf Scorpionfish</li>
           </ul>
         </section>
       </div>

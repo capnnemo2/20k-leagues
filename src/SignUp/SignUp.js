@@ -140,7 +140,7 @@ export default class SignUp extends React.Component {
             </fieldset>
             <fieldset className="sign-up-input">
               <legend>Animal Wishlist</legend>
-              Check what you've already seen!
+              Select the animals that you wish to see!
               <br />
               <label>
                 <input type="checkbox" name="whale-shark" />

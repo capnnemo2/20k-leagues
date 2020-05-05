@@ -1,4 +1,42 @@
 export default {
+  users: [
+    {
+      id: 1,
+      first_name: "Bob",
+      email: "bob@email.com",
+      password: "password",
+      certs: [
+        {
+          agency: "PADI",
+          certLevel: "Open Water Diver",
+          certNum: "123ab45",
+          certDate: "May 2020",
+        },
+      ],
+      wishlist: [
+        {
+          animal: "Whale Shark",
+          seen: false,
+        },
+        {
+          animal: "Mola Mola",
+          seen: false,
+        },
+        {
+          animal: "Hammerhead Shark",
+          seen: false,
+        },
+        {
+          animal: "Great White Shark",
+          seen: false,
+        },
+        {
+          animal: "Tiger Shark",
+          seen: false,
+        },
+      ],
+    },
+  ],
   dives: [
     {
       id: 1,
