@@ -9,7 +9,8 @@ export default class Home extends React.Component {
           <p>This is the home/landing page.</p>
           <p>
             <Link to="/login">Login</Link> to an existing account. Or
-            <Link to="/sign-up"> create</Link> a new account.
+            <Link to="/sign-up"> create</Link> a new account. Check out the{" "}
+            <Link to="/dashboard">demo</Link>.
           </p>
         </section>
 

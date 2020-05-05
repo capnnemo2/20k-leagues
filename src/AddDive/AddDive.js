@@ -166,7 +166,7 @@ export default class AddDive extends React.Component {
                 />
               </div>
               <fieldset className="sign-up-input">
-                <legend>Animal Wishlist</legend>
+                <legend>Animals Spotted</legend>
                 <label>
                   <input type="checkbox" name="whale-shark" />
                   Whale Shark

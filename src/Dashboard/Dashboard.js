@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import dummyStore from "../dummyStore";
 
 export default class Dashboard extends React.Component {
+  // dive depth handlers
   findDeepestDive(arr) {
     let diveDepths = [];
     for (let i = 0; i < arr.length; i++) {
@@ -42,6 +43,7 @@ export default class Dashboard extends React.Component {
     );
   }
 
+  // dive time handlers
   findLongestDive(arr) {
     let diveTimes = [];
     for (let i = 0; i < arr.length; i++) {
@@ -106,9 +108,9 @@ export default class Dashboard extends React.Component {
     return (
       <div className="Dashboard">
         <section>
-          <h2>User_name's Dive Log</h2>
+          <h2>{user.first_name}'s Dive Log</h2>
           <p>
-            Access your account profile:
+            Access your profile:
             <Link to="/profile"> My Profile</Link>
           </p>
         </section>
