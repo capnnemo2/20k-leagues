@@ -1,60 +1,46 @@
 import React from "react";
 import "./Profile.css";
 import { Link } from "react-router-dom";
+import dummyStore from "../dummyStore";
 
 export default class Profile extends React.Component {
   render() {
+    const user = dummyStore.users[0];
     return (
       <div className="Profile">
         <section>
           <h2>My Profile</h2>
-          <p>My email: bob@gmail.com</p>
+          <p>My email: {user.email}</p>
         </section>
         <section>
           <h2>Certifications</h2>
           <Link to="/add-cert">Add cert</Link>
           <ul className="certifications">
-            <li>
-              <ul className="cert">
-                <li>Agency: PADI</li>
-                <li>Rescue Diver</li>
-                <li>Date: May 2020</li>
-                <li>Diver number: 98765</li>
-              </ul>
-            </li>
-            <li>
-              <ul className="cert">
-                <li>Agency: PADI</li>
-                <li>Advanced Open Water Diver</li>
-                <li>Date: June 2019</li>
-                <li>Diver number: 45678</li>
-              </ul>
-            </li>
-            <li>
-              <ul className="cert">
-                <li>Agency: PADI</li>
-                <li>Open Water Diver</li>
-                <li>Date: May 2019</li>
-                <li>Diver number: 12345</li>
-              </ul>
-            </li>
+            {user.certs.map((cert) => (
+              <li key={cert.certNum}>
+                <ul>
+                  <li>Agency: {cert.agency}</li>
+                  <li>{cert.certLevel}</li>
+                  <li>Date: {cert.certDate}</li>
+                  <li>Diver number: {cert.certNum}</li>
+                </ul>
+              </li>
+            ))}
           </ul>
-          <h3>Diver Specialities</h3>
-          <Link to="/add-specialty">Add specialities</Link>
+          <h3>Diver Specialties</h3>
+          <Link to="/add-specialty">Add specialties</Link>
           <ul>
-            <li>Boat Diver</li>
-            <li>Emergency Oxygen Provider</li>
-            <li>Peak Performance Buoyancy</li>
-            <li>Navigation</li>
+            {user.specialties.map((spec) => (
+              <li key={spec}>{spec}</li>
+            ))}
           </ul>
           {/* if we get fancy, only render this next section if the diver has a pro cert */}
-          <h3>Instructor Specialities</h3>
-          <Link to="/add-specialty">Add specialities</Link>
+          <h3>Instructor Specialties</h3>
+          <Link to="/add-specialty">Add specialties</Link>
           <ul>
-            <li>Boat Diver</li>
-            <li>Emergency Oxygen Provider</li>
-            <li>Peak Performance Buoyancy</li>
-            <li>Navigation</li>
+            {user.instructorSpecialties.map((spec) => (
+              <li key={spec}>{spec}</li>
+            ))}
           </ul>
         </section>
         <section>

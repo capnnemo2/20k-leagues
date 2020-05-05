@@ -13,6 +13,12 @@ export default {
           certDate: "May 2020",
         },
       ],
+      specialties: [
+        "Boat Diver",
+        "Deep Diver",
+        "Digital Underwater Photography",
+      ],
+      instructorSpecialties: [],
       wishlist: [
         {
           animal: "Whale Shark",
