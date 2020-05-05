@@ -2,6 +2,10 @@ import React from "react";
 import "./AddDive.css";
 
 export default class AddDive extends React.Component {
+  handleClickCancel = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     return (
       <div className="AddDive">
@@ -214,7 +218,7 @@ export default class AddDive extends React.Component {
               </fieldset>
             </fieldset>
 
-            <fieldset>
+            <fieldset className="sign-up-input">
               <legend>Rating</legend>
               <label>
                 <input type="radio" name="rating" />
@@ -239,7 +243,9 @@ export default class AddDive extends React.Component {
             </fieldset>
           </div>
           <button type="submit">Log dive</button>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={this.handleClickCancel}>
+            Cancel
+          </button>
         </form>
       </div>
     );

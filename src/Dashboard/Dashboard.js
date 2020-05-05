@@ -105,6 +105,7 @@ export default class Dashboard extends React.Component {
   render() {
     const totalDives = dummyStore.dives.length;
     const user = dummyStore.users[0];
+    const dives = dummyStore.dives;
     return (
       <div className="Dashboard">
         <section>
@@ -114,91 +115,53 @@ export default class Dashboard extends React.Component {
             <Link to="/profile"> My Profile</Link>
           </p>
         </section>
-        <section>
-          <p>filter the dive list</p>
-          <Link to="/add-dive">Add new dive</Link>{" "}
+        <p>filter the dive list</p>
+        <Link to="/add-dive">Add new dive</Link>{" "}
+        <fieldset>
+          <legend>Dives</legend>
           <ul>
-            <li>
-              <ul>
-                {/* need a function to reverse the order so that most recent dive is listed first */}
-                <li>Dive #{dummyStore.dives[1].id}</li>
-                <li>Date: {dummyStore.dives[1].date}</li>
-                <li>Country: {dummyStore.dives[1].country}</li>
-                <li>Site: {dummyStore.dives[1].diveSite}</li>
-                <li>Rating: {dummyStore.dives[1].rating} seastars</li>
-                <li>
-                  <Link to={`/dive-details/${dummyStore.dives[1].id}`}>
-                    Details
-                  </Link>{" "}
-                </li>
-              </ul>
-            </li>
-            <br />
-            <li>
-              <ul>
-                <li>Dive #{dummyStore.dives[0].id}</li>
-                <li>Date: {dummyStore.dives[0].date}</li>
-                <li>Country: {dummyStore.dives[0].country}</li>
-                <li>Site: {dummyStore.dives[0].diveSite}</li>
-                <li>Rating: {dummyStore.dives[0].rating} seastars</li>
-                <li>
-                  <Link to={`/dive-details/${dummyStore.dives[0].id}`}>
-                    Details
-                  </Link>{" "}
-                </li>
-              </ul>
-            </li>
+            {dives.map((dive) => (
+              <li key={dive.id}>
+                <ul>
+                  <li>Dive #{dive.id}</li>
+                  <li>Date: {dive.date}</li>
+                  <li>Country: {dive.country}</li>
+                  <li>Site: {dive.diveSite}</li>
+                  <li>Rating: {dive.rating} seastars</li>
+                  <li>
+                    <Link to={`/dive-details/${dive.id}`}>Details</Link>{" "}
+                  </li>
+                </ul>
+              </li>
+            ))}
           </ul>
-        </section>
-
-        <section>
-          Your dives will be listed here, perhaps as cards, maybe just a plain
-          list? They will only display some basic info here: dive #,
-          location/country, date, site. If you click, it will take you to see
-          more details.
-          <Link to="/dive-details"> Example</Link>
-        </section>
-
-        <section>
-          This section will just have simple statistics: total # of dives, total
-          time under water deepest dive, longest dive, etc.
-          <h2>Dive Stats</h2>
+        </fieldset>
+        <fieldset>
+          <legend>Statistics</legend>
           <ul>
             <li>Total Dives: {totalDives}</li>
+            <li>Deepest Dive: {this.findDeepestDive(dummyStore.dives)}</li>
+            <li>Avg Dive Depth: {this.findAvgDiveDepth(dummyStore.dives)}</li>
             <li>
-              <ul>
-                <li>Deepest Dive: {this.findDeepestDive(dummyStore.dives)}</li>
-                <li>
-                  Avg Dive Depth: {this.findAvgDiveDepth(dummyStore.dives)}
-                </li>
-                <li>
-                  Shallowest Dive: {this.findShallowestDive(dummyStore.dives)}{" "}
-                </li>
-              </ul>
+              Shallowest Dive: {this.findShallowestDive(dummyStore.dives)}{" "}
             </li>
-            <br />
+            <li>Longest Dive: {this.findLongestDive(dummyStore.dives)}</li>
+            <li>Avg Dive Time: {this.findAvgDiveTime(dummyStore.dives)}</li>
+            <li>Shortest Dive: {this.findShortestDive(dummyStore.dives)}</li>
             <li>
-              <ul>
-                <li>Longest Dive: {this.findLongestDive(dummyStore.dives)}</li>
-                <li>Avg Dive Time: {this.findAvgDiveTime(dummyStore.dives)}</li>
-                <li>
-                  Shortest Dive: {this.findShortestDive(dummyStore.dives)}
-                </li>
-                <li>
-                  Total Time Spent Underwater:{" "}
-                  {this.findTotalDiveTime(dummyStore.dives)}
-                </li>
-              </ul>
+              Total Time Spent Underwater:{" "}
+              {this.findTotalDiveTime(dummyStore.dives)}
             </li>
           </ul>
-        </section>
-
-        <section>
+        </fieldset>
+        <p>
           When you register you choose which animals will appear on your animal
           wishlist. You can edit that via your profile. Here we will display
           your personal wishlist and animals that you've seen will be checked
           off in some exciting way.
-          <h3>Spotted in the wild!</h3>
+        </p>
+        <fieldset>
+          <legend>Spotted!</legend>
           <ul>
             {user.wishlist
               .filter((animal) => animal.seen === true)
@@ -206,7 +169,9 @@ export default class Dashboard extends React.Component {
                 <li key={animal.animal}>{animal.animal}</li>
               ))}
           </ul>
-          <h3>Still searching for...</h3>
+        </fieldset>
+        <fieldset>
+          <legend>Seeking</legend>
           <ul>
             {user.wishlist
               .filter((animal) => animal.seen === false)
@@ -214,7 +179,7 @@ export default class Dashboard extends React.Component {
                 <li key={animal.animal}>{animal.animal}</li>
               ))}
           </ul>
-        </section>
+        </fieldset>
       </div>
     );
   }
