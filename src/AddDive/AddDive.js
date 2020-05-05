@@ -109,34 +109,50 @@ export default class AddDive extends React.Component {
               </div>
             </fieldset>
 
-            <div>
-              <fieldset className="sign-up-input">
-                <legend>Visibility</legend>
-                <label>
-                  <input type="radio" name="viz"></input>I couldn't see my own
-                  fins
-                </label>
-                <br />
-                <label>
-                  <input type="radio" name="viz"></input>
-                  My dive buddy was a vague shadow
-                </label>
-                <br />
-                <label>
-                  <input type="radio" name="viz"></input>
-                  Anything beyond twenty feet was a theory
-                </label>
-                <br />
-                <label>
-                  <input type="radio" name="viz"></input>I could see just fine
-                </label>
-                <br />
-                <label>
-                  <input type="radio" name="viz"></input>I could see two days
-                  into the future
-                </label>
-              </fieldset>
-            </div>
+            <fieldset className="sign-up-input">
+              <legend>Visibility</legend>
+              <label>
+                <input type="radio" name="viz"></input>I couldn't see my own
+                fins
+              </label>
+              <br />
+              <label>
+                <input type="radio" name="viz"></input>
+                My dive buddy was a vague shadow
+              </label>
+              <br />
+              <label>
+                <input type="radio" name="viz"></input>
+                Anything beyond twenty feet was a theory
+              </label>
+              <br />
+              <label>
+                <input type="radio" name="viz"></input>I could see just fine
+              </label>
+              <br />
+              <label>
+                <input type="radio" name="viz"></input>I could see two days into
+                the future
+              </label>
+            </fieldset>
+
+            <fieldset className="sign-up-input">
+              <legend>Dive Type</legend>
+              <label>
+                <input type="radio" name="dive-type" />
+                Shore dive
+              </label>
+              <br />
+              <label>
+                <input type="radio" name="dive-type" />
+                Boat dive
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="drift" />
+                Drift dive
+              </label>
+            </fieldset>
             <fieldset className="sign-up-input">
               <legend>Sights</legend>
               <div>
@@ -198,23 +214,6 @@ export default class AddDive extends React.Component {
               </fieldset>
             </fieldset>
 
-            <fieldset className="sign-up-input">
-              <legend>Dive Type</legend>
-              <label>
-                <input type="radio" name="dive-type" />
-                Shore dive
-              </label>
-              <br />
-              <label>
-                <input type="radio" name="dive-type" />
-                Boat dive
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="drift" />
-                Drift dive
-              </label>
-            </fieldset>
             <fieldset>
               <legend>Rating</legend>
               <label>

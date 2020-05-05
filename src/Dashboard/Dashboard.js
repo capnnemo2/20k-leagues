@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Dashboard.css";
+import dummyStore from "../dummyStore";
 
 export default class Dashboard extends React.Component {
   render() {
@@ -14,12 +15,40 @@ export default class Dashboard extends React.Component {
           </p>
         </section>
         <section>
-          <p>
-            Log a dive: <Link to="/add-dive">Add new dive</Link>{" "}
-          </p>
-          Maybe you will be able to filter the dives listed? Search keyword from
-          description? Some way to find that dive where x happened, but you
-          don't remember which dive it was.
+          <p>filter the dive list</p>
+          <Link to="/add-dive">Add new dive</Link>{" "}
+          <ul>
+            <li>
+              <ul>
+                {/* need a function to reverse the order so that most recent dive is listed first */}
+                <li>Dive #{dummyStore.dives[1].id}</li>
+                <li>Date: {dummyStore.dives[1].date}</li>
+                <li>Country: {dummyStore.dives[1].country}</li>
+                <li>Site: {dummyStore.dives[1].diveSite}</li>
+                <li>Rating: {dummyStore.dives[1].rating} seastars</li>
+                <li>
+                  <Link to={`/dive-details/${dummyStore.dives[1].id}`}>
+                    Details
+                  </Link>{" "}
+                </li>
+              </ul>
+            </li>
+            <br />
+            <li>
+              <ul>
+                <li>Dive #{dummyStore.dives[0].id}</li>
+                <li>Date: {dummyStore.dives[0].date}</li>
+                <li>Country: {dummyStore.dives[0].country}</li>
+                <li>Site: {dummyStore.dives[0].diveSite}</li>
+                <li>Rating: {dummyStore.dives[0].rating} seastars</li>
+                <li>
+                  <Link to={`/dive-details/${dummyStore.dives[0].id}`}>
+                    Details
+                  </Link>{" "}
+                </li>
+              </ul>
+            </li>
+          </ul>
         </section>
 
         <section>
@@ -35,7 +64,7 @@ export default class Dashboard extends React.Component {
           time under water deepest dive, longest dive, etc.
           <h2>Dive Stats</h2>
           <ul>
-            <li>Total Dives:</li>
+            <li>Total Dives: </li>
             <li>
               <ul>
                 <li>Deepest Dive:</li>

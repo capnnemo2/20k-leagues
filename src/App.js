@@ -15,27 +15,27 @@ import AddDive from "./AddDive/AddDive";
 
 import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <Nav />
-      <main>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/sign-up" component={SignUp} />
-          <Route path="/login" component={Login} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/add-cert" component={AddCert} />
-          <Route path="/add-specialty" component={AddSpecialty} />
-          <Route path="/dive-details" component={DiveDetails} />
-          <Route path="/add-dive" component={AddDive} />
-        </Switch>
-      </main>
-      <footer>&copy;2020 Ben Hernandez</footer>
-    </div>
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <Nav />
+        <main>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/sign-up" component={SignUp} />
+            <Route path="/login" component={Login} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/add-cert" component={AddCert} />
+            <Route path="/add-specialty" component={AddSpecialty} />
+            <Route path="/dive-details/:dive_id" component={DiveDetails} />
+            <Route path="/add-dive" component={AddDive} />
+          </Switch>
+        </main>
+        <footer>&copy;2020 Ben Hernandez</footer>
+      </div>
+    );
+  }
 }
-
-export default App;
