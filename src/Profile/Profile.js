@@ -56,7 +56,7 @@ export default class Profile extends React.Component {
             list are normal colors. Animals on your list that you have seen have
             a sweet check mark (or something more fun).{" "}
           </p>
-
+          <Link to="/edit-wishlist">Edit Wishlist</Link>
           <ul>
             <li>Whale Shark</li>
             <li>Mola Mola</li>

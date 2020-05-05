@@ -91,7 +91,6 @@ export default class Dashboard extends React.Component {
 
   convertTime(num) {
     let days = Math.floor(num / 1440);
-    console.log(days);
     let hours = Math.floor((num - days * 1440) / 60);
     let minutes = num % 60;
     if (days > 0) {
@@ -103,6 +102,7 @@ export default class Dashboard extends React.Component {
 
   render() {
     const totalDives = dummyStore.dives.length;
+    const user = dummyStore.users[0];
     return (
       <div className="Dashboard">
         <section>
@@ -192,9 +192,26 @@ export default class Dashboard extends React.Component {
         </section>
 
         <section>
-          Thinking about an animal wishlist that you can select when you
-          register a new account. I guess there should be a way to edit your
-          animal wishlist afterward too.
+          When you register you choose which animals will appear on your animal
+          wishlist. You can edit that via your profile. Here we will display
+          your personal wishlist and animals that you've seen will be checked
+          off in some exciting way.
+          <h3>Spotted in the wild!</h3>
+          <ul>
+            {user.wishlist
+              .filter((animal) => animal.seen === true)
+              .map((animal) => (
+                <li key={animal.animal}>{animal.animal}</li>
+              ))}
+          </ul>
+          <h3>Still searching for...</h3>
+          <ul>
+            {user.wishlist
+              .filter((animal) => animal.seen === false)
+              .map((animal) => (
+                <li key={animal.animal}>{animal.animal}</li>
+              ))}
+          </ul>
         </section>
       </div>
     );

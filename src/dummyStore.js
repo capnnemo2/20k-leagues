@@ -22,7 +22,7 @@ export default {
       wishlist: [
         {
           animal: "Whale Shark",
-          seen: false,
+          seen: true,
         },
         {
           animal: "Mola Mola",

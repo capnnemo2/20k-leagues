@@ -186,6 +186,71 @@ export default class SignUp extends React.Component {
                 <input type="checkbox" name="seahorse" />
                 Seahorse
               </label>
+              <br />
+              <label>
+                <input type="checkbox" name="dragon" />
+                Dragon Moray
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="ribbon" />
+                Ribbon Eel
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="mandarin" />
+                Mandarin Fish
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="frog" />
+                Frog Fish
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="mimic" />
+                Mimic Octopus
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="pygmy" />
+                Pygmy Seahorse
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="seadragon" />
+                Leafy Seadragon
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="blue-ring" />
+                Blue-Ringed Octopus
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="flamboyant" />
+                Flamboyant Cuttlefish
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="harlequin" />
+                Harlequin Shrimp
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="orangutan" />
+                Orangutan Crab
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="pipefish" />
+                Ornate Ghost Pipefish
+              </label>
+              <br />
+              <label>
+                <input type="checkbox" name="leaf" />
+                Leaf Scorpionfish
+              </label>
             </fieldset>
           </div>
 

@@ -10,6 +10,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import Profile from "./Profile/Profile";
 import AddCert from "./AddCert/AddCert";
 import AddSpecialty from "./AddSpecialty/AddSpecialty";
+import EditWishlist from "./EditWishlist/EditWishlist";
 import DiveDetails from "./DiveDetails/DiveDetails";
 import AddDive from "./AddDive/AddDive";
 
@@ -32,6 +33,7 @@ export default class App extends React.Component {
             <Route path="/add-specialty" component={AddSpecialty} />
             <Route path="/dive-details/:dive_id" component={DiveDetails} />
             <Route path="/add-dive" component={AddDive} />
+            <Route path="/edit-wishlist" component={EditWishlist} />
           </Switch>
         </main>
         <footer>&copy;2020 Ben Hernandez</footer>
