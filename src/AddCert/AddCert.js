@@ -1,6 +1,6 @@
 import React from "react";
 import "./AddCert.css";
-import dummyStore from "../dummyStore";
+// import dummyStore from "../dummyStore";
 
 export default class AddCert extends React.Component {
   state = {
@@ -84,10 +84,8 @@ export default class AddCert extends React.Component {
   // users[0] should select only the user who is logged in
   handleSubmit = () => {
     console.log("something happened");
-    let { agency, certLevel, certNum, certDate } = this.state;
-    let newCert = { agency, certLevel, certNum, certDate };
-    dummyStore.users[0].certs.push(newCert);
-    this.props.history.push("/profile");
+    // let { agency, certLevel, certNum, certDate } = this.state;
+    // let newCert = { agency, certLevel, certNum, certDate };
   };
 
   handleClickCancel = () => {

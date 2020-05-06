@@ -18,6 +18,8 @@ export default class Home extends React.Component {
         </section>
 
         <section>Scroll down to see a sample dashboard.</section>
+
+        <section></section>
       </div>
     );
   }

@@ -104,8 +104,12 @@ export default class Dashboard extends React.Component {
 
   render() {
     const totalDives = dummyStore.dives.length;
+    // this logic to find the user will be different once login is established
     const user = dummyStore.users[0];
-    const dives = dummyStore.dives;
+    const userId = user.id;
+    const dives = dummyStore.dives.filter(
+      (d) => Number(d.user_id) === Number(userId)
+    );
     return (
       <div className="Dashboard">
         <section>
@@ -123,6 +127,7 @@ export default class Dashboard extends React.Component {
             {dives.map((dive) => (
               <li key={dive.id}>
                 <ul>
+                  {/* dive number will have to be calculated by counting all dives with the specific user_id, not just dive.id because there will be dives from multiple users in the same db. somehow keep them chronological too */}
                   <li>Dive #{dive.id}</li>
                   <li>Date: {dive.date}</li>
                   <li>Country: {dive.country}</li>

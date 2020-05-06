@@ -6,6 +6,18 @@ export default class EditWishlist extends React.Component {
     wishlist: [],
   };
 
+  updateWishlist(e) {
+    this.setState({
+      wishlist: [...this.state.wishlist, e.target.value],
+    });
+  }
+
+  handleSubmit = () => {
+    console.log(`handleSubmit ran`);
+    // let { wishlist } = this.state;
+    // let newWishlist = { wishlist };
+  };
+
   handleClickCancel = () => {
     this.props.history.goBack();
   };
@@ -20,115 +32,142 @@ export default class EditWishlist extends React.Component {
         <form>
           <div className="input-fields">
             <h2>Animal Wishlist</h2>
-            <fieldset className="sing-up-input">
+            <fieldset
+              className="sing-up-input"
+              onChange={(e) => this.updateWishlist(e)}
+            >
               <legend>Select animals</legend>
               <label>
-                <input type="checkbox" name="whale-shark" />
+                <input type="checkbox" name="whale-shark" value="Whale Shark" />
                 Whale Shark
               </label>
               <br />
               <label>
-                <input type="checkbox" name="mola-mola" />
+                <input type="checkbox" name="mola-mola" value="Mola Mola" />
                 Mola Mola
               </label>
               <br />
               <label>
-                <input type="checkbox" name="thresher" />
+                <input type="checkbox" name="thresher" value="Thresher Shark" />
                 Thresher Shark
               </label>
               <br />
               <label>
-                <input type="checkbox" name="hammer" />
+                <input type="checkbox" name="hammer" value="Hammerhead Shark" />
                 Hammerhead Shark
               </label>
               <br />
               <label>
-                <input type="checkbox" name="white" />
+                <input type="checkbox" name="white" value="Great White Shark" />
                 Great White Shark
               </label>
               <br />
               <label>
-                <input type="checkbox" name="tiger" />
+                <input type="checkbox" name="tiger" value="Tiger Shark" />
                 Tiger Shark
               </label>
               <br />
               <label>
-                <input type="checkbox" name="manatee" />
+                <input type="checkbox" name="manatee" value="Manatee" />
                 Manatee
               </label>
               <br />
               <label>
-                <input type="checkbox" name="manta" />
+                <input type="checkbox" name="manta" value="Manta Ray" />
                 Manta Ray
               </label>
               <br />
               <label>
-                <input type="checkbox" name="seahorse" />
+                <input type="checkbox" name="seahorse" value="Seahorse" />
                 Seahorse
               </label>
               <br />
               <label>
-                <input type="checkbox" name="dragon" />
+                <input type="checkbox" name="dragon" value="Dragon Moray" />
                 Dragon Moray
               </label>
               <br />
               <label>
-                <input type="checkbox" name="ribbon" />
+                <input type="checkbox" name="ribbon" value="Ribbon Eel" />
                 Ribbon Eel
               </label>
               <br />
               <label>
-                <input type="checkbox" name="mandarin" />
+                <input type="checkbox" name="mandarin" value="Mandarin Fish" />
                 Mandarin Fish
               </label>
               <br />
               <label>
-                <input type="checkbox" name="frog" />
+                <input type="checkbox" name="frog" value="Frog Fish" />
                 Frog Fish
               </label>
               <br />
               <label>
-                <input type="checkbox" name="mimic" />
+                <input type="checkbox" name="mimic" value="Mimic Octopus" />
                 Mimic Octopus
               </label>
               <br />
               <label>
-                <input type="checkbox" name="pygmy" />
+                <input type="checkbox" name="pygmy" value="Pygmy Seahorse" />
                 Pygmy Seahorse
               </label>
               <br />
               <label>
-                <input type="checkbox" name="seadragon" />
+                <input
+                  type="checkbox"
+                  name="seadragon"
+                  value="Leafy Seadragon"
+                />
                 Leafy Seadragon
               </label>
               <br />
               <label>
-                <input type="checkbox" name="blue-ring" />
+                <input
+                  type="checkbox"
+                  name="blue-ring"
+                  value="Blue-Ringed Octopus"
+                />
                 Blue-Ringed Octopus
               </label>
               <br />
               <label>
-                <input type="checkbox" name="flamboyant" />
+                <input
+                  type="checkbox"
+                  name="flamboyant"
+                  value="Flamboyant Cuttlefish"
+                />
                 Flamboyant Cuttlefish
               </label>
               <br />
               <label>
-                <input type="checkbox" name="harlequin" />
+                <input
+                  type="checkbox"
+                  name="harlequin"
+                  value="Harlequin Shrimp"
+                />
                 Harlequin Shrimp
               </label>
               <br />
               <label>
-                <input type="checkbox" name="orangutan" />
+                <input
+                  type="checkbox"
+                  name="orangutan"
+                  value="Orangutan Crab"
+                />
                 Orangutan Crab
               </label>
               <br />
               <label>
-                <input type="checkbox" name="pipefish" />
+                <input
+                  type="checkbox"
+                  name="pipefish"
+                  value="Ornate Ghost Pipefish"
+                />
                 Ornate Ghost Pipefish
               </label>
               <br />
               <label>
-                <input type="checkbox" name="leaf" />
+                <input type="checkbox" name="leaf" value="Leaf Scorpionfish" />
                 Leaf Scorpionfish
               </label>
             </fieldset>

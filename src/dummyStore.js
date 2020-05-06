@@ -46,6 +46,7 @@ export default {
   dives: [
     {
       id: 1,
+      user_id: 1,
       date: "May 4, 2020",
       country: "USA",
       diveSite: "Mana Crack",
@@ -65,6 +66,7 @@ export default {
     },
     {
       id: 2,
+      user_id: 1,
       date: "May 4, 2020",
       country: "USA",
       diveSite: "Mana Crack",
