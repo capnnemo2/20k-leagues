@@ -22,6 +22,7 @@ export default class App extends React.Component {
   state = {
     users: [],
     dives: [],
+    certs: [],
     user: "",
     wishlist: [],
     error: null,
@@ -41,6 +42,13 @@ export default class App extends React.Component {
     });
   };
 
+  setCerts = (certs) => {
+    this.setState({
+      certs,
+      error: null,
+    });
+  };
+
   createNewUser = (newUser) => {
     this.setState({
       users: [...this.state.users, newUser],
@@ -51,12 +59,14 @@ export default class App extends React.Component {
   componentDidMount() {
     this.setUsers(dummyStore.users);
     this.setDives(dummyStore.dives);
+    this.setCerts(dummyStore.certs);
   }
 
   render() {
     const value = {
       users: this.state.users,
       dives: this.state.dives,
+      certs: this.state.certs,
       createNewUser: this.createNewUser,
     };
     return (
@@ -66,9 +76,12 @@ export default class App extends React.Component {
           <main>
             <Header />
             <Switch>
+              {/* public endpoints */}
               <Route exact path="/" component={Home} />
               <Route path="/sign-up" component={SignUp} />
               <Route path="/login" component={Login} />
+
+              {/* private endpoints */}
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/profile" component={Profile} />
               <Route path="/add-cert" component={AddCert} />

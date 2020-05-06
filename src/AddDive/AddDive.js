@@ -169,6 +169,9 @@ export default class AddDive extends React.Component {
                   aria-label="Describe your dive"
                 />
               </div>
+
+              {/* ideally, upon submit for any checked animal this will (1) check if an animal is on your wishlist, (2) remove the animal from the wihslist, and (3) add the animal to wishlist fulfilled */}
+              {/* upon login, this list will only provide the animals on the users wishlist, thus removing (1) from above! */}
               <fieldset className="sign-up-input">
                 <legend>Animals Spotted</legend>
                 <label>

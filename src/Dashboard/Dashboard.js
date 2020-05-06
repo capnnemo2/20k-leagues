@@ -168,21 +168,17 @@ export default class Dashboard extends React.Component {
         <fieldset>
           <legend>Spotted!</legend>
           <ul>
-            {user.wishlist
-              .filter((animal) => animal.seen === true)
-              .map((animal) => (
-                <li key={animal.animal}>{animal.animal}</li>
-              ))}
+            {user.wishlistFulfilled.map((animal) => (
+              <li key={animal}>{animal}</li>
+            ))}
           </ul>
         </fieldset>
         <fieldset>
           <legend>Seeking</legend>
           <ul>
-            {user.wishlist
-              .filter((animal) => animal.seen === false)
-              .map((animal) => (
-                <li key={animal.animal}>{animal.animal}</li>
-              ))}
+            {user.wishlist.map((animal) => (
+              <li key={animal}>{animal}</li>
+            ))}
           </ul>
         </fieldset>
       </div>

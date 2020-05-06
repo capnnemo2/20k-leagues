@@ -10,7 +10,6 @@ export default class Profile extends React.Component {
     const certs = dummyStore.certs.filter(
       (c) => Number(c.user_id) === Number(userId)
     );
-    console.log(certs);
     return (
       <div className="Profile">
         <section>
@@ -65,32 +64,13 @@ export default class Profile extends React.Component {
             list are normal colors. Animals on your list that you have seen have
             a sweet check mark (or something more fun).{" "}
           </p>
-          <Link to="/edit-wishlist">Edit Wishlist</Link>
+
           <ul>
-            <li>Whale Shark</li>
-            <li>Mola Mola</li>
-            <li>Thresher Shark</li>
-            <li>Hammerhead Shark</li>
-            <li>Great White Shark</li>
-            <li>Tiger Shark</li>
-            <li>Manatee</li>
-            <li>Manta Ray</li>
-            <li>Seahorse</li>
-            {/* other animals */}
-            <li>Dragon Moray</li>
-            <li>Ribbon Eel</li>
-            <li>Mandarin Fish</li>
-            <li>Frog Fish</li>
-            <li>Mimic Octopus</li>
-            <li>Pygmy Seahorse</li>
-            <li>Leafy Seadragon</li>
-            <li>Blue-Ringed Octopus</li>
-            <li>Flamboyant Cuttlefish</li>
-            <li>Harlequin Shrimp</li>
-            <li>Orangutan Crab</li>
-            <li>Ornate Ghost Pipefish</li>
-            <li>Leaf Scorpionfish</li>
+            {user.wishlist.map((animal) => (
+              <li key={animal}>{animal}</li>
+            ))}
           </ul>
+          <Link to="/edit-wishlist">Edit Wishlist</Link>
         </fieldset>
       </div>
     );

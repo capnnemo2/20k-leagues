@@ -12,27 +12,12 @@ export default {
       ],
       instructorSpecialties: [],
       wishlist: [
-        {
-          animal: "Whale Shark",
-          seen: true,
-        },
-        {
-          animal: "Mola Mola",
-          seen: false,
-        },
-        {
-          animal: "Hammerhead Shark",
-          seen: false,
-        },
-        {
-          animal: "Great White Shark",
-          seen: false,
-        },
-        {
-          animal: "Tiger Shark",
-          seen: false,
-        },
+        "Mola Mola",
+        "Hammerhead Shark",
+        "Great White Shark",
+        "Tiger Shark",
       ],
+      wishlistFulfilled: ["Whale Shark"],
     },
   ],
   certs: [
