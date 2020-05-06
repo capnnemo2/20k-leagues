@@ -5,15 +5,6 @@ export default {
       first_name: "Bob",
       email: "bob@email.com",
       password: "password",
-      // do certs need to be their own table? they would have the user_id foreign key...
-      certs: [
-        {
-          agency: "PADI",
-          certLevel: "Open Water Diver",
-          certNum: "123ab45",
-          certDate: "May 2020",
-        },
-      ],
       specialties: [
         "Boat Diver",
         "Deep Diver",
@@ -42,6 +33,16 @@ export default {
           seen: false,
         },
       ],
+    },
+  ],
+  certs: [
+    {
+      id: 1,
+      user_id: 1,
+      agency: "PADI",
+      certLevel: "Open Water Diver",
+      certNum: "123ab45",
+      certDate: "May 2020",
     },
   ],
   dives: [

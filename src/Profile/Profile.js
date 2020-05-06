@@ -6,6 +6,11 @@ import dummyStore from "../dummyStore";
 export default class Profile extends React.Component {
   render() {
     const user = dummyStore.users[0];
+    const userId = user.id;
+    const certs = dummyStore.certs.filter(
+      (c) => Number(c.user_id) === Number(userId)
+    );
+    console.log(certs);
     return (
       <div className="Profile">
         <section>
@@ -16,7 +21,7 @@ export default class Profile extends React.Component {
           <legend>Certifications</legend>
           <Link to="/add-cert">Add cert</Link>
           <ul className="certifications">
-            {user.certs.map((cert) => (
+            {certs.map((cert) => (
               <li key={cert.certNum}>
                 <ul>
                   <li>Agency: {cert.agency}</li>
