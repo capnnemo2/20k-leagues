@@ -5,4 +5,5 @@ export default React.createContext({
   dives: [],
   user: "",
   wishlist: [],
+  createNewUser: () => {},
 });

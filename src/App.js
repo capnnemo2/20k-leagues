@@ -41,7 +41,7 @@ export default class App extends React.Component {
     });
   };
 
-  createUser = (newUser) => {
+  createNewUser = (newUser) => {
     this.setState({
       users: [...this.state.users, newUser],
     });
@@ -57,6 +57,7 @@ export default class App extends React.Component {
     const value = {
       users: this.state.users,
       dives: this.state.dives,
+      createNewUser: this.createNewUser,
     };
     return (
       <Context.Provider value={value}>
