@@ -13,7 +13,7 @@ export default class Profile extends React.Component {
     return (
       <div className="Profile">
         <section>
-          <h2>My Profile</h2>
+          <h2>{user.first_name}'s Profile</h2>
           <p>My email: {user.email}</p>
         </section>
         <fieldset>

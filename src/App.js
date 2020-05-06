@@ -6,7 +6,7 @@ import Header from "./Header/Header";
 import Home from "./Home/Home";
 import SignUp from "./SignUp/SignUp";
 import Login from "./Login/Login";
-import Dashboard from "./Dashboard/Dashboard";
+import Log from "./Log/Log";
 import Profile from "./Profile/Profile";
 import AddCert from "./AddCert/AddCert";
 import AddSpecialty from "./AddSpecialty/AddSpecialty";
@@ -82,7 +82,7 @@ export default class App extends React.Component {
               <Route path="/login" component={Login} />
 
               {/* private endpoints */}
-              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/log" component={Log} />
               <Route path="/profile" component={Profile} />
               <Route path="/add-cert" component={AddCert} />
               <Route path="/add-specialty" component={AddSpecialty} />

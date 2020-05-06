@@ -61,7 +61,7 @@ export default class DiveDetails extends React.Component {
           </fieldset>
         </div>
 
-        <Link to="/dashboard">Back to Log</Link>
+        <Link to="/log">Back to Log</Link>
       </div>
     );
   }

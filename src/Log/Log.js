@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Dashboard.css";
+import "./Log.css";
 import dummyStore from "../dummyStore";
 
-export default class Dashboard extends React.Component {
+export default class Log extends React.Component {
   // dive depth handlers
   findDeepestDive(arr) {
     let diveDepths = [];
@@ -111,12 +111,12 @@ export default class Dashboard extends React.Component {
       (d) => Number(d.user_id) === Number(userId)
     );
     return (
-      <div className="Dashboard">
+      <div className="Log">
         <section>
           <h2>{user.first_name}'s Dive Log</h2>
           <p>
-            Access your profile:
-            <Link to="/profile"> My Profile</Link>
+            Access your
+            <Link to="/profile"> profile</Link>
           </p>
         </section>
         <p>filter the dive list</p>
