@@ -17,6 +17,7 @@ import AddDive from "./AddDive/AddDive";
 import Context from "./Context";
 import dummyStore from "./dummyStore";
 import "./App.css";
+import TokenService from "./services/token-service";
 
 export default class App extends React.Component {
   state = {
@@ -25,6 +26,7 @@ export default class App extends React.Component {
     certs: [],
     user: "",
     wishlist: [],
+    loggedIn: TokenService.hasAuthToken() ? true : false,
     error: null,
   };
 
@@ -55,6 +57,12 @@ export default class App extends React.Component {
     });
   };
 
+  setLoggedIn = (status) => {
+    this.setState({
+      loggedIn: status,
+    });
+  };
+
   // right now just loading up everything, but with login will only need to set data for the specific user
   componentDidMount() {
     this.setUsers(dummyStore.users);
@@ -68,6 +76,7 @@ export default class App extends React.Component {
       dives: this.state.dives,
       certs: this.state.certs,
       createNewUser: this.createNewUser,
+      setLoggedIn: this.setLoggedIn,
     };
     return (
       <Context.Provider value={value}>

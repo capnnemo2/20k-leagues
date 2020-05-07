@@ -6,5 +6,7 @@ export default React.createContext({
   certs: [],
   user: "",
   wishlist: [],
+  loggedIn: null,
   createNewUser: () => {},
+  setLoggedIn: () => {},
 });

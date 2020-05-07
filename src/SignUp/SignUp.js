@@ -1,6 +1,6 @@
 import React from "react";
-import "./SignUp.css";
 import Context from "../Context";
+import "./SignUp.css";
 
 export default class SignUp extends React.Component {
   static contextType = Context;
@@ -15,6 +15,7 @@ export default class SignUp extends React.Component {
     certNum: "",
     certDate: "",
     wishlist: [],
+    error: null,
   };
 
   updateFirstName(e) {
@@ -110,14 +111,21 @@ export default class SignUp extends React.Component {
     });
   }
 
+  handleSignUpSuccess = () => {
+    const { history } = this.props;
+    history.push("/login");
+  };
+
   handleSubmit = () => {
     let newUser = this.state;
     newUser = { ...newUser, id: this.context.users.length + 1 };
+    this.setState({ error: null });
     this.context.createNewUser(newUser);
-    this.props.history.push("/");
+    this.props.history.push("/log");
   };
 
   render() {
+    const { error } = this.state;
     return (
       <div className="SignUp">
         <header>
@@ -129,6 +137,7 @@ export default class SignUp extends React.Component {
             this.handleSubmit();
           }}
         >
+          <div className="error">{error && <p>{error}</p>}</div>
           <div className="input-fields">
             <fieldset className="sign-up-input">
               <legend>Account information</legend>
