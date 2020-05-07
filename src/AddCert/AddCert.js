@@ -19,9 +19,10 @@ export default class AddCert extends React.Component {
     });
   }
 
-  setOtherSelected = () => {
+  setOtherSelected = (e) => {
     this.setState({
       isOtherSelected: false,
+      agency: e.target.nextElementSibling.value,
     });
   };
 
@@ -109,20 +110,31 @@ export default class AddCert extends React.Component {
         >
           <div className="input-fields">
             <h2>Add a certification</h2>
-            <fieldset
-              className="sign-up-input"
-              onChange={(e) => {
-                this.updateAgency(e);
-              }}
-            >
+            <fieldset className="sign-up-input">
               <legend>Select an agency</legend>
               <label>
-                <input type="radio" name="agency" value="PADI" required />
+                <input
+                  type="radio"
+                  name="agency"
+                  value="PADI"
+                  required
+                  onChange={(e) => {
+                    this.updateAgency(e);
+                  }}
+                />
                 PADI
               </label>
               <br />
               <label>
-                <input type="radio" name="agency" value="SSI" required />
+                <input
+                  type="radio"
+                  name="agency"
+                  value="SSI"
+                  required
+                  onChange={(e) => {
+                    this.updateAgency(e);
+                  }}
+                />
                 SSI
               </label>
               <br />
@@ -134,7 +146,7 @@ export default class AddCert extends React.Component {
                   type="radio"
                   name="agency"
                   value={this.state.otherAgency}
-                  onChange={this.setOtherSelected}
+                  onChange={(e) => this.setOtherSelected(e)}
                   required
                 />
                 Other:{" "}
@@ -143,6 +155,9 @@ export default class AddCert extends React.Component {
                   name="other"
                   id="other"
                   disabled={this.state.isOtherSelected}
+                  onChange={(e) => {
+                    this.updateAgency(e);
+                  }}
                 />
               </label>
             </fieldset>

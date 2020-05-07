@@ -72,4 +72,14 @@ export default {
       rating: 3,
     },
   ],
+  animalTracker: [
+    {
+      country: "usa",
+      animal: "manta ray",
+    },
+    {
+      country: "usa",
+      animal: "great white shark",
+    },
+  ],
 };
