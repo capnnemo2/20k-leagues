@@ -28,6 +28,7 @@ export default class DiveDetails extends React.Component {
               <ul className="sign-up-input">
                 <li>Date: {dive.date}</li>
                 <li>Country: {dive.country}</li>
+                <li>Region: {dive.region}</li>
                 <li>Dive Site: {dive.diveSite}</li>
               </ul>
             </fieldset>

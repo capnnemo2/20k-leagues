@@ -120,7 +120,7 @@ export default class Log extends React.Component {
           </p>
         </section>
         <p>filter the dive list</p>
-        <Link to="/add-dive">Add new dive</Link>{" "}
+        <Link to="/add-dive">Add new dive</Link>
         <fieldset>
           <legend>Dives</legend>
           <ul>
@@ -129,12 +129,12 @@ export default class Log extends React.Component {
                 <ul>
                   {/* dive number will have to be calculated by counting all dives with the specific user_id, not just dive.id because there will be dives from multiple users in the same db. somehow keep them chronological too */}
                   <li>Dive #{dive.id}</li>
-                  <li>Date: {dive.date}</li>
-                  <li>Country: {dive.country}</li>
-                  <li>Site: {dive.diveSite}</li>
-                  <li>Rating: {dive.rating} seastars</li>
+                  <li>{dive.date}</li>
+                  <li>{dive.country}</li>
+                  <li>{dive.diveSite}</li>
+                  <li>{dive.rating} seastars</li>
                   <li>
-                    <Link to={`/dive-details/${dive.id}`}>Details</Link>{" "}
+                    <Link to={`/dive-details/${dive.id}`}>Details</Link>
                   </li>
                 </ul>
               </li>
