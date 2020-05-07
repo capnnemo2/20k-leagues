@@ -1,5 +1,6 @@
 import React from "react";
 import "./AddDive.css";
+import dummyStore from "../dummyStore";
 
 export default class AddDive extends React.Component {
   handleClickCancel = () => {
@@ -7,6 +8,7 @@ export default class AddDive extends React.Component {
   };
 
   render() {
+    const user = dummyStore.users[0];
     return (
       <div className="AddDive">
         <header>
@@ -170,54 +172,17 @@ export default class AddDive extends React.Component {
                 />
               </div>
 
-              {/* ideally, upon submit for any checked animal this will (1) check if an animal is on your wishlist, (2) remove the animal from the wihslist, and (3) add the animal to wishlist fulfilled */}
-              {/* upon login, this list will only provide the animals on the users wishlist, thus removing (1) from above! */}
+              {/* ideally, upon submit for any checked animal this will (1) remove the animal from the wihslist, and (2) add the animal to wishlist fulfilled */}
               <fieldset className="sign-up-input">
                 <legend>Animals Spotted</legend>
-                <label>
-                  <input type="checkbox" name="whale-shark" />
-                  Whale Shark
-                </label>
-                <br />
-                <label>
-                  <input type="checkbox" name="mola-mola" />
-                  Mola Mola
-                </label>
-                <br />
-                <label>
-                  <input type="checkbox" name="thresher" />
-                  Thresher Shark
-                </label>
-                <br />
-                <label>
-                  <input type="checkbox" name="hammer" />
-                  Hammerhead Shark
-                </label>
-                <br />
-                <label>
-                  <input type="checkbox" name="white" />
-                  Great White Shark
-                </label>
-                <br />
-                <label>
-                  <input type="checkbox" name="tiger" />
-                  Tiger Shark
-                </label>
-                <br />
-                <label>
-                  <input type="checkbox" name="manatee" />
-                  Manatee
-                </label>
-                <br />
-                <label>
-                  <input type="checkbox" name="manta" />
-                  Manta Ray
-                </label>
-                <br />
-                <label>
-                  <input type="checkbox" name="seahorse" />
-                  Seahorse
-                </label>
+                {user.wishlist.map((animal) => (
+                  <div key={animal}>
+                    <label>
+                      <input type="checkbox" name={animal} value={animal} />
+                      {animal}
+                    </label>
+                  </div>
+                ))}
               </fieldset>
             </fieldset>
 
