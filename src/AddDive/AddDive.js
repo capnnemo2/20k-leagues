@@ -3,18 +3,39 @@ import "./AddDive.css";
 import dummyStore from "../dummyStore";
 
 export default class AddDive extends React.Component {
+  state = {
+    country: "",
+  };
+
   handleClickCancel = () => {
     this.props.history.goBack();
   };
 
+  updateCountry(e) {
+    this.setState({
+      country: e.target.value,
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   render() {
     const user = dummyStore.users[0];
+    const countries = dummyStore.countries;
+    const regions =
+      this.state.country !== ""
+        ? countries.find(
+            (country) => country.country_name === this.state.country
+          ).regions
+        : [];
     return (
       <div className="AddDive">
         <header>
           <h2>Log a New Dive</h2>
         </header>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="input-fields">
             <fieldset className="sign-up-input">
               <legend>Essentials</legend>
@@ -42,14 +63,31 @@ export default class AddDive extends React.Component {
               </div>
               <div>
                 <label htmlFor="country">Country: </label>
-                <input
-                  type="text"
-                  name="country"
+                <select
                   id="country"
-                  aria-label="Enter the country of the dive"
-                  aira-required="true"
+                  onChange={(e) => this.updateCountry(e)}
                   required
-                />
+                >
+                  <option value="">Select...</option>
+                  {countries.map((country) => (
+                    <option
+                      value={country.country_name}
+                      key={country.country_name}
+                    >
+                      {country.country_name}
+                    </option>
+                  ))}
+                </select>
+                <br />
+                <label htmlFor="region">Region: </label>
+                <select id="region" required>
+                  <option value="">Select...</option>
+                  {regions.map((region) => (
+                    <option value={region} key={region}>
+                      {region}
+                    </option>
+                  ))}
+                </select>
               </div>
             </fieldset>
 

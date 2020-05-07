@@ -72,13 +72,79 @@ export default {
       rating: 3,
     },
   ],
+  countries: [
+    {
+      country_name: "United States of America",
+      regions: ["Hawaii, Pacific Northwest, Florida, Channel Islands"],
+    },
+    {
+      country_name: "Mexico",
+      regions: ["Riviera Maya", "Baja", "Revillagigedo Islands"],
+    },
+    {
+      country_name: "Australia",
+      regions: [
+        "Great Barrier Reef",
+        "SS Yongala",
+        "Western Australia",
+        "Tasmania",
+      ],
+    },
+    {
+      country_name: "Nicaragua",
+      regions: ["Corn Islands"],
+    },
+    {
+      country_name: "Cayman Islands",
+      regions: [
+        "Little Cayman",
+        "Cayman Brac",
+        "Grand Cayman, West",
+        "Grand Cayman, East",
+        "Grand Cayman, North",
+      ],
+    },
+    {
+      country_name: "Thailand",
+      regions: [
+        "Similan Islands",
+        "Chumphon Archipelago (Koh Tao, Koh Samui, Koh Phangan)",
+        "Krabi (Koh Lanta)",
+        "Phuket",
+      ],
+    },
+    {
+      country_name: "Indonesia",
+      regions: [
+        "Bali (Nusa Lembongan, Nusa Penida)",
+        "Gili Islands",
+        "Raja Ampat",
+        "Komodo National Park",
+        "Manado",
+      ],
+    },
+    {
+      country_name: "Philippines",
+      regions: [
+        "Malapascua",
+        "Puerto Galera",
+        "Coron",
+        "Bohol",
+        "El Nido",
+        "Boracay",
+        "Apo Reef",
+      ],
+    },
+  ],
   animalTracker: [
     {
       country: "usa",
+      region: "hawaii",
       animal: "manta ray",
     },
     {
       country: "usa",
+      region: "pnw",
       animal: "great white shark",
     },
   ],
