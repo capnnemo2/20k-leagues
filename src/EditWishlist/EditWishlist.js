@@ -3,14 +3,67 @@ import "./EditWishlist.css";
 
 export default class EditWishlist extends React.Component {
   state = {
-    wishlist: [],
+    allChecked: false,
+    list: [
+      { id: 1, name: "Whale Shark", isChecked: false },
+      { id: 2, name: "Mola Mola", isChecked: false },
+      { id: 3, name: "Thresher Shark", isChecked: false },
+      { id: 4, name: "Hammerhead Shark", isChecked: false },
+      { id: 5, name: "Great White Shark", isChecked: false },
+      { id: 6, name: "Manatee", isChecked: false },
+      { id: 7, name: "Seahorse", isChecked: false },
+      { id: 8, name: "Dragon Moray", isChecked: false },
+      { id: 9, name: "Ribbon Eel", isChecked: false },
+      { id: 10, name: "Mandarin Fish", isChecked: false },
+      { id: 11, name: "Frog Fish", isChecked: false },
+      { id: 12, name: "Mimic Octopus", isChecked: false },
+      { id: 13, name: "Pygmy Seahorse", isChecked: false },
+      { id: 14, name: "Leafy Seadragon", isChecked: false },
+      { id: 15, name: "Blue-Ringed Octopus", isChecked: false },
+      { id: 16, name: "Flamboyant Cuttlefish", isChecked: false },
+      { id: 17, name: "Harlequin Shrimp", isChecked: false },
+      { id: 18, name: "Orangutan Crab", isChecked: false },
+      { id: 19, name: "Ornate Ghost Pipefish", isChecked: false },
+      { id: 20, name: "Leaf Scorpionfish", isChecked: false },
+    ],
   };
 
-  updateWishlist(e) {
-    this.setState({
-      wishlist: [...this.state.wishlist, e.target.value],
+  renderList = () => {
+    return this.state.list.map((animal) => (
+      <div key={animal.id}>
+        <label>
+          <input
+            type="checkbox"
+            name={animal.name}
+            value={animal.name}
+            checked={animal.isChecked}
+            onChange={this.handleChange}
+          />
+          {animal.name}
+        </label>
+      </div>
+    ));
+  };
+
+  handleChange = (e) => {
+    let animalName = e.target.name;
+    let checked = e.target.checked;
+    this.setState((prevState) => {
+      let { list, allChecked } = prevState;
+      if (animalName === "checkAll") {
+        allChecked = checked;
+        list = list.map((animal) => ({ ...animal, isChecked: checked }));
+      } else {
+        list = list.map((animal) =>
+          animal.name === animalName
+            ? { ...animal, isChecked: checked }
+            : animal
+        );
+        allChecked = list.every((animal) => animal.isChecked);
+      }
+      return { list, allChecked };
     });
-  }
+  };
 
   handleSubmit = () => {
     console.log(`handleSubmit ran`);
@@ -32,144 +85,21 @@ export default class EditWishlist extends React.Component {
         <form>
           <div className="input-fields">
             <h2>Animal Wishlist</h2>
-            <fieldset
-              className="sing-up-input"
-              onChange={(e) => this.updateWishlist(e)}
-            >
+            <fieldset className="sing-up-input" onChange={this.updateWishlist}>
               <legend>Select animals</legend>
-              <label>
-                <input type="checkbox" name="whale-shark" value="Whale Shark" />
-                Whale Shark
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="mola-mola" value="Mola Mola" />
-                Mola Mola
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="thresher" value="Thresher Shark" />
-                Thresher Shark
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="hammer" value="Hammerhead Shark" />
-                Hammerhead Shark
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="white" value="Great White Shark" />
-                Great White Shark
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="tiger" value="Tiger Shark" />
-                Tiger Shark
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="manatee" value="Manatee" />
-                Manatee
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="manta" value="Manta Ray" />
-                Manta Ray
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="seahorse" value="Seahorse" />
-                Seahorse
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="dragon" value="Dragon Moray" />
-                Dragon Moray
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="ribbon" value="Ribbon Eel" />
-                Ribbon Eel
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="mandarin" value="Mandarin Fish" />
-                Mandarin Fish
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="frog" value="Frog Fish" />
-                Frog Fish
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="mimic" value="Mimic Octopus" />
-                Mimic Octopus
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="pygmy" value="Pygmy Seahorse" />
-                Pygmy Seahorse
-              </label>
-              <br />
-              <label>
-                <input
-                  type="checkbox"
-                  name="seadragon"
-                  value="Leafy Seadragon"
-                />
-                Leafy Seadragon
-              </label>
-              <br />
-              <label>
-                <input
-                  type="checkbox"
-                  name="blue-ring"
-                  value="Blue-Ringed Octopus"
-                />
-                Blue-Ringed Octopus
-              </label>
-              <br />
-              <label>
-                <input
-                  type="checkbox"
-                  name="flamboyant"
-                  value="Flamboyant Cuttlefish"
-                />
-                Flamboyant Cuttlefish
-              </label>
-              <br />
-              <label>
-                <input
-                  type="checkbox"
-                  name="harlequin"
-                  value="Harlequin Shrimp"
-                />
-                Harlequin Shrimp
-              </label>
-              <br />
-              <label>
-                <input
-                  type="checkbox"
-                  name="orangutan"
-                  value="Orangutan Crab"
-                />
-                Orangutan Crab
-              </label>
-              <br />
-              <label>
-                <input
-                  type="checkbox"
-                  name="pipefish"
-                  value="Ornate Ghost Pipefish"
-                />
-                Ornate Ghost Pipefish
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="leaf" value="Leaf Scorpionfish" />
-                Leaf Scorpionfish
-              </label>
+              <div>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="checkAll"
+                    checked={this.state.allChecked}
+                    onChange={this.handleChange}
+                  />
+                  Check All
+                </label>
+              </div>
+
+              {this.renderList()}
             </fieldset>
           </div>
           <button type="submit">Submit</button>
