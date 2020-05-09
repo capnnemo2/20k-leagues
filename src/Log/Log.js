@@ -110,6 +110,15 @@ export default class Log extends React.Component {
     const dives = dummyStore.dives.filter(
       (d) => Number(d.user_id) === Number(userId)
     );
+
+    let animalsToSee = [];
+    for (let i = 0; i < user.wishlistFulfilled.length; i++) {
+      const animal = user.wishlist.filter(
+        (animal) => animal !== user.wishlistFulfilled[i]
+      );
+      animalsToSee = animal;
+    }
+
     return (
       <div className="Log">
         <section>
@@ -176,7 +185,7 @@ export default class Log extends React.Component {
         <fieldset>
           <legend>Seeking</legend>
           <ul>
-            {user.wishlist.map((animal) => (
+            {animalsToSee.map((animal) => (
               <li key={animal}>{animal}</li>
             ))}
           </ul>

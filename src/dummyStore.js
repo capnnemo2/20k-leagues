@@ -12,6 +12,7 @@ export default {
       ],
       instructorSpecialties: [],
       wishlist: [
+        "Whale Shark",
         "Mola Mola",
         "Hammerhead Shark",
         "Great White Shark",
