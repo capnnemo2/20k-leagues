@@ -24,8 +24,7 @@ export default class App extends React.Component {
     users: [],
     dives: [],
     certs: [],
-    user: "",
-    wishlist: [],
+    user: [],
     loggedIn: TokenService.hasAuthToken() ? true : false,
     error: null,
   };
@@ -34,6 +33,12 @@ export default class App extends React.Component {
     this.setState({
       users,
       error: null,
+    });
+  };
+
+  setUser = (user) => {
+    this.setState({
+      user,
     });
   };
 
@@ -63,11 +68,17 @@ export default class App extends React.Component {
     });
   };
 
+  updateWishlist = (wishlist) => {
+    let newUser = [...this.state.user, wishlist];
+    console.log(newUser);
+  };
+
   // right now just loading up everything, but with login will only need to set data for the specific user
   componentDidMount() {
     this.setUsers(dummyStore.users);
     this.setDives(dummyStore.dives);
     this.setCerts(dummyStore.certs);
+    this.setUser(dummyStore.users[0]);
   }
 
   render() {
@@ -75,8 +86,10 @@ export default class App extends React.Component {
       users: this.state.users,
       dives: this.state.dives,
       certs: this.state.certs,
+      user: this.state.user,
       createNewUser: this.createNewUser,
       setLoggedIn: this.setLoggedIn,
+      updateWishlist: this.updateWishlist,
     };
     return (
       <Context.Provider value={value}>

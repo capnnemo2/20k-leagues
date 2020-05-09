@@ -1,7 +1,11 @@
 import React from "react";
+import Context from "../Context";
 import "./EditWishlist.css";
+import dummyStore from "../dummyStore";
 
 export default class EditWishlist extends React.Component {
+  static contextType = Context;
+
   state = {
     allChecked: false,
     list: [
@@ -10,21 +14,22 @@ export default class EditWishlist extends React.Component {
       { id: 3, name: "Thresher Shark", isChecked: false },
       { id: 4, name: "Hammerhead Shark", isChecked: false },
       { id: 5, name: "Great White Shark", isChecked: false },
-      { id: 6, name: "Manatee", isChecked: false },
-      { id: 7, name: "Seahorse", isChecked: false },
-      { id: 8, name: "Dragon Moray", isChecked: false },
-      { id: 9, name: "Ribbon Eel", isChecked: false },
-      { id: 10, name: "Mandarin Fish", isChecked: false },
-      { id: 11, name: "Frog Fish", isChecked: false },
-      { id: 12, name: "Mimic Octopus", isChecked: false },
-      { id: 13, name: "Pygmy Seahorse", isChecked: false },
-      { id: 14, name: "Leafy Seadragon", isChecked: false },
-      { id: 15, name: "Blue-Ringed Octopus", isChecked: false },
-      { id: 16, name: "Flamboyant Cuttlefish", isChecked: false },
-      { id: 17, name: "Harlequin Shrimp", isChecked: false },
-      { id: 18, name: "Orangutan Crab", isChecked: false },
-      { id: 19, name: "Ornate Ghost Pipefish", isChecked: false },
-      { id: 20, name: "Leaf Scorpionfish", isChecked: false },
+      { id: 6, name: "Tiger Shark", isChecked: false },
+      { id: 7, name: "Manatee", isChecked: false },
+      { id: 8, name: "Seahorse", isChecked: false },
+      { id: 9, name: "Dragon Moray", isChecked: false },
+      { id: 10, name: "Ribbon Eel", isChecked: false },
+      { id: 11, name: "Mandarin Fish", isChecked: false },
+      { id: 12, name: "Frog Fish", isChecked: false },
+      { id: 13, name: "Mimic Octopus", isChecked: false },
+      { id: 14, name: "Pygmy Seahorse", isChecked: false },
+      { id: 15, name: "Leafy Seadragon", isChecked: false },
+      { id: 16, name: "Blue-Ringed Octopus", isChecked: false },
+      { id: 17, name: "Flamboyant Cuttlefish", isChecked: false },
+      { id: 18, name: "Harlequin Shrimp", isChecked: false },
+      { id: 19, name: "Orangutan Crab", isChecked: false },
+      { id: 20, name: "Ornate Ghost Pipefish", isChecked: false },
+      { id: 21, name: "Leaf Scorpionfish", isChecked: false },
     ],
   };
 
@@ -65,10 +70,39 @@ export default class EditWishlist extends React.Component {
     });
   };
 
-  handleSubmit = () => {
+  // Using this to pre-check boxes for the animals the user already has on their wishlist. this way they are editing their list rather than recreating it
+  componentDidMount() {
+    // will need to get the user from context, but currently does not work
+    let user = dummyStore.users[0];
+
+    let prefillList = user.wishlist;
+    let animals = this.state.list;
+    let names = animals.map((animal) => animal.name);
+
+    for (let i = 0; i < prefillList.length; i++) {
+      for (let j = 0; j < names.length; j++) {
+        if (names[j] === prefillList[i]) {
+          // set state
+          this.setState((prevState) => {
+            let { list } = prevState;
+            list = list.map((animal) =>
+              animal.name === names[j] ? { ...animal, isChecked: true } : animal
+            );
+            return { list };
+          });
+        }
+      }
+    }
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
     console.log(`handleSubmit ran`);
-    // let { wishlist } = this.state;
-    // let newWishlist = { wishlist };
+    let wishlist = this.state.list.filter(
+      (animal) => animal.isChecked === true
+    );
+    console.log(wishlist);
+    this.context.updateWishlist(wishlist);
   };
 
   handleClickCancel = () => {
@@ -82,7 +116,7 @@ export default class EditWishlist extends React.Component {
           You initially choose your wishlist when you sign up, but here you can
           re-select which animals appear on your wishlist.
         </section>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="input-fields">
             <h2>Animal Wishlist</h2>
             <fieldset className="sing-up-input" onChange={this.updateWishlist}>

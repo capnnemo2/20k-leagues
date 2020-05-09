@@ -4,9 +4,10 @@ export default React.createContext({
   users: [],
   dives: [],
   certs: [],
-  user: "",
+  user: [],
   wishlist: [],
   loggedIn: null,
   createNewUser: () => {},
   setLoggedIn: () => {},
+  updateWishlist: () => {},
 });
