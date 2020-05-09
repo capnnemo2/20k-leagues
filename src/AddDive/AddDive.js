@@ -19,6 +19,7 @@ export default class AddDive extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    // somewhere in here is the logic to add an animal seen to user.wishlistfulfilled
   };
 
   render() {

@@ -190,6 +190,7 @@ export default class Log extends React.Component {
             ))}
           </ul>
         </fieldset>
+        <Link to="/animal-finder">Find these sweet animals!</Link>
       </div>
     );
   }

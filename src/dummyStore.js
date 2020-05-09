@@ -78,7 +78,7 @@ export default {
   countries: [
     {
       country_name: "United States of America",
-      regions: ["Hawaii, Pacific Northwest, Florida, Channel Islands"],
+      regions: ["Hawaii", "Pacific Northwest", "Florida", "Channel Islands"],
     },
     {
       country_name: "Mexico",
@@ -139,13 +139,106 @@ export default {
       ],
     },
   ],
+  animals: [
+    {
+      id: 1,
+      animal: "Whale Shark",
+    },
+    {
+      id: 2,
+      animal: "Mola Mola",
+    },
+    {
+      id: 3,
+      animal: "Thresher Shark",
+    },
+    {
+      id: 4,
+      animal: "Hammerhead Shark",
+    },
+    {
+      id: 5,
+      animal: "Great White Shark",
+    },
+
+    {
+      id: 6,
+      animal: "Tiger Shark",
+    },
+    {
+      id: 7,
+      animal: "Manatee",
+    },
+    {
+      id: 8,
+      animal: "Manta Ray",
+    },
+    {
+      id: 9,
+      animal: "Seahorse",
+    },
+    {
+      id: 10,
+      animal: "Dragon Moray",
+    },
+    {
+      id: 11,
+      animal: "Ribbon Eel",
+    },
+    {
+      id: 12,
+      animal: "Mandarin Fish",
+    },
+    {
+      id: 13,
+      animal: "Frog Fish",
+    },
+    {
+      id: 14,
+      animal: "Mimic Octopus",
+    },
+    {
+      id: 15,
+      animal: "Pygmy Seahorse",
+    },
+    {
+      id: 16,
+      animal: "Leafy Seadragon",
+    },
+    {
+      id: 17,
+      animal: "Blue-Ringed Octopus",
+    },
+    {
+      id: 18,
+      animal: "Flamboyant Cuttlefish",
+    },
+    {
+      id: 19,
+      animal: "Harlequin Shrimp",
+    },
+    {
+      id: 20,
+      animal: "Orangutan Crab",
+    },
+    {
+      id: 21,
+      animal: "Ornate Ghost Pipefish",
+    },
+    {
+      id: 22,
+      animal: "Leaf Scorpionfish",
+    },
+  ],
   animalTracker: [
     {
+      id: 1,
       animal: "Manta Ray",
       country: "United States of America",
       region: "Hawaii",
     },
     {
+      id: 2,
       animal: "Whale Shark",
       country: "United States of America",
       region: "Hawaii",

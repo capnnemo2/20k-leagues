@@ -13,6 +13,7 @@ import AddSpecialty from "./AddSpecialty/AddSpecialty";
 import EditWishlist from "./EditWishlist/EditWishlist";
 import DiveDetails from "./DiveDetails/DiveDetails";
 import AddDive from "./AddDive/AddDive";
+import AnimalFinder from "./AnimalFinder/AnimalFinder";
 
 import Context from "./Context";
 import dummyStore from "./dummyStore";
@@ -111,6 +112,7 @@ export default class App extends React.Component {
               <Route path="/dive-details/:dive_id" component={DiveDetails} />
               <Route path="/add-dive" component={AddDive} />
               <Route path="/edit-wishlist" component={EditWishlist} />
+              <Route path="/animal-finder" component={AnimalFinder} />
             </Switch>
           </main>
           <footer>&copy;2020 Ben Hernandez</footer>
