@@ -243,5 +243,29 @@ export default {
       country: "United States of America",
       region: "Hawaii",
     },
+    {
+      id: 3,
+      animal: "Whale Shark",
+      country: "Thailand",
+      region: "Chumphon Archipelago (Koh Tao, Koh Samui, Koh Phangan)",
+    },
+    {
+      id: 4,
+      animal: "Whale Shark",
+      country: "Australia",
+      region: "SS Yongala",
+    },
+    {
+      id: 5,
+      animal: "Whale Shark",
+      country: "Australia",
+      region: "SS Yongala",
+    },
+    {
+      id: 6,
+      animal: "Manta Ray",
+      country: "Australia",
+      region: "SS Yongala",
+    },
   ],
 };

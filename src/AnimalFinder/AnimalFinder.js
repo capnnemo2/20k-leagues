@@ -1,5 +1,5 @@
 import React from "react";
-import LocationFilter from "../AnimalFinderUtils/LocationFilter";
+// import LocationFilter from "../AnimalFinderUtils/LocationFilter";
 import AnimalFilter from "../AnimalFinderUtils/AnimalFilter";
 import dummyStore from "../dummyStore";
 import "./AnimalFinder.css";
@@ -15,6 +15,9 @@ export default class AnimalFinder extends React.Component {
   updateSearchBy(search) {
     this.setState({
       searchBy: search,
+      animal: "",
+      region: "",
+      country: "",
     });
   }
 
@@ -44,13 +47,59 @@ export default class AnimalFinder extends React.Component {
             (country) => country.country_name === this.state.country
           ).regions
         : [];
-    const animals = dummyStore.animals;
+
+    const currentAnimal =
+      this.state.animal !== ""
+        ? dummyStore.animalTracker.filter(
+            (animal) => animal.animal === this.state.animal
+          )
+        : "";
+
+    console.log("current animal: ", currentAnimal);
+
+    let animalCount = currentAnimal
+      ? currentAnimal.reduce((counts, obj) => {
+          let bool = false;
+          if (!counts) {
+            counts = [];
+          }
+          counts.forEach((a) => {
+            if (a.region === obj.region) {
+              a.count++;
+              bool = true;
+            }
+          });
+          if (!bool) {
+            obj.count = 1;
+            counts.push(obj);
+          }
+          return counts;
+        }, [])
+      : "";
+
+    console.log("counts array: ", animalCount);
+
+    // let count = {};
+    // const animalCount = currentAnimal
+    //   ? currentAnimal.forEach((el) => {
+    //       count[el.region] = (count[el.region] || 0) + 1;
+    //     })
+    //   : "";
+    // console.log("animal region count: ", count);
+
+    const currentRegion =
+      this.state.region !== ""
+        ? dummyStore.animalTracker.filter(
+            (region) => region.region === this.state.region
+          )
+        : "";
 
     return (
       <div className="AnimalFinder">
         <h2>Find that beast</h2>
         <section>
           <div>
+            {/* maybe change this first select/option to radio buttons */}
             <label>
               Search by:
               <select onChange={(e) => this.updateSearchBy(e.target.value)}>
@@ -102,13 +151,32 @@ export default class AnimalFinder extends React.Component {
           </div>
         </section>
 
-        <div>
-          <ul>
-            {animals.map((animal) => (
-              <li key={animal.id}>{animal.animal}</li>
-            ))}
-          </ul>
-        </div>
+        <section>
+          <div>
+            {animalCount
+              ? animalCount.map((animal) => (
+                  <div key={animal.id}>
+                    <p>{animal.country}</p>
+                    <p>{animal.region}</p>
+                    <p>Number of sightings: {animal.count}</p>
+                    <hr />
+                  </div>
+                ))
+              : ""}
+          </div>
+          <div>
+            {/* maybe a separate component? */}
+            {/* again, need to tally repeat animals rather than list them again */}
+            {currentRegion
+              ? currentRegion.map((region) => (
+                  <div key={region.id}>
+                    <p>{region.animal}</p>
+                    <hr />
+                  </div>
+                ))
+              : ""}
+          </div>
+        </section>
       </div>
     );
   }
