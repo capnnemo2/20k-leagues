@@ -133,21 +133,25 @@ export default class Log extends React.Component {
         <fieldset>
           <legend>Dives</legend>
           <ul>
-            {dives.map((dive) => (
-              <li key={dive.id}>
-                <ul>
-                  {/* dive number will have to be calculated by counting all dives with the specific user_id, not just dive.id because there will be dives from multiple users in the same db. somehow keep them chronological too */}
-                  <li>Dive #{dive.id}</li>
-                  <li>{dive.date}</li>
-                  <li>{dive.country}</li>
-                  <li>{dive.diveSite}</li>
-                  <li>{dive.rating} seastars</li>
-                  <li>
-                    <Link to={`/dive-details/${dive.id}`}>Details</Link>
-                  </li>
-                </ul>
-              </li>
-            ))}
+            {dives
+              .slice(0)
+              .reverse()
+              .map((dive) => (
+                <li key={dive.id}>
+                  <ul>
+                    {/* dive number will have to be calculated by counting all dives with the specific user_id, not just dive.id because there will be dives from multiple users in the same db. somehow keep them chronological too */}
+                    <li>Dive #{dive.id}</li>
+                    <li>{dive.date}</li>
+                    <li>{dive.country}</li>
+                    <li>{dive.diveSite}</li>
+                    <li>{dive.rating} seastars</li>
+                    <li>
+                      <Link to={`/dive-details/${dive.id}`}>Details</Link>
+                    </li>
+                    <br />
+                  </ul>
+                </li>
+              ))}
           </ul>
         </fieldset>
         <fieldset>

@@ -107,7 +107,6 @@ export default class AnimalFinder extends React.Component {
         <h2>Find that beast</h2>
         <section>
           <div>
-            {/* maybe change this first select/option to radio buttons */}
             {/* <label>
               Search by:
               <select onChange={(e) => this.updateSearchBy(e.target.value)}>
