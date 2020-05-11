@@ -9,7 +9,7 @@ export default class Log extends React.Component {
   static contextType = Context;
 
   state = {
-    searchBy: "",
+    searchBy: "all",
     country: "",
     animal: "",
   };
@@ -133,6 +133,7 @@ export default class Log extends React.Component {
     }
   }
 
+  // wishlist handlers
   renderAnimalsSeen = (user) => {
     return user.wishlistFulfilled.map((animal) => (
       <li key={animal}>{animal}</li>
@@ -150,18 +151,30 @@ export default class Log extends React.Component {
     return animalsToSee.map((animal) => <li key={animal}>{animal}</li>);
   };
 
+  // dive list handlers
+  renderDiveList = (dives) => {};
+
   render() {
     const user = this.context.user;
 
     const userId = user.id;
-    const dives = this.context.dives.filter(
-      (d) => Number(d.user_id) === Number(userId)
-    );
+
+    const dives =
+      this.state.searchBy === "all"
+        ? this.context.dives.filter((d) => Number(d.user_id) === Number(userId))
+        : "";
+
+    // const dives = this.context.dives.filter(
+    //   (d) => Number(d.user_id) === Number(userId)
+    // );
     // they aren't truly in order, just reverse order of how they were entered
-    const divesInOrder = dives.sort(function (a, b) {
-      return a.date - b.date;
-    });
-    console.log(divesInOrder);
+
+    // divesInOrder is not being used currently, probably don't need it
+    // const divesInOrder = dives.sort(function (a, b) {
+    //   return a.date - b.date;
+    // });
+    // console.log(divesInOrder);
+
     const totalDives = dives.length;
 
     return user ? (

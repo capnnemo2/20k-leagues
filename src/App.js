@@ -110,6 +110,7 @@ export default class App extends React.Component {
               <Route exact path="/" component={Home} />
               <PublicOnlyRoute path="/sign-up" component={SignUp} />
               <PublicOnlyRoute path="/login" component={Login} />
+              <Route path="/animal-finder" component={AnimalFinder} />
 
               {/* private endpoints */}
               <Route path="/log" component={Log} />
@@ -119,7 +120,6 @@ export default class App extends React.Component {
               <Route path="/dive-details/:dive_id" component={DiveDetails} />
               <Route path="/add-dive" component={AddDive} />
               <Route path="/edit-wishlist" component={EditWishlist} />
-              <Route path="/animal-finder" component={AnimalFinder} />
             </Switch>
           </main>
           <footer>&copy;2020 Ben Hernandez</footer>

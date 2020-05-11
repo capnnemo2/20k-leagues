@@ -6,39 +6,23 @@ import AnimalFilter from "../AnimalFinderUtils/AnimalFilter";
 export default class LogFilters extends React.Component {
   static contextType = Context;
 
-  //   state = {
-  //     searchBy: "",
-  //     country: "",
-  //     animal: "",
-  //   };
-
-  //   updateSearchBy(search) {
-  //     this.setState({
-  //       searchBy: search,
-  //       country: "",
-  //       animal: "",
-  //     });
-  //   }
-
-  //   updateCountry = (e) => {
-  //     this.setState({
-  //       country: e.target.value,
-  //     });
-  //   };
-
-  //   updateAnimal = (e) => {
-  //     this.setState({
-  //       animal: e.target.value,
-  //     });
-  //   };
-
   render() {
     const countries = dummyStore.countries;
 
     return (
       <div className="LogFilters">
         <fieldset>
-          <legend>Filter dives by</legend>
+          <legend>Filter dives</legend>
+          <input
+            type="radio"
+            name="searchBy"
+            id="all"
+            value="all"
+            onChange={(e) => this.props.updateSearchBy(e.target.value)}
+            defaultChecked
+          />
+          <label htmlFor="all">All</label>
+          <br />
           <input
             type="radio"
             name="searchBy"
