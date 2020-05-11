@@ -55,9 +55,7 @@ export default class AnimalFinder extends React.Component {
           )
         : "";
 
-    console.log("current animal: ", currentAnimal);
-
-    let animalCount = currentAnimal
+    let regionCount = currentAnimal
       ? currentAnimal.reduce((counts, obj) => {
           let bool = false;
           if (!counts) {
@@ -77,22 +75,32 @@ export default class AnimalFinder extends React.Component {
         }, [])
       : "";
 
-    console.log("counts array: ", animalCount);
-
-    // let count = {};
-    // const animalCount = currentAnimal
-    //   ? currentAnimal.forEach((el) => {
-    //       count[el.region] = (count[el.region] || 0) + 1;
-    //     })
-    //   : "";
-    // console.log("animal region count: ", count);
-
     const currentRegion =
       this.state.region !== ""
         ? dummyStore.animalTracker.filter(
             (region) => region.region === this.state.region
           )
         : "";
+
+    let animalCount = currentRegion
+      ? currentRegion.reduce((counts, obj) => {
+          let bool = false;
+          if (!counts) {
+            counts = [];
+          }
+          counts.forEach((a) => {
+            if (a.animal === obj.animal) {
+              a.count++;
+              bool = true;
+            }
+          });
+          if (!bool) {
+            obj.count = 1;
+            counts.push(obj);
+          }
+          return counts;
+        }, [])
+      : "";
 
     return (
       <div className="AnimalFinder">
@@ -153,24 +161,23 @@ export default class AnimalFinder extends React.Component {
 
         <section>
           <div>
-            {animalCount
-              ? animalCount.map((animal) => (
+            {regionCount
+              ? regionCount.map((animal) => (
                   <div key={animal.id}>
                     <p>{animal.country}</p>
                     <p>{animal.region}</p>
-                    <p>Number of sightings: {animal.count}</p>
+                    <p>Total sightings: {animal.count}</p>
                     <hr />
                   </div>
                 ))
               : ""}
           </div>
           <div>
-            {/* maybe a separate component? */}
-            {/* again, need to tally repeat animals rather than list them again */}
-            {currentRegion
-              ? currentRegion.map((region) => (
+            {animalCount
+              ? animalCount.map((region) => (
                   <div key={region.id}>
                     <p>{region.animal}</p>
+                    <p>Total sightings: {region.count}</p>
                     <hr />
                   </div>
                 ))
