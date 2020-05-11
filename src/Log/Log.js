@@ -13,6 +13,7 @@ export default class Log extends React.Component {
     country: "",
     animal: "",
     site: "",
+    shop: "",
   };
 
   // filter handlers
@@ -39,6 +40,12 @@ export default class Log extends React.Component {
   updateSite = (e) => {
     this.setState({
       site: e.target.value,
+    });
+  };
+
+  updateShop = (e) => {
+    this.setState({
+      shop: e.target.value,
     });
   };
 
@@ -187,6 +194,17 @@ export default class Log extends React.Component {
     return siteDives;
   }
 
+  findShopDives(arr) {
+    let shopDives = [];
+    for (let i = 0; i < arr.length; i++) {
+      let dive = arr[i];
+      if (dive.diveShop.toUpperCase().includes(this.state.shop.toUpperCase())) {
+        shopDives.push(dive);
+      }
+    }
+    return shopDives;
+  }
+
   render() {
     const user = this.context.user;
 
@@ -205,6 +223,8 @@ export default class Log extends React.Component {
         ? this.findAnimalDives(allUserDives)
         : this.state.searchBy === "site"
         ? this.findSiteDives(allUserDives)
+        : this.state.searchBy === "shop"
+        ? this.findShopDives(allUserDives)
         : "";
 
     // they aren't truly in order, just reverse order of how they were entered
@@ -232,6 +252,7 @@ export default class Log extends React.Component {
           updateCountry={this.updateCountry}
           updateAnimal={this.updateAnimal}
           updateSite={this.updateSite}
+          updateShop={this.updateShop}
         />
         <Link to="/add-dive">Add new dive</Link>
         <fieldset>
