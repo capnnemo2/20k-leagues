@@ -1,11 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import dummyStore from "../dummyStore";
+import LogFilters from "../LogUtils/LogFilters";
 import Context from "../Context";
 import "./Log.css";
 
 export default class Log extends React.Component {
   static contextType = Context;
+
+  state = {
+    searchBy: "",
+    country: "",
+    animal: "",
+  };
+
+  // filter handlers
+  updateSearchBy = (search) => {
+    this.setState({
+      searchBy: search,
+      country: "",
+      animal: "",
+    });
+  };
+
+  updateCountry = (e) => {
+    this.setState({
+      country: e.target.value,
+    });
+  };
+
+  updateAnimal = (e) => {
+    this.setState({
+      animal: e.target.value,
+    });
+  };
 
   // dive depth handlers
   findDeepestDive(arr) {
@@ -126,9 +154,14 @@ export default class Log extends React.Component {
     const user = this.context.user;
 
     const userId = user.id;
-    const dives = dummyStore.dives.filter(
+    const dives = this.context.dives.filter(
       (d) => Number(d.user_id) === Number(userId)
     );
+    // they aren't truly in order, just reverse order of how they were entered
+    const divesInOrder = dives.sort(function (a, b) {
+      return a.date - b.date;
+    });
+    console.log(divesInOrder);
     const totalDives = dives.length;
 
     return user ? (
@@ -140,19 +173,24 @@ export default class Log extends React.Component {
             <Link to="/profile"> profile</Link>
           </p>
         </section>
-        <p>filter the dive list</p>
+        <LogFilters
+          updateSearchBy={this.updateSearchBy}
+          updateCountry={this.updateCountry}
+          updateAnimal={this.updateAnimal}
+          searchBy={this.state.searchBy}
+        />
         <Link to="/add-dive">Add new dive</Link>
         <fieldset>
           <legend>Dives</legend>
           <ul>
+            {/* dives should be displayed in order of most recent. currently this just reverses the order they were input. what if a user (me) inputs dives from the past, out of order */}
             {dives
               .slice(0)
               .reverse()
               .map((dive) => (
                 <li key={dive.id}>
                   <ul>
-                    {/* dive number will have to be calculated by counting all dives with the specific user_id, not just dive.id because there will be dives from multiple users in the same db. somehow keep them chronological too */}
-                    <li>Dive #{dive.id}</li>
+                    {/* <li>Dive #{dive.id}</li> */}
                     <li>{dive.date}</li>
                     <li>{dive.country}</li>
                     <li>{dive.diveSite}</li>
@@ -192,21 +230,11 @@ export default class Log extends React.Component {
         </p>
         <fieldset>
           <legend>Spotted!</legend>
-          <ul>
-            {/* {user.wishlistFulfilled.map((animal) => (
-              <li key={animal}>{animal}</li>
-            ))} */}
-            {this.renderAnimalsSeen(user)}
-          </ul>
+          <ul>{this.renderAnimalsSeen(user)}</ul>
         </fieldset>
         <fieldset>
           <legend>Seeking</legend>
-          <ul>
-            {/* {animalsToSee.map((animal) => (
-              <li key={animal}>{animal}</li>
-            ))} */}
-            {this.renderAnimalsToSee(user)}
-          </ul>
+          <ul>{this.renderAnimalsToSee(user)}</ul>
         </fieldset>
       </div>
     ) : (

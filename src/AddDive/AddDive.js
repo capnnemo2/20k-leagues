@@ -48,6 +48,7 @@ export default class AddDive extends React.Component {
                   id="date"
                   aria-label="Enter the date of the dive"
                   aria-required="true"
+                  onChange={(e) => console.log(e.target.value)}
                   required
                 />
               </div>

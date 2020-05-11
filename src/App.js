@@ -15,6 +15,9 @@ import DiveDetails from "./DiveDetails/DiveDetails";
 import AddDive from "./AddDive/AddDive";
 import AnimalFinder from "./AnimalFinder/AnimalFinder";
 
+import PublicOnlyRoute from "./Utils/PublicOnlyRoute";
+// import PrivateRoute from "./Utils/PrivateRoute";
+
 import Context from "./Context";
 import dummyStore from "./dummyStore";
 import "./App.css";
@@ -105,8 +108,8 @@ export default class App extends React.Component {
             <Switch>
               {/* public endpoints */}
               <Route exact path="/" component={Home} />
-              <Route path="/sign-up" component={SignUp} />
-              <Route path="/login" component={Login} />
+              <PublicOnlyRoute path="/sign-up" component={SignUp} />
+              <PublicOnlyRoute path="/login" component={Login} />
 
               {/* private endpoints */}
               <Route path="/log" component={Log} />
