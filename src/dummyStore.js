@@ -79,7 +79,7 @@ export default {
     {
       id: 3,
       user_id: 1,
-      date: "March, 18, 2017",
+      date: "March 18, 2017",
       country: "Philippines",
       region: "Malapascua",
       diveSite: "North Point",

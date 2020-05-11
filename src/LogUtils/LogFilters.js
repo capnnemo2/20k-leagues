@@ -32,6 +32,7 @@ export default class LogFilters extends React.Component {
           />
           <label htmlFor="country">Country</label>
           <br />
+          {/* animal filter is basically a personalized animalFinder. also maybe tough to implement */}
           <input
             type="radio"
             name="searchBy"

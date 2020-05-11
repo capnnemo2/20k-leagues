@@ -151,22 +151,42 @@ export default class Log extends React.Component {
     return animalsToSee.map((animal) => <li key={animal}>{animal}</li>);
   };
 
-  // dive list handlers
-  renderDiveList = (dives) => {};
+  findAnimalDives(arr) {
+    let animalDives = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      let dive = arr[i];
+      let currentDive = dive.animals;
+      if (currentDive.length !== 0) {
+        let check = currentDive.filter(
+          (animal) => animal === this.state.animal
+        );
+        if (check.length !== 0) {
+          animalDives.push(dive);
+        }
+      }
+    }
+    return animalDives;
+  }
 
   render() {
     const user = this.context.user;
 
     const userId = user.id;
 
+    const allUserDives = this.context.dives.filter(
+      (dive) => Number(dive.user_id) === Number(userId)
+    );
+
     const dives =
       this.state.searchBy === "all"
-        ? this.context.dives.filter((d) => Number(d.user_id) === Number(userId))
+        ? allUserDives
+        : this.state.searchBy === "country"
+        ? allUserDives.filter((dive) => dive.country === this.state.country)
+        : this.state.searchBy === "animal"
+        ? this.findAnimalDives(allUserDives)
         : "";
 
-    // const dives = this.context.dives.filter(
-    //   (d) => Number(d.user_id) === Number(userId)
-    // );
     // they aren't truly in order, just reverse order of how they were entered
 
     // divesInOrder is not being used currently, probably don't need it
@@ -198,23 +218,25 @@ export default class Log extends React.Component {
           <ul>
             {/* dives should be displayed in order of most recent. currently this just reverses the order they were input. what if a user (me) inputs dives from the past, out of order */}
             {dives
-              .slice(0)
-              .reverse()
-              .map((dive) => (
-                <li key={dive.id}>
-                  <ul>
-                    {/* <li>Dive #{dive.id}</li> */}
-                    <li>{dive.date}</li>
-                    <li>{dive.country}</li>
-                    <li>{dive.diveSite}</li>
-                    <li>{dive.rating} seastars</li>
-                    <li>
-                      <Link to={`/dive-details/${dive.id}`}>Details</Link>
+              ? dives
+                  .slice(0)
+                  .reverse()
+                  .map((dive) => (
+                    <li key={dive.id}>
+                      <ul>
+                        {/* <li>Dive #{dive.id}</li> */}
+                        <li>{dive.date}</li>
+                        <li>{dive.country}</li>
+                        <li>{dive.diveSite}</li>
+                        <li>{dive.rating} seastars</li>
+                        <li>
+                          <Link to={`/dive-details/${dive.id}`}>Details</Link>
+                        </li>
+                        <br />
+                      </ul>
                     </li>
-                    <br />
-                  </ul>
-                </li>
-              ))}
+                  ))
+              : ""}
           </ul>
         </fieldset>
         <fieldset>
