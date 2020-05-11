@@ -21,28 +21,32 @@ export default class Login extends React.Component {
 
   checkUser(email, password) {
     const users = this.context.users;
-    let userCheck = users.find((user) => user.email === email);
-    console.log(users);
-    console.log("userCheck = ", userCheck);
-    console.log(`check user ran`);
+    const userCheck = users.find((user) => user.email === email);
+    if (userCheck === undefined) {
+      this.setState({ error: "Email does not exist" });
+      console.log("user incorrect");
+    } else {
+      if (userCheck.password === password) {
+        this.context.setLoggedIn(true);
+        this.handleLoginSuccess();
+      } else {
+        this.setState({ error: "Incorrect password" });
+        console.log("incorrect password");
+      }
+    }
   }
 
-  handleSubmitAuth = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = e.target;
-    this.setState({
-      error: null,
-    });
-    this.checkUser(email, password);
-    this.context.setLoggedIn(true);
-    this.handleLoginSuccess();
+    this.checkUser(email.value, password.value);
   };
 
   render() {
     const { error } = this.state;
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmitAuth}>
+        <form onSubmit={this.handleSubmit}>
           <fieldset className="input-fields">
             <legend>Login</legend>
             <div className="error">{error && <p>{error}</p>}</div>
