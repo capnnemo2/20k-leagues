@@ -10,4 +10,5 @@ export default React.createContext({
   createNewUser: () => {},
   setLoggedIn: () => {},
   updateWishlist: () => {},
+  setUser: () => {},
 });

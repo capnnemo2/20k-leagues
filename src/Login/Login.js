@@ -27,7 +27,9 @@ export default class Login extends React.Component {
       console.log("user incorrect");
     } else {
       if (userCheck.password === password) {
+        this.context.setUser(userCheck);
         this.context.setLoggedIn(true);
+        console.log(this.context.user);
         this.handleLoginSuccess();
       } else {
         this.setState({ error: "Incorrect password" });

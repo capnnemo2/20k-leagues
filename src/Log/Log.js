@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Log.css";
 import dummyStore from "../dummyStore";
+import Context from "../Context";
+import "./Log.css";
 
 export default class Log extends React.Component {
+  static contextType = Context;
+
   // dive depth handlers
   findDeepestDive(arr) {
     let diveDepths = [];
@@ -26,7 +29,7 @@ export default class Log extends React.Component {
     }
     let sum = diveDepths.reduce((a, b) => a + b, 0);
     let avg = sum / arr.length;
-    return avg + " ft.";
+    return avg.toFixed(1) + " ft.";
   }
 
   findShallowestDive(arr) {
@@ -102,15 +105,13 @@ export default class Log extends React.Component {
     }
   }
 
-  render() {
-    const totalDives = dummyStore.dives.length;
-    // this logic to find the user will be different once login is established
-    const user = dummyStore.users[0];
-    const userId = user.id;
-    const dives = dummyStore.dives.filter(
-      (d) => Number(d.user_id) === Number(userId)
-    );
+  renderAnimalsSeen = (user) => {
+    return user.wishlistFulfilled.map((animal) => (
+      <li key={animal}>{animal}</li>
+    ));
+  };
 
+  renderAnimalsToSee = (user) => {
     let animalsToSee = [];
     for (let i = 0; i < user.wishlistFulfilled.length; i++) {
       const animal = user.wishlist.filter(
@@ -118,8 +119,19 @@ export default class Log extends React.Component {
       );
       animalsToSee = animal;
     }
+    return animalsToSee.map((animal) => <li key={animal}>{animal}</li>);
+  };
 
-    return (
+  render() {
+    const user = this.context.user;
+
+    const userId = user.id;
+    const dives = dummyStore.dives.filter(
+      (d) => Number(d.user_id) === Number(userId)
+    );
+    const totalDives = dives.length;
+
+    return user ? (
       <div className="Log">
         <section>
           <h2>{user.first_name}'s Dive Log</h2>
@@ -181,20 +193,24 @@ export default class Log extends React.Component {
         <fieldset>
           <legend>Spotted!</legend>
           <ul>
-            {user.wishlistFulfilled.map((animal) => (
+            {/* {user.wishlistFulfilled.map((animal) => (
               <li key={animal}>{animal}</li>
-            ))}
+            ))} */}
+            {this.renderAnimalsSeen(user)}
           </ul>
         </fieldset>
         <fieldset>
           <legend>Seeking</legend>
           <ul>
-            {animalsToSee.map((animal) => (
+            {/* {animalsToSee.map((animal) => (
               <li key={animal}>{animal}</li>
-            ))}
+            ))} */}
+            {this.renderAnimalsToSee(user)}
           </ul>
         </fieldset>
       </div>
+    ) : (
+      "Loading..."
     );
   }
 }

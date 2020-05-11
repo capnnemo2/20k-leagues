@@ -58,9 +58,12 @@ export default class App extends React.Component {
   };
 
   createNewUser = (newUser) => {
+    console.log("create new user ran in app");
     this.setState({
       users: [...this.state.users, newUser],
     });
+    console.log("new user: ", newUser);
+    console.log("hopefully new users: ", this.state.users);
   };
 
   setLoggedIn = (status) => {
@@ -79,7 +82,7 @@ export default class App extends React.Component {
     this.setUsers(dummyStore.users);
     this.setDives(dummyStore.dives);
     this.setCerts(dummyStore.certs);
-    this.setUser(dummyStore.users[0]);
+    // this.setUser(dummyStore.users[0]);
   }
 
   render() {
@@ -91,6 +94,7 @@ export default class App extends React.Component {
       createNewUser: this.createNewUser,
       setLoggedIn: this.setLoggedIn,
       updateWishlist: this.updateWishlist,
+      setUser: this.setUser,
     };
     return (
       <Context.Provider value={value}>
