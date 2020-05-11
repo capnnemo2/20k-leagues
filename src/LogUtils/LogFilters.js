@@ -92,6 +92,13 @@ export default class LogFilters extends React.Component {
             <div>
               <AnimalFilter updateAnimal={this.props.updateAnimal} />
             </div>
+          ) : this.props.searchBy === "site" ? (
+            <div>
+              <label>
+                Dive Site:
+                <input type="text" onChange={(e) => this.props.updateSite(e)} />
+              </label>
+            </div>
           ) : (
             ""
           )}

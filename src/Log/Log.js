@@ -12,6 +12,7 @@ export default class Log extends React.Component {
     searchBy: "all",
     country: "",
     animal: "",
+    site: "",
   };
 
   // filter handlers
@@ -32,6 +33,12 @@ export default class Log extends React.Component {
   updateAnimal = (e) => {
     this.setState({
       animal: e.target.value,
+    });
+  };
+
+  updateSite = (e) => {
+    this.setState({
+      site: e.target.value,
     });
   };
 
@@ -151,9 +158,9 @@ export default class Log extends React.Component {
     return animalsToSee.map((animal) => <li key={animal}>{animal}</li>);
   };
 
+  // filter result handlers
   findAnimalDives(arr) {
     let animalDives = [];
-
     for (let i = 0; i < arr.length; i++) {
       let dive = arr[i];
       let currentDive = dive.animals;
@@ -167,6 +174,17 @@ export default class Log extends React.Component {
       }
     }
     return animalDives;
+  }
+
+  findSiteDives(arr) {
+    let siteDives = [];
+    for (let i = 0; i < arr.length; i++) {
+      let dive = arr[i];
+      if (dive.diveSite.toUpperCase().includes(this.state.site.toUpperCase())) {
+        siteDives.push(dive);
+      }
+    }
+    return siteDives;
   }
 
   render() {
@@ -185,6 +203,8 @@ export default class Log extends React.Component {
         ? allUserDives.filter((dive) => dive.country === this.state.country)
         : this.state.searchBy === "animal"
         ? this.findAnimalDives(allUserDives)
+        : this.state.searchBy === "site"
+        ? this.findSiteDives(allUserDives)
         : "";
 
     // they aren't truly in order, just reverse order of how they were entered
@@ -195,7 +215,7 @@ export default class Log extends React.Component {
     // });
     // console.log(divesInOrder);
 
-    const totalDives = dives.length;
+    const totalDives = allUserDives.length;
 
     return user ? (
       <div className="Log">
@@ -207,10 +227,11 @@ export default class Log extends React.Component {
           </p>
         </section>
         <LogFilters
+          searchBy={this.state.searchBy}
           updateSearchBy={this.updateSearchBy}
           updateCountry={this.updateCountry}
           updateAnimal={this.updateAnimal}
-          searchBy={this.state.searchBy}
+          updateSite={this.updateSite}
         />
         <Link to="/add-dive">Add new dive</Link>
         <fieldset>
