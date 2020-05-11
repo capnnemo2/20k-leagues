@@ -6,7 +6,7 @@ import "./AnimalFinder.css";
 
 export default class AnimalFinder extends React.Component {
   state = {
-    searchBy: "animal",
+    searchBy: "",
     country: "",
     region: "",
     animal: "",
@@ -108,13 +108,33 @@ export default class AnimalFinder extends React.Component {
         <section>
           <div>
             {/* maybe change this first select/option to radio buttons */}
-            <label>
+            {/* <label>
               Search by:
               <select onChange={(e) => this.updateSearchBy(e.target.value)}>
                 <option value="animal">Animal</option>
                 <option value="location">Location</option>
               </select>
-            </label>
+            </label> */}
+            <fieldset>
+              <legend>Search by</legend>
+              <input
+                type="radio"
+                name="searchBy"
+                id="animal"
+                value="animal"
+                onChange={(e) => this.updateSearchBy(e.target.value)}
+              />
+              <label htmlFor="animal">Animal</label>
+              <br />
+              <input
+                type="radio"
+                name="searchBy"
+                id="location"
+                value="location"
+                onChange={(e) => this.updateSearchBy(e.target.value)}
+              />
+              <label htmlFor="location">Location</label>
+            </fieldset>
           </div>
           <div className="filter-box">
             {this.state.searchBy === "location" ? (
@@ -151,10 +171,12 @@ export default class AnimalFinder extends React.Component {
                   </select>
                 </label>
               </div>
-            ) : (
+            ) : this.state.searchBy === "animal" ? (
               <div>
                 <AnimalFilter updateAnimal={this.updateAnimal} />
               </div>
+            ) : (
+              ""
             )}
           </div>
         </section>
