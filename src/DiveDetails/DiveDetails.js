@@ -17,9 +17,9 @@ export default class DiveDetails extends React.Component {
           <fieldset className="input-fields sidebar">
             <legend>People</legend>
             <ul className="sign-up-input">
-              <li>Dive Shop Used: {dive.diveShop}</li>
-              <li>Guide: {dive.guide}</li>
-              <li>Buddy: {dive.buddy}</li>
+              {dive.diveShop ? <li>Dive Shop: {dive.diveShop}</li> : ""}
+              {dive.guide !== "" ? <li>Guide: {dive.guide}</li> : ""}
+              {dive.buddy !== "" ? <li>Guide: {dive.buddy}</li> : ""}
             </ul>
           </fieldset>
           <div className="dive-inner-container">
@@ -35,7 +35,7 @@ export default class DiveDetails extends React.Component {
             <fieldset className="input-fields">
               <legend>Description</legend>
               <ul className="sign-up-input">
-                <li>Description: {dive.description}</li>
+                {dive.description !== "" ? <li>{dive.description}</li> : ""}
                 <li>Rating: {dive.rating} seastars</li>
               </ul>
             </fieldset>
@@ -52,12 +52,17 @@ export default class DiveDetails extends React.Component {
           <fieldset className="input-fields sidebar">
             <legend>Statistics</legend>
             <ul className="sign-up-input">
-              <li>Depth: {dive.maxDepth} ft.</li>
+              <li>Maximum Depth: {dive.maxDepth} ft.</li>
               <li>Bottom Time: {dive.duration} min.</li>
               <li>Water Temp: {dive.waterTemp} °F</li>
-              <li>Visibility: {dive.viz}</li>
-              <li>Dive Type: {dive.diveType}</li>
-              <li>Drift: {dive.driftDive}</li>
+              {dive.viz !== "" ? <li>Visibility: {dive.viz} ft.</li> : ""}
+              {dive.diveType === "boat" ? (
+                <li>Boat dive</li>
+              ) : (
+                <li>Shore dive</li>
+              )}
+              {dive.driftDive === true ? <li>Drift dive</li> : ""}
+              {dive.night === true ? <li>Night dive</li> : ""}
             </ul>
           </fieldset>
         </div>

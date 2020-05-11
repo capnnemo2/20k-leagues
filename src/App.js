@@ -70,7 +70,7 @@ export default class App extends React.Component {
   };
 
   updateWishlist = (wishlist) => {
-    let newUser = [...this.state.user, wishlist];
+    let newUser = [...this.context.user, wishlist];
     console.log(newUser);
   };
 
