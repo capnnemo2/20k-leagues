@@ -80,6 +80,13 @@ export default class App extends React.Component {
     console.log(newUser);
   };
 
+  addCert = (newCert) => {
+    // this.context.certs.push(newCert);
+    this.setState({
+      certs: [...this.state.certs, newCert],
+    });
+  };
+
   // right now just loading up everything, but with login will only need to set data for the specific user
   componentDidMount() {
     this.setUsers(dummyStore.users);
@@ -91,14 +98,15 @@ export default class App extends React.Component {
   render() {
     const value = {
       users: this.state.users,
+      user: this.state.user,
+      setUser: this.setUser,
       dives: this.state.dives,
       certs: this.state.certs,
-      user: this.state.user,
       loggedIn: this.state.loggedIn,
-      createNewUser: this.createNewUser,
       setLoggedIn: this.setLoggedIn,
+      createNewUser: this.createNewUser,
       updateWishlist: this.updateWishlist,
-      setUser: this.setUser,
+      addCert: this.addCert,
     };
     return (
       <Context.Provider value={value}>

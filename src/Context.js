@@ -11,4 +11,5 @@ export default React.createContext({
   setLoggedIn: () => {},
   updateWishlist: () => {},
   setUser: () => {},
+  addCert: () => {},
 });

@@ -1,8 +1,11 @@
 import React from "react";
 import "./AddCert.css";
 // import dummyStore from "../dummyStore";
+import Context from "../Context";
 
 export default class AddCert extends React.Component {
+  static contextType = Context;
+
   state = {
     agency: "",
     isOtherSelected: true,
@@ -85,8 +88,12 @@ export default class AddCert extends React.Component {
   // users[0] should select only the user who is logged in
   handleSubmit = () => {
     console.log("something happened");
-    // let { agency, certLevel, certNum, certDate } = this.state;
-    // let newCert = { agency, certLevel, certNum, certDate };
+    let { agency, certLevel, certNum, certDate } = this.state;
+    let id = this.context.certs.length + 1;
+    let user_id = this.context.user.id;
+    let newCert = { id, user_id, agency, certLevel, certNum, certDate };
+    this.context.addCert(newCert);
+    this.props.history.push("/profile");
   };
 
   handleClickCancel = () => {
@@ -96,12 +103,6 @@ export default class AddCert extends React.Component {
   render() {
     return (
       <div className="AddCert">
-        <section>
-          Do you need to be able to update your email address? This would affect
-          your login. Do I have the ability to change that?
-        </section>
-        <section>There should be a section for specialities.</section>
-        <section>Your animal wishlist should auto-update.</section>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -138,9 +139,6 @@ export default class AddCert extends React.Component {
                 SSI
               </label>
               <br />
-
-              {/* is there a better way to write-in for other? */}
-              {/* this doesn't work if you choose other, type something in, choose padi or ssi, then switch back to other.  */}
               <label htmlFor="other">
                 <input
                   type="radio"

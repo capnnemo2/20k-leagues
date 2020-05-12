@@ -30,6 +30,7 @@ export default class Profile extends React.Component {
                   <li>{cert.certDate}</li>
                   <li>Diver number: {cert.certNum}</li>
                 </ul>
+                <br />
               </li>
             ))}
           </ul>
