@@ -100,7 +100,19 @@ export default class App extends React.Component {
     }
   };
 
-  addInstructorSpecialties = (specs) => {};
+  addInstructorSpecialties = (specs) => {
+    for (let i = 0; i < specs.length; i++) {
+      this.setState((prevState) => ({
+        user: {
+          ...prevState.user,
+          instructorSpecialties: [
+            ...prevState.user.instructorSpecialties,
+            specs[i],
+          ],
+        },
+      }));
+    }
+  };
 
   // right now just loading up everything, but with login will only need to set data for the specific user
   componentDidMount() {

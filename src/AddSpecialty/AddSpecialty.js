@@ -71,18 +71,34 @@ export default class AddSpecialty extends React.Component {
   };
 
   handleSubmit = () => {
+    // get all specialties checked
     let specialties = this.state.specialties.filter(
       (spec) => spec.isChecked === true
     );
+    // select only the name values of specialties
     specialties = specialties.map((spec) => spec.name);
+    // grab any specialties user already has
     const userSpecs = this.context.user.specialties;
-    for (let i = 0; i < userSpecs.length; i++) {
-      const specList = specialties.filter((spec) => spec !== userSpecs[i]);
-      specialties = specList;
-    }
+    const userInstructorSpecs = this.context.user.instructorSpecialties;
+
+    // make sure submitting diver or instructor specs
     if (this.state.type === "diver") {
+      // filter out any new specialties checked that the user already has
+      for (let i = 0; i < userSpecs.length; i++) {
+        const specList = specialties.filter((spec) => spec !== userSpecs[i]);
+        specialties = specList;
+      }
+      // add specialties
       this.context.addSpecialties(specialties);
     } else if (this.state.type === "instructor") {
+      // filter out any new specialties checked that the user already has
+      for (let i = 0; i < userInstructorSpecs.length; i++) {
+        const specList = specialties.filter(
+          (spec) => spec !== userInstructorSpecs[i]
+        );
+        specialties = specList;
+      }
+      // add specialties
       this.context.addInstructorSpecialties(specialties);
     }
     this.props.history.push("/profile");
