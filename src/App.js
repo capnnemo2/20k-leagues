@@ -87,7 +87,6 @@ export default class App extends React.Component {
   };
 
   addCert = (newCert) => {
-    // this.context.certs.push(newCert);
     this.setState({
       certs: [...this.state.certs, newCert],
     });

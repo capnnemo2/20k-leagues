@@ -48,7 +48,7 @@ export default {
       viz: 4,
       diveType: "boat",
       driftDive: true,
-      night: false,
+      nightDive: false,
       description:
         "Lots of old dead coral, but found some sweet nudis and a whitetip.",
       animals: [],
@@ -70,7 +70,7 @@ export default {
       viz: 3,
       diveType: "boat",
       driftDive: true,
-      night: false,
+      nightDive: false,
       description:
         "Strong current, fast drift. Mostly just floated and watched the world go by.",
       animals: ["Manta Ray", "Great White Shark"],
@@ -92,7 +92,7 @@ export default {
       viz: "",
       diveType: "boat",
       driftDive: false,
-      night: false,
+      nightDive: false,
       description:
         "Saw some teeny tiny shrimp: flea-sized, solid red coloring, half a dozen. Juveniles? On the other end of the spectrum, saw some huge nudis.",
       animals: [],
@@ -114,7 +114,7 @@ export default {
       viz: "",
       diveType: "boat",
       driftDive: false,
-      night: false,
+      nightDive: false,
       description:
         "No threshers. Mantis shrimp, eagle rays, pipefish, white tip, white/blue nudi, free swimming flatworm.",
       animals: [],
@@ -136,7 +136,7 @@ export default {
       viz: "",
       diveType: "boat",
       driftDive: false,
-      night: false,
+      nightDive: false,
       description:
         "Blue-Ringed Octopus! Tiger pipefish, mantis shrimp, rhino nudis, lionfish, cleaner shrimp.",
       animals: ["Blue-Ringed Octopus"],
@@ -158,7 +158,7 @@ export default {
       viz: "",
       diveType: "boat",
       driftDive: false,
-      night: true,
+      nightDive: true,
       description: "Mandarin fish x2! Bobtail squid, seahorses x3, nudis.",
       animals: ["Mandarin Fish", "Seahorse"],
       rating: 4,
@@ -179,7 +179,7 @@ export default {
       viz: "",
       diveType: "boat",
       driftDive: false,
-      night: false,
+      nightDive: false,
       description:
         "Thresher! Cuttlefish, nudis, white tip, frog fish, baby lionfish, tiny cuttlefish? maybe bobtail squid",
       animals: ["Thresher Shark", "Frog Fish"],

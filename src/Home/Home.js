@@ -6,17 +6,28 @@ export default class Home extends React.Component {
     return (
       <div className="Home">
         <section>
-          This is a digital dive log with an animal wishlist tracker.
+          <p>This is a digital dive log.</p>
         </section>
 
         <section>
           <p>
-            <Link to="/login">Login</Link> to an existing account. Or
-            <Link to="/sign-up"> create</Link> a new account.
+            Have an account?<Link to="/login"> Login</Link>
+          </p>
+          <p>
+            Don't have an account yet?
+            <Link to="/sign-up"> Sign up</Link>
           </p>
         </section>
 
-        <section>Scroll down to see a sample log.</section>
+        <section>
+          <p>
+            Not only can you log your dives, but you can keep track of your
+            sightings from your custom wishlist of awesome sea creatures. You
+            can even search the database of dives to see where your wishlist
+            beasts have been spotted.
+          </p>
+          <p>Scroll down to see a sample log and animal tracker.</p>
+        </section>
 
         <section></section>
       </div>

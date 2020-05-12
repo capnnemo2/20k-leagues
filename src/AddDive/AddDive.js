@@ -1,19 +1,167 @@
 import React from "react";
 import "./AddDive.css";
 import dummyStore from "../dummyStore";
+import Context from "../Context";
 
 export default class AddDive extends React.Component {
+  static contextType = Context;
   state = {
+    date: "",
+    diveSite: "",
     country: "",
+    region: "",
+
+    maxDepth: "",
+    duration: "",
+    waterTemp: "",
+
+    diveShop: "",
+    guide: "",
+    buddy: "",
+
+    viz: "",
+
+    diveType: "",
+    driftDive: false,
+    nightDive: false,
+
+    description: "",
+    animals: [],
+
+    rating: "",
   };
 
-  handleClickCancel = () => {
-    this.props.history.goBack();
-  };
+  componentDidMount() {
+    const userWishlist = this.context.user.wishlist;
+    let animals = [];
+    for (let i = 0; i < userWishlist.length; i++) {
+      let newAnimal = {
+        name: userWishlist[i],
+        isChecked: false,
+      };
+      animals.push(newAnimal);
+    }
+    this.setState({
+      animals: animals,
+    });
+  }
+
+  updateDate(e) {
+    this.setState({
+      date: e.target.value,
+    });
+  }
+  updateDiveSite(e) {
+    this.setState({
+      diveSite: e.target.value,
+    });
+  }
 
   updateCountry(e) {
     this.setState({
       country: e.target.value,
+    });
+  }
+  updateRegion(e) {
+    this.setState({
+      region: e.target.value,
+    });
+  }
+
+  updateMaxDepth(e) {
+    this.setState({
+      maxDepth: e.target.value,
+    });
+  }
+
+  updateDuration(e) {
+    this.setState({
+      duration: e.target.value,
+    });
+  }
+
+  updateWaterTemp(e) {
+    this.setState({
+      waterTemp: e.target.value,
+    });
+  }
+
+  updateDiveShop(e) {
+    this.setState({
+      diveShop: e.target.value,
+    });
+  }
+
+  updateGuide(e) {
+    this.setState({
+      guide: e.target.value,
+    });
+  }
+
+  updateBuddy(e) {
+    this.setState({
+      buddy: e.target.value,
+    });
+  }
+
+  updateViz(e) {
+    this.setState({
+      viz: e.target.value,
+    });
+  }
+
+  updateDiveType(e) {
+    this.setState({
+      diveType: e.target.value,
+    });
+  }
+
+  handleDriftDiveChange = (e) => {
+    this.setState((prevState) => {
+      let { driftDive } = prevState;
+      if (driftDive === false) {
+        driftDive = true;
+      } else if (driftDive === true) {
+        driftDive = false;
+      }
+      return { driftDive };
+    });
+  };
+
+  handleNightDiveChange = (e) => {
+    this.setState((prevState) => {
+      let { nightDive } = prevState;
+      if (nightDive === false) {
+        nightDive = true;
+      } else if (nightDive === true) {
+        nightDive = false;
+      }
+      return { nightDive };
+    });
+  };
+
+  updateDescription(e) {
+    this.setState({
+      description: e.target.value,
+    });
+  }
+
+  handleAnimalsChange = (e) => {
+    let animalName = e.target.name;
+    let checked = e.target.checked;
+
+    this.setState((prevState) => {
+      let { animals } = prevState;
+      animals = animals.map((animal) =>
+        animal.name === animalName ? { ...animal, isChecked: checked } : animal
+      );
+      return { animals };
+    });
+  };
+
+  updateRating(e) {
+    this.setState({
+      rating: e.target.value,
     });
   }
 
@@ -22,8 +170,12 @@ export default class AddDive extends React.Component {
     // somewhere in here is the logic to add an animal seen to user.wishlistfulfilled
   };
 
+  handleClickCancel = () => {
+    this.props.history.goBack();
+  };
+
   render() {
-    const user = dummyStore.users[0];
+    const user = this.context.user;
     const countries = dummyStore.countries;
     const regions =
       this.state.country !== ""
@@ -31,7 +183,7 @@ export default class AddDive extends React.Component {
             (country) => country.country_name === this.state.country
           ).regions
         : [];
-    return (
+    return user ? (
       <div className="AddDive">
         <header>
           <h2>Log a New Dive</h2>
@@ -48,7 +200,7 @@ export default class AddDive extends React.Component {
                   id="date"
                   aria-label="Enter the date of the dive"
                   aria-required="true"
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => this.updateDate(e)}
                   required
                 />
               </div>
@@ -60,6 +212,7 @@ export default class AddDive extends React.Component {
                   id="site"
                   aria-label="Enter the name of the dive site"
                   aria-required="true"
+                  onChange={(e) => this.updateDiveSite(e)}
                   required
                 />
               </div>
@@ -82,7 +235,11 @@ export default class AddDive extends React.Component {
                 </select>
                 <br />
                 <label htmlFor="region">Region: </label>
-                <select id="region" required>
+                <select
+                  id="region"
+                  onChange={(e) => this.updateRegion(e)}
+                  required
+                >
                   <option value="">Select...</option>
                   {regions.map((region) => (
                     <option value={region} key={region}>
@@ -102,6 +259,7 @@ export default class AddDive extends React.Component {
                   name="depth"
                   id="depth"
                   aria-label="Enter the maximum depth"
+                  onChange={(e) => this.updateMaxDepth(e)}
                 />
               </div>
               <div>
@@ -111,6 +269,7 @@ export default class AddDive extends React.Component {
                   name="dive-time"
                   id="dive-time"
                   aria-label="Enter the dive duration"
+                  onChange={(e) => this.updateDuration(e)}
                 />
               </div>
               <div>
@@ -120,6 +279,7 @@ export default class AddDive extends React.Component {
                   name="temp"
                   id="temp"
                   aria-label="Enter the water temperature"
+                  onChange={(e) => this.updateWaterTemp(e)}
                 />
               </div>
             </fieldset>
@@ -133,6 +293,7 @@ export default class AddDive extends React.Component {
                   name="shop"
                   id="shop"
                   aria-label="Enter the dive shop"
+                  onChange={(e) => this.updateDiveShop(e)}
                 />
               </div>
               <div>
@@ -142,6 +303,7 @@ export default class AddDive extends React.Component {
                   name="guide"
                   id="guide"
                   aria-label="Enter your dive guide"
+                  onChange={(e) => this.updateGuide(e)}
                 />
               </div>
               <div>
@@ -151,6 +313,7 @@ export default class AddDive extends React.Component {
                   name="buddy"
                   id="buddy"
                   aria-label="Enter your dive buddy"
+                  onChange={(e) => this.updateBuddy(e)}
                 />
               </div>
             </fieldset>
@@ -158,45 +321,94 @@ export default class AddDive extends React.Component {
             <fieldset className="sign-up-input">
               <legend>Visibility</legend>
               <label>
-                <input type="radio" name="viz"></input>I couldn't see my own
-                fins
+                <input
+                  type="radio"
+                  name="viz"
+                  value="1"
+                  onChange={(e) => this.updateViz(e)}
+                />
+                I couldn't see my own fins
               </label>
               <br />
               <label>
-                <input type="radio" name="viz"></input>
+                <input
+                  type="radio"
+                  name="viz"
+                  value="2"
+                  onChange={(e) => this.updateViz(e)}
+                />
                 My dive buddy was a vague shadow
               </label>
               <br />
               <label>
-                <input type="radio" name="viz"></input>
+                <input
+                  type="radio"
+                  name="viz"
+                  value="3"
+                  onChange={(e) => this.updateViz(e)}
+                />
                 Anything beyond twenty feet was a theory
               </label>
               <br />
               <label>
-                <input type="radio" name="viz"></input>I could see just fine
+                <input
+                  type="radio"
+                  name="viz"
+                  value="4"
+                  onChange={(e) => this.updateViz(e)}
+                />
+                I could see just fine
               </label>
               <br />
               <label>
-                <input type="radio" name="viz"></input>I could see two days into
-                the future
+                <input
+                  type="radio"
+                  name="viz"
+                  value="5"
+                  onChange={(e) => this.updateViz(e)}
+                />
+                I could see two days into the future
               </label>
             </fieldset>
 
             <fieldset className="sign-up-input">
               <legend>Dive Type</legend>
               <label>
-                <input type="radio" name="dive-type" />
+                <input
+                  type="radio"
+                  name="dive-type"
+                  value="Shore"
+                  onChange={(e) => this.updateDiveType(e)}
+                />
                 Shore dive
               </label>
               <br />
               <label>
-                <input type="radio" name="dive-type" />
+                <input
+                  type="radio"
+                  name="dive-type"
+                  value="Boat"
+                  onChange={(e) => this.updateDiveType(e)}
+                />
                 Boat dive
               </label>
               <br />
               <label>
-                <input type="checkbox" name="drift" />
+                <input
+                  type="checkbox"
+                  name="drift"
+                  onChange={this.handleDriftDiveChange}
+                />
                 Drift dive
+              </label>
+              <br />
+              <label>
+                <input
+                  type="checkbox"
+                  name="night"
+                  onChange={this.handleNightDiveChange}
+                />
+                Night dive
               </label>
             </fieldset>
             <fieldset className="sign-up-input">
@@ -209,16 +421,22 @@ export default class AddDive extends React.Component {
                   rows="4"
                   cols="50"
                   aria-label="Describe your dive"
+                  onChange={(e) => this.updateDescription(e)}
                 />
               </div>
 
-              {/* ideally, upon submit for any checked animal this will (1) remove the animal from the wihslist, and (2) add the animal to wishlist fulfilled */}
+              {/* upon submit for any checked animal this will add the animal to wishlist fulfilled */}
               <fieldset className="sign-up-input">
                 <legend>Animals Spotted</legend>
                 {user.wishlist.map((animal) => (
                   <div key={animal}>
                     <label>
-                      <input type="checkbox" name={animal} value={animal} />
+                      <input
+                        type="checkbox"
+                        name={animal}
+                        value={animal}
+                        onChange={this.handleAnimalsChange}
+                      />
                       {animal}
                     </label>
                   </div>
@@ -229,27 +447,52 @@ export default class AddDive extends React.Component {
             <fieldset className="sign-up-input">
               <legend>Rating</legend>
               <label>
-                <input type="radio" name="rating" />
+                <input
+                  type="radio"
+                  name="rating"
+                  value="1"
+                  onChange={(e) => this.updateRating(e)}
+                />
                 One seastar
               </label>
               {"  "}
               <label>
-                <input type="radio" name="rating" />
+                <input
+                  type="radio"
+                  name="rating"
+                  value="2"
+                  onChange={(e) => this.updateRating(e)}
+                />
                 Two seastars
               </label>
               {"  "}
               <label>
-                <input type="radio" name="rating" />
+                <input
+                  type="radio"
+                  name="rating"
+                  value="3"
+                  onChange={(e) => this.updateRating(e)}
+                />
                 Three seastars
               </label>
               {"  "}
               <label>
-                <input type="radio" name="rating" />
+                <input
+                  type="radio"
+                  name="rating"
+                  value="4"
+                  onChange={(e) => this.updateRating(e)}
+                />
                 Four seastars
               </label>
               {"  "}
               <label>
-                <input type="radio" name="rating" />
+                <input
+                  type="radio"
+                  name="rating"
+                  value="5"
+                  onChange={(e) => this.updateRating(e)}
+                />
                 Five seastars
               </label>
             </fieldset>
@@ -260,6 +503,8 @@ export default class AddDive extends React.Component {
           </button>
         </form>
       </div>
+    ) : (
+      "Loading..."
     );
   }
 }

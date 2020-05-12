@@ -95,14 +95,12 @@ export default class EditWishlist extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log(`handleSubmit ran`);
+    // grab all checked animals
     let wishlist = this.state.list.filter(
       (animal) => animal.isChecked === true
     );
-    console.log(wishlist);
-
+    // extract only the animal names
     wishlist = wishlist.map((animal) => animal.name);
-
     this.context.updateWishlist(wishlist);
     this.props.history.push("/profile");
   };
