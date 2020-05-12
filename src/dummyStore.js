@@ -51,7 +51,7 @@ export default {
       nightDive: false,
       description:
         "Lots of old dead coral, but found some sweet nudis and a whitetip.",
-      animals: [],
+      animalsSpotted: [],
       rating: 3,
     },
     {
@@ -73,7 +73,7 @@ export default {
       nightDive: false,
       description:
         "Strong current, fast drift. Mostly just floated and watched the world go by.",
-      animals: ["Manta Ray", "Great White Shark"],
+      animalsSpotted: ["Manta Ray", "Great White Shark"],
       rating: 3,
     },
     {
@@ -95,7 +95,7 @@ export default {
       nightDive: false,
       description:
         "Saw some teeny tiny shrimp: flea-sized, solid red coloring, half a dozen. Juveniles? On the other end of the spectrum, saw some huge nudis.",
-      animals: [],
+      animalsSpotted: [],
       rating: 3,
     },
     {
@@ -117,7 +117,7 @@ export default {
       nightDive: false,
       description:
         "No threshers. Mantis shrimp, eagle rays, pipefish, white tip, white/blue nudi, free swimming flatworm.",
-      animals: [],
+      animalsSpotted: [],
       rating: 4,
     },
     {
@@ -139,7 +139,7 @@ export default {
       nightDive: false,
       description:
         "Blue-Ringed Octopus! Tiger pipefish, mantis shrimp, rhino nudis, lionfish, cleaner shrimp.",
-      animals: ["Blue-Ringed Octopus"],
+      animalsSpotted: ["Blue-Ringed Octopus"],
       rating: 4,
     },
     {
@@ -160,7 +160,7 @@ export default {
       driftDive: false,
       nightDive: true,
       description: "Mandarin fish x2! Bobtail squid, seahorses x3, nudis.",
-      animals: ["Mandarin Fish", "Seahorse"],
+      animalsSpotted: ["Mandarin Fish", "Seahorse"],
       rating: 4,
     },
     {
@@ -182,7 +182,7 @@ export default {
       nightDive: false,
       description:
         "Thresher! Cuttlefish, nudis, white tip, frog fish, baby lionfish, tiny cuttlefish? maybe bobtail squid",
-      animals: ["Thresher Shark", "Frog Fish"],
+      animalsSpotted: ["Thresher Shark", "Frog Fish"],
       rating: 5,
     },
   ],

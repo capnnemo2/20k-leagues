@@ -26,7 +26,7 @@ export default class AddDive extends React.Component {
     nightDive: false,
 
     description: "",
-    wishlist: [],
+    animalsSpotted: [],
 
     rating: "",
   };
@@ -42,7 +42,7 @@ export default class AddDive extends React.Component {
       animals.push(newAnimal);
     }
     this.setState({
-      wishlist: animals,
+      animalsSpotted: animals,
     });
   }
 
@@ -151,11 +151,11 @@ export default class AddDive extends React.Component {
     let checked = e.target.checked;
 
     this.setState((prevState) => {
-      let { wishlist } = prevState;
-      wishlist = wishlist.map((animal) =>
+      let { animalsSpotted } = prevState;
+      animalsSpotted = animalsSpotted.map((animal) =>
         animal.name === animalName ? { ...animal, isChecked: checked } : animal
       );
-      return { wishlist };
+      return { animalsSpotted };
     });
   };
 
@@ -169,13 +169,14 @@ export default class AddDive extends React.Component {
     let newDive = this.state;
     newDive.id = this.context.dives.length + 1;
     newDive.user_id = this.context.user.id;
-    let wishlistFulfilled = newDive.wishlist.filter(
+    let wishlistFulfilled = newDive.animalsSpotted.filter(
       (animal) => animal.isChecked === true
     );
-    newDive.wishlistFulfilled = wishlistFulfilled.map((animal) => animal.name);
-    newDive.wishlist = newDive.wishlist.map((animal) => animal.name);
+    newDive.animalsSpotted = wishlistFulfilled.map((animal) => animal.name);
 
+    console.log(newDive);
     this.context.addDive(newDive);
+    this.props.history.push("/log");
   };
 
   handleClickCancel = () => {

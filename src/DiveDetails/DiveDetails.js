@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import dummyStore from "../dummyStore";
+import Context from "../Context";
 import "./DiveDetails.css";
 
 export default class DiveDetails extends React.Component {
+  static contextType = Context;
   render() {
     const dive_id = this.props.match.params.dive_id;
-    const dive = dummyStore.dives.find((d) => Number(d.id) === Number(dive_id));
-    // const viz =
+    const dive = this.context.dives.find(
+      (d) => Number(d.id) === Number(dive_id)
+    );
 
     return (
       <div className="DiveDetails">
@@ -40,9 +42,9 @@ export default class DiveDetails extends React.Component {
               </ul>
             </fieldset>
             <fieldset className="input-fields">
-              <legend>Wishlist Animals</legend>
+              <legend>Wishlist Animals Spotted</legend>
               <ul className="sign-up-input">
-                {dive.animals.map((animal) => (
+                {dive.animalsSpotted.map((animal) => (
                   <li key={animal}>{animal}</li>
                 ))}
               </ul>
