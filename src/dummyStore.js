@@ -182,7 +182,7 @@ export default {
       night: false,
       description:
         "Thresher! Cuttlefish, nudis, white tip, frog fish, baby lionfish, tiny cuttlefish? maybe bobtail squid",
-      animals: ["Thresher Shark"],
+      animals: ["Thresher Shark", "Frog Fish"],
       rating: 5,
     },
   ],
@@ -403,10 +403,10 @@ export default {
       region: "Malapascua",
     },
     {
-      id: 6,
-      animal: "Manta Ray",
-      country: "Australia",
-      region: "SS Yongala",
+      id: 11,
+      animal: "Frog Fish",
+      country: "Philippines",
+      region: "Malapascua",
     },
   ],
 };

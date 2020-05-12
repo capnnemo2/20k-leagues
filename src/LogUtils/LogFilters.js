@@ -13,7 +13,17 @@ export default class LogFilters extends React.Component {
       <div className="LogFilters">
         <fieldset>
           <legend>Filter dives</legend>
-          <input
+          <label>
+            <select onChange={(e) => this.props.updateSearchBy(e.target.value)}>
+              <option value="all">All</option>
+              <option value="country">Country</option>
+              <option value="animal">Animal</option>
+              <option value="site">Dive Site</option>
+              <option value="shop">Dive Shop</option>
+            </select>
+          </label>
+
+          {/* <input
             type="radio"
             name="searchBy"
             id="all"
@@ -32,7 +42,6 @@ export default class LogFilters extends React.Component {
           />
           <label htmlFor="country">Country</label>
           <br />
-          {/* animal filter is basically a personalized animalFinder. also maybe tough to implement */}
           <input
             type="radio"
             name="searchBy"
@@ -67,49 +76,55 @@ export default class LogFilters extends React.Component {
             value="shop"
             onChange={(e) => this.props.updateSearchBy(e.target.value)}
           />
-          <label htmlFor="shop">Dive Shop</label>
+          <label htmlFor="shop">Dive Shop</label> */}
           <br />
+          <div className="filter-box">
+            {this.props.searchBy === "country" ? (
+              <div>
+                <label>
+                  Country:
+                  <select onChange={(e) => this.props.updateCountry(e)}>
+                    <option>Select...</option>
+                    {countries.map((country) => (
+                      <option
+                        value={country.country_name}
+                        key={country.country_name}
+                      >
+                        {country.country_name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+            ) : this.props.searchBy === "animal" ? (
+              <div>
+                <AnimalFilter updateAnimal={this.props.updateAnimal} />
+              </div>
+            ) : this.props.searchBy === "site" ? (
+              <div>
+                <label>
+                  Dive Site:
+                  <input
+                    type="text"
+                    onChange={(e) => this.props.updateSite(e)}
+                  />
+                </label>
+              </div>
+            ) : this.props.searchBy === "shop" ? (
+              <div>
+                <label>
+                  Dive Shop:
+                  <input
+                    type="text"
+                    onChange={(e) => this.props.updateShop(e)}
+                  />
+                </label>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </fieldset>
-        <div className="filter-box">
-          {this.props.searchBy === "country" ? (
-            <div>
-              <label>
-                Country:
-                <select onChange={(e) => this.props.updateCountry(e)}>
-                  <option>Select...</option>
-                  {countries.map((country) => (
-                    <option
-                      value={country.country_name}
-                      key={country.country_name}
-                    >
-                      {country.country_name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-          ) : this.props.searchBy === "animal" ? (
-            <div>
-              <AnimalFilter updateAnimal={this.props.updateAnimal} />
-            </div>
-          ) : this.props.searchBy === "site" ? (
-            <div>
-              <label>
-                Dive Site:
-                <input type="text" onChange={(e) => this.props.updateSite(e)} />
-              </label>
-            </div>
-          ) : this.props.searchBy === "shop" ? (
-            <div>
-              <label>
-                Dive Shop:
-                <input type="text" onChange={(e) => this.props.updateShop(e)} />
-              </label>
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
       </div>
     );
   }

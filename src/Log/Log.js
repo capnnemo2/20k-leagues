@@ -228,7 +228,6 @@ export default class Log extends React.Component {
         : "";
 
     // they aren't truly in order, just reverse order of how they were entered
-
     // divesInOrder is not being used currently, probably don't need it
     // const divesInOrder = dives.sort(function (a, b) {
     //   return a.date - b.date;
