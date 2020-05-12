@@ -26,7 +26,7 @@ export default class AddDive extends React.Component {
     nightDive: false,
 
     description: "",
-    animals: [],
+    wishlist: [],
 
     rating: "",
   };
@@ -42,7 +42,7 @@ export default class AddDive extends React.Component {
       animals.push(newAnimal);
     }
     this.setState({
-      animals: animals,
+      wishlist: animals,
     });
   }
 
@@ -151,11 +151,11 @@ export default class AddDive extends React.Component {
     let checked = e.target.checked;
 
     this.setState((prevState) => {
-      let { animals } = prevState;
-      animals = animals.map((animal) =>
+      let { wishlist } = prevState;
+      wishlist = wishlist.map((animal) =>
         animal.name === animalName ? { ...animal, isChecked: checked } : animal
       );
-      return { animals };
+      return { wishlist };
     });
   };
 
@@ -166,8 +166,18 @@ export default class AddDive extends React.Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
     // somewhere in here is the logic to add an animal seen to user.wishlistfulfilled
+
+    let newDive = this.state;
+    newDive.id = this.context.dives.length + 1;
+    newDive.user_id = this.context.user.id;
+    let wishlistFulfilled = newDive.wishlist.filter(
+      (animal) => animal.isChecked === true
+    );
+    newDive.wishlistFulfilled = wishlistFulfilled.map((animal) => animal.name);
+    newDive.wishlist = newDive.wishlist.map((animal) => animal.name);
+
+    console.log(newDive);
   };
 
   handleClickCancel = () => {
@@ -188,7 +198,12 @@ export default class AddDive extends React.Component {
         <header>
           <h2>Log a New Dive</h2>
         </header>
-        <form onSubmit={this.handleSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.handleSubmit();
+          }}
+        >
           <div className="input-fields">
             <fieldset className="sign-up-input">
               <legend>Essentials</legend>
