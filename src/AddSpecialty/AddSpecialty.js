@@ -80,7 +80,6 @@ export default class AddSpecialty extends React.Component {
     // grab any specialties user already has
     const userSpecs = this.context.user.specialties;
     const userInstructorSpecs = this.context.user.instructorSpecialties;
-
     // make sure submitting diver or instructor specs
     if (this.state.type === "diver") {
       // filter out any new specialties checked that the user already has

@@ -1,7 +1,6 @@
 import React from "react";
 import Context from "../Context";
 import "./EditWishlist.css";
-import dummyStore from "../dummyStore";
 
 export default class EditWishlist extends React.Component {
   static contextType = Context;
@@ -73,7 +72,7 @@ export default class EditWishlist extends React.Component {
   // Using this to pre-check boxes for the animals the user already has on their wishlist. this way they are editing their list rather than recreating it
   componentDidMount() {
     // will need to get the user from context, but currently does not work
-    let user = dummyStore.users[0];
+    let user = this.context.user;
 
     let prefillList = user.wishlist;
     let animals = this.state.list;
@@ -95,14 +94,17 @@ export default class EditWishlist extends React.Component {
     }
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = () => {
     console.log(`handleSubmit ran`);
     let wishlist = this.state.list.filter(
       (animal) => animal.isChecked === true
     );
     console.log(wishlist);
+
+    wishlist = wishlist.map((animal) => animal.name);
+
     this.context.updateWishlist(wishlist);
+    this.props.history.push("/profile");
   };
 
   handleClickCancel = () => {
@@ -116,7 +118,12 @@ export default class EditWishlist extends React.Component {
           You initially choose your wishlist when you sign up, but here you can
           re-select which animals appear on your wishlist.
         </section>
-        <form onSubmit={this.handleSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.handleSubmit();
+          }}
+        >
           <div className="input-fields">
             <h2>Animal Wishlist</h2>
             <fieldset className="sing-up-input" onChange={this.updateWishlist}>

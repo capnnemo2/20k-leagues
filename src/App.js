@@ -78,8 +78,12 @@ export default class App extends React.Component {
   };
 
   updateWishlist = (wishlist) => {
-    let newUser = [...this.context.user, wishlist];
-    console.log(newUser);
+    this.setState((prevState) => ({
+      user: {
+        ...prevState.user,
+        wishlist,
+      },
+    }));
   };
 
   addCert = (newCert) => {
