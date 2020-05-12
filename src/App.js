@@ -21,7 +21,7 @@ import PublicOnlyRoute from "./Utils/PublicOnlyRoute";
 import Context from "./Context";
 import dummyStore from "./dummyStore";
 import "./App.css";
-import TokenService from "./services/token-service";
+// import TokenService from "./services/token-service";
 
 export default class App extends React.Component {
   state = {
@@ -29,7 +29,7 @@ export default class App extends React.Component {
     dives: [],
     certs: [],
     user: [],
-    loggedIn: TokenService.hasAuthToken() ? true : false,
+    loggedIn: false,
     error: null,
   };
 
@@ -60,6 +60,12 @@ export default class App extends React.Component {
     });
   };
 
+  setLoggedIn = () => {
+    this.setState({
+      loggedIn: true,
+    });
+  };
+
   createNewUser = (newUser) => {
     console.log("create new user ran in app");
     this.setState({
@@ -67,12 +73,6 @@ export default class App extends React.Component {
     });
     console.log("new user: ", newUser);
     console.log("hopefully new users: ", this.state.users);
-  };
-
-  setLoggedIn = (status) => {
-    this.setState({
-      loggedIn: status,
-    });
   };
 
   updateWishlist = (wishlist) => {
@@ -94,6 +94,7 @@ export default class App extends React.Component {
       dives: this.state.dives,
       certs: this.state.certs,
       user: this.state.user,
+      loggedIn: this.state.loggedIn,
       createNewUser: this.createNewUser,
       setLoggedIn: this.setLoggedIn,
       updateWishlist: this.updateWishlist,

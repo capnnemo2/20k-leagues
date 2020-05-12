@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import dummyStore from "../dummyStore";
 import LogFilters from "../LogUtils/LogFilters";
 import Context from "../Context";
@@ -237,14 +237,10 @@ export default class Log extends React.Component {
 
     const totalDives = allUserDives.length;
 
-    return user ? (
+    return user && this.context.loggedIn === true ? (
       <div className="Log">
         <section>
           <h2>{user.first_name}'s Dive Log</h2>
-          <p>
-            Access your
-            <Link to="/profile"> profile</Link>
-          </p>
         </section>
         <LogFilters
           searchBy={this.state.searchBy}
@@ -315,7 +311,7 @@ export default class Log extends React.Component {
         </fieldset>
       </div>
     ) : (
-      "Loading..."
+      <Redirect to={{ pathname: "/login" }} />
     );
   }
 }

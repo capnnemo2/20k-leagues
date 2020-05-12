@@ -16,6 +16,7 @@ export default class Login extends React.Component {
   handleLoginSuccess = () => {
     const { location, history } = this.props;
     const destination = (location.state || {}).from || "/log";
+    this.context.setLoggedIn();
     history.push(destination);
   };
 
@@ -29,7 +30,6 @@ export default class Login extends React.Component {
       if (userCheck.password === password) {
         this.context.setUser(userCheck);
         this.context.setLoggedIn(true);
-        console.log(this.context.user);
         this.handleLoginSuccess();
       } else {
         this.setState({ error: "Incorrect password" });
@@ -73,6 +73,9 @@ export default class Login extends React.Component {
                 required
               />
             </div>
+            <p>
+              Feel free to login as Bob. Email: bob@email, password: password.
+            </p>
           </fieldset>
 
           <button type="submit">Login</button>

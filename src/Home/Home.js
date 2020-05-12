@@ -12,8 +12,7 @@ export default class Home extends React.Component {
         <section>
           <p>
             <Link to="/login">Login</Link> to an existing account. Or
-            <Link to="/sign-up"> create</Link> a new account. Check out the{" "}
-            <Link to="/log">demo</Link>.
+            <Link to="/sign-up"> create</Link> a new account.
           </p>
         </section>
 

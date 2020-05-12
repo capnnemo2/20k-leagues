@@ -378,5 +378,35 @@ export default {
       country: "Australia",
       region: "SS Yongala",
     },
+    {
+      id: 7,
+      animal: "Blue-Ringed Octopus",
+      country: "Philippines",
+      region: "Malapascua",
+    },
+    {
+      id: 8,
+      animal: "Mandarin Fish",
+      country: "Philippines",
+      region: "Malapascua",
+    },
+    {
+      id: 9,
+      animal: "Seahorse",
+      country: "Philippines",
+      region: "Malapascua",
+    },
+    {
+      id: 10,
+      animal: "Thresher Shark",
+      country: "Philippines",
+      region: "Malapascua",
+    },
+    {
+      id: 6,
+      animal: "Manta Ray",
+      country: "Australia",
+      region: "SS Yongala",
+    },
   ],
 };
