@@ -70,16 +70,16 @@ export default class AddSpecialty extends React.Component {
     });
   };
 
-  // what if the user selects a specialty they already have?
-  // can we only render ones they don't have for the list?
-  // or after submit do we simply filter out repeats somewhere in the process?
   handleSubmit = () => {
     let specialties = this.state.specialties.filter(
       (spec) => spec.isChecked === true
     );
     specialties = specialties.map((spec) => spec.name);
-    console.log("specs: ", specialties);
-
+    const userSpecs = this.context.user.specialties;
+    for (let i = 0; i < userSpecs.length; i++) {
+      const specList = specialties.filter((spec) => spec !== userSpecs[i]);
+      specialties = specList;
+    }
     if (this.state.type === "diver") {
       this.context.addSpecialties(specialties);
     } else if (this.state.type === "instructor") {

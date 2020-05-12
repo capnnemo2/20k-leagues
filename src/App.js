@@ -90,13 +90,14 @@ export default class App extends React.Component {
   };
 
   addSpecialties = (specs) => {
-    // somewhere in here need to make sure not to add duplicates
-    this.setState((prevState) => ({
-      user: {
-        ...prevState.user,
-        specialties: [...prevState.user.specialties, specs],
-      },
-    }));
+    for (let i = 0; i < specs.length; i++) {
+      this.setState((prevState) => ({
+        user: {
+          ...prevState.user,
+          specialties: [...prevState.user.specialties, specs[i]],
+        },
+      }));
+    }
   };
 
   addInstructorSpecialties = (specs) => {};
