@@ -4,7 +4,7 @@ export default React.createContext({
   users: [],
   dives: [],
   certs: [],
-  user: [],
+  user: {},
   wishlist: [],
   loggedIn: null,
   createNewUser: () => {},
@@ -12,4 +12,6 @@ export default React.createContext({
   updateWishlist: () => {},
   setUser: () => {},
   addCert: () => {},
+  addSpecialties: () => {},
+  addInstrcutorSpecialties: () => {},
 });

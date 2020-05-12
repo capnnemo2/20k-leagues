@@ -87,7 +87,6 @@ export default class AddCert extends React.Component {
 
   // users[0] should select only the user who is logged in
   handleSubmit = () => {
-    console.log("something happened");
     let { agency, certLevel, certNum, certDate } = this.state;
     let id = this.context.certs.length + 1;
     let user_id = this.context.user.id;

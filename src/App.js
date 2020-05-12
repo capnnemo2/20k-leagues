@@ -24,11 +24,13 @@ import "./App.css";
 // import TokenService from "./services/token-service";
 
 export default class App extends React.Component {
+  static contextType = Context;
+
   state = {
     users: [],
     dives: [],
     certs: [],
-    user: [],
+    user: {},
     loggedIn: false,
     error: null,
   };
@@ -87,6 +89,18 @@ export default class App extends React.Component {
     });
   };
 
+  addSpecialties = (specs) => {
+    // somewhere in here need to make sure not to add duplicates
+    this.setState((prevState) => ({
+      user: {
+        ...prevState.user,
+        specialties: [...prevState.user.specialties, specs],
+      },
+    }));
+  };
+
+  addInstructorSpecialties = (specs) => {};
+
   // right now just loading up everything, but with login will only need to set data for the specific user
   componentDidMount() {
     this.setUsers(dummyStore.users);
@@ -107,6 +121,8 @@ export default class App extends React.Component {
       createNewUser: this.createNewUser,
       updateWishlist: this.updateWishlist,
       addCert: this.addCert,
+      addSpecialties: this.addSpecialties,
+      addInstructorSpecialties: this.addInstructorSpecialties,
     };
     return (
       <Context.Provider value={value}>
