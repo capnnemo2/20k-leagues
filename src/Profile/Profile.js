@@ -1,16 +1,18 @@
 import React from "react";
 import "./Profile.css";
-import { Link } from "react-router-dom";
-import dummyStore from "../dummyStore";
+import { Link, Redirect } from "react-router-dom";
+import Context from "../Context";
 
 export default class Profile extends React.Component {
+  static contextType = Context;
   render() {
-    const user = dummyStore.users[0];
+    const user = this.context.user;
     const userId = user.id;
-    const certs = dummyStore.certs.filter(
+    const certs = this.context.certs.filter(
       (c) => Number(c.user_id) === Number(userId)
     );
-    return (
+
+    return user && this.context.loggedIn === true ? (
       <div className="Profile">
         <section>
           <h2>{user.first_name}'s Profile</h2>
@@ -25,7 +27,7 @@ export default class Profile extends React.Component {
                 <ul>
                   <li>Agency: {cert.agency}</li>
                   <li>{cert.certLevel}</li>
-                  <li>Date: {cert.certDate}</li>
+                  <li>{cert.certDate}</li>
                   <li>Diver number: {cert.certNum}</li>
                 </ul>
               </li>
@@ -73,6 +75,8 @@ export default class Profile extends React.Component {
           <Link to="/edit-wishlist">Edit Wishlist</Link>
         </fieldset>
       </div>
+    ) : (
+      <Redirect to={{ pathname: "/login" }} />
     );
   }
 }

@@ -13,6 +13,7 @@ export default class LogFilters extends React.Component {
       <div className="LogFilters">
         <fieldset>
           <legend>Filter dives</legend>
+
           <label>
             <select onChange={(e) => this.props.updateSearchBy(e.target.value)}>
               <option value="all">All</option>
@@ -22,62 +23,8 @@ export default class LogFilters extends React.Component {
               <option value="shop">Dive Shop</option>
             </select>
           </label>
+          <br />
 
-          {/* <input
-            type="radio"
-            name="searchBy"
-            id="all"
-            value="all"
-            onChange={(e) => this.props.updateSearchBy(e.target.value)}
-            defaultChecked
-          />
-          <label htmlFor="all">All</label>
-          <br />
-          <input
-            type="radio"
-            name="searchBy"
-            id="country"
-            value="country"
-            onChange={(e) => this.props.updateSearchBy(e.target.value)}
-          />
-          <label htmlFor="country">Country</label>
-          <br />
-          <input
-            type="radio"
-            name="searchBy"
-            id="animal"
-            value="animal"
-            onChange={(e) => this.props.updateSearchBy(e.target.value)}
-          />
-          <label htmlFor="animal">Animal</label>
-          <br />
-          <input
-            type="radio"
-            name="searchBy"
-            id="year"
-            value="year"
-            onChange={(e) => this.props.updateSearchBy(e.target.value)}
-          />
-          <label htmlFor="year">Year</label>
-          <br />
-          <input
-            type="radio"
-            name="searchBy"
-            id="site"
-            value="site"
-            onChange={(e) => this.props.updateSearchBy(e.target.value)}
-          />
-          <label htmlFor="site">Dive Site</label>
-          <br />
-          <input
-            type="radio"
-            name="searchBy"
-            id="shop"
-            value="shop"
-            onChange={(e) => this.props.updateSearchBy(e.target.value)}
-          />
-          <label htmlFor="shop">Dive Shop</label> */}
-          <br />
           <div className="filter-box">
             {this.props.searchBy === "country" ? (
               <div>
