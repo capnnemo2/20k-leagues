@@ -117,6 +117,12 @@ export default class App extends React.Component {
     }
   };
 
+  addDive = (newDive) => {
+    this.setState({
+      dives: [...this.state.dives, newDive],
+    });
+  };
+
   // right now just loading up everything, but with login will only need to set data for the specific user
   componentDidMount() {
     this.setUsers(dummyStore.users);
@@ -139,6 +145,7 @@ export default class App extends React.Component {
       addCert: this.addCert,
       addSpecialties: this.addSpecialties,
       addInstructorSpecialties: this.addInstructorSpecialties,
+      addDive: this.addDive,
     };
     return (
       <Context.Provider value={value}>

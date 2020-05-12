@@ -166,8 +166,6 @@ export default class AddDive extends React.Component {
   }
 
   handleSubmit = (e) => {
-    // somewhere in here is the logic to add an animal seen to user.wishlistfulfilled
-
     let newDive = this.state;
     newDive.id = this.context.dives.length + 1;
     newDive.user_id = this.context.user.id;
@@ -177,7 +175,7 @@ export default class AddDive extends React.Component {
     newDive.wishlistFulfilled = wishlistFulfilled.map((animal) => animal.name);
     newDive.wishlist = newDive.wishlist.map((animal) => animal.name);
 
-    console.log(newDive);
+    this.context.addDive(newDive);
   };
 
   handleClickCancel = () => {
@@ -467,6 +465,7 @@ export default class AddDive extends React.Component {
                   name="rating"
                   value="1"
                   onChange={(e) => this.updateRating(e)}
+                  required
                 />
                 One seastar
               </label>
@@ -477,6 +476,7 @@ export default class AddDive extends React.Component {
                   name="rating"
                   value="2"
                   onChange={(e) => this.updateRating(e)}
+                  required
                 />
                 Two seastars
               </label>
@@ -487,6 +487,7 @@ export default class AddDive extends React.Component {
                   name="rating"
                   value="3"
                   onChange={(e) => this.updateRating(e)}
+                  required
                 />
                 Three seastars
               </label>
@@ -497,6 +498,7 @@ export default class AddDive extends React.Component {
                   name="rating"
                   value="4"
                   onChange={(e) => this.updateRating(e)}
+                  required
                 />
                 Four seastars
               </label>
@@ -507,6 +509,7 @@ export default class AddDive extends React.Component {
                   name="rating"
                   value="5"
                   onChange={(e) => this.updateRating(e)}
+                  required
                 />
                 Five seastars
               </label>

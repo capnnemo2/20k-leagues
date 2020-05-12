@@ -14,4 +14,5 @@ export default React.createContext({
   addCert: () => {},
   addSpecialties: () => {},
   addInstrcutorSpecialties: () => {},
+  addDive: () => {},
 });
