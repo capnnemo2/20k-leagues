@@ -173,9 +173,22 @@ export default class AddDive extends React.Component {
       (animal) => animal.isChecked === true
     );
     newDive.animalsSpotted = wishlistFulfilled.map((animal) => animal.name);
-
     this.context.addDive(newDive);
     this.context.updateWishlistFulfilled(newDive.animalsSpotted);
+
+    if (newDive.animalsSpotted) {
+      let newAnimalTracked = {};
+
+      newAnimalTracked.id = this.context.animalTracker.length + 1;
+      newAnimalTracked.animal = "";
+      newAnimalTracked.country = "";
+      newAnimalTracked.region = "";
+
+      console.log(newAnimalTracked);
+
+      this.context.updateAnimalTracker(newAnimalTracked);
+    }
+
     this.props.history.push("/log");
   };
 

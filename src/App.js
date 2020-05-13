@@ -32,6 +32,7 @@ export default class App extends React.Component {
     certs: [],
     user: {},
     loggedIn: false,
+    animalTracker: [],
     error: null,
   };
 
@@ -58,6 +59,13 @@ export default class App extends React.Component {
   setCerts = (certs) => {
     this.setState({
       certs,
+      error: null,
+    });
+  };
+
+  setAnimalTracker = (animalTracker) => {
+    this.setState({
+      animalTracker,
       error: null,
     });
   };
@@ -145,11 +153,14 @@ export default class App extends React.Component {
     }
   };
 
+  updateAnimalTracker = (newAnimal) => {};
+
   // right now just loading up everything, but with login will only need to set data for the specific user
   componentDidMount() {
     this.setUsers(dummyStore.users);
     this.setDives(dummyStore.dives);
     this.setCerts(dummyStore.certs);
+    this.setAnimalTracker(dummyStore.animalTracker);
     // this.setUser(dummyStore.users[0]);
   }
 
@@ -161,6 +172,7 @@ export default class App extends React.Component {
       dives: this.state.dives,
       certs: this.state.certs,
       loggedIn: this.state.loggedIn,
+      animalTracker: this.state.animalTracker,
       setLoggedIn: this.setLoggedIn,
       createNewUser: this.createNewUser,
       updateWishlist: this.updateWishlist,
@@ -169,6 +181,7 @@ export default class App extends React.Component {
       addInstructorSpecialties: this.addInstructorSpecialties,
       addDive: this.addDive,
       updateWishlistFulfilled: this.updateWishlistFulfilled,
+      updateAnimalTracker: this.updateAnimalTracker,
     };
     return (
       <Context.Provider value={value}>

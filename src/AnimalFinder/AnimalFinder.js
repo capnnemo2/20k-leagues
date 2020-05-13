@@ -2,9 +2,12 @@ import React from "react";
 // import LocationFilter from "../AnimalFinderUtils/LocationFilter";
 import AnimalFilter from "../AnimalFinderUtils/AnimalFilter";
 import dummyStore from "../dummyStore";
+import Context from "../Context";
 import "./AnimalFinder.css";
 
 export default class AnimalFinder extends React.Component {
+  static contextType = Context;
+
   state = {
     searchBy: "",
     country: "",
@@ -50,7 +53,7 @@ export default class AnimalFinder extends React.Component {
 
     const currentAnimal =
       this.state.animal !== ""
-        ? dummyStore.animalTracker.filter(
+        ? this.context.animalTracker.filter(
             (animal) => animal.animal === this.state.animal
           )
         : "";
@@ -77,7 +80,7 @@ export default class AnimalFinder extends React.Component {
 
     const currentRegion =
       this.state.region !== ""
-        ? dummyStore.animalTracker.filter(
+        ? this.context.animalTracker.filter(
             (region) => region.region === this.state.region
           )
         : "";

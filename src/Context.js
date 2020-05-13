@@ -7,6 +7,7 @@ export default React.createContext({
   user: {},
   wishlist: [],
   loggedIn: null,
+  animalTracker: [],
   createNewUser: () => {},
   setLoggedIn: () => {},
   updateWishlist: () => {},
@@ -16,4 +17,5 @@ export default React.createContext({
   addInstrcutorSpecialties: () => {},
   addDive: () => {},
   updateWishlistFulfilled: () => {},
+  updateAnimalTracker: () => {},
 });
