@@ -203,7 +203,51 @@ export default class Log extends React.Component {
   }
 
   displayDate = (date) => {
-    // can use slice to separate out year, month, day, but they're still just numbers in a funky order to display
+    let formattedDate = "";
+    let year = date.slice(0, 4);
+    let month = date.slice(4, 6);
+    let day = date.slice(6, 8);
+
+    if (month === "01") {
+      month = "January";
+    }
+    if (month === "02") {
+      month = "February";
+    }
+    if (month === "03") {
+      month = "March";
+    }
+    if (month === "04") {
+      month = "April";
+    }
+    if (month === "05") {
+      month = "May";
+    }
+    if (month === "06") {
+      month = "June";
+    }
+    if (month === "07") {
+      month = "July";
+    }
+    if (month === "08") {
+      month = "August";
+    }
+    if (month === "09") {
+      month = "September";
+    }
+    if (month === "10") {
+      month = "October";
+    }
+    if (month === "11") {
+      month = "November";
+    }
+    if (month === "12") {
+      month = "December";
+    }
+
+    formattedDate = month + " " + day + ", " + year;
+
+    return formattedDate;
   };
 
   render() {
@@ -258,7 +302,7 @@ export default class Log extends React.Component {
                     <li key={dive.id}>
                       <ul>
                         {/* <li>Dive #{dive.id}</li> */}
-                        <li>{dive.date}</li>
+                        <li>{this.displayDate(dive.date)}</li>
                         <li>{dive.country}</li>
                         <li>{dive.diveSite}</li>
                         <li>{dive.rating} seastars</li>

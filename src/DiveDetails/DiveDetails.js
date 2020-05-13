@@ -5,6 +5,77 @@ import "./DiveDetails.css";
 
 export default class DiveDetails extends React.Component {
   static contextType = Context;
+
+  displayDate = (date) => {
+    let formattedDate = "";
+    let year = date.slice(0, 4);
+    let month = date.slice(4, 6);
+    let day = date.slice(6, 8);
+
+    if (month === "01") {
+      month = "January";
+    }
+    if (month === "02") {
+      month = "February";
+    }
+    if (month === "03") {
+      month = "March";
+    }
+    if (month === "04") {
+      month = "April";
+    }
+    if (month === "05") {
+      month = "May";
+    }
+    if (month === "06") {
+      month = "June";
+    }
+    if (month === "07") {
+      month = "July";
+    }
+    if (month === "08") {
+      month = "August";
+    }
+    if (month === "09") {
+      month = "September";
+    }
+    if (month === "10") {
+      month = "October";
+    }
+    if (month === "11") {
+      month = "November";
+    }
+    if (month === "12") {
+      month = "December";
+    }
+
+    formattedDate = month + " " + day + ", " + year;
+
+    return formattedDate;
+  };
+
+  displayViz = (visibility) => {
+    let viz = visibility;
+
+    if (Number(viz) === 1) {
+      viz = "I couldn't see my own fins";
+    }
+    if (Number(viz) === 2) {
+      viz = "My dive buddy was a vague shadow";
+    }
+    if (Number(viz) === 3) {
+      viz = "Anything beyond twenty feet was a theory";
+    }
+    if (Number(viz) === 4) {
+      viz = "I could see just fine";
+    }
+    if (Number(viz) === 4) {
+      viz = "I could see two days into the future";
+    }
+
+    return viz;
+  };
+
   render() {
     const dive_id = this.props.match.params.dive_id;
     const dive = this.context.dives.find(
@@ -21,14 +92,14 @@ export default class DiveDetails extends React.Component {
             <ul className="sign-up-input">
               {dive.diveShop ? <li>Dive Shop: {dive.diveShop}</li> : ""}
               {dive.guide !== "" ? <li>Guide: {dive.guide}</li> : ""}
-              {dive.buddy !== "" ? <li>Guide: {dive.buddy}</li> : ""}
+              {dive.buddy !== "" ? <li>Buddy: {dive.buddy}</li> : ""}
             </ul>
           </fieldset>
           <div className="dive-inner-container">
             <fieldset className="input-fields">
               <legend>Date and Location</legend>
               <ul className="sign-up-input">
-                <li>Date: {dive.date}</li>
+                <li>Date: {this.displayDate(dive.date)}</li>
                 <li>Country: {dive.country}</li>
                 <li>Region: {dive.region}</li>
                 <li>Dive Site: {dive.diveSite}</li>
@@ -57,7 +128,11 @@ export default class DiveDetails extends React.Component {
               <li>Maximum Depth: {dive.maxDepth} ft.</li>
               <li>Bottom Time: {dive.duration} min.</li>
               <li>Water Temp: {dive.waterTemp} °F</li>
-              {dive.viz !== "" ? <li>Visibility: {dive.viz} ft.</li> : ""}
+              {dive.viz !== "" ? (
+                <li>Visibility: {this.displayViz(dive.viz)}</li>
+              ) : (
+                ""
+              )}
               {dive.diveType === "boat" ? (
                 <li>Boat dive</li>
               ) : (
