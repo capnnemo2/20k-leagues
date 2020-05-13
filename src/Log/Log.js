@@ -210,6 +210,46 @@ export default class Log extends React.Component {
       (dive) => Number(dive.user_id) === Number(userId)
     );
 
+    // 1
+    // WORKSHOPPING USING DATES TO SORT CHRONOLOGICALLY
+    // allUserDives.forEach(dive => dive.date.split('-'))
+    // .forEach() OR .map()?
+
+    // 2
+    // the below is effective on a simple array, but need to somehow not alter the original dates in dives, but still transform the dates in order to use them
+    // let divesArray = [];
+    // dives.forEach((dive) => divesArray.push(dive.date.split("-").join("")));
+    // divesArray.sort((a, b) => b - a);
+    // console.log(divesArray);
+
+    // 3
+    // I LIKE THIS. IT EFFECTIVELY TURNS DATES INTO A SINGLE NUMBER AND ORDERS THEM WITH THE MOST RECENT DATE FIRST
+    // need to figure out how to use this
+    // let dives = [
+    //   {
+    //     id: 1,
+    //     date: '2020-05-04'
+    //   },
+    //   {
+    //     id: 2,
+    //     date: '2017-03-19'
+    //   },
+    //   {
+    //     id: 3,
+    //     date: '2019-12-23'
+    //   },
+    //   {
+    //     id: 4,
+    //     date: '2001-01-01'
+    //   },
+    //   {
+    //     id: 5,
+    //     date: '2021-03-17'
+    //   }
+    // ]
+    // dives = dives.map((dive) => (dive.date = dive.date.split("-").join("")));
+    // console.log(dives.sort((a, b) => b - a));
+
     const dives =
       this.state.searchBy === "all"
         ? allUserDives

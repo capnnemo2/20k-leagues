@@ -35,7 +35,7 @@ export default {
     {
       id: 1,
       user_id: 1,
-      date: "May 4, 2020",
+      date: "2020-05-04",
       country: "United States of America",
       region: "Hawaii",
       diveSite: "Mana Crack",
@@ -57,7 +57,7 @@ export default {
     {
       id: 2,
       user_id: 1,
-      date: "May 4, 2020",
+      date: "2020-05-04",
       country: "United States of America",
       region: "Hawaii",
       diveSite: "Mana Crack",
@@ -79,7 +79,7 @@ export default {
     {
       id: 3,
       user_id: 1,
-      date: "March 18, 2017",
+      date: "2017-03-18",
       country: "Philippines",
       region: "Malapascua",
       diveSite: "North Point",
@@ -101,7 +101,7 @@ export default {
     {
       id: 4,
       user_id: 1,
-      date: "March 19, 2017",
+      date: "2017-03-19",
       country: "Philippines",
       region: "Malapascua",
       diveSite: "Monad Shoal",
@@ -123,7 +123,7 @@ export default {
     {
       id: 5,
       user_id: 1,
-      date: "March 19, 2017",
+      date: "2017-03-19",
       country: "Philippines",
       region: "Malapascua",
       diveSite: "Bantigue",
@@ -145,7 +145,7 @@ export default {
     {
       id: 6,
       user_id: 1,
-      date: "March 20, 2017",
+      date: "2017-03-20",
       country: "Philippines",
       region: "Malapascua",
       diveSite: "Lighthouse",
@@ -166,7 +166,7 @@ export default {
     {
       id: 7,
       user_id: 1,
-      date: "March 21, 2017",
+      date: "2017-03-21",
       country: "Philippines",
       region: "Malapascua",
       diveSite: "Monad Shoal",
