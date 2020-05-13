@@ -166,7 +166,7 @@ export default class Log extends React.Component {
     let animalDives = [];
     for (let i = 0; i < arr.length; i++) {
       let dive = arr[i];
-      let currentDive = dive.animals;
+      let currentDive = dive.animalsSpotted;
       if (currentDive.length !== 0) {
         let check = currentDive.filter(
           (animal) => animal === this.state.animal
