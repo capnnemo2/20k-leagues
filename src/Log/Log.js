@@ -257,8 +257,6 @@ export default class Log extends React.Component {
       (dive) => Number(dive.user_id) === Number(userId)
     );
 
-    console.log("all user dives: ", allUserDives);
-
     const dives =
       this.state.searchBy === "all"
         ? allUserDives

@@ -124,7 +124,7 @@ export default class EditWishlist extends React.Component {
         >
           <div className="input-fields">
             <h2>Animal Wishlist</h2>
-            <fieldset className="sing-up-input" onChange={this.updateWishlist}>
+            <fieldset className="sing-up-input">
               <legend>Select animals</legend>
               <div>
                 <label>
@@ -137,7 +137,6 @@ export default class EditWishlist extends React.Component {
                   Check All
                 </label>
               </div>
-
               {this.renderList()}
             </fieldset>
           </div>
