@@ -84,7 +84,9 @@ export default class DiveDetails extends React.Component {
 
     return (
       <div className="DiveDetails">
-        <h2>Dive #{dive.id}</h2>
+        {/* dive.id will not give you the actual dive number because dive.id is reflective of all dives for all users. Maybe there needs to be a dive_number attached to the dive object when it is created? */}
+        {/* caluculating dive number will require putting the dives in order first, then counting up to this dive. Adding new dives in the middle of your chronology should shift the number */}
+        {/* <h2>Dive #{dive.id}</h2> */}
         <div className="dive-container">
           {/* the order of these only makes sense when you turn on flexbox. Need a way to change the order of the fieldsets depending on a media query? */}
           <fieldset className="input-fields sidebar">

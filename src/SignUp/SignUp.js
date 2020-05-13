@@ -153,9 +153,6 @@ export default class SignUp extends React.Component {
       certDate,
     };
     this.createNewUserCert(newUserCert);
-
-    console.log("new user cert: ", newUserCert);
-
     this.setState({ error: null });
 
     const emailCheck = this.context.users.find(
@@ -168,8 +165,6 @@ export default class SignUp extends React.Component {
     } else {
       this.setState({ error: "An account already exists for that email" });
     }
-
-    console.log("new user: ", newUser);
   };
 
   render() {

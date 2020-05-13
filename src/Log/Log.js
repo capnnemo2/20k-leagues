@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import dummyStore from "../dummyStore";
 import LogFilters from "../LogUtils/LogFilters";
 import Context from "../Context";
 import "./Log.css";
@@ -258,6 +257,8 @@ export default class Log extends React.Component {
       (dive) => Number(dive.user_id) === Number(userId)
     );
 
+    console.log("all user dives: ", allUserDives);
+
     const dives =
       this.state.searchBy === "all"
         ? allUserDives
@@ -293,26 +294,21 @@ export default class Log extends React.Component {
         <fieldset>
           <legend>Dives</legend>
           <ul>
-            {/* dives should be displayed in order of most recent. currently this just reverses the order they were input. what if a user (me) inputs dives from the past, out of order */}
             {dives
-              ? dives
-                  // .slice(0)
-                  // .reverse()
-                  .map((dive) => (
-                    <li key={dive.id}>
-                      <ul>
-                        {/* <li>Dive #{dive.id}</li> */}
-                        <li>{this.displayDate(dive.date)}</li>
-                        <li>{dive.country}</li>
-                        <li>{dive.diveSite}</li>
-                        <li>{dive.rating} seastars</li>
-                        <li>
-                          <Link to={`/dive-details/${dive.id}`}>Details</Link>
-                        </li>
-                        <br />
-                      </ul>
-                    </li>
-                  ))
+              ? dives.map((dive) => (
+                  <li key={dive.id}>
+                    <ul>
+                      <li>{this.displayDate(dive.date)}</li>
+                      <li>{dive.country}</li>
+                      <li>{dive.diveSite}</li>
+                      <li>{dive.rating} seastars</li>
+                      <li>
+                        <Link to={`/dive-details/${dive.id}`}>Details</Link>
+                      </li>
+                      <br />
+                    </ul>
+                  </li>
+                ))
               : ""}
           </ul>
         </fieldset>
@@ -320,18 +316,30 @@ export default class Log extends React.Component {
           <legend>Statistics</legend>
           <ul>
             <li>Total Dives: {totalDives}</li>
-            <li>Deepest Dive: {this.findDeepestDive(dummyStore.dives)}</li>
-            <li>Avg Dive Depth: {this.findAvgDiveDepth(dummyStore.dives)}</li>
-            <li>
-              Shallowest Dive: {this.findShallowestDive(dummyStore.dives)}{" "}
-            </li>
-            <li>Longest Dive: {this.findLongestDive(dummyStore.dives)}</li>
-            <li>Avg Dive Time: {this.findAvgDiveTime(dummyStore.dives)}</li>
-            <li>Shortest Dive: {this.findShortestDive(dummyStore.dives)}</li>
-            <li>
-              Total Time Spent Underwater:{" "}
-              {this.findTotalDiveTime(dummyStore.dives)}
-            </li>
+
+            {allUserDives.length !== 0 ? (
+              <div>
+                <li>Deepest Dive: {this.findDeepestDive(allUserDives)}</li>
+                <li>Avg Dive Depth: {this.findAvgDiveDepth(allUserDives)}</li>
+                <li>
+                  Shallowest Dive: {this.findShallowestDive(allUserDives)}{" "}
+                </li>
+                <li>Longest Dive: {this.findLongestDive(allUserDives)}</li>
+                <li>Avg Dive Time: {this.findAvgDiveTime(allUserDives)}</li>
+                <li>Shortest Dive: {this.findShortestDive(allUserDives)}</li>
+                <li>
+                  Total Time Spent Underwater:{" "}
+                  {this.findTotalDiveTime(allUserDives)}
+                </li>
+              </div>
+            ) : (
+              ""
+            )}
+
+            {/* <li>
+              Deepest Dive:{" "}
+              {allUserDives ? this.findDeepestDive(allUserDives) : ""}
+            </li> */}
           </ul>
         </fieldset>
         <p>
