@@ -202,6 +202,10 @@ export default class Log extends React.Component {
     return shopDives;
   }
 
+  displayDate = (date) => {
+    // can use slice to separate out year, month, day, but they're still just numbers in a funky order to display
+  };
+
   render() {
     const user = this.context.user;
     const userId = user.id;
@@ -209,46 +213,6 @@ export default class Log extends React.Component {
     const allUserDives = this.context.dives.filter(
       (dive) => Number(dive.user_id) === Number(userId)
     );
-
-    // 1
-    // WORKSHOPPING USING DATES TO SORT CHRONOLOGICALLY
-    // allUserDives.forEach(dive => dive.date.split('-'))
-    // .forEach() OR .map()?
-
-    // 2
-    // the below is effective on a simple array, but need to somehow not alter the original dates in dives, but still transform the dates in order to use them
-    // let divesArray = [];
-    // dives.forEach((dive) => divesArray.push(dive.date.split("-").join("")));
-    // divesArray.sort((a, b) => b - a);
-    // console.log(divesArray);
-
-    // 3
-    // I LIKE THIS. IT EFFECTIVELY TURNS DATES INTO A SINGLE NUMBER AND ORDERS THEM WITH THE MOST RECENT DATE FIRST
-    // need to figure out how to use this
-    // let dives = [
-    //   {
-    //     id: 1,
-    //     date: '2020-05-04'
-    //   },
-    //   {
-    //     id: 2,
-    //     date: '2017-03-19'
-    //   },
-    //   {
-    //     id: 3,
-    //     date: '2019-12-23'
-    //   },
-    //   {
-    //     id: 4,
-    //     date: '2001-01-01'
-    //   },
-    //   {
-    //     id: 5,
-    //     date: '2021-03-17'
-    //   }
-    // ]
-    // dives = dives.map((dive) => (dive.date = dive.date.split("-").join("")));
-    // console.log(dives.sort((a, b) => b - a));
 
     const dives =
       this.state.searchBy === "all"
@@ -263,12 +227,8 @@ export default class Log extends React.Component {
         ? this.findShopDives(allUserDives)
         : "";
 
-    // they aren't truly in order, just reverse order of how they were entered
-    // divesInOrder is not being used currently, probably don't need it
-    // const divesInOrder = dives.sort(function (a, b) {
-    //   return a.date - b.date;
-    // });
-    // console.log(divesInOrder);
+    dives.map((dive) => (dive.date = dive.date.split("-").join("")));
+    dives.sort((a, b) => b.date - a.date);
 
     const totalDives = allUserDives.length;
 
@@ -292,8 +252,8 @@ export default class Log extends React.Component {
             {/* dives should be displayed in order of most recent. currently this just reverses the order they were input. what if a user (me) inputs dives from the past, out of order */}
             {dives
               ? dives
-                  .slice(0)
-                  .reverse()
+                  // .slice(0)
+                  // .reverse()
                   .map((dive) => (
                     <li key={dive.id}>
                       <ul>
