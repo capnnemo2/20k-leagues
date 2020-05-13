@@ -165,7 +165,7 @@ export default class AddDive extends React.Component {
     });
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = () => {
     let newDive = this.state;
     newDive.id = this.context.dives.length + 1;
     newDive.user_id = this.context.user.id;
@@ -174,8 +174,8 @@ export default class AddDive extends React.Component {
     );
     newDive.animalsSpotted = wishlistFulfilled.map((animal) => animal.name);
 
-    console.log(newDive);
     this.context.addDive(newDive);
+    this.context.updateWishlistFulfilled(newDive.animalsSpotted);
     this.props.history.push("/log");
   };
 

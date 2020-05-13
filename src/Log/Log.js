@@ -156,12 +156,9 @@ export default class Log extends React.Component {
 
   renderAnimalsToSee = (user) => {
     let animalsToSee = [];
-    for (let i = 0; i < user.wishlistFulfilled.length; i++) {
-      const animal = user.wishlist.filter(
-        (animal) => animal !== user.wishlistFulfilled[i]
-      );
-      animalsToSee = animal;
-    }
+    animalsToSee = user.wishlist.filter(
+      (animal) => !user.wishlistFulfilled.includes(animal)
+    );
     return animalsToSee.map((animal) => <li key={animal}>{animal}</li>);
   };
 

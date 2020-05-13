@@ -123,6 +123,28 @@ export default class App extends React.Component {
     });
   };
 
+  updateWishlistFulfilled = (animalsSpotted) => {
+    let animalsNewlySeen = animalsSpotted;
+    const alreadySeen = this.state.user.wishlistFulfilled;
+    for (let i = 0; i < alreadySeen.length; i++) {
+      const newlySeen = animalsNewlySeen.filter(
+        (animal) => animal !== alreadySeen[i]
+      );
+      animalsNewlySeen = newlySeen;
+    }
+    for (let i = 0; i < animalsNewlySeen.length; i++) {
+      this.setState((prevState) => ({
+        user: {
+          ...prevState.user,
+          wishlistFulfilled: [
+            ...prevState.user.wishlistFulfilled,
+            animalsNewlySeen[i],
+          ],
+        },
+      }));
+    }
+  };
+
   // right now just loading up everything, but with login will only need to set data for the specific user
   componentDidMount() {
     this.setUsers(dummyStore.users);
@@ -146,6 +168,7 @@ export default class App extends React.Component {
       addSpecialties: this.addSpecialties,
       addInstructorSpecialties: this.addInstructorSpecialties,
       addDive: this.addDive,
+      updateWishlistFulfilled: this.updateWishlistFulfilled,
     };
     return (
       <Context.Provider value={value}>

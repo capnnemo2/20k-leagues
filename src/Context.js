@@ -15,4 +15,5 @@ export default React.createContext({
   addSpecialties: () => {},
   addInstrcutorSpecialties: () => {},
   addDive: () => {},
+  updateWishlistFulfilled: () => {},
 });
