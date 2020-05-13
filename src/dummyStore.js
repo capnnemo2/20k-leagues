@@ -18,7 +18,16 @@ export default {
         "Great White Shark",
         "Tiger Shark",
       ],
-      wishlistFulfilled: ["Whale Shark"],
+      wishlistFulfilled: [
+        "Whale Shark",
+        "Manta Ray",
+        "Great White Shark",
+        "Blue-Ringed Octopus",
+        "Mandarin Fish",
+        "Seahorse",
+        "Thresher Shark",
+        "Frog Fish",
+      ],
     },
   ],
   certs: [

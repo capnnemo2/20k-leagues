@@ -112,19 +112,64 @@ export default class SignUp extends React.Component {
     });
   }
 
-  handleSignUpSuccess = () => {
-    const { history } = this.props;
-    history.push("/login");
+  createNewUserCert = (newUserCert) => {
+    newUserCert.id = this.context.certs.length + 1;
+    return newUserCert;
   };
 
   handleSubmit = () => {
-    let newUser = this.state;
-    newUser = { ...newUser, id: this.context.users.length + 1 };
+    let {
+      first_name,
+      email,
+      password,
+      agency,
+      certLevel,
+      certNum,
+      certDate,
+      wishlist,
+    } = this.state;
+
+    let id = this.context.users.length + 1;
+    let specialties = [];
+    let instructorSpecialties = [];
+    let wishlistFulfilled = [];
+    let newUser = {
+      id,
+      first_name,
+      email,
+      password,
+      wishlist,
+      specialties,
+      instructorSpecialties,
+      wishlistFulfilled,
+    };
+
+    let user_id = id;
+    let newUserCert = {
+      user_id,
+      agency,
+      certLevel,
+      certNum,
+      certDate,
+    };
+    this.createNewUserCert(newUserCert);
+
+    console.log("new user cert: ", newUserCert);
+
     this.setState({ error: null });
-    console.log(newUser);
-    this.context.createNewUser(newUser);
-    console.log(this.context.users);
-    // this.props.history.push("/log");
+
+    const emailCheck = this.context.users.find(
+      (user) => user.email === newUser.email
+    );
+    if (emailCheck === undefined) {
+      this.context.createNewUser(newUser);
+      this.context.addCert(newUserCert);
+      this.props.history.push("/login");
+    } else {
+      this.setState({ error: "An account already exists for that email" });
+    }
+
+    console.log("new user: ", newUser);
   };
 
   render() {
@@ -367,7 +412,7 @@ export default class SignUp extends React.Component {
               ))}
             </fieldset>
           </div>
-
+          <div className="error">{error && <p>{error}</p>}</div>
           <button type="submit">Submit</button>
           <button type="button">Cancel</button>
         </form>

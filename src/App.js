@@ -77,12 +77,9 @@ export default class App extends React.Component {
   };
 
   createNewUser = (newUser) => {
-    console.log("create new user ran in app");
     this.setState({
       users: [...this.state.users, newUser],
     });
-    console.log("new user: ", newUser);
-    console.log("hopefully new users: ", this.state.users);
   };
 
   updateWishlist = (wishlist) => {
@@ -153,7 +150,11 @@ export default class App extends React.Component {
     }
   };
 
-  updateAnimalTracker = (newAnimal) => {};
+  updateAnimalTracker = (newAnimal) => {
+    this.setState({
+      animalTracker: [...this.state.animalTracker, newAnimal],
+    });
+  };
 
   // right now just loading up everything, but with login will only need to set data for the specific user
   componentDidMount() {

@@ -176,16 +176,18 @@ export default class AddDive extends React.Component {
     this.context.addDive(newDive);
     this.context.updateWishlistFulfilled(newDive.animalsSpotted);
 
-    if (newDive.animalsSpotted) {
+    for (let i = 0; i < newDive.animalsSpotted.length; i++) {
       let newAnimalTracked = {};
 
-      newAnimalTracked.id = this.context.animalTracker.length + 1;
-      newAnimalTracked.animal = "";
-      newAnimalTracked.country = "";
-      newAnimalTracked.region = "";
+      // trying to create the correct id
+      newAnimalTracked.id = this.context.animalTracker.length + 1 + i;
+      newAnimalTracked.animal = newDive.animalsSpotted[i];
+      newAnimalTracked.country = newDive.country;
+      newAnimalTracked.region = newDive.region;
 
-      console.log(newAnimalTracked);
+      console.log("new animal sighting: ", newAnimalTracked);
 
+      // if there are multiple animals, this is only effective for the last one. I don't fully understand for loops, that's for sure
       this.context.updateAnimalTracker(newAnimalTracked);
     }
 
