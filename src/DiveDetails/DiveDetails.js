@@ -79,22 +79,21 @@ export default class DiveDetails extends React.Component {
   getDiveNumber = (allDives, thisDive) => {
     allDives.map((dive) => (dive.date = dive.date.split("-").join("")));
     allDives.sort((a, b) => a.date - b.date);
-    console.log("index?: ", allDives.indexOf(thisDive) + 1);
     return allDives.indexOf(thisDive) + 1;
   };
 
   render() {
+    // for all the dive data
     const dive_id = this.props.match.params.dive_id;
     const dive = this.context.dives.find(
       (d) => Number(d.id) === Number(dive_id)
     );
 
+    // to calculate dive number
     const userId = dive.user_id;
     const allUserDives = this.context.dives.filter(
       (dive) => Number(userId) === Number(dive.user_id)
     );
-
-    console.log("all user dives: ", allUserDives);
 
     return (
       <div className="DiveDetails">
