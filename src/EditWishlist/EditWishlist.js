@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Context from "../Context";
 import "./EditWishlist.css";
 
@@ -71,24 +72,25 @@ export default class EditWishlist extends React.Component {
 
   // Using this to pre-check boxes for the animals the user already has on their wishlist. this way they are editing their list rather than recreating it
   componentDidMount() {
-    // will need to get the user from context, but currently does not work
-    let user = this.context.user;
+    if (this.context.user.wishlist) {
+      let prefillList = this.context.user.wishlist;
+      let animals = this.state.list;
+      let names = animals.map((animal) => animal.name);
 
-    let prefillList = user.wishlist;
-    let animals = this.state.list;
-    let names = animals.map((animal) => animal.name);
-
-    for (let i = 0; i < prefillList.length; i++) {
-      for (let j = 0; j < names.length; j++) {
-        if (names[j] === prefillList[i]) {
-          // set state
-          this.setState((prevState) => {
-            let { list } = prevState;
-            list = list.map((animal) =>
-              animal.name === names[j] ? { ...animal, isChecked: true } : animal
-            );
-            return { list };
-          });
+      for (let i = 0; i < prefillList.length; i++) {
+        for (let j = 0; j < names.length; j++) {
+          if (names[j] === prefillList[i]) {
+            // set state
+            this.setState((prevState) => {
+              let { list } = prevState;
+              list = list.map((animal) =>
+                animal.name === names[j]
+                  ? { ...animal, isChecked: true }
+                  : animal
+              );
+              return { list };
+            });
+          }
         }
       }
     }
@@ -110,7 +112,8 @@ export default class EditWishlist extends React.Component {
   };
 
   render() {
-    return (
+    const { user } = this.context;
+    return user.id ? (
       <div className="EditWishlist">
         <section>
           You initially choose your wishlist when you sign up, but here you can
@@ -146,6 +149,8 @@ export default class EditWishlist extends React.Component {
           </button>
         </form>
       </div>
+    ) : (
+      <Redirect to="/login" />
     );
   }
 }

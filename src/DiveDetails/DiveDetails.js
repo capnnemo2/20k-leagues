@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Context from "../Context";
 import "./DiveDetails.css";
 
@@ -89,13 +89,16 @@ export default class DiveDetails extends React.Component {
       (d) => Number(d.id) === Number(dive_id)
     );
 
+    console.log("dive_id: ", dive_id);
+    console.log("dive: ", dive);
+
     // to calculate dive number
     const userId = dive.user_id;
     const allUserDives = this.context.dives.filter(
       (dive) => Number(userId) === Number(dive.user_id)
     );
 
-    return (
+    return dive_id ? (
       <div className="DiveDetails">
         <h2>Dive # {this.getDiveNumber(allUserDives, dive)}</h2>
         <div className="dive-container">
@@ -159,6 +162,8 @@ export default class DiveDetails extends React.Component {
 
         <Link to="/log">Back to Log</Link>
       </div>
+    ) : (
+      <Redirect to="/login" />
     );
   }
 }
