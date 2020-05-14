@@ -76,31 +76,24 @@ export default class DiveDetails extends React.Component {
     return viz;
   };
 
-  getDiveNumber = (allDives, thisDive) => {
-    allDives.map((dive) => (dive.date = dive.date.split("-").join("")));
-    allDives.sort((a, b) => a.date - b.date);
-    return allDives.indexOf(thisDive) + 1;
+  getDiveNumber = (id, thisDive) => {
+    const allUserDives = this.context.dives.filter(
+      (dive) => Number(id) === Number(dive.user_id)
+    );
+
+    allUserDives.map((dive) => (dive.date = dive.date.split("-").join("")));
+    allUserDives.sort((a, b) => a.date - b.date);
+    return allUserDives.indexOf(thisDive) + 1;
   };
 
   render() {
-    // for all the dive data
     const dive_id = this.props.match.params.dive_id;
     const dive = this.context.dives.find(
       (d) => Number(d.id) === Number(dive_id)
     );
-
-    console.log("dive_id: ", dive_id);
-    console.log("dive: ", dive);
-
-    // to calculate dive number
-    const userId = dive.user_id;
-    const allUserDives = this.context.dives.filter(
-      (dive) => Number(userId) === Number(dive.user_id)
-    );
-
-    return dive_id ? (
+    return dive ? (
       <div className="DiveDetails">
-        <h2>Dive # {this.getDiveNumber(allUserDives, dive)}</h2>
+        <h2>Dive # {this.getDiveNumber(dive.user_id, dive)}</h2>
         <div className="dive-container">
           {/* the order of these only makes sense when you turn on flexbox. Need a way to change the order of the fieldsets depending on a media query? */}
           <fieldset className="input-fields sidebar">

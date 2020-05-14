@@ -7,7 +7,7 @@ it("renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(
     <BrowserRouter>
-      <DiveDetails />
+      <DiveDetails match={{ params: { dive_id: 1 } }} />
     </BrowserRouter>,
     div
   );
