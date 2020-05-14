@@ -2,6 +2,7 @@ import React from "react";
 import "./AddDive.css";
 import dummyStore from "../dummyStore";
 import Context from "../Context";
+import { Redirect } from "react-router-dom";
 
 export default class AddDive extends React.Component {
   static contextType = Context;
@@ -32,18 +33,20 @@ export default class AddDive extends React.Component {
   };
 
   componentDidMount() {
-    const userWishlist = this.context.user.wishlist;
-    let animals = [];
-    for (let i = 0; i < userWishlist.length; i++) {
-      let newAnimal = {
-        name: userWishlist[i],
-        isChecked: false,
-      };
-      animals.push(newAnimal);
+    if (this.context.user.wishlist) {
+      const userWishlist = this.context.user.wishlist;
+      let animals = [];
+      for (let i = 0; i < userWishlist.length; i++) {
+        let newAnimal = {
+          name: userWishlist[i],
+          isChecked: false,
+        };
+        animals.push(newAnimal);
+      }
+      this.setState({
+        animalsSpotted: animals,
+      });
     }
-    this.setState({
-      animalsSpotted: animals,
-    });
   }
 
   updateDate(e) {
@@ -176,16 +179,19 @@ export default class AddDive extends React.Component {
     this.context.addDive(newDive);
     this.context.updateWishlistFulfilled(newDive.animalsSpotted);
 
-    for (let i = 0; i < newDive.animalsSpotted.length; i++) {
+    let newAnimalsTracked = newDive.animalsSpotted.map((animal, i) => {
       let newAnimalTracked = {};
       // create the correct id
       newAnimalTracked.id = this.context.animalTracker.length + 1 + i;
-      newAnimalTracked.animal = newDive.animalsSpotted[i];
+      newAnimalTracked.animal = animal;
       newAnimalTracked.country = newDive.country;
       newAnimalTracked.region = newDive.region;
 
-      this.context.updateAnimalTracker(newAnimalTracked);
-    }
+      return newAnimalTracked;
+    });
+    // .map, .filter, .forEach -> let's wait until they are done
+    // for() -> we're gonna keep moving
+    this.context.updateAnimalTracker(newAnimalsTracked);
 
     this.props.history.push("/log");
   };
@@ -195,7 +201,7 @@ export default class AddDive extends React.Component {
   };
 
   render() {
-    const user = this.context.user;
+    const { user } = this.context;
     const countries = dummyStore.countries;
     const regions =
       this.state.country !== ""
@@ -203,7 +209,7 @@ export default class AddDive extends React.Component {
             (country) => country.country_name === this.state.country
           ).regions
         : [];
-    return user ? (
+    return user.id ? (
       <div className="AddDive">
         <header>
           <h2>Log a New Dive</h2>
@@ -534,7 +540,7 @@ export default class AddDive extends React.Component {
         </form>
       </div>
     ) : (
-      "Loading..."
+      <Redirect to="/login" />
     );
   }
 }

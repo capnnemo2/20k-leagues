@@ -81,6 +81,8 @@ export default class DiveDetails extends React.Component {
     const dive = this.context.dives.find(
       (d) => Number(d.id) === Number(dive_id)
     );
+    const user = dive.user_id;
+    console.log("user: ", user);
 
     return (
       <div className="DiveDetails">

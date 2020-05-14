@@ -150,9 +150,9 @@ export default class App extends React.Component {
     }
   };
 
-  updateAnimalTracker = (newAnimal) => {
+  updateAnimalTracker = (newAnimals) => {
     this.setState({
-      animalTracker: [...this.state.animalTracker, newAnimal],
+      animalTracker: [].concat(this.state.animalTracker, newAnimals),
     });
   };
 

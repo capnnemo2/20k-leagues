@@ -68,6 +68,8 @@ export default class Log extends React.Component {
     for (let i = 0; i < arr.length; i++) {
       diveDepths.push(arr[i].maxDepth);
     }
+    // this does the same thing. check other for loops
+    //let diveDepths = arr.map(item=>item.maxDepth);
     let sum = diveDepths.reduce((a, b) => a + b, 0);
     let avg = sum / arr.length;
     return avg.toFixed(1) + " ft.";
