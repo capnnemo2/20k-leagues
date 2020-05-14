@@ -335,11 +335,6 @@ export default class Log extends React.Component {
             ) : (
               ""
             )}
-
-            {/* <li>
-              Deepest Dive:{" "}
-              {allUserDives ? this.findDeepestDive(allUserDives) : ""}
-            </li> */}
           </ul>
         </fieldset>
         <p>

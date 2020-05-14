@@ -76,19 +76,29 @@ export default class DiveDetails extends React.Component {
     return viz;
   };
 
+  getDiveNumber = (allDives, thisDive) => {
+    allDives.map((dive) => (dive.date = dive.date.split("-").join("")));
+    allDives.sort((a, b) => a.date - b.date);
+    console.log("index?: ", allDives.indexOf(thisDive) + 1);
+    return allDives.indexOf(thisDive) + 1;
+  };
+
   render() {
     const dive_id = this.props.match.params.dive_id;
     const dive = this.context.dives.find(
       (d) => Number(d.id) === Number(dive_id)
     );
-    const user = dive.user_id;
-    console.log("user: ", user);
+
+    const userId = dive.user_id;
+    const allUserDives = this.context.dives.filter(
+      (dive) => Number(userId) === Number(dive.user_id)
+    );
+
+    console.log("all user dives: ", allUserDives);
 
     return (
       <div className="DiveDetails">
-        {/* dive.id will not give you the actual dive number because dive.id is reflective of all dives for all users. Maybe there needs to be a dive_number attached to the dive object when it is created? */}
-        {/* caluculating dive number will require putting the dives in order first, then counting up to this dive. Adding new dives in the middle of your chronology should shift the number */}
-        {/* <h2>Dive #{dive.id}</h2> */}
+        <h2>Dive # {this.getDiveNumber(allUserDives, dive)}</h2>
         <div className="dive-container">
           {/* the order of these only makes sense when you turn on flexbox. Need a way to change the order of the fieldsets depending on a media query? */}
           <fieldset className="input-fields sidebar">

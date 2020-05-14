@@ -450,7 +450,8 @@ export default class SignUp extends React.Component {
               </fieldset>
             </fieldset>
             <fieldset className="sign-up-input">
-              <legend>Select animals</legend>
+              {/* need a better explanation of what this is for */}
+              <legend>Select animals for your wishlist</legend>
               <div>
                 <label>
                   <input
