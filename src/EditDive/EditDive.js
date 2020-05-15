@@ -37,12 +37,12 @@ export default class EditDive extends React.Component {
   };
 
   componentDidMount() {
-    if (this.context.user.wishlist) {
-      const userWishlist = this.context.user.wishlist;
+    if (this.context.allAnimals) {
+      const animalList = this.context.allAnimals;
       let animals = [];
-      for (let i = 0; i < userWishlist.length; i++) {
+      for (let i = 0; i < animalList.length; i++) {
         let newAnimal = {
-          name: userWishlist[i],
+          name: animalList[i].animal,
           isChecked: false,
         };
         animals.push(newAnimal);
@@ -51,32 +51,6 @@ export default class EditDive extends React.Component {
         animalsSpotted: animals,
       });
     }
-
-    // in my other project I set state here and componentDidUpdate/setFieldsInState --> why both? can I just do it here instead? or just there?
-    // need to grab all current info about dive from context
-
-    // const diveId = Number(this.props.match.params.dive_id);
-    // const dive = this.context.dives.find((dive) => dive.id === diveId);
-
-    // this.setState({
-    //   initialFieldsSet: true,
-    //   date: dive.date,
-    //   diveSite: dive.diveSite,
-    //   country: dive.country,
-    //   region: dive.region,
-    //   maxDepth: dive.maxDepth,
-    //   duration: dive.duration,
-    //   waterTemp: dive.waterTemp,
-    //   diveShop: dive.diveShop,
-    //   guide: dive.guide,
-    //   buddy: dive.buddy,
-    //   viz: dive.viz,
-    //   diveType: dive.diveType,
-    //   dirftDive: dive.dirftDive,
-    //   nightDive: dive.nightDive,
-    //   description: dive.description,
-    //   rating: dive.rating,
-    // });
   }
 
   componentDidUpdate() {
@@ -277,12 +251,8 @@ export default class EditDive extends React.Component {
             (country) => country.country_name === this.state.country
           ).regions
         : [];
-
-    const experiment = user.wishlist;
-    // console.log("user wishlist: ", experiment);
-    // console.log("animals prev spotted: ", this.state.animalsPrevSpotted);
-    const animalsForList = [].concat(experiment, this.state.animalsPrevSpotted);
-    // console.log("combined list: ", animalsForList);
+    const animalList = this.context.allAnimals;
+    const justAnimals = animalList.map((animal) => animal.animal);
 
     return user.id ? (
       <div className="EditDive">
@@ -553,7 +523,7 @@ export default class EditDive extends React.Component {
 
               <fieldset className="sign-up-input">
                 <legend>Animals Spotted</legend>
-                {animalsForList.map((animal) => (
+                {justAnimals.map((animal) => (
                   <div key={animal}>
                     <label>
                       <input
