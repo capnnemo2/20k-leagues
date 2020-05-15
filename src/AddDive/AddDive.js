@@ -33,12 +33,12 @@ export default class AddDive extends React.Component {
   };
 
   componentDidMount() {
-    if (this.context.user.wishlist) {
-      const userWishlist = this.context.user.wishlist;
+    if (this.context.allAnimals) {
+      const animalList = this.context.allAnimals;
       let animals = [];
-      for (let i = 0; i < userWishlist.length; i++) {
+      for (let i = 0; i < animalList.length; i++) {
         let newAnimal = {
-          name: userWishlist[i],
+          name: animalList[i].animal,
           isChecked: false,
         };
         animals.push(newAnimal);
@@ -47,6 +47,21 @@ export default class AddDive extends React.Component {
         animalsSpotted: animals,
       });
     }
+
+    // if (this.context.user.wishlist) {
+    //   const userWishlist = this.context.user.wishlist;
+    //   let animals = [];
+    //   for (let i = 0; i < userWishlist.length; i++) {
+    //     let newAnimal = {
+    //       name: userWishlist[i],
+    //       isChecked: false,
+    //     };
+    //     animals.push(newAnimal);
+    //   }
+    //   this.setState({
+    //     animalsSpotted: animals,
+    //   });
+    // }
   }
 
   updateDate(e) {
@@ -209,6 +224,8 @@ export default class AddDive extends React.Component {
             (country) => country.country_name === this.state.country
           ).regions
         : [];
+    const animalList = this.context.allAnimals;
+    const justAnimals = animalList.map((animal) => animal.animal);
     return user.id ? (
       <div className="AddDive">
         <header>
@@ -456,10 +473,9 @@ export default class AddDive extends React.Component {
                 />
               </div>
 
-              {/* upon submit for any checked animal this will add the animal to wishlist fulfilled */}
               <fieldset className="sign-up-input">
                 <legend>Animals Spotted</legend>
-                {user.wishlist.map((animal) => (
+                {justAnimals.map((animal) => (
                   <div key={animal}>
                     <label>
                       <input

@@ -31,6 +31,8 @@ export default class EditDive extends React.Component {
     description: "",
     animalsSpotted: [],
 
+    animalsPrevSpotted: [],
+
     rating: "",
   };
 
@@ -110,7 +112,8 @@ export default class EditDive extends React.Component {
       nightDive: dive.nightDive,
       description: dive.description,
       rating: dive.rating,
-      animalsSpotted: dive.animalsSpotted,
+      //   animalsSpotted: dive.animalsSpotted,
+      animalsPrevSpotted: dive.animalsSpotted,
     });
   };
 
@@ -274,6 +277,13 @@ export default class EditDive extends React.Component {
             (country) => country.country_name === this.state.country
           ).regions
         : [];
+
+    const experiment = user.wishlist;
+    // console.log("user wishlist: ", experiment);
+    // console.log("animals prev spotted: ", this.state.animalsPrevSpotted);
+    const animalsForList = [].concat(experiment, this.state.animalsPrevSpotted);
+    // console.log("combined list: ", animalsForList);
+
     return user.id ? (
       <div className="EditDive">
         <header>
@@ -541,10 +551,9 @@ export default class EditDive extends React.Component {
                 />
               </div>
 
-              {/* upon submit for any checked animal this will add the animal to wishlist fulfilled */}
               <fieldset className="sign-up-input">
                 <legend>Animals Spotted</legend>
-                {user.wishlist.map((animal) => (
+                {animalsForList.map((animal) => (
                   <div key={animal}>
                     <label>
                       <input
