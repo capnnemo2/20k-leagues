@@ -55,7 +55,7 @@ export default {
       guide: "Ben",
       buddy: "Chris",
       viz: 4,
-      diveType: "boat",
+      diveType: "Boat",
       driftDive: true,
       nightDive: false,
       description:
@@ -77,7 +77,7 @@ export default {
       guide: "Ben",
       buddy: "Chris",
       viz: 3,
-      diveType: "boat",
+      diveType: "Boat",
       driftDive: true,
       nightDive: false,
       description:

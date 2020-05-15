@@ -8,6 +8,7 @@ export default class EditDive extends React.Component {
   static contextType = Context;
 
   state = {
+    initialFieldsSet: false,
     date: "",
     diveSite: "",
     country: "",
@@ -48,7 +49,70 @@ export default class EditDive extends React.Component {
         animalsSpotted: animals,
       });
     }
+
+    // in my other project I set state here and componentDidUpdate/setFieldsInState --> why both? can I just do it here instead? or just there?
+    // need to grab all current info about dive from context
+
+    // const diveId = Number(this.props.match.params.dive_id);
+    // const dive = this.context.dives.find((dive) => dive.id === diveId);
+
+    // this.setState({
+    //   initialFieldsSet: true,
+    //   date: dive.date,
+    //   diveSite: dive.diveSite,
+    //   country: dive.country,
+    //   region: dive.region,
+    //   maxDepth: dive.maxDepth,
+    //   duration: dive.duration,
+    //   waterTemp: dive.waterTemp,
+    //   diveShop: dive.diveShop,
+    //   guide: dive.guide,
+    //   buddy: dive.buddy,
+    //   viz: dive.viz,
+    //   diveType: dive.diveType,
+    //   dirftDive: dive.dirftDive,
+    //   nightDive: dive.nightDive,
+    //   description: dive.description,
+    //   rating: dive.rating,
+    // });
   }
+
+  componentDidUpdate() {
+    const diveId = Number(this.props.match.params.dive_id);
+    const dive = this.context.dives.find((dive) => dive.id === diveId);
+
+    if (!this.state.initialFieldsSet && dive != null) {
+      this.setFieldsInState(dive);
+    }
+  }
+
+  setFieldsInState = (dive) => {
+    let diveDate = dive.date.split("");
+    diveDate.splice(4, 0, "-");
+    diveDate.splice(7, 0, "-");
+    diveDate = diveDate.join("");
+
+    this.setState({
+      initialFieldsSet: true,
+      date: diveDate,
+      diveSite: dive.diveSite,
+      country: dive.country,
+      region: dive.region,
+      maxDepth: dive.maxDepth,
+      duration: dive.duration,
+      waterTemp: dive.waterTemp,
+      diveShop: dive.diveShop,
+      guide: dive.guide,
+      buddy: dive.buddy,
+      viz: dive.viz,
+      diveType: dive.diveType,
+      driftDive: dive.driftDive,
+      nightDive: dive.nightDive,
+      description: dive.description,
+      rating: dive.rating,
+      animalsSpotted: dive.animalsSpotted,
+    });
+  };
 
   updateDate(e) {
     this.setState({
@@ -213,7 +277,7 @@ export default class EditDive extends React.Component {
     return user.id ? (
       <div className="EditDive">
         <header>
-          <h2>Log a New Dive</h2>
+          <h2>Edit Dive</h2>
         </header>
         <form
           onSubmit={(e) => {
@@ -232,6 +296,7 @@ export default class EditDive extends React.Component {
                   id="date"
                   aria-label="Enter the date of the dive"
                   aria-required="true"
+                  value={this.state.date}
                   onChange={(e) => this.updateDate(e)}
                   required
                 />
@@ -244,6 +309,7 @@ export default class EditDive extends React.Component {
                   id="site"
                   aria-label="Enter the name of the dive site"
                   aria-required="true"
+                  value={this.state.diveSite}
                   onChange={(e) => this.updateDiveSite(e)}
                   required
                 />
@@ -252,6 +318,7 @@ export default class EditDive extends React.Component {
                 <label htmlFor="country">Country: </label>
                 <select
                   id="country"
+                  value={this.state.country}
                   onChange={(e) => this.updateCountry(e)}
                   required
                 >
@@ -269,6 +336,7 @@ export default class EditDive extends React.Component {
                 <label htmlFor="region">Region: </label>
                 <select
                   id="region"
+                  value={this.state.region}
                   onChange={(e) => this.updateRegion(e)}
                   required
                 >
@@ -291,6 +359,7 @@ export default class EditDive extends React.Component {
                   name="depth"
                   id="depth"
                   aria-label="Enter the maximum depth"
+                  value={this.state.maxDepth}
                   onChange={(e) => this.updateMaxDepth(e)}
                 />
               </div>
@@ -301,6 +370,7 @@ export default class EditDive extends React.Component {
                   name="dive-time"
                   id="dive-time"
                   aria-label="Enter the dive duration"
+                  value={this.state.duration}
                   onChange={(e) => this.updateDuration(e)}
                 />
               </div>
@@ -311,6 +381,7 @@ export default class EditDive extends React.Component {
                   name="temp"
                   id="temp"
                   aria-label="Enter the water temperature"
+                  value={this.state.waterTemp}
                   onChange={(e) => this.updateWaterTemp(e)}
                 />
               </div>
@@ -325,6 +396,7 @@ export default class EditDive extends React.Component {
                   name="shop"
                   id="shop"
                   aria-label="Enter the dive shop"
+                  value={this.state.diveShop}
                   onChange={(e) => this.updateDiveShop(e)}
                 />
               </div>
@@ -335,6 +407,7 @@ export default class EditDive extends React.Component {
                   name="guide"
                   id="guide"
                   aria-label="Enter your dive guide"
+                  value={this.state.guide}
                   onChange={(e) => this.updateGuide(e)}
                 />
               </div>
@@ -345,6 +418,7 @@ export default class EditDive extends React.Component {
                   name="buddy"
                   id="buddy"
                   aria-label="Enter your dive buddy"
+                  value={this.state.buddy}
                   onChange={(e) => this.updateBuddy(e)}
                 />
               </div>
@@ -355,8 +429,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="viz"
+                  //   name="viz"
                   value="1"
+                  checked={Number(this.state.viz) === 1}
                   onChange={(e) => this.updateViz(e)}
                 />
                 I couldn't see my own fins
@@ -365,8 +440,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="viz"
+                  //   name="viz"
                   value="2"
+                  checked={Number(this.state.viz) === 2}
                   onChange={(e) => this.updateViz(e)}
                 />
                 My dive buddy was a vague shadow
@@ -375,8 +451,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="viz"
+                  //   name="viz"
                   value="3"
+                  checked={Number(this.state.viz) === 3}
                   onChange={(e) => this.updateViz(e)}
                 />
                 Anything beyond twenty feet was a theory
@@ -385,8 +462,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="viz"
+                  //   name="viz"
                   value="4"
+                  checked={Number(this.state.viz) === 4}
                   onChange={(e) => this.updateViz(e)}
                 />
                 I could see just fine
@@ -395,8 +473,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="viz"
+                  //   name="viz"
                   value="5"
+                  checked={Number(this.state.viz) === 5}
                   onChange={(e) => this.updateViz(e)}
                 />
                 I could see two days into the future
@@ -408,8 +487,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="dive-type"
+                  //   name="dive-type"
                   value="Shore"
+                  checked={this.state.diveType === "Shore"}
                   onChange={(e) => this.updateDiveType(e)}
                 />
                 Shore dive
@@ -418,8 +498,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="dive-type"
+                  //   name="dive-type"
                   value="Boat"
+                  checked={this.state.diveType === "Boat"}
                   onChange={(e) => this.updateDiveType(e)}
                 />
                 Boat dive
@@ -429,6 +510,7 @@ export default class EditDive extends React.Component {
                 <input
                   type="checkbox"
                   name="drift"
+                  checked={this.state.driftDive}
                   onChange={this.handleDriftDiveChange}
                 />
                 Drift dive
@@ -438,6 +520,7 @@ export default class EditDive extends React.Component {
                 <input
                   type="checkbox"
                   name="night"
+                  checked={this.state.nightDive}
                   onChange={this.handleNightDiveChange}
                 />
                 Night dive
@@ -453,6 +536,7 @@ export default class EditDive extends React.Component {
                   rows="4"
                   cols="50"
                   aria-label="Describe your dive"
+                  value={this.state.description}
                   onChange={(e) => this.updateDescription(e)}
                 />
               </div>
@@ -481,8 +565,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="rating"
+                  //   name="rating"
                   value="1"
+                  checked={Number(this.state.rating) === 1}
                   onChange={(e) => this.updateRating(e)}
                   required
                 />
@@ -492,8 +577,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="rating"
+                  //   name="rating"
                   value="2"
+                  checked={Number(this.state.rating) === 2}
                   onChange={(e) => this.updateRating(e)}
                   required
                 />
@@ -503,8 +589,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="rating"
+                  //   name="rating"
                   value="3"
+                  checked={Number(this.state.rating) === 3}
                   onChange={(e) => this.updateRating(e)}
                   required
                 />
@@ -514,8 +601,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="rating"
+                  //   name="rating"
                   value="4"
+                  checked={Number(this.state.rating) === 4}
                   onChange={(e) => this.updateRating(e)}
                   required
                 />
@@ -525,8 +613,9 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  name="rating"
+                  //   name="rating"
                   value="5"
+                  checked={Number(this.state.rating) === 5}
                   onChange={(e) => this.updateRating(e)}
                   required
                 />

@@ -204,7 +204,7 @@ export default class App extends React.Component {
               <Route path="/add-specialty" component={AddSpecialty} />
               <Route path="/dive-details/:dive_id" component={DiveDetails} />
               <Route path="/add-dive" component={AddDive} />
-              <Route path="/edit-dive" component={EditDive} />
+              <Route path="/edit-dive/:dive_id" component={EditDive} />
               <Route path="/edit-wishlist" component={EditWishlist} />
             </Switch>
           </main>

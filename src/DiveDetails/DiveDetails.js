@@ -95,7 +95,7 @@ export default class DiveDetails extends React.Component {
       <div className="DiveDetails">
         <h2>Dive # {this.getDiveNumber(dive.user_id, dive)}</h2>
         <div className="dive-container">
-          <Link to="/edit-dive">Edit Dive</Link>
+          <Link to={`/edit-dive/${dive_id}`}>Edit Dive</Link>
           {/* the order of these only makes sense when you turn on flexbox. Need a way to change the order of the fieldsets depending on a media query? */}
           <fieldset className="input-fields sidebar">
             <legend>People</legend>
