@@ -74,7 +74,8 @@ export default class Login extends React.Component {
               />
             </div>
             <p>
-              Feel free to login as Bob. Email: bob@email, password: password.
+              Feel free to login as Bob: email: bob@email.com, password:
+              password.
             </p>
           </fieldset>
 

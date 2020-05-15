@@ -338,17 +338,15 @@ export default class Log extends React.Component {
           </ul>
         </fieldset>
         <p>
-          When you register you choose which animals will appear on your animal
-          wishlist. You can edit that via your profile. Here we will display
-          your personal wishlist and animals that you've seen will be checked
-          off in some exciting way.
+          In the future this will display your personal wishlist/wishlist
+          fulfilled in some exciting way.
         </p>
         <fieldset>
           <legend>Spotted!</legend>
           <ul>{this.renderAnimalsSeen(user)}</ul>
         </fieldset>
         <fieldset>
-          <legend>Seeking</legend>
+          <legend>Still Seeking</legend>
           <ul>{this.renderAnimalsToSee(user)}</ul>
         </fieldset>
       </div>

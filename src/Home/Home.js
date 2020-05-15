@@ -26,7 +26,7 @@ export default class Home extends React.Component {
             can even search the database of dives to see where your wishlist
             beasts have been spotted.
           </p>
-          <p>Scroll down to see a sample log and animal tracker.</p>
+          <p>Examples/screenshots coming soon!</p>
         </section>
 
         <section></section>

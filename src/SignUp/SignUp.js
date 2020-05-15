@@ -248,7 +248,7 @@ export default class SignUp extends React.Component {
           <div className="error">{error && <p>{error}</p>}</div>
           <div className="input-fields">
             <fieldset className="sign-up-input">
-              <legend>Account information</legend>
+              <legend>User Information</legend>
               <div>
                 <label htmlFor="first_name">First Name: </label>
                 <input
@@ -449,9 +449,16 @@ export default class SignUp extends React.Component {
                 />
               </fieldset>
             </fieldset>
+
             <fieldset className="sign-up-input">
+              <p>
+                Your dive log will allow you to keep track of some of the
+                amazing sea creatures you encounter. We've selected some of the
+                common 'wishlist' animals that people often want to see. Choose
+                the ones that interest you!
+              </p>
               {/* need a better explanation of what this is for */}
-              <legend>Select animals for your wishlist</legend>
+              <legend>Select Wishlist Animals</legend>
               <div>
                 <label>
                   <input

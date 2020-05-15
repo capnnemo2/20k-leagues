@@ -13,11 +13,11 @@ import AddSpecialty from "./AddSpecialty/AddSpecialty";
 import EditWishlist from "./EditWishlist/EditWishlist";
 import DiveDetails from "./DiveDetails/DiveDetails";
 import AddDive from "./AddDive/AddDive";
+import EditDive from "./EditDive/EditDive";
 import AnimalFinder from "./AnimalFinder/AnimalFinder";
 
 import PublicOnlyRoute from "./Utils/PublicOnlyRoute";
 // import PrivateRoute from "./Utils/PrivateRoute";
-
 import Context from "./Context";
 import dummyStore from "./dummyStore";
 import "./App.css";
@@ -204,6 +204,7 @@ export default class App extends React.Component {
               <Route path="/add-specialty" component={AddSpecialty} />
               <Route path="/dive-details/:dive_id" component={DiveDetails} />
               <Route path="/add-dive" component={AddDive} />
+              <Route path="/edit-dive" component={EditDive} />
               <Route path="/edit-wishlist" component={EditWishlist} />
             </Switch>
           </main>
