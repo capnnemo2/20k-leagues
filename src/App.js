@@ -164,7 +164,16 @@ export default class App extends React.Component {
     });
   };
 
-  // right now just loading up everything, but with login will only need to set data for the specific user
+  deleteDive = (dive_id) => {
+    const newDives = this.state.dives.filter(
+      (dive) => Number(dive.id) !== Number(dive_id)
+    );
+    this.setState({
+      dives: newDives,
+    });
+  };
+
+  // right now just loading up everything
   componentDidMount() {
     this.setUsers(dummyStore.users);
     this.setDives(dummyStore.dives);
@@ -193,6 +202,7 @@ export default class App extends React.Component {
       addDive: this.addDive,
       updateWishlistFulfilled: this.updateWishlistFulfilled,
       updateAnimalTracker: this.updateAnimalTracker,
+      deleteDive: this.deleteDive,
     };
     return (
       <Context.Provider value={value}>

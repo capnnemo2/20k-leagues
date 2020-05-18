@@ -86,6 +86,11 @@ export default class DiveDetails extends React.Component {
     return allUserDives.indexOf(thisDive) + 1;
   };
 
+  handleDelete = (dive_id) => {
+    this.context.deleteDive(dive_id);
+    this.props.history.push("/log");
+  };
+
   render() {
     const dive_id = this.props.match.params.dive_id;
     const dive = this.context.dives.find(
@@ -95,7 +100,16 @@ export default class DiveDetails extends React.Component {
       <div className="DiveDetails">
         <h2>Dive # {this.getDiveNumber(dive.user_id, dive)}</h2>
         <div className="dive-container">
-          <Link to={`/edit-dive/${dive_id}`}>Edit Dive</Link>
+          <Link to={`/edit-dive/${dive_id}`}>Edit Dive</Link>{" "}
+          <Link
+            to={"/log"}
+            onClick={(e) => {
+              e.preventDefault();
+              this.handleDelete(dive_id);
+            }}
+          >
+            Delete Dive
+          </Link>
           {/* the order of these only makes sense when you turn on flexbox. Need a way to change the order of the fieldsets depending on a media query? */}
           <fieldset className="input-fields sidebar">
             <legend>People</legend>
@@ -131,7 +145,6 @@ export default class DiveDetails extends React.Component {
               </ul>
             </fieldset>
           </div>
-
           <fieldset className="input-fields sidebar">
             <legend>Statistics</legend>
             <ul className="sign-up-input">

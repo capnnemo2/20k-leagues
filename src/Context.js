@@ -19,4 +19,7 @@ export default React.createContext({
   addDive: () => {},
   updateWishlistFulfilled: () => {},
   updateAnimalTracker: () => {},
+  deleteDive: () => {},
+  deleteCert: () => {},
+  deleteSpecialty: () => {},
 });
