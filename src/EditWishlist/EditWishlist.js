@@ -12,15 +12,15 @@ export default class EditWishlist extends React.Component {
     list: [],
   };
 
-  renderList = (allAnimals) => {
-    return allAnimals.map((animal) => (
+  renderList = () => {
+    return this.state.list.map((animal) => (
       <div key={animal.id}>
         <label>
           <input
             type="checkbox"
             name={animal.animal}
             value={animal.animal}
-            // checked={this.state.list}
+            checked={animal.isChecked}
             onChange={this.handleChange}
           />
           {animal.animal}
@@ -146,7 +146,7 @@ export default class EditWishlist extends React.Component {
                   Check All
                 </label>
               </div>
-              {this.renderList(allAnimals)}
+              {this.renderList()}
             </fieldset>
           </div>
           <button type="submit">Submit</button>
