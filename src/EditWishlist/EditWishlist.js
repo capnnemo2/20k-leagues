@@ -8,43 +8,22 @@ export default class EditWishlist extends React.Component {
 
   state = {
     allChecked: false,
-    list: [
-      { id: 1, name: "Whale Shark", isChecked: false },
-      { id: 2, name: "Mola Mola", isChecked: false },
-      { id: 3, name: "Thresher Shark", isChecked: false },
-      { id: 4, name: "Hammerhead Shark", isChecked: false },
-      { id: 5, name: "Great White Shark", isChecked: false },
-      { id: 6, name: "Tiger Shark", isChecked: false },
-      { id: 7, name: "Manatee", isChecked: false },
-      { id: 8, name: "Seahorse", isChecked: false },
-      { id: 9, name: "Dragon Moray", isChecked: false },
-      { id: 10, name: "Ribbon Eel", isChecked: false },
-      { id: 11, name: "Mandarin Fish", isChecked: false },
-      { id: 12, name: "Frog Fish", isChecked: false },
-      { id: 13, name: "Mimic Octopus", isChecked: false },
-      { id: 14, name: "Pygmy Seahorse", isChecked: false },
-      { id: 15, name: "Leafy Seadragon", isChecked: false },
-      { id: 16, name: "Blue-Ringed Octopus", isChecked: false },
-      { id: 17, name: "Flamboyant Cuttlefish", isChecked: false },
-      { id: 18, name: "Harlequin Shrimp", isChecked: false },
-      { id: 19, name: "Orangutan Crab", isChecked: false },
-      { id: 20, name: "Ornate Ghost Pipefish", isChecked: false },
-      { id: 21, name: "Leaf Scorpionfish", isChecked: false },
-    ],
+    wishlist: [],
+    list: [],
   };
 
-  renderList = () => {
-    return this.state.list.map((animal) => (
+  renderList = (allAnimals) => {
+    return allAnimals.map((animal) => (
       <div key={animal.id}>
         <label>
           <input
             type="checkbox"
-            name={animal.name}
-            value={animal.name}
+            name={animal.animal}
+            value={animal.animal}
             checked={animal.isChecked}
             onChange={this.handleChange}
           />
-          {animal.name}
+          {animal.animal}
         </label>
       </div>
     ));
@@ -60,7 +39,7 @@ export default class EditWishlist extends React.Component {
         list = list.map((animal) => ({ ...animal, isChecked: checked }));
       } else {
         list = list.map((animal) =>
-          animal.name === animalName
+          animal.animal === animalName
             ? { ...animal, isChecked: checked }
             : animal
         );
@@ -70,31 +49,57 @@ export default class EditWishlist extends React.Component {
     });
   };
 
-  // Using this to pre-check boxes for the animals the user already has on their wishlist. this way they are editing their list rather than recreating it
+  // handleChange = (e) => {
+  //   let name = e.target.value;
+  //   if (this.state.wishlist.includes(name)) {
+  //     this.setState({
+  //       wishlist: this.state.wishlist.filter((animal) => animal !== name),
+  //     });
+  //   } else {
+  //     this.setState({
+  //       wishlist: [...this.state.wishlist, name],
+  //     });
+  //   }
+  // };
+
   componentDidMount() {
     if (this.context.user.wishlist) {
-      let prefillList = this.context.user.wishlist;
-      let animals = this.state.list;
-      let names = animals.map((animal) => animal.name);
-
-      for (let i = 0; i < prefillList.length; i++) {
-        for (let j = 0; j < names.length; j++) {
-          if (names[j] === prefillList[i]) {
-            // set state
-            this.setState((prevState) => {
-              let { list } = prevState;
-              list = list.map((animal) =>
-                animal.name === names[j]
-                  ? { ...animal, isChecked: true }
-                  : animal
-              );
-              return { list };
-            });
-          }
-        }
-      }
+      this.setState({
+        wishlist: this.context.user.wishlist,
+      });
+    }
+    if (this.context.allAnimals) {
+      this.setState({
+        list: this.context.allAnimals,
+      });
     }
   }
+
+  // Using this to pre-check boxes for the animals the user already has on their wishlist. this way they are editing their list rather than recreating it
+  // componentDidMount() {
+  //   if (this.context.user.wishlist) {
+  //     let prefillList = this.context.user.wishlist;
+  //     let animals = this.state.list;
+  //     let names = animals.map((animal) => animal.name);
+
+  //     for (let i = 0; i < prefillList.length; i++) {
+  //       for (let j = 0; j < names.length; j++) {
+  //         if (names[j] === prefillList[i]) {
+  //           // set state
+  //           this.setState((prevState) => {
+  //             let { list } = prevState;
+  //             list = list.map((animal) =>
+  //               animal.name === names[j]
+  //                 ? { ...animal, isChecked: true }
+  //                 : animal
+  //             );
+  //             return { list };
+  //           });
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   handleSubmit = () => {
     // grab all checked animals
@@ -113,6 +118,7 @@ export default class EditWishlist extends React.Component {
 
   render() {
     const { user } = this.context;
+    const allAnimals = this.context.allAnimals;
     return user.id ? (
       <div className="EditWishlist">
         <section>
@@ -140,7 +146,7 @@ export default class EditWishlist extends React.Component {
                   Check All
                 </label>
               </div>
-              {this.renderList()}
+              {this.renderList(allAnimals)}
             </fieldset>
           </div>
           <button type="submit">Submit</button>

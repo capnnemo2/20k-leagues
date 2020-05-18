@@ -263,91 +263,113 @@ export default {
     {
       id: 1,
       animal: "Whale Shark",
+      isChecked: false,
     },
     {
       id: 2,
       animal: "Mola Mola",
+      isChecked: false,
     },
     {
       id: 3,
       animal: "Thresher Shark",
+      isChecked: false,
     },
     {
       id: 4,
       animal: "Hammerhead Shark",
+      isChecked: false,
     },
     {
       id: 5,
       animal: "Great White Shark",
+      isChecked: false,
     },
 
     {
       id: 6,
       animal: "Tiger Shark",
+      isChecked: false,
     },
     {
       id: 7,
       animal: "Manatee",
+      isChecked: false,
     },
     {
       id: 8,
       animal: "Manta Ray",
+      isChecked: false,
     },
     {
       id: 9,
       animal: "Seahorse",
+      isChecked: false,
     },
     {
       id: 10,
       animal: "Dragon Moray",
+      isChecked: false,
     },
     {
       id: 11,
       animal: "Ribbon Eel",
+      isChecked: false,
     },
     {
       id: 12,
       animal: "Mandarin Fish",
+      isChecked: false,
     },
     {
       id: 13,
       animal: "Frog Fish",
+      isChecked: false,
     },
     {
       id: 14,
       animal: "Mimic Octopus",
+      isChecked: false,
     },
     {
       id: 15,
       animal: "Pygmy Seahorse",
+      isChecked: false,
     },
     {
       id: 16,
       animal: "Leafy Seadragon",
+      isChecked: false,
     },
     {
       id: 17,
       animal: "Blue-Ringed Octopus",
+      isChecked: false,
     },
     {
       id: 18,
       animal: "Flamboyant Cuttlefish",
+      isChecked: false,
     },
     {
       id: 19,
       animal: "Harlequin Shrimp",
+      isChecked: false,
     },
     {
       id: 20,
       animal: "Orangutan Crab",
+      isChecked: false,
     },
     {
       id: 21,
       animal: "Ornate Ghost Pipefish",
+      isChecked: false,
     },
     {
       id: 22,
       animal: "Leaf Scorpionfish",
+      isChecked: false,
     },
   ],
   animalTracker: [
