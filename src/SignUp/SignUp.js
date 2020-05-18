@@ -6,6 +6,7 @@ export default class SignUp extends React.Component {
   static contextType = Context;
 
   state = {
+    initialListSet: false,
     first_name: "",
     email: "",
     password: "",
@@ -17,29 +18,6 @@ export default class SignUp extends React.Component {
     wishlist: [],
     error: null,
     allChecked: false,
-    list: [
-      { id: 1, name: "Whale Shark", isChecked: false },
-      { id: 2, name: "Mola Mola", isChecked: false },
-      { id: 3, name: "Thresher Shark", isChecked: false },
-      { id: 4, name: "Hammerhead Shark", isChecked: false },
-      { id: 5, name: "Great White Shark", isChecked: false },
-      { id: 6, name: "Tiger Shark", isChecked: false },
-      { id: 7, name: "Manatee", isChecked: false },
-      { id: 8, name: "Seahorse", isChecked: false },
-      { id: 9, name: "Dragon Moray", isChecked: false },
-      { id: 10, name: "Ribbon Eel", isChecked: false },
-      { id: 11, name: "Mandarin Fish", isChecked: false },
-      { id: 12, name: "Frog Fish", isChecked: false },
-      { id: 13, name: "Mimic Octopus", isChecked: false },
-      { id: 14, name: "Pygmy Seahorse", isChecked: false },
-      { id: 15, name: "Leafy Seadragon", isChecked: false },
-      { id: 16, name: "Blue-Ringed Octopus", isChecked: false },
-      { id: 17, name: "Flamboyant Cuttlefish", isChecked: false },
-      { id: 18, name: "Harlequin Shrimp", isChecked: false },
-      { id: 19, name: "Orangutan Crab", isChecked: false },
-      { id: 20, name: "Ornate Ghost Pipefish", isChecked: false },
-      { id: 21, name: "Leaf Scorpionfish", isChecked: false },
-    ],
   };
 
   updateFirstName(e) {
@@ -129,49 +107,51 @@ export default class SignUp extends React.Component {
     });
   }
 
-  renderList = () => {
-    return this.state.list.map((animal) => (
+  renderList = (allAnimals) => {
+    return allAnimals.map((animal) => (
       <div key={animal.id}>
         <label>
           <input
             type="checkbox"
-            name={animal.name}
-            value={animal.name}
-            checked={animal.isChecked}
-            onChange={this.handleChange}
+            name={animal.animal}
+            value={animal.animal}
+            // checked={this.state.allChecked}
+            onChange={(e) => this.handleChange(e)}
           />
-          {animal.name}
+          {animal.animal}
         </label>
       </div>
     ));
   };
 
   handleChange = (e) => {
-    let animalName = e.target.name;
-    let checked = e.target.checked;
-    this.setState((prevState) => {
-      let { list, allChecked } = prevState;
-      if (animalName === "checkAll") {
-        allChecked = checked;
-        list = list.map((animal) => ({ ...animal, isChecked: checked }));
-      } else {
-        list = list.map((animal) =>
-          animal.name === animalName
-            ? { ...animal, isChecked: checked }
-            : animal
-        );
-        allChecked = list.every((animal) => animal.isChecked);
-      }
-      return { list, allChecked };
-    });
+    let name = e.target.value;
+    if (this.state.wishlist.includes(name)) {
+      this.setState({
+        wishlist: this.state.wishlist.filter((animal) => animal !== name),
+      });
+    } else {
+      this.setState({
+        wishlist: [...this.state.wishlist, name],
+      });
+    }
   };
 
-  // should need to use this
-  // updateWishlist(e) {
-  //   this.setState({
-  //     wishlist: [...this.state.wishlist, e.target.value],
-  //   });
-  // }
+  handleCheckAll = () => {
+    const allAnimals = this.context.allAnimals.map((animal) => animal.animal);
+    if (this.state.allChecked === false) {
+      this.setState({
+        allChecked: true,
+        wishlist: allAnimals,
+      });
+    }
+    if (this.state.allChecked === true) {
+      this.setState({
+        allChecked: false,
+        wishlist: [],
+      });
+    }
+  };
 
   createNewUserCert = (newUserCert) => {
     newUserCert.id = this.context.certs.length + 1;
@@ -179,11 +159,6 @@ export default class SignUp extends React.Component {
   };
 
   handleSubmit = () => {
-    let wishlist = this.state.list.filter(
-      (animal) => animal.isChecked === true
-    );
-    wishlist = wishlist.map((animal) => animal.name);
-
     let {
       first_name,
       email,
@@ -192,6 +167,7 @@ export default class SignUp extends React.Component {
       certLevel,
       certNum,
       certDate,
+      wishlist,
     } = this.state;
 
     let id = this.context.users.length + 1;
@@ -234,7 +210,8 @@ export default class SignUp extends React.Component {
 
   render() {
     const { error } = this.state;
-    return (
+    const allAnimals = this.context.allAnimals;
+    return allAnimals ? (
       <div className="SignUp">
         <header>
           <h2>Sign Up</h2>
@@ -464,13 +441,13 @@ export default class SignUp extends React.Component {
                   <input
                     type="checkbox"
                     name="checkAll"
-                    checked={this.state.allChecked}
-                    onChange={this.handleChange}
+                    // checked={this.state.allChecked}
+                    onChange={this.handleCheckAll}
                   />
                   Check All
                 </label>
               </div>
-              {this.renderList()}
+              {this.renderList(allAnimals)}
             </fieldset>
           </div>
           <div className="error">{error && <p>{error}</p>}</div>
@@ -478,6 +455,8 @@ export default class SignUp extends React.Component {
           <button type="button">Cancel</button>
         </form>
       </div>
+    ) : (
+      "Loading..."
     );
   }
 }

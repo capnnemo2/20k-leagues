@@ -31,7 +31,7 @@ export default class EditDive extends React.Component {
     description: "",
     animalsSpotted: [],
 
-    animalsPrevSpotted: [],
+    animalsMarkedSeen: [],
 
     rating: "",
   };
@@ -87,7 +87,7 @@ export default class EditDive extends React.Component {
       description: dive.description,
       rating: dive.rating,
       //   animalsSpotted: dive.animalsSpotted,
-      animalsPrevSpotted: dive.animalsSpotted,
+      animalsMarkedSeen: dive.animalsSpotted,
     });
   };
 
@@ -523,6 +523,10 @@ export default class EditDive extends React.Component {
 
               <fieldset className="sign-up-input">
                 <legend>Animals Spotted</legend>
+                <p>
+                  Animals that were checked before:{" "}
+                  {this.state.animalsMarkedSeen}
+                </p>
                 {justAnimals.map((animal) => (
                   <div key={animal}>
                     <label>
