@@ -29,49 +29,73 @@ export default class EditWishlist extends React.Component {
     ));
   };
 
+  // handleChange = (e) => {
+  //   let animalName = e.target.name;
+  //   let checked = e.target.checked;
+  //   this.setState((prevState) => {
+  //     let { list, allChecked } = prevState;
+  //     if (animalName === "checkAll") {
+  //       allChecked = checked;
+  //       list = list.map((animal) => ({ ...animal, isChecked: checked }));
+  //     } else {
+  //       list = list.map((animal) =>
+  //         animal.animal === animalName
+  //           ? { ...animal, isChecked: checked }
+  //           : animal
+  //       );
+  //       allChecked = list.every((animal) => animal.isChecked);
+  //     }
+  //     return { list, allChecked };
+  //   });
+  // };
+
   handleChange = (e) => {
     let animalName = e.target.name;
     let checked = e.target.checked;
-    this.setState((prevState) => {
-      let { list, allChecked } = prevState;
-      if (animalName === "checkAll") {
-        allChecked = checked;
-        list = list.map((animal) => ({ ...animal, isChecked: checked }));
-      } else {
-        list = list.map((animal) =>
-          animal.animal === animalName
-            ? { ...animal, isChecked: checked }
-            : animal
-        );
-        allChecked = list.every((animal) => animal.isChecked);
-      }
-      return { list, allChecked };
-    });
+    let { allChecked, list } = this.state;
+    if (animalName === "checkAll") {
+      allChecked = checked;
+      list = list.map((animal) => ({ ...animal, isChecked: checked }));
+      this.setState({ list, allChecked });
+    } else {
+      list = list.map((animal) =>
+        animal.animal === animalName
+          ? { ...animal, isChecked: checked }
+          : animal
+      );
+      allChecked = list.every((animal) => animal.isChecked);
+      this.setState({ list, allChecked });
+    }
   };
 
-  // handleChange = (e) => {
-  //   let name = e.target.value;
-  //   if (this.state.wishlist.includes(name)) {
-  //     this.setState({
-  //       wishlist: this.state.wishlist.filter((animal) => animal !== name),
-  //     });
-  //   } else {
-  //     this.setState({
-  //       wishlist: [...this.state.wishlist, name],
-  //     });
-  //   }
-  // };
-
   componentDidMount() {
-    if (this.context.user.wishlist) {
-      this.setState({
-        wishlist: this.context.user.wishlist,
-      });
-    }
     if (this.context.allAnimals) {
       this.setState({
         list: this.context.allAnimals,
       });
+    }
+
+    if (this.context.user.wishlist) {
+      let prefillList = this.context.user.wishlist;
+      let animals = this.state.list;
+      let names = animals.map((animal) => animal.animal);
+
+      for (let i = 0; i < prefillList.length; i++) {
+        for (let j = 0; j < names.length; j++) {
+          if (names[j] === prefillList[i]) {
+            // set state
+            this.setState((prevState) => {
+              let { list } = prevState;
+              list = list.map((animal) =>
+                animal.animal === names[j]
+                  ? { ...animal, isChecked: true }
+                  : animal
+              );
+              return { list };
+            });
+          }
+        }
+      }
     }
   }
 
@@ -107,7 +131,7 @@ export default class EditWishlist extends React.Component {
       (animal) => animal.isChecked === true
     );
     // extract only the animal names
-    wishlist = wishlist.map((animal) => animal.name);
+    wishlist = wishlist.map((animal) => animal.animal);
     this.context.updateWishlist(wishlist);
     this.props.history.push("/profile");
   };
@@ -118,7 +142,6 @@ export default class EditWishlist extends React.Component {
 
   render() {
     const { user } = this.context;
-    const allAnimals = this.context.allAnimals;
     return user.id ? (
       <div className="EditWishlist">
         <section>

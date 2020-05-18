@@ -11,7 +11,6 @@ export default class Profile extends React.Component {
     const certs = this.context.certs.filter(
       (c) => Number(c.user_id) === Number(userId)
     );
-
     return user && this.context.loggedIn === true ? (
       <div className="Profile">
         <section>
