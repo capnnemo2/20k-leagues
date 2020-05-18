@@ -173,6 +173,15 @@ export default class App extends React.Component {
     });
   };
 
+  deleteCert = (certId) => {
+    const newCerts = this.state.certs.filter(
+      (cert) => Number(cert.id) !== Number(certId)
+    );
+    this.setState({
+      certs: newCerts,
+    });
+  };
+
   // right now just loading up everything
   componentDidMount() {
     this.setUsers(dummyStore.users);
@@ -203,6 +212,7 @@ export default class App extends React.Component {
       updateWishlistFulfilled: this.updateWishlistFulfilled,
       updateAnimalTracker: this.updateAnimalTracker,
       deleteDive: this.deleteDive,
+      deleteCert: this.deleteCert,
     };
     return (
       <Context.Provider value={value}>

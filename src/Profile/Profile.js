@@ -5,6 +5,11 @@ import Context from "../Context";
 
 export default class Profile extends React.Component {
   static contextType = Context;
+
+  handleDelete = (certId) => {
+    this.context.deleteCert(certId);
+  };
+
   render() {
     const user = this.context.user;
     const userId = user.id;
@@ -22,12 +27,20 @@ export default class Profile extends React.Component {
           <Link to="/add-cert">Add cert</Link>
           <ul className="certifications">
             {certs.map((cert) => (
-              <li key={cert.certNum}>
+              <li key={cert.id}>
                 <ul>
                   <li>Agency: {cert.agency}</li>
                   <li>{cert.certLevel}</li>
                   <li>{cert.certDate}</li>
                   <li>Diver number: {cert.certNum}</li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={(e) => this.handleDelete(cert.id)}
+                    >
+                      Delete Cert
+                    </button>{" "}
+                  </li>
                 </ul>
                 <br />
               </li>
