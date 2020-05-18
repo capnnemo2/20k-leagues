@@ -8,7 +8,6 @@ export default class EditWishlist extends React.Component {
 
   state = {
     allChecked: false,
-    wishlist: [],
     list: [],
   };
 
@@ -68,12 +67,14 @@ export default class EditWishlist extends React.Component {
     }
   };
 
-  componentDidMount() {
-    if (this.context.allAnimals) {
-      this.setState({
-        list: this.context.allAnimals,
-      });
-    }
+  setListState() {
+    this.setState({
+      list: this.context.allAnimals,
+    });
+  }
+
+  async componentDidMount() {
+    await this.setListState();
 
     if (this.context.user.wishlist) {
       let prefillList = this.context.user.wishlist;
