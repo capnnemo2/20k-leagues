@@ -20,7 +20,7 @@ export default class EditWishlist extends React.Component {
             type="checkbox"
             name={animal.animal}
             value={animal.animal}
-            checked={animal.isChecked}
+            // checked={this.state.list}
             onChange={this.handleChange}
           />
           {animal.animal}
