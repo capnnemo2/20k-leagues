@@ -1,8 +1,8 @@
 import React from "react";
-import "./AddSpecialty.css";
+import "./UpdateSpecialties.css";
 import Context from "../Context";
 
-export default class AddSpecialty extends React.Component {
+export default class UpdateSpecialties extends React.Component {
   static contextType = Context;
 
   state = {

@@ -49,7 +49,7 @@ export default class Profile extends React.Component {
         </fieldset>
         <fieldset>
           <legend>Diver Specialties</legend>
-          <Link to="/add-specialty">Add specialties</Link>
+          <Link to="/add-specialty">Update Specialties</Link>
           <ul>
             {user.specialties.map((spec) => (
               <li key={spec}>{spec}</li>
@@ -59,7 +59,7 @@ export default class Profile extends React.Component {
         <fieldset>
           {/* if we get fancy, only render this next section if the diver has a pro cert */}
           <legend>Instructor Specialties</legend>
-          <Link to="/add-specialty">Add specialties</Link>
+          <Link to="/add-specialty">Update Specialties</Link>
           <ul>
             {user.instructorSpecialties.map((spec) => (
               <li key={spec}>{spec}</li>

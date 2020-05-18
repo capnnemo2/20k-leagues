@@ -21,5 +21,4 @@ export default React.createContext({
   updateAnimalTracker: () => {},
   deleteDive: () => {},
   deleteCert: () => {},
-  deleteSpecialty: () => {},
 });
