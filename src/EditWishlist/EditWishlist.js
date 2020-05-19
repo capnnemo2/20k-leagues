@@ -76,6 +76,7 @@ export default class EditWishlist extends React.Component {
   async componentDidMount() {
     await this.setListState();
 
+    // this doesn't work
     if (this.context.user.wishlist) {
       let prefillList = this.context.user.wishlist;
       let animals = this.state.list;
@@ -84,7 +85,6 @@ export default class EditWishlist extends React.Component {
       for (let i = 0; i < prefillList.length; i++) {
         for (let j = 0; j < names.length; j++) {
           if (names[j] === prefillList[i]) {
-            // set state
             this.setState((prevState) => {
               let { list } = prevState;
               list = list.map((animal) =>

@@ -1,6 +1,7 @@
 import React from "react";
-import "./UpdateSpecialties.css";
 import Context from "../Context";
+import dummyStore from "../dummyStore";
+import "./UpdateSpecialties.css";
 
 export default class UpdateSpecialties extends React.Component {
   static contextType = Context;
@@ -8,32 +9,63 @@ export default class UpdateSpecialties extends React.Component {
   state = {
     type: "",
     specialties: [
-      { id: 1, name: "Altitude Diver", isChecked: false },
-      { id: 2, name: "Boat Diver", isChecked: false },
-      { id: 3, name: "Cavern Diver", isChecked: false },
-      { id: 4, name: "Coral Reef Conservation", isChecked: false },
-      { id: 5, name: "Deep Diver", isChecked: false },
-      { id: 6, name: "Digital Underwater Photographer", isChecked: false },
-      { id: 7, name: "Diver Propulsion Vehicle", isChecked: false },
-      { id: 8, name: "Drift Diver", isChecked: false },
-      { id: 9, name: "Dry Suit Diver", isChecked: false },
-      { id: 10, name: "Emergency Oxygen Provider", isChecked: false },
-      { id: 11, name: "Enriched Air Diver", isChecked: false },
-      { id: 12, name: "Equipment Specialist", isChecked: false },
-      { id: 13, name: "Fish Identification", isChecked: false },
-      { id: 14, name: "Ice Diver", isChecked: false },
-      { id: 15, name: "Night Diver", isChecked: false },
-      { id: 16, name: "Peak Performance Buoyancy", isChecked: false },
-      { id: 17, name: "Public Safety Diver", isChecked: false },
-      { id: 18, name: "Search and Recovery Diver", isChecked: false },
-      { id: 19, name: "Self-Reliant Diver", isChecked: false },
-      { id: 20, name: "Sidemount Diver", isChecked: false },
-      { id: 21, name: "Underwater Naturalist", isChecked: false },
-      { id: 22, name: "Underwater Navigator", isChecked: false },
-      { id: 23, name: "Underwater Videographer", isChecked: false },
-      { id: 24, name: "Wreck Diver", isChecked: false },
+      // { id: 1, name: "Altitude Diver", isChecked: false },
+      // { id: 2, name: "Boat Diver", isChecked: false },
+      // { id: 3, name: "Cavern Diver", isChecked: false },
+      // { id: 4, name: "Coral Reef Conservation", isChecked: false },
+      // { id: 5, name: "Deep Diver", isChecked: false },
+      // { id: 6, name: "Digital Underwater Photographer", isChecked: false },
+      // { id: 7, name: "Diver Propulsion Vehicle", isChecked: false },
+      // { id: 8, name: "Drift Diver", isChecked: false },
+      // { id: 9, name: "Dry Suit Diver", isChecked: false },
+      // { id: 10, name: "Emergency Oxygen Provider", isChecked: false },
+      // { id: 11, name: "Enriched Air Diver", isChecked: false },
+      // { id: 12, name: "Equipment Specialist", isChecked: false },
+      // { id: 13, name: "Fish Identification", isChecked: false },
+      // { id: 14, name: "Ice Diver", isChecked: false },
+      // { id: 15, name: "Night Diver", isChecked: false },
+      // { id: 16, name: "Peak Performance Buoyancy", isChecked: false },
+      // { id: 17, name: "Public Safety Diver", isChecked: false },
+      // { id: 18, name: "Search and Recovery Diver", isChecked: false },
+      // { id: 19, name: "Self-Reliant Diver", isChecked: false },
+      // { id: 20, name: "Sidemount Diver", isChecked: false },
+      // { id: 21, name: "Underwater Naturalist", isChecked: false },
+      // { id: 22, name: "Underwater Navigator", isChecked: false },
+      // { id: 23, name: "Underwater Videographer", isChecked: false },
+      // { id: 24, name: "Wreck Diver", isChecked: false },
     ],
   };
+
+  setSpecsState() {
+    const specialties = dummyStore.specialties;
+    this.setState({
+      specialties: specialties,
+    });
+  }
+
+  async componentDidMount() {
+    await this.setSpecsState();
+
+    // this doesn't work
+    let prefillList = this.context.user.specialties;
+    console.log(prefillList);
+    let specialties = this.state.specialties.map((spec) => spec.name);
+    console.log(specialties);
+
+    for (let i = 0; i < prefillList.length; i++) {
+      for (let j = 0; j < specialties.length; j++) {
+        if (specialties[j] === prefillList[i]) {
+          this.setState((prevState) => {
+            let { specialties } = prevState;
+            specialties = specialties.map((spec) =>
+              spec.name === specialties[j] ? { ...spec, isChecked: true } : spec
+            );
+            return { specialties };
+          });
+        }
+      }
+    }
+  }
 
   renderList = () => {
     return this.state.specialties.map((spec) => (
