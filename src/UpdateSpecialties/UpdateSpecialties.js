@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Context from "../Context";
 import dummyStore from "../dummyStore";
 import "./UpdateSpecialties.css";
@@ -74,7 +75,8 @@ export default class UpdateSpecialties extends React.Component {
   };
 
   render() {
-    return (
+    const { user } = this.context;
+    return user.id ? (
       <div className="AddSpecialty">
         <form
           onSubmit={(e) => {
@@ -94,6 +96,8 @@ export default class UpdateSpecialties extends React.Component {
           </button>
         </form>
       </div>
+    ) : (
+      <Redirect to="/login" />
     );
   }
 }
