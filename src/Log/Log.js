@@ -50,10 +50,8 @@ export default class Log extends React.Component {
 
   // dive depth handlers
   findDeepestDive(arr) {
-    let diveDepths = [];
-    for (let i = 0; i < arr.length; i++) {
-      diveDepths.push(arr[i].maxDepth);
-    }
+    let diveDepths = arr.map((dive) => Number(dive.maxDepth));
+
     return (
       diveDepths.reduce(function (prevLargestNum, currLargestNum) {
         return currLargestNum > prevLargestNum
@@ -64,22 +62,16 @@ export default class Log extends React.Component {
   }
 
   findAvgDiveDepth(arr) {
-    let diveDepths = [];
-    for (let i = 0; i < arr.length; i++) {
-      diveDepths.push(arr[i].maxDepth);
-    }
-    // this does the same thing. check other for loops
-    //let diveDepths = arr.map(item=>item.maxDepth);
+    let diveDepths = arr.map((dive) => Number(dive.maxDepth));
+
     let sum = diveDepths.reduce((a, b) => a + b, 0);
     let avg = sum / arr.length;
     return avg.toFixed(1) + " ft.";
   }
 
   findShallowestDive(arr) {
-    let diveDepths = [];
-    for (let i = 0; i < arr.length; i++) {
-      diveDepths.push(arr[i].maxDepth);
-    }
+    let diveDepths = arr.map((dive) => Number(dive.maxDepth));
+
     return (
       diveDepths.reduce(function (prevSmallestNum, currSmallestNum) {
         return currSmallestNum < prevSmallestNum
@@ -91,10 +83,7 @@ export default class Log extends React.Component {
 
   // dive time handlers
   findLongestDive(arr) {
-    let diveTimes = [];
-    for (let i = 0; i < arr.length; i++) {
-      diveTimes.push(arr[i].duration);
-    }
+    let diveTimes = arr.map((dive) => Number(dive.duration));
     return (
       diveTimes.reduce(function (prevLargestNum, currLargestNum) {
         return currLargestNum > prevLargestNum
@@ -105,20 +94,15 @@ export default class Log extends React.Component {
   }
 
   findAvgDiveTime(arr) {
-    let diveTimes = [];
-    for (let i = 0; i < arr.length; i++) {
-      diveTimes.push(arr[i].duration);
-    }
+    let diveTimes = arr.map((dive) => Number(dive.duration));
+
     let sum = diveTimes.reduce((a, b) => a + b, 0);
     let avg = sum / arr.length;
-    return avg + " min.";
+    return avg.toFixed(1) + " min.";
   }
 
   findShortestDive(arr) {
-    let diveTimes = [];
-    for (let i = 0; i < arr.length; i++) {
-      diveTimes.push(arr[i].duration);
-    }
+    let diveTimes = arr.map((dive) => Number(dive.duration));
     return (
       diveTimes.reduce(function (prevSmallestNum, currSmallestNum) {
         return currSmallestNum < prevSmallestNum
@@ -129,10 +113,7 @@ export default class Log extends React.Component {
   }
 
   findTotalDiveTime(arr) {
-    let diveTimes = [];
-    for (let i = 0; i < arr.length; i++) {
-      diveTimes.push(arr[i].duration);
-    }
+    let diveTimes = arr.map((dive) => Number(dive.duration));
     const sum = diveTimes.reduce((a, b) => a + b, 0);
     return this.convertTime(sum);
   }

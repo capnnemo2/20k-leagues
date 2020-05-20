@@ -182,6 +182,15 @@ export default class App extends React.Component {
     });
   };
 
+  updateDive = (newDive, diveId) => {
+    const newDives = this.state.dives.map((dive) =>
+      Number(dive.id) === Number(diveId) ? newDive : dive
+    );
+    this.setState({
+      dives: newDives,
+    });
+  };
+
   // right now just loading up everything
   componentDidMount() {
     this.setUsers(dummyStore.users);
@@ -213,6 +222,7 @@ export default class App extends React.Component {
       updateAnimalTracker: this.updateAnimalTracker,
       deleteDive: this.deleteDive,
       deleteCert: this.deleteCert,
+      updateDive: this.updateDive,
     };
     return (
       <Context.Provider value={value}>

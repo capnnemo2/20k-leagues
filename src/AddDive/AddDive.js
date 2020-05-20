@@ -306,6 +306,7 @@ export default class AddDive extends React.Component {
                   type="number"
                   name="depth"
                   id="depth"
+                  min="0"
                   aria-label="Enter the maximum depth"
                   onChange={(e) => this.updateMaxDepth(e)}
                 />
@@ -316,6 +317,7 @@ export default class AddDive extends React.Component {
                   type="number"
                   name="dive-time"
                   id="dive-time"
+                  min="0"
                   aria-label="Enter the dive duration"
                   onChange={(e) => this.updateDuration(e)}
                 />

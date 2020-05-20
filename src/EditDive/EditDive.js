@@ -210,33 +210,31 @@ export default class EditDive extends React.Component {
     });
   }
 
-  //   handleSubmit = () => {
-  //     let newDive = this.state;
-  //     newDive.id = this.context.dives.length + 1;
-  //     newDive.user_id = this.context.user.id;
-  //     let wishlistFulfilled = newDive.animalsSpotted.filter(
-  //       (animal) => animal.isChecked === true
-  //     );
-  //     newDive.animalsSpotted = wishlistFulfilled.map((animal) => animal.name);
-  //     this.context.addDive(newDive);
-  //     this.context.updateWishlistFulfilled(newDive.animalsSpotted);
+  handleSubmit = () => {
+    let newDive = this.state;
+    newDive.id = Number(this.props.match.params.dive_id);
+    newDive.user_id = this.context.user.id;
+    let wishlistFulfilled = newDive.animalsSpotted.filter(
+      (animal) => animal.isChecked === true
+    );
+    newDive.animalsSpotted = wishlistFulfilled.map((animal) => animal.name);
+    this.context.updateDive(newDive);
+    this.context.updateWishlistFulfilled(newDive.animalsSpotted);
 
-  //     let newAnimalsTracked = newDive.animalsSpotted.map((animal, i) => {
-  //       let newAnimalTracked = {};
-  //       // create the correct id
-  //       newAnimalTracked.id = this.context.animalTracker.length + 1 + i;
-  //       newAnimalTracked.animal = animal;
-  //       newAnimalTracked.country = newDive.country;
-  //       newAnimalTracked.region = newDive.region;
+    let newAnimalsTracked = newDive.animalsSpotted.map((animal, i) => {
+      let newAnimalTracked = {};
+      newAnimalTracked.animal = animal;
+      newAnimalTracked.country = newDive.country;
+      newAnimalTracked.region = newDive.region;
 
-  //       return newAnimalTracked;
-  //     });
-  //     // .map, .filter, .forEach -> let's wait until they are done
-  //     // for() -> we're gonna keep moving
-  //     this.context.updateAnimalTracker(newAnimalsTracked);
+      return newAnimalTracked;
+    });
+    // .map, .filter, .forEach -> let's wait until they are done
+    // for() -> we're gonna keep moving
+    this.context.updateAnimalTracker(newAnimalsTracked);
 
-  //     this.props.history.push("/log");
-  //   };
+    this.props.history.push("/log");
+  };
 
   handleClickCancel = () => {
     this.props.history.goBack();
@@ -338,6 +336,7 @@ export default class EditDive extends React.Component {
                   type="number"
                   name="depth"
                   id="depth"
+                  min="0"
                   aria-label="Enter the maximum depth"
                   value={this.state.maxDepth}
                   onChange={(e) => this.updateMaxDepth(e)}
@@ -349,6 +348,7 @@ export default class EditDive extends React.Component {
                   type="number"
                   name="dive-time"
                   id="dive-time"
+                  min="0"
                   aria-label="Enter the dive duration"
                   value={this.state.duration}
                   onChange={(e) => this.updateDuration(e)}
