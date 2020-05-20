@@ -17,7 +17,6 @@ export default class Profile extends React.Component {
       (c) => Number(c.user_id) === Number(userId)
     );
     const userCerts = certs.map((cert) => cert.certLevel);
-
     return user && this.context.loggedIn === true ? (
       <div className="Profile">
         <section>
@@ -61,15 +60,13 @@ export default class Profile extends React.Component {
         <fieldset>
           {/* if we get fancy, only render this next section if the diver has a pro cert */}
           <legend>Instructor Specialties</legend>
-          {userCerts.includes(
-            "Divemaster" ||
-              "Assistant Instructor" ||
-              "Open Water Scuba Instructor" ||
-              "Master Scuba Diver Trainer" ||
-              "IDC Staff Instructor" ||
-              "Master Scuba Instructor" ||
-              "Course Director"
-          ) ? (
+          {userCerts.includes("Divemaster") ||
+          userCerts.includes("Assistant Instructor") ||
+          userCerts.includes("Open Water Scuba Instructor") ||
+          userCerts.includes("Master Scuba Diver Trainer") ||
+          userCerts.includes("IDC Staff Instructor") ||
+          userCerts.includes("Master Scuba Instructor") ||
+          userCerts.includes("Course Director") ? (
             <Link to="/update-instr-specs">Update</Link>
           ) : (
             ""
