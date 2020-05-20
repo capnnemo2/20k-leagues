@@ -17,6 +17,9 @@ export default class Profile extends React.Component {
       (c) => Number(c.user_id) === Number(userId)
     );
     const userCerts = certs.map((cert) => cert.certLevel);
+
+    console.log("user wishlist: ", user.wishlist);
+
     return user && this.context.loggedIn === true ? (
       <div className="Profile">
         <section>

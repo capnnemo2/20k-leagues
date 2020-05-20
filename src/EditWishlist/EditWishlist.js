@@ -55,28 +55,18 @@ export default class EditWishlist extends React.Component {
 
   async componentDidMount() {
     await this.setListState();
-
-    // somehow the animals that the user has seen get filtered out
     if (this.context.user.wishlist) {
-      let prefillList = this.context.user.wishlist;
-      let animals = this.state.list;
-      let names = animals.map((animal) => animal.animal);
+      const currentWishlist = this.context.user.wishlist;
 
-      for (let i = 0; i < prefillList.length; i++) {
-        for (let j = 0; j < names.length; j++) {
-          if (names[j] === prefillList[i]) {
-            this.setState((prevState) => {
-              let { list } = prevState;
-              list = list.map((animal) =>
-                animal.animal === names[j]
-                  ? { ...animal, isChecked: true }
-                  : animal
-              );
-              return { list };
-            });
-          }
-        }
-      }
+      this.setState((prevState) => {
+        let { list } = prevState;
+        list = list.map((animal) =>
+          currentWishlist.includes(animal.animal)
+            ? { ...animal, isChecked: true }
+            : animal
+        );
+        return { list };
+      });
     }
   }
 
