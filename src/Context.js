@@ -22,4 +22,5 @@ export default React.createContext({
   deleteDive: () => {},
   deleteCert: () => {},
   updateDive: () => {},
+  logOut: () => {},
 });

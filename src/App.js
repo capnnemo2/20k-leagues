@@ -85,6 +85,12 @@ export default class App extends React.Component {
     });
   };
 
+  logOut = () => {
+    this.setState({
+      loggedIn: false,
+    });
+  };
+
   createNewUser = (newUser) => {
     this.setState({
       users: [...this.state.users, newUser],
@@ -217,6 +223,7 @@ export default class App extends React.Component {
       deleteDive: this.deleteDive,
       deleteCert: this.deleteCert,
       updateDive: this.updateDive,
+      logOut: this.logOut,
     };
     return (
       <Context.Provider value={value}>

@@ -150,36 +150,6 @@ export default class SignUp extends React.Component {
       this.setState({ list, allChecked });
     }
   };
-  // handleChange = (e) => {
-  //   let name = e.target.value;
-  //   let checked = e.target.checked
-  //   let {allChecked, list} = this.state
-  //   if (this.state.list.includes(name)) {
-  //     this.setState({
-  //       list: this.state.wishlist.filter((animal) => animal !== name),
-  //     });
-  //   } else {
-  //     this.setState({
-  //       list: [...this.state.wishlist, name],
-  //     });
-  //   }
-  // };
-
-  // handleCheckAll = () => {
-  //   const allAnimals = this.context.allAnimals.map((animal) => animal.animal);
-  //   if (this.state.allChecked === false) {
-  //     this.setState({
-  //       allChecked: true,
-  //       wishlist: allAnimals,
-  //     });
-  //   }
-  //   if (this.state.allChecked === true) {
-  //     this.setState({
-  //       allChecked: false,
-  //       wishlist: [],
-  //     });
-  //   }
-  // };
 
   createNewUserCert = (newUserCert) => {
     newUserCert.id = this.context.certs.length + 1;

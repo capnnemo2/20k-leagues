@@ -13,24 +13,25 @@ export default class Login extends React.Component {
     this.props.history.goBack();
   };
 
-  handleLoginSuccess = () => {
+  handleLoginSuccess = (user) => {
     const { location, history } = this.props;
     const destination = (location.state || {}).from || "/log";
+    this.context.setUser(user);
     this.context.setLoggedIn();
     history.push(destination);
   };
 
   checkUser(email, password) {
     const users = this.context.users;
-    const userCheck = users.find((user) => user.email === email);
-    if (userCheck === undefined) {
+    const user = users.find((user) => user.email === email);
+    if (user === undefined) {
       this.setState({ error: "Email does not exist" });
       console.log("user incorrect");
     } else {
-      if (userCheck.password === password) {
-        this.context.setUser(userCheck);
-        this.context.setLoggedIn(true);
-        this.handleLoginSuccess();
+      if (user.password === password) {
+        // this.context.setUser(user);
+        // this.context.setLoggedIn(true);
+        this.handleLoginSuccess(user);
       } else {
         this.setState({ error: "Incorrect password" });
         console.log("incorrect password");
