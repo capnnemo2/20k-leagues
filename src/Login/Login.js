@@ -24,17 +24,23 @@ export default class Login extends React.Component {
   checkUser(email, password) {
     const users = this.context.users;
     const user = users.find((user) => user.email === email);
-    if (user === undefined) {
-      this.setState({ error: "Email does not exist" });
-      console.log("user incorrect");
+    const alreadyLoggedIn = this.context.user.id;
+
+    if (alreadyLoggedIn !== undefined) {
+      this.setState({ error: "Already logged in" });
     } else {
-      if (user.password === password) {
-        // this.context.setUser(user);
-        // this.context.setLoggedIn(true);
-        this.handleLoginSuccess(user);
+      if (user === undefined) {
+        this.setState({ error: "Email does not exist" });
+        console.log("user incorrect");
       } else {
-        this.setState({ error: "Incorrect password" });
-        console.log("incorrect password");
+        if (user.password === password) {
+          // this.context.setUser(user);
+          // this.context.setLoggedIn(true);
+          this.handleLoginSuccess(user);
+        } else {
+          this.setState({ error: "Incorrect password" });
+          console.log("incorrect password");
+        }
       }
     }
   }

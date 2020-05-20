@@ -7,7 +7,6 @@ export default class Nav extends React.Component {
   static contextType = Context;
 
   handleLogOut = () => {
-    console.log("log out ran");
     this.context.setUser({});
     this.context.logOut();
   };
