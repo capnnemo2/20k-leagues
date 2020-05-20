@@ -8,7 +8,7 @@ export default {
       specialties: [
         "Boat Diver",
         "Deep Diver",
-        "Digital Underwater Photography",
+        "Digital Underwater Photographer",
       ],
       instructorSpecialties: [],
       wishlist: [

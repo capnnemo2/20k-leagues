@@ -10,6 +10,7 @@ import Log from "./Log/Log";
 import Profile from "./Profile/Profile";
 import AddCert from "./AddCert/AddCert";
 import UpdateSpecialties from "./UpdateSpecialties/UpdateSpecialties";
+import UpdateInstrSpecs from "./UpdateInstrSpecs/UpdateInstrSpecs";
 import EditWishlist from "./EditWishlist/EditWishlist";
 import DiveDetails from "./DiveDetails/DiveDetails";
 import AddDive from "./AddDive/AddDive";
@@ -105,29 +106,22 @@ export default class App extends React.Component {
     });
   };
 
-  addSpecialties = (specs) => {
-    for (let i = 0; i < specs.length; i++) {
-      this.setState((prevState) => ({
-        user: {
-          ...prevState.user,
-          specialties: [...prevState.user.specialties, specs[i]],
-        },
-      }));
-    }
+  updateSpecialties = (newSpecs) => {
+    this.setState((prevState) => ({
+      user: {
+        ...prevState.user,
+        specialties: newSpecs,
+      },
+    }));
   };
 
-  addInstructorSpecialties = (specs) => {
-    for (let i = 0; i < specs.length; i++) {
-      this.setState((prevState) => ({
-        user: {
-          ...prevState.user,
-          instructorSpecialties: [
-            ...prevState.user.instructorSpecialties,
-            specs[i],
-          ],
-        },
-      }));
-    }
+  updateInstrSpecs = (newInstrSpecs) => {
+    this.setState((prevState) => ({
+      user: {
+        ...prevState.user,
+        instructorSpecialties: newInstrSpecs,
+      },
+    }));
   };
 
   addDive = (newDive) => {
@@ -215,8 +209,8 @@ export default class App extends React.Component {
       createNewUser: this.createNewUser,
       updateWishlist: this.updateWishlist,
       addCert: this.addCert,
-      addSpecialties: this.addSpecialties,
-      addInstructorSpecialties: this.addInstructorSpecialties,
+      updateSpecialties: this.updateSpecialties,
+      updateInstrSpecs: this.updateInstrSpecs,
       addDive: this.addDive,
       updateWishlistFulfilled: this.updateWishlistFulfilled,
       updateAnimalTracker: this.updateAnimalTracker,
@@ -242,6 +236,7 @@ export default class App extends React.Component {
               <Route path="/profile" component={Profile} />
               <Route path="/add-cert" component={AddCert} />
               <Route path="/update-specialties" component={UpdateSpecialties} />
+              <Route path="/update-instr-specs" component={UpdateInstrSpecs} />
               <Route path="/dive-details/:dive_id" component={DiveDetails} />
               <Route path="/add-dive" component={AddDive} />
               <Route path="/edit-dive/:dive_id" component={EditDive} />

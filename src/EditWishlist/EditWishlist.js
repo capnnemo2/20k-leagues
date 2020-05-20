@@ -76,7 +76,8 @@ export default class EditWishlist extends React.Component {
   async componentDidMount() {
     await this.setListState();
 
-    // this doesn't work
+    // does this work?
+    // somehow the animals that the user has seen get filtered out
     if (this.context.user.wishlist) {
       let prefillList = this.context.user.wishlist;
       let animals = this.state.list;

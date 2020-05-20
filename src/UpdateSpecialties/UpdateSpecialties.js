@@ -7,7 +7,7 @@ export default class UpdateSpecialties extends React.Component {
   static contextType = Context;
 
   state = {
-    type: "",
+    // type: "",
     specialties: [
       // { id: 1, name: "Altitude Diver", isChecked: false },
       // { id: 2, name: "Boat Diver", isChecked: false },
@@ -46,25 +46,20 @@ export default class UpdateSpecialties extends React.Component {
   async componentDidMount() {
     await this.setSpecsState();
 
-    // this doesn't work
     let prefillList = this.context.user.specialties;
-    console.log(prefillList);
-    let specialties = this.state.specialties.map((spec) => spec.name);
-    console.log(specialties);
+    // let specialties = this.state.specialties.map((spec) => spec.name);
 
-    for (let i = 0; i < prefillList.length; i++) {
-      for (let j = 0; j < specialties.length; j++) {
-        if (specialties[j] === prefillList[i]) {
-          this.setState((prevState) => {
-            let { specialties } = prevState;
-            specialties = specialties.map((spec) =>
-              spec.name === specialties[j] ? { ...spec, isChecked: true } : spec
-            );
-            return { specialties };
-          });
-        }
-      }
-    }
+    // const sharedSpecs = specialties.filter((spec) =>
+    //   prefillList.includes(spec)
+    // );
+
+    this.setState((prevState) => {
+      let { specialties } = prevState;
+      specialties = specialties.map((spec) =>
+        prefillList.includes(spec.name) ? { ...spec, isChecked: true } : spec
+      );
+      return { specialties };
+    });
   }
 
   renderList = () => {
@@ -96,11 +91,11 @@ export default class UpdateSpecialties extends React.Component {
     });
   };
 
-  updateType = (e) => {
-    this.setState({
-      type: e.target.value,
-    });
-  };
+  // updateType = (e) => {
+  //   this.setState({
+  //     type: e.target.value,
+  //   });
+  // };
 
   handleSubmit = () => {
     // get all specialties checked
@@ -109,29 +104,11 @@ export default class UpdateSpecialties extends React.Component {
     );
     // select only the name values of specialties
     specialties = specialties.map((spec) => spec.name);
-    // grab any specialties user already has
-    const userSpecs = this.context.user.specialties;
-    const userInstructorSpecs = this.context.user.instructorSpecialties;
     // make sure submitting diver or instructor specs
-    if (this.state.type === "diver") {
-      // filter out any new specialties checked that the user already has
-      for (let i = 0; i < userSpecs.length; i++) {
-        const specList = specialties.filter((spec) => spec !== userSpecs[i]);
-        specialties = specList;
-      }
-      // add specialties
-      this.context.addSpecialties(specialties);
-    } else if (this.state.type === "instructor") {
-      // filter out any new specialties checked that the user already has
-      for (let i = 0; i < userInstructorSpecs.length; i++) {
-        const specList = specialties.filter(
-          (spec) => spec !== userInstructorSpecs[i]
-        );
-        specialties = specList;
-      }
-      // add specialties
-      this.context.addInstructorSpecialties(specialties);
-    }
+    // if (this.state.type === "diver") {
+    //   this.context.updateSpecialties(specialties);
+    // }
+    this.context.updateSpecialties(specialties);
     this.props.history.push("/profile");
   };
 
@@ -149,7 +126,7 @@ export default class UpdateSpecialties extends React.Component {
           }}
         >
           <div className="input-fields">
-            <fieldset className="sign-up-input">
+            {/* <fieldset className="sign-up-input">
               <legend>Specialty Type</legend>
               <label>
                 <input
@@ -162,7 +139,7 @@ export default class UpdateSpecialties extends React.Component {
                 Diver
               </label>
               <br />
-              {/* maybe disable instructor if the diver hasn't entered a pro cert? */}
+              maybe disable instructor if the diver hasn't entered a pro cert?
               <label>
                 <input
                   type="radio"
@@ -173,7 +150,7 @@ export default class UpdateSpecialties extends React.Component {
                 />
                 Instructor
               </label>
-            </fieldset>
+            </fieldset> */}
             <fieldset className="sign-up-input">
               <legend>Specialties</legend>
               {this.renderList()}
