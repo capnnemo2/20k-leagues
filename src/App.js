@@ -178,7 +178,7 @@ export default class App extends React.Component {
 
   updateDive = (newDive, diveId) => {
     const newDives = this.state.dives.map((dive) =>
-      Number(dive.id) === Number(diveId) ? newDive : dive
+      dive.id === diveId ? newDive : dive
     );
     this.setState({
       dives: newDives,

@@ -31,25 +31,22 @@ export default class EditDive extends React.Component {
     description: "",
     animalsSpotted: [],
 
-    animalsMarkedSeen: [],
-
     rating: "",
   };
 
-  componentDidMount() {
-    if (this.context.allAnimals) {
-      const animalList = this.context.allAnimals;
-      let animals = [];
-      for (let i = 0; i < animalList.length; i++) {
-        let newAnimal = {
-          name: animalList[i].animal,
-          isChecked: false,
-        };
-        animals.push(newAnimal);
-      }
-      this.setState({
-        animalsSpotted: animals,
-      });
+  setListState() {
+    this.setState({
+      animalsSpotted: this.context.allAnimals,
+    });
+  }
+
+  async componentDidMount() {
+    await this.setListState();
+
+    const diveId = Number(this.props.match.params.dive_id);
+    const dive = this.context.dives.find((dive) => dive.id === diveId);
+    if (dive) {
+      this.setAnimalsSeen(dive.animalsSpotted);
     }
   }
 
@@ -61,6 +58,18 @@ export default class EditDive extends React.Component {
       this.setFieldsInState(dive);
     }
   }
+
+  setAnimalsSeen = (animalsSeen) => {
+    this.setState((prevState) => {
+      let { animalsSpotted } = prevState;
+      animalsSpotted = animalsSpotted.map((animal) =>
+        animalsSeen.includes(animal.animal)
+          ? { ...animal, isChecked: true }
+          : animal
+      );
+      return { animalsSpotted };
+    });
+  };
 
   setFieldsInState = (dive) => {
     let diveDate = dive.date.split("");
@@ -86,8 +95,6 @@ export default class EditDive extends React.Component {
       nightDive: dive.nightDive,
       description: dive.description,
       rating: dive.rating,
-      //   animalsSpotted: dive.animalsSpotted,
-      animalsMarkedSeen: dive.animalsSpotted,
     });
   };
 
@@ -198,7 +205,9 @@ export default class EditDive extends React.Component {
     this.setState((prevState) => {
       let { animalsSpotted } = prevState;
       animalsSpotted = animalsSpotted.map((animal) =>
-        animal.name === animalName ? { ...animal, isChecked: checked } : animal
+        animal.animal === animalName
+          ? { ...animal, isChecked: checked }
+          : animal
       );
       return { animalsSpotted };
     });
@@ -217,8 +226,8 @@ export default class EditDive extends React.Component {
     let wishlistFulfilled = newDive.animalsSpotted.filter(
       (animal) => animal.isChecked === true
     );
-    newDive.animalsSpotted = wishlistFulfilled.map((animal) => animal.name);
-    this.context.updateDive(newDive);
+    newDive.animalsSpotted = wishlistFulfilled.map((animal) => animal.animal);
+    this.context.updateDive(newDive, newDive.id);
     this.context.updateWishlistFulfilled(newDive.animalsSpotted);
 
     let newAnimalsTracked = newDive.animalsSpotted.map((animal, i) => {
@@ -229,8 +238,6 @@ export default class EditDive extends React.Component {
 
       return newAnimalTracked;
     });
-    // .map, .filter, .forEach -> let's wait until they are done
-    // for() -> we're gonna keep moving
     this.context.updateAnimalTracker(newAnimalsTracked);
 
     this.props.history.push("/log");
@@ -249,8 +256,8 @@ export default class EditDive extends React.Component {
             (country) => country.country_name === this.state.country
           ).regions
         : [];
-    const animalList = this.context.allAnimals;
-    const justAnimals = animalList.map((animal) => animal.animal);
+
+    const animalList = this.state.animalsSpotted;
 
     return user.id ? (
       <div className="EditDive">
@@ -523,20 +530,17 @@ export default class EditDive extends React.Component {
 
               <fieldset className="sign-up-input">
                 <legend>Animals Spotted</legend>
-                <p>
-                  Animals that were checked before:{" "}
-                  {this.state.animalsMarkedSeen}
-                </p>
-                {justAnimals.map((animal) => (
-                  <div key={animal}>
+                {animalList.map((animal) => (
+                  <div key={animal.id}>
                     <label>
                       <input
                         type="checkbox"
-                        name={animal}
-                        value={animal}
+                        name={animal.animal}
+                        value={animal.animal}
+                        checked={animal.isChecked}
                         onChange={this.handleAnimalsChange}
                       />
-                      {animal}
+                      {animal.animal}
                     </label>
                   </div>
                 ))}
