@@ -144,6 +144,10 @@ export default class Log extends React.Component {
     return user.wishlist.map((animal) => <li key={animal}>{animal}</li>);
   };
 
+  // animals user has seen
+  // this.context.allAnimals.filter(a=>user.wishlist.includes(a.id)).map((a,i)=><li class={user.wishlistFulfilled.includes(a.id) ? 'fulfilled' : ''} key={i}>{a}</li>)
+  // .fulfilled { text-decoration: strikethrough }
+
   // filter result handlers
   findAnimalDives(arr) {
     let animalDives = [];

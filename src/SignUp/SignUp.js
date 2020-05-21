@@ -20,14 +20,6 @@ export default class SignUp extends React.Component {
     error: null,
   };
 
-  async componentDidMount() {
-    await this.context.allAnimals;
-    let animals = this.context.allAnimals;
-    this.setState({
-      list: animals,
-    });
-  }
-
   updateFirstName(e) {
     this.setState({
       first_name: e.target.value,
@@ -116,15 +108,16 @@ export default class SignUp extends React.Component {
   }
 
   renderList = () => {
-    return this.state.list.map((animal) => (
+    return this.context.allAnimals.map((animal) => (
       <div key={animal.id}>
         <label>
           <input
             type="checkbox"
             name={animal.animal}
             value={animal.animal}
-            checked={animal.isChecked}
+            checked={this.state.list.includes(animal.id)}
             onChange={this.handleChange}
+            id={animal.id}
           />
           {animal.animal}
         </label>
@@ -133,21 +126,20 @@ export default class SignUp extends React.Component {
   };
 
   handleChange = (e) => {
-    let animalName = e.target.name;
-    let checked = e.target.checked;
-    let { allChecked, list } = this.state;
-    if (animalName === "checkAll") {
-      allChecked = checked;
-      list = list.map((animal) => ({ ...animal, isChecked: checked }));
-      this.setState({ list, allChecked });
+    if (e.target.getAttribute("name") === "checkAll") {
+      this.setState({
+        list: e.target.checked ? this.context.allAnimals.map((a) => a.id) : [],
+      });
+    } else if (e.target.checked) {
+      this.setState({
+        list: [...this.state.list, parseInt(e.target.getAttribute("id"))],
+      });
     } else {
-      list = list.map((animal) =>
-        animal.animal === animalName
-          ? { ...animal, isChecked: checked }
-          : animal
-      );
-      allChecked = list.every((animal) => animal.isChecked);
-      this.setState({ list, allChecked });
+      this.setState({
+        list: this.state.list.filter(
+          (a) => a !== parseInt(e.target.getAttribute("id"))
+        ),
+      });
     }
   };
 
@@ -445,7 +437,9 @@ export default class SignUp extends React.Component {
                   <input
                     type="checkbox"
                     name="checkAll"
-                    checked={this.state.allChecked}
+                    checked={
+                      this.state.list.length === this.context.allAnimals.length
+                    }
                     onChange={this.handleChange}
                   />
                   Check All

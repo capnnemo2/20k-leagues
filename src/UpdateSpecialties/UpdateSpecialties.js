@@ -11,23 +11,28 @@ export default class UpdateSpecialties extends React.Component {
     specialties: [],
   };
 
-  setSpecsState() {
+  setSpecsState(cb) {
     const specialties = dummyStore.specialties;
-    this.setState({
-      specialties: specialties,
-    });
+    this.setState(
+      {
+        specialties: specialties,
+      },
+      cb
+    );
   }
 
-  async componentDidMount() {
-    await this.setSpecsState();
-
-    let prefillList = this.context.user.specialties;
-    this.setState((prevState) => {
-      let { specialties } = prevState;
-      specialties = specialties.map((spec) =>
-        prefillList.includes(spec.name) ? { ...spec, isChecked: true } : spec
-      );
-      return { specialties };
+  componentDidMount() {
+    this.setSpecsState(() => {
+      let prefillList = this.context.user.specialties
+        ? this.context.user.specialties
+        : [];
+      this.setState((prevState) => {
+        let { specialties } = prevState;
+        specialties = specialties.map((spec) =>
+          prefillList.includes(spec.name) ? { ...spec, isChecked: true } : spec
+        );
+        return { specialties };
+      });
     });
   }
 
