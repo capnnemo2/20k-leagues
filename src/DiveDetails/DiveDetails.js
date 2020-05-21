@@ -104,8 +104,14 @@ export default class DiveDetails extends React.Component {
           <Link
             to={"/log"}
             onClick={(e) => {
-              e.preventDefault();
-              this.handleDelete(dive_id);
+              if (
+                window.confirm("Are you sure you want to delete this dive?")
+              ) {
+                e.preventDefault();
+                this.handleDelete(dive_id);
+              } else {
+                alert(`Whew, that was close!`);
+              }
             }}
           >
             Delete Dive
