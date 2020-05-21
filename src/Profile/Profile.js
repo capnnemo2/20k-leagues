@@ -60,13 +60,9 @@ export default class Profile extends React.Component {
               .map((spec, i) => (
                 <li key={i}>{spec.name}</li>
               ))}
-            {/* {user.specialties.map((spec) => (
-              <li key={spec}>{spec}</li>
-            ))} */}
           </ul>
         </fieldset>
         <fieldset>
-          {/* if we get fancy, only render this next section if the diver has a pro cert */}
           <legend>Instructor Specialties</legend>
           {userCerts.includes("Divemaster") ||
           userCerts.includes("Assistant Instructor") ||
@@ -79,11 +75,12 @@ export default class Profile extends React.Component {
           ) : (
             ""
           )}
-
           <ul>
-            {user.instructorSpecialties.map((spec) => (
-              <li key={spec}>{spec}</li>
-            ))}
+            {this.context.specialties
+              .filter((spec) => user.instructorSpecialties.includes(spec.id))
+              .map((spec, i) => (
+                <li key={i}>{spec.name}</li>
+              ))}
           </ul>
         </fieldset>
         <fieldset>
@@ -94,9 +91,6 @@ export default class Profile extends React.Component {
               .map((a, i) => (
                 <li key={i}>{a.animal}</li>
               ))}
-            {/* {user.wishlist.map((animal) => (
-              <li key={animal}>{animal}</li>
-            ))} */}
           </ul>
           <Link to="/edit-wishlist">Edit Wishlist</Link>
         </fieldset>

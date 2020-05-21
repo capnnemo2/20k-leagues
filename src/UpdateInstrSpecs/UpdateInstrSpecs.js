@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import Context from "../Context";
-import dummyStore from "../dummyStore";
 import "./UpdateInstrSpecs.css";
 
 export default class UpdateInstrSpecs extends React.Component {
@@ -11,36 +10,22 @@ export default class UpdateInstrSpecs extends React.Component {
     instructorSpecialties: [],
   };
 
-  setSpecsState() {
-    const specialties = dummyStore.specialties;
+  componentDidMount() {
     this.setState({
-      instructorSpecialties: specialties,
-    });
-  }
-
-  async componentDidMount() {
-    await this.setSpecsState();
-
-    let prefillList = this.context.user.instructorSpecialties;
-
-    this.setState((prevState) => {
-      let { instructorSpecialties } = prevState;
-      instructorSpecialties = instructorSpecialties.map((spec) =>
-        prefillList.includes(spec.name) ? { ...spec, isChecked: true } : spec
-      );
-      return { instructorSpecialties };
+      instructorSpecialties: this.context.user.instructorSpecialties,
     });
   }
 
   renderList = () => {
-    return this.state.instructorSpecialties.map((spec) => (
+    return this.context.specialties.map((spec) => (
       <div key={spec.id}>
         <label>
           <input
             type="checkbox"
             name={spec.name}
+            id={spec.id}
             value={spec.name}
-            checked={spec.isChecked}
+            checked={this.state.instructorSpecialties.includes(spec.id)}
             onChange={this.handleChange}
           />
           {spec.name}
@@ -50,25 +35,24 @@ export default class UpdateInstrSpecs extends React.Component {
   };
 
   handleChange = (e) => {
-    let specName = e.target.name;
-    let checked = e.target.checked;
-    this.setState((prevState) => {
-      let { instructorSpecialties } = prevState;
-      instructorSpecialties = instructorSpecialties.map((spec) =>
-        spec.name === specName ? { ...spec, isChecked: checked } : spec
-      );
-      return { instructorSpecialties };
-    });
+    if (e.target.checked) {
+      this.setState({
+        instructorSpecialties: [
+          ...this.state.instructorSpecialties,
+          parseInt(e.target.getAttribute("id")),
+        ],
+      });
+    } else {
+      this.setState({
+        instructorSpecialties: this.state.instructorSpecialties.filter(
+          (spec) => spec !== parseInt(e.target.getAttribute("id"))
+        ),
+      });
+    }
   };
 
   handleSubmit = () => {
-    // get all specialties checked
-    let instructorSpecialties = this.state.instructorSpecialties.filter(
-      (spec) => spec.isChecked === true
-    );
-    // select only the name values of specialties
-    instructorSpecialties = instructorSpecialties.map((spec) => spec.name);
-    this.context.updateInstrSpecs(instructorSpecialties);
+    this.context.updateInstrSpecs(this.state.instructorSpecialties);
     this.props.history.push("/profile");
   };
 
