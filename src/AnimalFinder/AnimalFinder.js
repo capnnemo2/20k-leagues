@@ -110,6 +110,7 @@ export default class AnimalFinder extends React.Component {
         <h2>Find that beast</h2>
         <section>
           <div>
+            <p>Here is an explanation of what this is</p>
             {/* <label>
               Search by:
               <select onChange={(e) => this.updateSearchBy(e.target.value)}>

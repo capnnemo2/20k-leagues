@@ -239,6 +239,14 @@ export default {
         "Apo Reef",
       ],
     },
+    {
+      country_name: "Honduras",
+      regions: ["Utila", "Roatan"],
+    },
+    {
+      country_name: "Jamaica",
+      regions: ["North", "South", "West"],
+    },
   ],
   animals: [
     {

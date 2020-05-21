@@ -432,10 +432,11 @@ export default class SignUp extends React.Component {
             <fieldset className="sign-up-input">
               <p>
                 Your dive log will allow you to keep track of some of the
-                amazing sea creatures you encounter. We've selected some of the
-                common 'wishlist' animals that people often want to see. Choose
-                the ones that interest you!
+                amazing sea creatures you encounter. We've collected a list of
+                some of the common 'wishlist' animals that people often want to
+                see. Choose the ones that interest you!
               </p>
+              {/* it would be awesome if there were images for each of these creatures so users would know what it is they are saying they want to see */}
               {/* need a better explanation of what this is for */}
               <legend>Select Wishlist Animals</legend>
               <div>

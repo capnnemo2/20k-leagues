@@ -584,7 +584,7 @@ export default class EditDive extends React.Component {
               </label>
             </fieldset>
           </div>
-          <button type="submit">Log dive</button>
+          <button type="submit">Update</button>
           <button type="button" onClick={this.handleClickCancel}>
             Cancel
           </button>
