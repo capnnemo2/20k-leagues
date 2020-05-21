@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import Context from "../Context";
-import dummyStore from "../dummyStore";
 import "./UpdateSpecialties.css";
 
 export default class UpdateSpecialties extends React.Component {
@@ -11,40 +10,22 @@ export default class UpdateSpecialties extends React.Component {
     specialties: [],
   };
 
-  setSpecsState(cb) {
-    const specialties = dummyStore.specialties;
-    this.setState(
-      {
-        specialties: specialties,
-      },
-      cb
-    );
-  }
-
   componentDidMount() {
-    this.setSpecsState(() => {
-      let prefillList = this.context.user.specialties
-        ? this.context.user.specialties
-        : [];
-      this.setState((prevState) => {
-        let { specialties } = prevState;
-        specialties = specialties.map((spec) =>
-          prefillList.includes(spec.name) ? { ...spec, isChecked: true } : spec
-        );
-        return { specialties };
-      });
+    this.setState({
+      specialties: this.context.user.specialties,
     });
   }
 
   renderList = () => {
-    return this.state.specialties.map((spec) => (
+    return this.context.specialties.map((spec) => (
       <div key={spec.id}>
         <label>
           <input
             type="checkbox"
             name={spec.name}
+            id={spec.id}
             value={spec.name}
-            checked={spec.isChecked}
+            checked={this.state.specialties.includes(spec.id)}
             onChange={this.handleChange}
           />
           {spec.name}
@@ -54,24 +35,24 @@ export default class UpdateSpecialties extends React.Component {
   };
 
   handleChange = (e) => {
-    let specName = e.target.name;
-    let checked = e.target.checked;
-    this.setState((prevState) => {
-      let { specialties } = prevState;
-      specialties = specialties.map((spec) =>
-        spec.name === specName ? { ...spec, isChecked: checked } : spec
-      );
-      return { specialties };
-    });
+    if (e.target.checked) {
+      this.setState({
+        specialties: [
+          ...this.state.specialties,
+          parseInt(e.target.getAttribute("id")),
+        ],
+      });
+    } else {
+      this.setState({
+        specialties: this.state.specialties.filter(
+          (spec) => spec !== parseInt(e.target.getAttribute("id"))
+        ),
+      });
+    }
   };
+
   handleSubmit = () => {
-    // get all specialties checked
-    let specialties = this.state.specialties.filter(
-      (spec) => spec.isChecked === true
-    );
-    // select only the name values of specialties
-    specialties = specialties.map((spec) => spec.name);
-    this.context.updateSpecialties(specialties);
+    this.context.updateSpecialties(this.state.specialties);
     this.props.history.push("/profile");
   };
 

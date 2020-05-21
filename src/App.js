@@ -35,6 +35,7 @@ export default class App extends React.Component {
     loggedIn: false,
     allAnimals: [],
     animalTracker: [],
+    specialties: [],
     error: null,
   };
 
@@ -68,6 +69,13 @@ export default class App extends React.Component {
   setAllAnimals = (allAnimals) => {
     this.setState({
       allAnimals,
+      error: null,
+    });
+  };
+
+  setSpecialties = (specialties) => {
+    this.setState({
+      specialties,
       error: null,
     });
   };
@@ -198,6 +206,7 @@ export default class App extends React.Component {
     this.setCerts(dummyStore.certs);
     this.setAnimalTracker(dummyStore.animalTracker);
     this.setAllAnimals(dummyStore.animals);
+    this.setSpecialties(dummyStore.specialties);
     // this.setUser(dummyStore.users[0]);
   }
 
@@ -211,6 +220,7 @@ export default class App extends React.Component {
       loggedIn: this.state.loggedIn,
       allAnimals: this.state.allAnimals,
       animalTracker: this.state.animalTracker,
+      specialties: this.state.specialties,
       setLoggedIn: this.setLoggedIn,
       createNewUser: this.createNewUser,
       updateWishlist: this.updateWishlist,

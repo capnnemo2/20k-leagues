@@ -55,9 +55,14 @@ export default class Profile extends React.Component {
           <legend>Diver Specialties</legend>
           <Link to="/update-specialties">Update</Link>
           <ul>
-            {user.specialties.map((spec) => (
+            {this.context.specialties
+              .filter((spec) => user.specialties.includes(spec.id))
+              .map((spec, i) => (
+                <li key={i}>{spec.name}</li>
+              ))}
+            {/* {user.specialties.map((spec) => (
               <li key={spec}>{spec}</li>
-            ))}
+            ))} */}
           </ul>
         </fieldset>
         <fieldset>

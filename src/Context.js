@@ -9,6 +9,7 @@ export default React.createContext({
   loggedIn: null,
   allAnimals: [],
   animalTracker: [],
+  specialties: [],
   createNewUser: () => {},
   setLoggedIn: () => {},
   updateWishlist: () => {},
