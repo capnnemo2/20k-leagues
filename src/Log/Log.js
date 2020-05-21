@@ -132,16 +132,21 @@ export default class Log extends React.Component {
   // wishlist handlers
   // this currently renders all animals seen, even they aren't on the user's personal wishlist. is this cool or should we only display the animals they've seen that they put on their wishlist?
   renderAnimalsSeen = (user) => {
-    return user.wishlistFulfilled.map((animal) => (
-      <li key={animal}>{animal}</li>
-    ));
+    return this.context.allAnimals
+      .filter((animal) => user.wishlistFulfilled.includes(animal.id))
+      .map((animal, i) => <li key={i}>{animal.animal}</li>);
   };
 
   renderAnimalsToSee = (user) => {
-    user.wishlist = user.wishlist.filter(
-      (animal) => !user.wishlistFulfilled.includes(animal)
-    );
-    return user.wishlist.map((animal) => <li key={animal}>{animal}</li>);
+    return this.context.allAnimals
+      .filter((animal) => user.wishlist.includes(animal.id))
+      .filter((animal) => !user.wishlistFulfilled.includes(animal.id))
+      .map((animal, i) => <li key={i}>{animal.animal}</li>);
+
+    // user.wishlist = user.wishlist.filter(
+    //   (animal) => !user.wishlistFulfilled.includes(animal)
+    // );
+    // return user.wishlist.map((animal) => <li key={animal}>{animal}</li>);
   };
 
   renderWishlist = (user) => {
