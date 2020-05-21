@@ -167,7 +167,9 @@ export default class AddDive extends React.Component {
       let newAnimalTracked = {};
       // create the correct id
       newAnimalTracked.id = this.context.animalTracker.length + 1 + i;
-      newAnimalTracked.animal = animal;
+      newAnimalTracked.animal = this.context.allAnimals.find(
+        (a) => a.id === animal
+      ).animal;
       newAnimalTracked.country = newDive.country;
       newAnimalTracked.region = newDive.region;
 

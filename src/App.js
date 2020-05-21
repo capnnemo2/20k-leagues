@@ -145,25 +145,19 @@ export default class App extends React.Component {
   };
 
   updateWishlistFulfilled = (animalsSpotted) => {
-    let animalsNewlySeen = animalsSpotted;
-    const alreadySeen = this.state.user.wishlistFulfilled;
-    for (let i = 0; i < alreadySeen.length; i++) {
-      const newlySeen = animalsNewlySeen.filter(
-        (animal) => animal !== alreadySeen[i]
-      );
-      animalsNewlySeen = newlySeen;
-    }
-    for (let i = 0; i < animalsNewlySeen.length; i++) {
-      this.setState((prevState) => ({
-        user: {
-          ...prevState.user,
-          wishlistFulfilled: [
-            ...prevState.user.wishlistFulfilled,
-            animalsNewlySeen[i],
-          ],
-        },
-      }));
-    }
+    let newAnimalsSpotted = animalsSpotted.filter(
+      (a) => !this.state.user.wishlistFulfilled.includes(a)
+    );
+
+    this.setState((prevState) => ({
+      user: {
+        ...prevState.user,
+        wishlistFulfilled: [].concat(
+          prevState.user.wishlistFulfilled,
+          newAnimalsSpotted
+        ),
+      },
+    }));
   };
 
   updateAnimalTracker = (newAnimals) => {
