@@ -32,23 +32,6 @@ export default class AddDive extends React.Component {
     rating: "",
   };
 
-  // componentDidMount() {
-  //   if (this.context.allAnimals) {
-  //     const animalList = this.context.allAnimals;
-  //     let animals = [];
-  //     for (let i = 0; i < animalList.length; i++) {
-  //       let newAnimal = {
-  //         name: animalList[i].animal,
-  //         isChecked: false,
-  //       };
-  //       animals.push(newAnimal);
-  //     }
-  //     this.setState({
-  //       animalsSpotted: animals,
-  //     });
-  //   }
-  // }
-
   updateDate(e) {
     this.setState({
       date: e.target.value,
@@ -164,17 +147,6 @@ export default class AddDive extends React.Component {
         ),
       });
     }
-
-    // let animalName = e.target.name;
-    // let checked = e.target.checked;
-
-    // this.setState((prevState) => {
-    //   let { animalsSpotted } = prevState;
-    //   animalsSpotted = animalsSpotted.map((animal) =>
-    //     animal.name === animalName ? { ...animal, isChecked: checked } : animal
-    //   );
-    //   return { animalsSpotted };
-    // });
   };
 
   updateRating(e) {
@@ -187,8 +159,6 @@ export default class AddDive extends React.Component {
     let newDive = this.state;
     newDive.id = this.context.dives.length + 1;
     newDive.user_id = this.context.user.id;
-
-    console.log(newDive);
 
     this.context.addDive(newDive);
     this.context.updateWishlistFulfilled(newDive.animalsSpotted);
@@ -203,8 +173,6 @@ export default class AddDive extends React.Component {
 
       return newAnimalTracked;
     });
-    // .map, .filter, .forEach -> let's wait until they are done
-    // for() -> we're gonna keep moving
     this.context.updateAnimalTracker(newAnimalsTracked);
 
     this.props.history.push("/log");

@@ -114,10 +114,10 @@ export default class SignUp extends React.Component {
           <input
             type="checkbox"
             name={animal.animal}
+            id={animal.id}
             value={animal.animal}
             checked={this.state.wishlist.includes(animal.id)}
             onChange={this.handleChange}
-            id={animal.id}
           />
           {animal.animal}
         </label>

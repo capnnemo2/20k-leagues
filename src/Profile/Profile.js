@@ -84,9 +84,14 @@ export default class Profile extends React.Component {
         <fieldset>
           <legend>Animal Wishlist</legend>
           <ul>
-            {user.wishlist.map((animal) => (
+            {this.context.allAnimals
+              .filter((a) => user.wishlist.includes(a.id))
+              .map((a, i) => (
+                <li key={i}>{a.animal}</li>
+              ))}
+            {/* {user.wishlist.map((animal) => (
               <li key={animal}>{animal}</li>
-            ))}
+            ))} */}
           </ul>
           <Link to="/edit-wishlist">Edit Wishlist</Link>
         </fieldset>

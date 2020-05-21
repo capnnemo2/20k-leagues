@@ -34,23 +34,8 @@ export default class EditDive extends React.Component {
     rating: "",
   };
 
-  setListState() {
-    this.setState({
-      animalsSpotted: this.context.allAnimals,
-    });
-  }
-
-  async componentDidMount() {
-    await this.setListState();
-
-    const diveId = Number(this.props.match.params.dive_id);
-    const dive = this.context.dives.find((dive) => dive.id === diveId);
-    if (dive) {
-      this.setAnimalsSeen(dive.animalsSpotted);
-    }
-  }
-
-  componentDidUpdate() {
+  componentDidMount() {
+    console.log("CDU ran");
     const diveId = Number(this.props.match.params.dive_id);
     const dive = this.context.dives.find((dive) => dive.id === diveId);
 
@@ -58,18 +43,6 @@ export default class EditDive extends React.Component {
       this.setFieldsInState(dive);
     }
   }
-
-  setAnimalsSeen = (animalsSeen) => {
-    this.setState((prevState) => {
-      let { animalsSpotted } = prevState;
-      animalsSpotted = animalsSpotted.map((animal) =>
-        animalsSeen.includes(animal.animal)
-          ? { ...animal, isChecked: true }
-          : animal
-      );
-      return { animalsSpotted };
-    });
-  };
 
   setFieldsInState = (dive) => {
     let diveDate = dive.date.split("");
@@ -94,6 +67,7 @@ export default class EditDive extends React.Component {
       driftDive: dive.driftDive,
       nightDive: dive.nightDive,
       description: dive.description,
+      animalsSpotted: dive.animalsSpotted,
       rating: dive.rating,
     });
   };
@@ -198,19 +172,21 @@ export default class EditDive extends React.Component {
     });
   }
 
-  handleAnimalsChange = (e) => {
-    let animalName = e.target.name;
-    let checked = e.target.checked;
-
-    this.setState((prevState) => {
-      let { animalsSpotted } = prevState;
-      animalsSpotted = animalsSpotted.map((animal) =>
-        animal.animal === animalName
-          ? { ...animal, isChecked: checked }
-          : animal
-      );
-      return { animalsSpotted };
-    });
+  handleAnimalChange = (e) => {
+    if (e.target.checked) {
+      this.setState({
+        animalsSpotted: [
+          ...this.state.animalsSpotted,
+          parseInt(e.target.getAttribute("id")),
+        ],
+      });
+    } else {
+      this.setState({
+        animalsSpotted: this.state.animalsSpotted.filter(
+          (a) => a !== parseInt(e.target.getAttribute("id"))
+        ),
+      });
+    }
   };
 
   updateRating(e) {
@@ -223,10 +199,7 @@ export default class EditDive extends React.Component {
     let newDive = this.state;
     newDive.id = Number(this.props.match.params.dive_id);
     newDive.user_id = this.context.user.id;
-    let wishlistFulfilled = newDive.animalsSpotted.filter(
-      (animal) => animal.isChecked === true
-    );
-    newDive.animalsSpotted = wishlistFulfilled.map((animal) => animal.animal);
+
     this.context.updateDive(newDive, newDive.id);
     this.context.updateWishlistFulfilled(newDive.animalsSpotted);
 
@@ -257,7 +230,7 @@ export default class EditDive extends React.Component {
           ).regions
         : [];
 
-    const animalList = this.state.animalsSpotted;
+    const animalList = this.context.allAnimals;
 
     return user.id ? (
       <div className="EditDive">
@@ -536,9 +509,10 @@ export default class EditDive extends React.Component {
                       <input
                         type="checkbox"
                         name={animal.animal}
+                        id={animal.id}
                         value={animal.animal}
-                        checked={animal.isChecked}
-                        onChange={this.handleAnimalsChange}
+                        checked={this.state.animalsSpotted.includes(animal.id)}
+                        onChange={this.handleAnimalChange}
                       />
                       {animal.animal}
                     </label>
