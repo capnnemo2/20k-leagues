@@ -11,23 +11,8 @@ export default {
         "Digital Underwater Photographer",
       ],
       instructorSpecialties: [],
-      wishlist: [
-        "Whale Shark",
-        "Mola Mola",
-        "Hammerhead Shark",
-        "Great White Shark",
-        "Tiger Shark",
-      ],
-      wishlistFulfilled: [
-        "Whale Shark",
-        "Manta Ray",
-        "Great White Shark",
-        "Blue-Ringed Octopus",
-        "Mandarin Fish",
-        "Seahorse",
-        "Thresher Shark",
-        "Frog Fish",
-      ],
+      wishlist: [1, 2, 4, 5, 6],
+      wishlistFulfilled: [1, 8, 5, 17, 12, 9, 3, 13],
     },
   ],
   certs: [
@@ -82,7 +67,7 @@ export default {
       nightDive: false,
       description:
         "Strong current, fast drift. Mostly just floated and watched the world go by.",
-      animalsSpotted: ["Manta Ray", "Great White Shark"],
+      animalsSpotted: [8, 5],
       rating: 3,
     },
     {
@@ -148,7 +133,7 @@ export default {
       nightDive: false,
       description:
         "Blue-Ringed Octopus! Tiger pipefish, mantis shrimp, rhino nudis, lionfish, cleaner shrimp.",
-      animalsSpotted: ["Blue-Ringed Octopus"],
+      animalsSpotted: [17],
       rating: 4,
     },
     {
@@ -169,7 +154,7 @@ export default {
       driftDive: false,
       nightDive: true,
       description: "Mandarin fish x2! Bobtail squid, seahorses x3, nudis.",
-      animalsSpotted: ["Mandarin Fish", "Seahorse"],
+      animalsSpotted: [12, 9],
       rating: 4,
     },
     {
@@ -191,7 +176,7 @@ export default {
       nightDive: false,
       description:
         "Thresher! Cuttlefish, nudis, white tip, frog fish, baby lionfish, tiny cuttlefish? maybe bobtail squid",
-      animalsSpotted: ["Thresher Shark", "Frog Fish"],
+      animalsSpotted: [3, 13],
       rating: 5,
     },
   ],
@@ -263,113 +248,91 @@ export default {
     {
       id: 1,
       animal: "Whale Shark",
-      isChecked: false,
     },
     {
       id: 2,
       animal: "Mola Mola",
-      isChecked: false,
     },
     {
       id: 3,
       animal: "Thresher Shark",
-      isChecked: false,
     },
     {
       id: 4,
       animal: "Hammerhead Shark",
-      isChecked: false,
     },
     {
       id: 5,
       animal: "Great White Shark",
-      isChecked: false,
     },
 
     {
       id: 6,
       animal: "Tiger Shark",
-      isChecked: false,
     },
     {
       id: 7,
       animal: "Manatee",
-      isChecked: false,
     },
     {
       id: 8,
       animal: "Manta Ray",
-      isChecked: false,
     },
     {
       id: 9,
       animal: "Seahorse",
-      isChecked: false,
     },
     {
       id: 10,
       animal: "Dragon Moray",
-      isChecked: false,
     },
     {
       id: 11,
       animal: "Ribbon Eel",
-      isChecked: false,
     },
     {
       id: 12,
       animal: "Mandarin Fish",
-      isChecked: false,
     },
     {
       id: 13,
       animal: "Frog Fish",
-      isChecked: false,
     },
     {
       id: 14,
       animal: "Mimic Octopus",
-      isChecked: false,
     },
     {
       id: 15,
       animal: "Pygmy Seahorse",
-      isChecked: false,
     },
     {
       id: 16,
       animal: "Leafy Seadragon",
-      isChecked: false,
     },
     {
       id: 17,
       animal: "Blue-Ringed Octopus",
-      isChecked: false,
     },
     {
       id: 18,
       animal: "Flamboyant Cuttlefish",
-      isChecked: false,
     },
     {
       id: 19,
       animal: "Harlequin Shrimp",
-      isChecked: false,
     },
     {
       id: 20,
       animal: "Orangutan Crab",
-      isChecked: false,
     },
     {
       id: 21,
       animal: "Ornate Ghost Pipefish",
-      isChecked: false,
     },
     {
       id: 22,
       animal: "Leaf Scorpionfish",
-      isChecked: false,
     },
   ],
   animalTracker: [

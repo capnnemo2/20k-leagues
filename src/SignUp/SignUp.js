@@ -16,7 +16,7 @@ export default class SignUp extends React.Component {
     certLevel: "",
     certNum: "",
     certDate: "",
-    list: [],
+    wishlist: [],
     error: null,
   };
 
@@ -115,7 +115,7 @@ export default class SignUp extends React.Component {
             type="checkbox"
             name={animal.animal}
             value={animal.animal}
-            checked={this.state.list.includes(animal.id)}
+            checked={this.state.wishlist.includes(animal.id)}
             onChange={this.handleChange}
             id={animal.id}
           />
@@ -128,15 +128,20 @@ export default class SignUp extends React.Component {
   handleChange = (e) => {
     if (e.target.getAttribute("name") === "checkAll") {
       this.setState({
-        list: e.target.checked ? this.context.allAnimals.map((a) => a.id) : [],
+        wishlist: e.target.checked
+          ? this.context.allAnimals.map((a) => a.id)
+          : [],
       });
     } else if (e.target.checked) {
       this.setState({
-        list: [...this.state.list, parseInt(e.target.getAttribute("id"))],
+        wishlist: [
+          ...this.state.wishlist,
+          parseInt(e.target.getAttribute("id")),
+        ],
       });
     } else {
       this.setState({
-        list: this.state.list.filter(
+        wishlist: this.state.wishlist.filter(
           (a) => a !== parseInt(e.target.getAttribute("id"))
         ),
       });
@@ -150,11 +155,11 @@ export default class SignUp extends React.Component {
 
   handleSubmit = () => {
     // grab all checked animals
-    let wishlist = this.state.list.filter(
-      (animal) => animal.isChecked === true
-    );
+    // let wishlist = this.state.list.filter(
+    //   (animal) => animal.isChecked === true
+    // );
     // extract animal names
-    wishlist = wishlist.map((animal) => animal.animal);
+    // wishlist = wishlist.map((animal) => animal.animal);
 
     let {
       first_name,
@@ -164,6 +169,7 @@ export default class SignUp extends React.Component {
       certLevel,
       certNum,
       certDate,
+      wishlist,
     } = this.state;
 
     let id = this.context.users.length + 1;
@@ -438,7 +444,8 @@ export default class SignUp extends React.Component {
                     type="checkbox"
                     name="checkAll"
                     checked={
-                      this.state.list.length === this.context.allAnimals.length
+                      this.state.wishlist.length ===
+                      this.context.allAnimals.length
                     }
                     onChange={this.handleChange}
                   />

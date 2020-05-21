@@ -144,6 +144,21 @@ export default class Log extends React.Component {
     return user.wishlist.map((animal) => <li key={animal}>{animal}</li>);
   };
 
+  renderWishlist = (user) => {
+    return this.context.allAnimals
+      .filter((animal) => user.wishlist.includes(animal.id))
+      .map((animal, i) => (
+        <li
+          key={i}
+          className={
+            user.wishlistFulfilled.includes(animal.id) ? "fulfilled" : ""
+          }
+        >
+          {animal.animal}
+        </li>
+      ));
+  };
+
   // animals user has seen
   // this.context.allAnimals.filter(a=>user.wishlist.includes(a.id)).map((a,i)=><li class={user.wishlistFulfilled.includes(a.id) ? 'fulfilled' : ''} key={i}>{a}</li>)
   // .fulfilled { text-decoration: strikethrough }
@@ -333,6 +348,10 @@ export default class Log extends React.Component {
         <fieldset>
           <legend>Still Seeking</legend>
           <ul>{this.renderAnimalsToSee(user)}</ul>
+        </fieldset>
+        <fieldset>
+          <legend>new and improved wishlist</legend>
+          <ul>{this.renderWishlist(user)}</ul>
         </fieldset>
       </div>
     ) : (

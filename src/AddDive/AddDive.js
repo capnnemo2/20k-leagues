@@ -32,37 +32,22 @@ export default class AddDive extends React.Component {
     rating: "",
   };
 
-  componentDidMount() {
-    if (this.context.allAnimals) {
-      const animalList = this.context.allAnimals;
-      let animals = [];
-      for (let i = 0; i < animalList.length; i++) {
-        let newAnimal = {
-          name: animalList[i].animal,
-          isChecked: false,
-        };
-        animals.push(newAnimal);
-      }
-      this.setState({
-        animalsSpotted: animals,
-      });
-    }
-
-    // if (this.context.user.wishlist) {
-    //   const userWishlist = this.context.user.wishlist;
-    //   let animals = [];
-    //   for (let i = 0; i < userWishlist.length; i++) {
-    //     let newAnimal = {
-    //       name: userWishlist[i],
-    //       isChecked: false,
-    //     };
-    //     animals.push(newAnimal);
-    //   }
-    //   this.setState({
-    //     animalsSpotted: animals,
-    //   });
-    // }
-  }
+  // componentDidMount() {
+  //   if (this.context.allAnimals) {
+  //     const animalList = this.context.allAnimals;
+  //     let animals = [];
+  //     for (let i = 0; i < animalList.length; i++) {
+  //       let newAnimal = {
+  //         name: animalList[i].animal,
+  //         isChecked: false,
+  //       };
+  //       animals.push(newAnimal);
+  //     }
+  //     this.setState({
+  //       animalsSpotted: animals,
+  //     });
+  //   }
+  // }
 
   updateDate(e) {
     this.setState({
@@ -164,17 +149,32 @@ export default class AddDive extends React.Component {
     });
   }
 
-  handleAnimalsChange = (e) => {
-    let animalName = e.target.name;
-    let checked = e.target.checked;
+  handleAnimalChange = (e) => {
+    if (e.target.checked) {
+      this.setState({
+        animalsSpotted: [
+          ...this.state.animalsSpotted,
+          parseInt(e.target.getAttribute("id")),
+        ],
+      });
+    } else {
+      this.setState({
+        animalsSpotted: this.state.animalsSpotted.filter(
+          (animal) => animal !== parseInt(e.target.getAttribute("id"))
+        ),
+      });
+    }
 
-    this.setState((prevState) => {
-      let { animalsSpotted } = prevState;
-      animalsSpotted = animalsSpotted.map((animal) =>
-        animal.name === animalName ? { ...animal, isChecked: checked } : animal
-      );
-      return { animalsSpotted };
-    });
+    // let animalName = e.target.name;
+    // let checked = e.target.checked;
+
+    // this.setState((prevState) => {
+    //   let { animalsSpotted } = prevState;
+    //   animalsSpotted = animalsSpotted.map((animal) =>
+    //     animal.name === animalName ? { ...animal, isChecked: checked } : animal
+    //   );
+    //   return { animalsSpotted };
+    // });
   };
 
   updateRating(e) {
@@ -187,10 +187,9 @@ export default class AddDive extends React.Component {
     let newDive = this.state;
     newDive.id = this.context.dives.length + 1;
     newDive.user_id = this.context.user.id;
-    let wishlistFulfilled = newDive.animalsSpotted.filter(
-      (animal) => animal.isChecked === true
-    );
-    newDive.animalsSpotted = wishlistFulfilled.map((animal) => animal.name);
+
+    console.log(newDive);
+
     this.context.addDive(newDive);
     this.context.updateWishlistFulfilled(newDive.animalsSpotted);
 
@@ -225,7 +224,6 @@ export default class AddDive extends React.Component {
           ).regions
         : [];
     const animalList = this.context.allAnimals;
-    const justAnimals = animalList.map((animal) => animal.animal);
     return user.id ? (
       <div className="AddDive">
         <header>
@@ -477,16 +475,18 @@ export default class AddDive extends React.Component {
 
               <fieldset className="sign-up-input">
                 <legend>Animals Spotted</legend>
-                {justAnimals.map((animal) => (
-                  <div key={animal}>
+                {animalList.map((animal) => (
+                  <div key={animal.id}>
                     <label>
                       <input
                         type="checkbox"
-                        name={animal}
-                        value={animal}
-                        onChange={this.handleAnimalsChange}
+                        name={animal.animal}
+                        id={animal.id}
+                        value={animal.animal}
+                        checked={this.state.animalsSpotted.includes(animal.id)}
+                        onChange={this.handleAnimalChange}
                       />
-                      {animal}
+                      {animal.animal}
                     </label>
                   </div>
                 ))}

@@ -137,11 +137,16 @@ export default class DiveDetails extends React.Component {
               </ul>
             </fieldset>
             <fieldset className="input-fields">
-              <legend>Wishlist Animals Spotted</legend>
+              <legend>Animals Spotted</legend>
               <ul className="sign-up-input">
-                {dive.animalsSpotted.map((animal) => (
+                {this.context.allAnimals
+                  .filter((animal) => dive.animalsSpotted.includes(animal.id))
+                  .map((animal, i) => (
+                    <li key={i}>{animal.animal}</li>
+                  ))}
+                {/* {dive.animalsSpotted.map((animal) => (
                   <li key={animal}>{animal}</li>
-                ))}
+                ))} */}
               </ul>
             </fieldset>
           </div>
