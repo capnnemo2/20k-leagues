@@ -1,9 +1,12 @@
 import React from "react";
 import dummyStore from "../dummyStore";
+import Context from "../Context";
 
 export default class AnimalFilter extends React.Component {
+  static contextType = Context;
+
   render() {
-    const animals = dummyStore.animals;
+    const animals = this.context.allAnimals;
     return (
       <div className="AnimalFilter">
         <label>
@@ -11,7 +14,7 @@ export default class AnimalFilter extends React.Component {
           <select onChange={(e) => this.props.updateAnimal(e)}>
             <option>Select...</option>
             {animals.map((animal) => (
-              <option key={animal.id} value={animal.animal}>
+              <option key={animal.id} value={animal.id} id={animal.id}>
                 {animal.animal}
               </option>
             ))}

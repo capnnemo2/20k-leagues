@@ -51,10 +51,14 @@ export default class AnimalFinder extends React.Component {
           ).regions
         : [];
 
+    let userSelectedAnimal = this.context.allAnimals.find(
+      (a) => a.id === Number(this.state.animal)
+    );
+
     const currentAnimal =
       this.state.animal !== ""
         ? this.context.animalTracker.filter(
-            (animal) => animal.animal === this.state.animal
+            (animal) => animal.animal === userSelectedAnimal.animal
           )
         : "";
 
