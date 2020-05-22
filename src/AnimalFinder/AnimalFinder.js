@@ -111,10 +111,21 @@ export default class AnimalFinder extends React.Component {
 
     return (
       <div className="AnimalFinder">
-        <h2>Find that beast</h2>
         <section>
           <div>
-            <p>Here is an explanation of what this is</p>
+            <div className="finderExplanation">
+              <p>
+                Here is where you can leverage the data that we have collected
+                from all of the dives logged by all of our users.
+              </p>
+              <p>
+                If you select a particular creature, we'll show you everywhere
+                that our users have spotted that creature. If you select a
+                destination country, we'll show you all of the wishlist animals
+                that users have seen there.
+              </p>
+            </div>
+
             {/* <label>
               Search by:
               <select onChange={(e) => this.updateSearchBy(e.target.value)}>
