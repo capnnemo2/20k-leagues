@@ -236,13 +236,13 @@ export default class App extends React.Component {
           <main>
             <Header />
             <Switch>
-              {/* public endpoints */}
+              {/* public routes */}
               <Route exact path="/" component={Home} />
               <PublicOnlyRoute path="/sign-up" component={SignUp} />
               <PublicOnlyRoute path="/login" component={Login} />
               <Route path="/animal-finder" component={AnimalFinder} />
 
-              {/* private endpoints */}
+              {/* private routes */}
               <Route path="/log" component={Log} />
               <Route path="/profile" component={Profile} />
               <Route path="/add-cert" component={AddCert} />
@@ -252,6 +252,9 @@ export default class App extends React.Component {
               <Route path="/add-dive" component={AddDive} />
               <Route path="/edit-dive/:dive_id" component={EditDive} />
               <Route path="/edit-wishlist" component={EditWishlist} />
+
+              {/* public route */}
+              {/* <Route component={NotFoundPage} /> */}
             </Switch>
           </main>
           <footer>&copy;2020 Ben Hernandez</footer>
