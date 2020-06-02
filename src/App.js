@@ -248,9 +248,6 @@ export default class App extends React.Component {
       logOut: this.logOut,
     };
 
-    console.log("countries: ", this.state.countries);
-    console.log("animals: ", this.state.allAnimals);
-    console.log("spec: ", this.state.specialties);
     return (
       <Context.Provider value={value}>
         <div className="App">

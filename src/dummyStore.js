@@ -6,9 +6,9 @@ export default {
       email: "bob@email.com",
       password: "password",
       specialties: [2, 5, 6],
-      instructorSpecialties: [],
+      instructor_specialties: [],
       wishlist: [1, 2, 4, 5, 6],
-      wishlistFulfilled: [1, 8, 5, 17, 12, 9, 3, 13],
+      wishlist_fulfilled: [1, 8, 5, 17, 12, 9, 3, 13],
     },
   ],
   certs: [

@@ -16,7 +16,13 @@ export default class Profile extends React.Component {
     const certs = this.context.certs.filter(
       (c) => Number(c.user_id) === Number(userId)
     );
-    const userCerts = certs.map((cert) => cert.certLevel);
+    const userCerts = certs.map((cert) => cert.cert_level);
+
+    console.log("user: ", this.context.user);
+
+    console.log("context specs: ", this.context.specialties);
+
+    console.log("user specs: ", this.context.user.specialties);
 
     return user && this.context.loggedIn === true ? (
       <div className="Profile">
@@ -32,9 +38,9 @@ export default class Profile extends React.Component {
               <li key={cert.id}>
                 <ul>
                   <li>Agency: {cert.agency}</li>
-                  <li>{cert.certLevel}</li>
-                  <li>{cert.certDate}</li>
-                  <li>Diver number: {cert.certNum}</li>
+                  <li>{cert.cert_level}</li>
+                  <li>{cert.cert_date}</li>
+                  <li>Diver number: {cert.cert_num}</li>
                   <li>
                     <button
                       type="button"
@@ -56,7 +62,7 @@ export default class Profile extends React.Component {
             {this.context.specialties
               .filter((spec) => user.specialties.includes(spec.id))
               .map((spec, i) => (
-                <li key={i}>{spec.name}</li>
+                <li key={i}>{spec.spec_name}</li>
               ))}
           </ul>
         </fieldset>
@@ -75,7 +81,7 @@ export default class Profile extends React.Component {
           )}
           <ul>
             {this.context.specialties
-              .filter((spec) => user.instructorSpecialties.includes(spec.id))
+              .filter((spec) => user.instructor_specialties.includes(spec.id))
               .map((spec, i) => (
                 <li key={i}>{spec.name}</li>
               ))}

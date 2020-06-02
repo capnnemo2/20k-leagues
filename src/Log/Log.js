@@ -132,14 +132,14 @@ export default class Log extends React.Component {
   // wishlist handlers
   renderAnimalsSeen = (user) => {
     return this.context.allAnimals
-      .filter((animal) => user.wishlistFulfilled.includes(animal.id))
+      .filter((animal) => user.wishlist_fulfilled.includes(animal.id))
       .map((animal, i) => <li key={i}>{animal.animal}</li>);
   };
 
   renderAnimalsToSee = (user) => {
     return this.context.allAnimals
       .filter((animal) => user.wishlist.includes(animal.id))
-      .filter((animal) => !user.wishlistFulfilled.includes(animal.id))
+      .filter((animal) => !user.wishlist_fulfilled.includes(animal.id))
       .map((animal, i) => <li key={i}>{animal.animal}</li>);
   };
 
@@ -150,7 +150,7 @@ export default class Log extends React.Component {
         <li
           key={i}
           className={
-            user.wishlistFulfilled.includes(animal.id) ? "fulfilled" : ""
+            user.wishlist_fulfilled.includes(animal.id) ? "fulfilled" : ""
           }
         >
           {animal.animal}
@@ -190,7 +190,9 @@ export default class Log extends React.Component {
     let siteDives = [];
     for (let i = 0; i < arr.length; i++) {
       let dive = arr[i];
-      if (dive.diveSite.toUpperCase().includes(this.state.site.toUpperCase())) {
+      if (
+        dive.dive_site.toUpperCase().includes(this.state.site.toUpperCase())
+      ) {
         siteDives.push(dive);
       }
     }
@@ -208,11 +210,11 @@ export default class Log extends React.Component {
     return shopDives;
   }
 
-  displayDate = (date) => {
+  displayDate = (dive_date) => {
     let formattedDate = "";
-    let year = date.slice(0, 4);
-    let month = date.slice(4, 6);
-    let day = date.slice(6, 8);
+    let year = dive_date.slice(0, 4);
+    let month = dive_date.slice(4, 6);
+    let day = dive_date.slice(6, 8);
 
     if (month === "01") {
       month = "January";
@@ -277,8 +279,8 @@ export default class Log extends React.Component {
         ? this.findShopDives(allUserDives)
         : "";
 
-    dives.map((dive) => (dive.date = dive.date.split("-").join("")));
-    dives.sort((a, b) => b.date - a.date);
+    dives.map((dive) => (dive.dive_date = dive.dive_date.split("-").join("")));
+    dives.sort((a, b) => b.dive_date - a.dive_date);
 
     const totalDives = allUserDives.length;
 
@@ -303,9 +305,9 @@ export default class Log extends React.Component {
               ? dives.map((dive) => (
                   <li key={dive.id}>
                     <ul>
-                      <li>{this.displayDate(dive.date)}</li>
+                      <li>{this.displayDate(dive.dive_date)}</li>
                       <li>{dive.country}</li>
-                      <li>{dive.diveSite}</li>
+                      <li>{dive.dive_site}</li>
                       <li>{dive.rating} seastars</li>
                       <li>
                         <Link to={`/dive-details/${dive.id}`}>Details</Link>

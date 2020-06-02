@@ -81,8 +81,10 @@ export default class DiveDetails extends React.Component {
       (dive) => Number(id) === Number(dive.user_id)
     );
 
-    allUserDives.map((dive) => (dive.date = dive.date.split("-").join("")));
-    allUserDives.sort((a, b) => a.date - b.date);
+    allUserDives.map(
+      (dive) => (dive.dive_date = dive.dive_date.split("-").join(""))
+    );
+    allUserDives.sort((a, b) => a.dive_date - b.dive_date);
     return allUserDives.indexOf(thisDive) + 1;
   };
 
@@ -129,10 +131,10 @@ export default class DiveDetails extends React.Component {
             <fieldset className="input-fields">
               <legend>Date and Location</legend>
               <ul className="sign-up-input">
-                <li>Date: {this.displayDate(dive.date)}</li>
+                <li>Date: {this.displayDate(dive.dive_date)}</li>
                 <li>Country: {dive.country}</li>
                 <li>Region: {dive.region}</li>
-                <li>Dive Site: {dive.diveSite}</li>
+                <li>Dive Site: {dive.dive_site}</li>
               </ul>
             </fieldset>
             <fieldset className="input-fields">
@@ -146,7 +148,7 @@ export default class DiveDetails extends React.Component {
               <legend>Animals Spotted</legend>
               <ul className="sign-up-input">
                 {this.context.allAnimals
-                  .filter((animal) => dive.animalsSpotted.includes(animal.id))
+                  .filter((animal) => dive.animals_spotted.includes(animal.id))
                   .map((animal, i) => (
                     <li key={i}>{animal.animal}</li>
                   ))}
