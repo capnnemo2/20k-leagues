@@ -1,9 +1,10 @@
 import React from "react";
-import dummyStore from "../dummyStore";
+import Context from "../Context";
 
 export default class LocationFilter extends React.Component {
+  static contextType = Context;
   render() {
-    const countries = dummyStore.countries;
+    const countries = this.context.countries;
     const country = this.props.country;
     console.log(country);
     // const regions =

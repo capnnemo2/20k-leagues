@@ -2,12 +2,14 @@ import React from "react";
 import "./Profile.css";
 import { Link, Redirect } from "react-router-dom";
 import Context from "../Context";
+import NonGetApiService from "../services/non-get-api-service";
 
 export default class Profile extends React.Component {
   static contextType = Context;
 
   handleDelete = (certId) => {
-    this.context.deleteCert(certId);
+    NonGetApiService.deleteCert(certId);
+    // this.context.deleteCert(certId);
   };
 
   render() {
@@ -17,12 +19,6 @@ export default class Profile extends React.Component {
       (c) => Number(c.user_id) === Number(userId)
     );
     const userCerts = certs.map((cert) => cert.cert_level);
-
-    console.log("user: ", this.context.user);
-
-    console.log("context specs: ", this.context.specialties);
-
-    console.log("user specs: ", this.context.user.specialties);
 
     return user && this.context.loggedIn === true ? (
       <div className="Profile">

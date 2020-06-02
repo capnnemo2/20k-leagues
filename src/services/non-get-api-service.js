@@ -1,7 +1,7 @@
 import config from "../config";
 import TokenService from "./token-service";
 
-const nonGetApiService = {
+const NonGetApiService = {
   // USERS
   addUser(newUser) {
     fetch(`${config.API_ENDPOINT}/users`, {
@@ -72,7 +72,7 @@ const nonGetApiService = {
     );
   },
   //   CERTS
-  addCert(newCert) {
+  addCert(user_id, agency, cert_level, cert_num, cert_date) {
     fetch(`${config.API_ENDPOINT}/certs`, {
       method: "POST",
       headers: {
@@ -80,7 +80,11 @@ const nonGetApiService = {
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
-        newCert,
+        user_id,
+        agency,
+        cert_level,
+        cert_num,
+        cert_date,
       }),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
@@ -91,7 +95,7 @@ const nonGetApiService = {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
-        authorization: `bearer ${TokenService.getAuthToken()}`,
+        // authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
@@ -113,7 +117,7 @@ const nonGetApiService = {
     );
   },
   updateAnimalsTracked(animal, region) {
-    fetch(`${config.API_ENDPOINT}/animalTracker/${diveId}`, {
+    fetch(`${config.API_ENDPOINT}/animalTracker`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -126,4 +130,4 @@ const nonGetApiService = {
   },
 };
 
-export default nonGetApiService;
+export default NonGetApiService;

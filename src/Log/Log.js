@@ -50,7 +50,7 @@ export default class Log extends React.Component {
 
   // dive depth handlers
   findDeepestDive(arr) {
-    let diveDepths = arr.map((dive) => Number(dive.maxDepth));
+    let diveDepths = arr.map((dive) => Number(dive.max_depth));
 
     return (
       diveDepths.reduce(function (prevLargestNum, currLargestNum) {
@@ -62,7 +62,7 @@ export default class Log extends React.Component {
   }
 
   findAvgDiveDepth(arr) {
-    let diveDepths = arr.map((dive) => Number(dive.maxDepth));
+    let diveDepths = arr.map((dive) => Number(dive.max_depth));
 
     let sum = diveDepths.reduce((a, b) => a + b, 0);
     let avg = sum / arr.length;
@@ -70,7 +70,7 @@ export default class Log extends React.Component {
   }
 
   findShallowestDive(arr) {
-    let diveDepths = arr.map((dive) => Number(dive.maxDepth));
+    let diveDepths = arr.map((dive) => Number(dive.max_depth));
 
     return (
       diveDepths.reduce(function (prevSmallestNum, currSmallestNum) {
@@ -157,10 +157,6 @@ export default class Log extends React.Component {
         </li>
       ));
   };
-
-  // animals user has seen
-  // this.context.allAnimals.filter(a=>user.wishlist.includes(a.id)).map((a,i)=><li class={user.wishlistFulfilled.includes(a.id) ? 'fulfilled' : ''} key={i}>{a}</li>)
-  // .fulfilled { text-decoration: strikethrough }
 
   // filter result handlers
   findAnimalDives(arr) {
@@ -331,6 +327,7 @@ export default class Log extends React.Component {
                 <li>
                   Shallowest Dive: {this.findShallowestDive(allUserDives)}{" "}
                 </li>
+
                 <li>Longest Dive: {this.findLongestDive(allUserDives)}</li>
                 <li>Avg Dive Time: {this.findAvgDiveTime(allUserDives)}</li>
                 <li>Shortest Dive: {this.findShortestDive(allUserDives)}</li>

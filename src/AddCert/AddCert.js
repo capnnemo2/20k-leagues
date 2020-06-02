@@ -1,7 +1,7 @@
 import React from "react";
 import "./AddCert.css";
-// import dummyStore from "../dummyStore";
 import Context from "../Context";
+import NonGetApiService from "../services/non-get-api-service";
 
 export default class AddCert extends React.Component {
   static contextType = Context;
@@ -9,9 +9,9 @@ export default class AddCert extends React.Component {
   state = {
     agency: "",
     isOtherSelected: true,
-    certLevel: "",
-    certNum: "",
-    certDate: "",
+    cert_level: "",
+    cert_num: "",
+    cert_date: "",
     error: null,
   };
 
@@ -32,13 +32,13 @@ export default class AddCert extends React.Component {
   // cert handlers
   updateCertLevel(e) {
     this.setState({
-      certLevel: e.target.value,
+      cert_level: e.target.value,
     });
   }
 
   updateCertNum(num) {
     this.setState({
-      certNum: num,
+      cert_num: num,
     });
   }
 
@@ -81,17 +81,24 @@ export default class AddCert extends React.Component {
       dateFormatted = "December " + dateFormatted[0];
     }
     this.setState({
-      certDate: dateFormatted,
+      cert_date: dateFormatted,
     });
   }
 
-  // users[0] should select only the user who is logged in
   handleSubmit = () => {
-    let { agency, certLevel, certNum, certDate } = this.state;
-    let id = this.context.certs.length + 1;
+    let { agency, cert_level, cert_num, cert_date } = this.state;
+    // let id = this.context.certs.length + 1;
     let user_id = this.context.user.id;
-    let newCert = { id, user_id, agency, certLevel, certNum, certDate };
-    this.context.addCert(newCert);
+    let newCert = { user_id, agency, cert_level, cert_num, cert_date };
+    NonGetApiService.addCert(
+      newCert.user_id,
+      newCert.agency,
+      newCert.cert_level,
+      newCert.cert_num,
+      newCert.cert_date
+    );
+    // .then(this.context.addCert);
+    // this.context.addCert(newCert);
     this.props.history.push("/profile");
   };
 

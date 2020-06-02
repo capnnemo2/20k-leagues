@@ -1,7 +1,6 @@
 import React from "react";
 // import LocationFilter from "../AnimalFinderUtils/LocationFilter";
 import AnimalFilter from "../AnimalFinderUtils/AnimalFilter";
-import dummyStore from "../dummyStore";
 import Context from "../Context";
 import "./AnimalFinder.css";
 
@@ -43,7 +42,7 @@ export default class AnimalFinder extends React.Component {
   };
 
   render() {
-    const countries = dummyStore.countries;
+    const countries = this.context.countries;
     const regions =
       this.state.country !== ""
         ? countries.find(

@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import Context from "../Context";
-import dummyStore from "../dummyStore";
 import "./EditDive.css";
 
 export default class EditDive extends React.Component {
@@ -222,7 +221,7 @@ export default class EditDive extends React.Component {
 
   render() {
     const { user } = this.context;
-    const countries = dummyStore.countries;
+    const countries = this.context.countries;
     const regions =
       this.state.country !== ""
         ? countries.find(

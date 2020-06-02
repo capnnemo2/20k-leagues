@@ -205,6 +205,7 @@ export default class App extends React.Component {
 
   // right now just loading up everything
   componentDidMount() {
+    // does each of these need a catch?
     GetApiService.getCountries().then(this.setCountries);
     GetApiService.getAnimals().then(this.setAllAnimals);
     GetApiService.getSpecialties().then(this.setSpecialties);

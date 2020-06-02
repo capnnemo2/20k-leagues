@@ -1,6 +1,5 @@
 import React from "react";
 import "./AddDive.css";
-import dummyStore from "../dummyStore";
 import Context from "../Context";
 import { Redirect } from "react-router-dom";
 
@@ -186,7 +185,7 @@ export default class AddDive extends React.Component {
 
   render() {
     const { user } = this.context;
-    const countries = dummyStore.countries;
+    const countries = this.context.countries;
     const regions =
       this.state.country !== ""
         ? countries.find(

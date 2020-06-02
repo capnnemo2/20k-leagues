@@ -1,13 +1,12 @@
 import React from "react";
 import Context from "../Context";
-import dummyStore from "../dummyStore";
 import AnimalFilter from "../AnimalFinderUtils/AnimalFilter";
 
 export default class LogFilters extends React.Component {
   static contextType = Context;
 
   render() {
-    const countries = dummyStore.countries;
+    const countries = this.context.countries;
 
     return (
       <div className="LogFilters">
