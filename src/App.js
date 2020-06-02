@@ -23,6 +23,9 @@ import Context from "./Context";
 import dummyStore from "./dummyStore";
 import "./App.css";
 // import TokenService from "./services/token-service";
+// import IdleService from './services/idle-service'
+// import AuthApiService from './services/auth-api-service'
+import GetApiService from "./services/get-api-service";
 
 export default class App extends React.Component {
   static contextType = Context;
@@ -34,6 +37,7 @@ export default class App extends React.Component {
     user: {},
     loggedIn: false,
     allAnimals: [],
+    countries: [],
     animalTracker: [],
     specialties: [],
     error: null,
@@ -56,6 +60,12 @@ export default class App extends React.Component {
     this.setState({
       dives,
       error: null,
+    });
+  };
+
+  setCountries = (countries) => {
+    this.setState({
+      countries,
     });
   };
 
@@ -195,13 +205,20 @@ export default class App extends React.Component {
 
   // right now just loading up everything
   componentDidMount() {
+    GetApiService.getCountries().then(this.setCountries);
+    GetApiService.getAnimals().then(this.setAllAnimals);
+    GetApiService.getSpecialties().then(this.setSpecialties);
+
+    GetApiService.getAllCerts().then(this.setCerts);
+    GetApiService.getAllDives().then(this.setDives);
+    GetApiService.getAnimalsTracked().then(this.setAnimalTracker);
+
     this.setUsers(dummyStore.users);
-    this.setDives(dummyStore.dives);
-    this.setCerts(dummyStore.certs);
-    this.setAnimalTracker(dummyStore.animalTracker);
-    this.setAllAnimals(dummyStore.animals);
-    this.setSpecialties(dummyStore.specialties);
-    // this.setUser(dummyStore.users[0]);
+    // this.setDives(dummyStore.dives);
+    // this.setCerts(dummyStore.certs);
+    // this.setAnimalTracker(dummyStore.animalTracker);
+    // this.setAllAnimals(dummyStore.animals);
+    // this.setSpecialties(dummyStore.specialties);
   }
 
   render() {
@@ -213,6 +230,7 @@ export default class App extends React.Component {
       certs: this.state.certs,
       loggedIn: this.state.loggedIn,
       allAnimals: this.state.allAnimals,
+      countries: this.state.countries,
       animalTracker: this.state.animalTracker,
       specialties: this.state.specialties,
       setLoggedIn: this.setLoggedIn,
@@ -229,6 +247,10 @@ export default class App extends React.Component {
       updateDive: this.updateDive,
       logOut: this.logOut,
     };
+
+    console.log("countries: ", this.state.countries);
+    console.log("animals: ", this.state.allAnimals);
+    console.log("spec: ", this.state.specialties);
     return (
       <Context.Provider value={value}>
         <div className="App">

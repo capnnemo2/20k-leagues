@@ -33,7 +33,7 @@ const TokenService = {
     const msUntilExpiry = TokenService._getMsUntilExpiry(
       TokenService.readJwtToken()
     );
-    _timoutId = setTimeout(callback, msUntilExpiry - _TEN_SECONDS_IN_MS);
+    _timeoutId = setTimeout(callback, msUntilExpiry - _TEN_SECONDS_IN_MS);
   },
   clearCallbackBeforeExpiry() {
     clearTimeout(_timeoutId);
