@@ -3,13 +3,19 @@ import { Link } from "react-router-dom";
 import Context from "../Context";
 import "./Nav.css";
 import TokenService from "../services/token-service";
+import IdleService from "../services/idle-service";
 
 export default class Nav extends React.Component {
   static contextType = Context;
 
   handleLogOut = () => {
+    TokenService.clearAuthToken();
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unRegisterIdleResets();
     this.context.setUser({});
-    this.context.logOut();
+
+    // don't think I need this anymore
+    // this.context.logOut();
   };
 
   renderLogout = () => {
@@ -31,12 +37,7 @@ export default class Nav extends React.Component {
         <Link to="/animal-finder">Animal Finder</Link>
         <Link to="/log">Log</Link>
         <Link to="/profile">Profile</Link>
-
-        {/* this is great, but setting auth tokens hasn't been implemented yet... */}
         {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
-        {/* <Link to="/" onClick={() => this.handleLogOut()}>
-          Logout
-        </Link> */}
       </div>
     );
   }

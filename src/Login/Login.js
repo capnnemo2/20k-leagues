@@ -1,5 +1,8 @@
 import React from "react";
 import Context from "../Context";
+import AuthApiService from "../services/auth-api-service";
+import TokenService from "../services/token-service";
+import GetApiService from "../services/get-api-service";
 import "./Login.css";
 
 export default class Login extends React.Component {
@@ -13,49 +16,76 @@ export default class Login extends React.Component {
     this.props.history.goBack();
   };
 
-  handleLoginSuccess = (user) => {
+  handleLoginSuccess = (userEmail) => {
     const { location, history } = this.props;
     const destination = (location.state || {}).from || "/log";
-    this.context.setUser(user);
-    this.context.setLoggedIn();
+
+    // fetch user by email?
+    GetApiService.getUser(userEmail).then((res) => this.context.setUser(res));
+    // this returns everything? minus password for security?
+    // returns user which gets passed to setUser
+    // this.context.setUser(user);
+
+    // I don't think I need the setLoggedIn() fn anymore because of jwt
+    // this.context.setLoggedIn();
+
     history.push(destination);
   };
 
-  checkUser(email, password) {
-    const users = this.context.users;
-    const user = users.find((user) => user.email === email);
-    const alreadyLoggedIn = this.context.user.id;
+  // checkUser(email, password) {
+  //   const users = this.context.users;
+  //   const user = users.find((user) => user.email === email);
+  //   const alreadyLoggedIn = this.context.user.id;
 
-    if (alreadyLoggedIn !== undefined) {
-      this.setState({ error: "Already logged in" });
-    } else {
-      if (user === undefined) {
-        this.setState({ error: "Email does not exist" });
-        console.log("user incorrect");
-      } else {
-        if (user.password === password) {
-          // this.context.setUser(user);
-          // this.context.setLoggedIn(true);
-          this.handleLoginSuccess(user);
-        } else {
-          this.setState({ error: "Incorrect password" });
-          console.log("incorrect password");
-        }
-      }
-    }
-  }
+  //   if (alreadyLoggedIn !== undefined) {
+  //     this.setState({ error: "Already logged in" });
+  //   } else {
+  //     if (user === undefined) {
+  //       this.setState({ error: "Email does not exist" });
+  //       console.log("user incorrect");
+  //     } else {
+  //       if (user.password === password) {
+  //         // this.context.setUser(user);
+  //         // this.context.setLoggedIn(true);
+  //         this.handleLoginSuccess(user);
+  //       } else {
+  //         this.setState({ error: "Incorrect password" });
+  //         console.log("incorrect password");
+  //       }
+  //     }
+  //   }
+  // }
 
-  handleSubmit = (e) => {
+  handleSubmitJwtAuth = (e) => {
     e.preventDefault();
+    this.setState({ error: null });
     const { email, password } = e.target;
-    this.checkUser(email.value, password.value);
+
+    AuthApiService.postLogin({
+      email: email.value,
+      password: password.value,
+    })
+      .then((res) => {
+        // email.value = "";
+        // password.value = "";
+        TokenService.saveAuthToken(res.authToken);
+        // where do I get the user info from?
+        // do I need a separate api call to the users GET endpoint?
+        // or is the res the user?
+        this.handleLoginSuccess(email.value);
+      })
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
+
+    // this.checkUser(email.value, password.value);
   };
 
   render() {
     const { error } = this.state;
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmitJwtAuth}>
           <fieldset className="input-fields">
             <legend>Login</legend>
             <div className="error">{error && <p>{error}</p>}</div>

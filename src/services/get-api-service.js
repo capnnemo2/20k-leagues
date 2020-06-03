@@ -33,8 +33,16 @@ const GetApiService = {
   },
 
   // do I get the user by id or by email?
-  getUser(userId) {
-    // return fetch(`${config.API_ENDPOINT}/${userId}`);
+  // I think email
+  // getUser(userId) {
+  //   // return fetch(`${config.API_ENDPOINT}/${userId}`);
+  // },
+  getUser(userEmail) {
+    return fetch(`${config.API_ENDPOINT}/users/${userEmail}`, {
+      headers: {},
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
   },
 
   getUserCerts(userId) {

@@ -18,7 +18,7 @@ import EditDive from "./EditDive/EditDive";
 import AnimalFinder from "./AnimalFinder/AnimalFinder";
 
 import PublicOnlyRoute from "./Utils/PublicOnlyRoute";
-// import PrivateRoute from "./Utils/PrivateRoute";
+import PrivateRoute from "./Utils/PrivateRoute";
 import Context from "./Context";
 import dummyStore from "./dummyStore";
 import "./App.css";
@@ -215,6 +215,7 @@ export default class App extends React.Component {
     GetApiService.getAnimalsTracked().then(this.setAnimalTracker);
 
     this.setUsers(dummyStore.users);
+
     // this.setDives(dummyStore.dives);
     // this.setCerts(dummyStore.certs);
     // this.setAnimalTracker(dummyStore.animalTracker);
@@ -263,15 +264,24 @@ export default class App extends React.Component {
               <Route path="/animal-finder" component={AnimalFinder} />
 
               {/* private routes */}
-              <Route path="/log" component={Log} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/add-cert" component={AddCert} />
-              <Route path="/update-specialties" component={UpdateSpecialties} />
-              <Route path="/update-instr-specs" component={UpdateInstrSpecs} />
-              <Route path="/dive-details/:dive_id" component={DiveDetails} />
-              <Route path="/add-dive" component={AddDive} />
-              <Route path="/edit-dive/:dive_id" component={EditDive} />
-              <Route path="/edit-wishlist" component={EditWishlist} />
+              <PrivateRoute path="/log" component={Log} />
+              <PrivateRoute path="/add-cert" component={AddCert} />
+              <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute
+                path="/update-specialties"
+                component={UpdateSpecialties}
+              />
+              <PrivateRoute
+                path="/update-instr-specs"
+                component={UpdateInstrSpecs}
+              />
+              <PrivateRoute
+                path="/dive-details/:dive_id"
+                component={DiveDetails}
+              />
+              <PrivateRoute path="/add-dive" component={AddDive} />
+              <PrivateRoute path="/edit-dive/:dive_id" component={EditDive} />
+              <PrivateRoute path="/edit-wishlist" component={EditWishlist} />
 
               {/* public route */}
               {/* <Route component={NotFoundPage} /> */}

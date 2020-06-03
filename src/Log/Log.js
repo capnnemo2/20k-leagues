@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import LogFilters from "../LogUtils/LogFilters";
 import Context from "../Context";
+import TokenService from "../services/token-service";
 import "./Log.css";
 
 export default class Log extends React.Component {
@@ -280,7 +281,7 @@ export default class Log extends React.Component {
 
     const totalDives = allUserDives.length;
 
-    return user && this.context.loggedIn === true ? (
+    return TokenService.hasAuthToken() && user ? (
       <div className="Log">
         <section>
           <h2>{user.first_name}'s Dive Log</h2>
