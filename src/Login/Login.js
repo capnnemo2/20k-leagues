@@ -66,12 +66,7 @@ export default class Login extends React.Component {
       password: password.value,
     })
       .then((res) => {
-        // email.value = "";
-        // password.value = "";
         TokenService.saveAuthToken(res.authToken);
-        // where do I get the user info from?
-        // do I need a separate api call to the users GET endpoint?
-        // or is the res the user?
         this.handleLoginSuccess(email.value);
       })
       .catch((res) => {
