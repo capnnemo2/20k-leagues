@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 export default class AddDive extends React.Component {
   static contextType = Context;
   state = {
-    date: "",
+    dive_date: "",
     dive_site: "",
     country: "",
     region: "",
@@ -15,7 +15,7 @@ export default class AddDive extends React.Component {
     duration: "",
     water_temp: "",
 
-    dive_dhop: "",
+    dive_shop: "",
     guide: "",
     buddy: "",
 
@@ -33,7 +33,7 @@ export default class AddDive extends React.Component {
 
   updateDate(e) {
     this.setState({
-      date: e.target.value,
+      dive_date: e.target.value,
     });
   }
   updateDiveSite(e) {
@@ -161,7 +161,7 @@ export default class AddDive extends React.Component {
     newDive.user_id = this.context.user.id;
 
     this.context.addDive(newDive);
-    this.context.updateWishlistFulfilled(newDive.animalsSpotted);
+    this.context.updateWishlistFulfilled(newDive.animals_spotted);
 
     let newAnimalsTracked = newDive.animals_spotted.map((animal, i) => {
       let newAnimalTracked = {};
@@ -453,7 +453,7 @@ export default class AddDive extends React.Component {
                         name={animal.animal}
                         id={animal.id}
                         value={animal.animal}
-                        checked={this.state.animalsSpotted.includes(animal.id)}
+                        checked={this.state.animals_spotted.includes(animal.id)}
                         onChange={this.handleAnimalChange}
                       />
                       {animal.animal}

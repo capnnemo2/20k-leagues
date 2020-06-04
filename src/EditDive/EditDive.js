@@ -34,7 +34,6 @@ export default class EditDive extends React.Component {
   };
 
   componentDidMount() {
-    console.log("CDU ran");
     const diveId = Number(this.props.match.params.dive_id);
     const dive = this.context.dives.find((dive) => dive.id === diveId);
 
@@ -73,7 +72,7 @@ export default class EditDive extends React.Component {
 
   updateDate(e) {
     this.setState({
-      date: e.target.value,
+      dive_date: e.target.value,
     });
   }
   updateDiveSite(e) {
@@ -254,7 +253,7 @@ export default class EditDive extends React.Component {
                   id="date"
                   aria-label="Enter the date of the dive"
                   aria-required="true"
-                  value={this.state.date}
+                  value={this.state.dive_date}
                   onChange={(e) => this.updateDate(e)}
                   required
                 />
@@ -267,7 +266,7 @@ export default class EditDive extends React.Component {
                   id="site"
                   aria-label="Enter the name of the dive site"
                   aria-required="true"
-                  value={this.state.diveSite}
+                  value={this.state.dive_site}
                   onChange={(e) => this.updateDiveSite(e)}
                   required
                 />
@@ -318,7 +317,7 @@ export default class EditDive extends React.Component {
                   id="depth"
                   min="0"
                   aria-label="Enter the maximum depth"
-                  value={this.state.maxDepth}
+                  value={this.state.max_depth}
                   onChange={(e) => this.updateMaxDepth(e)}
                 />
               </div>
@@ -341,7 +340,7 @@ export default class EditDive extends React.Component {
                   name="temp"
                   id="temp"
                   aria-label="Enter the water temperature"
-                  value={this.state.waterTemp}
+                  value={this.state.water_temp}
                   onChange={(e) => this.updateWaterTemp(e)}
                 />
               </div>
@@ -356,7 +355,7 @@ export default class EditDive extends React.Component {
                   name="shop"
                   id="shop"
                   aria-label="Enter the dive shop"
-                  value={this.state.diveShop}
+                  value={this.state.dive_shop}
                   onChange={(e) => this.updateDiveShop(e)}
                 />
               </div>
@@ -460,7 +459,7 @@ export default class EditDive extends React.Component {
                   type="radio"
                   //   name="dive-type"
                   value="Boat"
-                  checked={this.state.diveType === "Boat"}
+                  checked={this.state.dive_type === "Boat"}
                   onChange={(e) => this.updateDiveType(e)}
                 />
                 Boat dive
@@ -470,7 +469,7 @@ export default class EditDive extends React.Component {
                 <input
                   type="checkbox"
                   name="drift"
-                  checked={this.state.driftDive}
+                  checked={this.state.drift_dive}
                   onChange={this.handleDriftDiveChange}
                 />
                 Drift dive
@@ -480,7 +479,7 @@ export default class EditDive extends React.Component {
                 <input
                   type="checkbox"
                   name="night"
-                  checked={this.state.nightDive}
+                  checked={this.state.night_dive}
                   onChange={this.handleNightDiveChange}
                 />
                 Night dive
@@ -511,7 +510,7 @@ export default class EditDive extends React.Component {
                         name={animal.animal}
                         id={animal.id}
                         value={animal.animal}
-                        checked={this.state.animalsSpotted.includes(animal.id)}
+                        checked={this.state.animals_spotted.includes(animal.id)}
                         onChange={this.handleAnimalChange}
                       />
                       {animal.animal}

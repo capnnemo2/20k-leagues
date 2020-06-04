@@ -166,9 +166,6 @@ export default class Log extends React.Component {
       let dive = arr[i];
       let currentDive = dive.animalsSpotted;
 
-      console.log("current dive: ", currentDive);
-      // IE: [1, 2]
-
       if (currentDive.length !== 0) {
         let check = currentDive.filter(
           (animal) => animal === Number(this.state.animal)
@@ -178,8 +175,6 @@ export default class Log extends React.Component {
         }
       }
     }
-
-    console.log("animal dives:", animalDives);
     return animalDives;
   }
 

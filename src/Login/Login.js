@@ -16,39 +16,16 @@ export default class Login extends React.Component {
     this.props.history.goBack();
   };
 
-  handleLoginSuccess = (userEmail) => {
-    // const { location, history } = this.props;
-    const { history } = this.props;
-    // const destination = (location.state || {}).from || "/log";
-
-    GetApiService.getUser(userEmail)
-      .then((res) => this.context.setUser(res))
-      .then(() => history.push("/log"));
+  handleLoginSuccess = (cb) => {
+    GetApiService.getUser()
+      .then((res) => {
+        this.context.setUser(res);
+      })
+      .then(() => {
+        // this is not working because it needs to pass the newly fetch user id
+        cb();
+      });
   };
-
-  // checkUser(email, password) {
-  //   const users = this.context.users;
-  //   const user = users.find((user) => user.email === email);
-  //   const alreadyLoggedIn = this.context.user.id;
-
-  //   if (alreadyLoggedIn !== undefined) {
-  //     this.setState({ error: "Already logged in" });
-  //   } else {
-  //     if (user === undefined) {
-  //       this.setState({ error: "Email does not exist" });
-  //       console.log("user incorrect");
-  //     } else {
-  //       if (user.password === password) {
-  //         // this.context.setUser(user);
-  //         // this.context.setLoggedIn(true);
-  //         this.handleLoginSuccess(user);
-  //       } else {
-  //         this.setState({ error: "Incorrect password" });
-  //         console.log("incorrect password");
-  //       }
-  //     }
-  //   }
-  // }
 
   handleSubmitJwtAuth = (e) => {
     e.preventDefault();
@@ -61,13 +38,15 @@ export default class Login extends React.Component {
     })
       .then((res) => {
         TokenService.saveAuthToken(res.authToken);
-        this.handleLoginSuccess(email.value);
+        this.handleLoginSuccess(() => {
+          // somewhere the newly fetched user id has to be passed to this function
+          this.context.getUserData();
+          this.props.history.push("/log");
+        });
       })
       .catch((res) => {
         this.setState({ error: res.error });
       });
-
-    // this.checkUser(email.value, password.value);
   };
 
   render() {

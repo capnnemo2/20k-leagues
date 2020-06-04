@@ -31,15 +31,11 @@ const GetApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-
-  // do I get the user by id or by email?
-  // I think email
-  // getUser(userId) {
-  //   // return fetch(`${config.API_ENDPOINT}/${userId}`);
-  // },
-  getUser(userEmail) {
-    return fetch(`${config.API_ENDPOINT}/users/${userEmail}`, {
-      headers: {},
+  getUser() {
+    return fetch(`${config.API_ENDPOINT}/users/getinfo`, {
+      headers: {
+        Authorization: `Bearer ${TokenService.getAuthToken()}`,
+      },
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
@@ -55,15 +51,15 @@ const GetApiService = {
     );
   },
   // OR -----------
-  getAllCerts() {
-    return fetch(`${config.API_ENDPOINT}/certs`, {
-      headers: {
-        authorization: `bearer ${TokenService.getAuthToken()}`,
-      },
-    }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-    );
-  },
+  // getAllCerts() {
+  //   return fetch(`${config.API_ENDPOINT}/certs`, {
+  //     headers: {
+  //       authorization: `bearer ${TokenService.getAuthToken()}`,
+  //     },
+  //   }).then((res) =>
+  //     !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+  //   );
+  // },
 
   getUserDives(userId) {
     return fetch(`${config.API_ENDPOINT}/dives/user/${userId}`, {
@@ -75,15 +71,15 @@ const GetApiService = {
     );
   },
   // OR ----------
-  getAllDives() {
-    return fetch(`${config.API_ENDPOINT}/dives`, {
-      headers: {
-        authorization: `bearer ${TokenService.getAuthToken()}`,
-      },
-    }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-    );
-  },
+  // getAllDives() {
+  //   return fetch(`${config.API_ENDPOINT}/dives`, {
+  //     headers: {
+  //       authorization: `bearer ${TokenService.getAuthToken()}`,
+  //     },
+  //   }).then((res) =>
+  //     !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+  //   );
+  // },
 };
 
 export default GetApiService;

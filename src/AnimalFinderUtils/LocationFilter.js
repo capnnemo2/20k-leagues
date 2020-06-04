@@ -6,7 +6,6 @@ export default class LocationFilter extends React.Component {
   render() {
     const countries = this.context.countries;
     const country = this.props.country;
-    console.log(country);
     // const regions =
     //   this.props.country === ""
     //     ? []

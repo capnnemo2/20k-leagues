@@ -22,7 +22,7 @@ import PrivateRoute from "./Utils/PrivateRoute";
 import Context from "./Context";
 // import dummyStore from "./dummyStore";
 import "./App.css";
-// import TokenService from "./services/token-service";
+import TokenService from "./services/token-service";
 // import IdleService from './services/idle-service'
 // import AuthApiService from './services/auth-api-service'
 import GetApiService from "./services/get-api-service";
@@ -143,7 +143,7 @@ export default class App extends React.Component {
     this.setState((prevState) => ({
       user: {
         ...prevState.user,
-        instructorSpecialties: newInstrSpecs,
+        instructor_specialties: newInstrSpecs,
       },
     }));
   };
@@ -156,14 +156,14 @@ export default class App extends React.Component {
 
   updateWishlistFulfilled = (animalsSpotted) => {
     let newAnimalsSpotted = animalsSpotted.filter(
-      (a) => !this.state.user.wishlistFulfilled.includes(a)
+      (a) => !this.state.user.wishlist_fulfilled.includes(a)
     );
 
     this.setState((prevState) => ({
       user: {
         ...prevState.user,
         wishlistFulfilled: [].concat(
-          prevState.user.wishlistFulfilled,
+          prevState.user.wishlist_fulfilled,
           newAnimalsSpotted
         ),
       },
@@ -203,25 +203,36 @@ export default class App extends React.Component {
     });
   };
 
-  // right now just loading up everything
   componentDidMount() {
-    // does each of these need a catch?
-    GetApiService.getCountries().then(this.setCountries);
-    GetApiService.getAnimals().then(this.setAllAnimals);
-    GetApiService.getSpecialties().then(this.setSpecialties);
+    GetApiService.getCountries().then(this.setCountries).catch(this.catchError);
+    GetApiService.getAnimals().then(this.setAllAnimals).catch(this.catchError);
+    GetApiService.getSpecialties()
+      .then(this.setSpecialties)
+      .catch(this.catchError);
 
-    GetApiService.getAllCerts().then(this.setCerts);
-    GetApiService.getAllDives().then(this.setDives);
-    GetApiService.getAnimalsTracked().then(this.setAnimalTracker);
+    GetApiService.getAnimalsTracked()
+      .then(this.setAnimalTracker)
+      .catch(this.catchError);
 
-    // this.setUsers(dummyStore.users);
-
-    // this.setDives(dummyStore.dives);
-    // this.setCerts(dummyStore.certs);
-    // this.setAnimalTracker(dummyStore.animalTracker);
-    // this.setAllAnimals(dummyStore.animals);
-    // this.setSpecialties(dummyStore.specialties);
+    if (TokenService.getAuthToken()) {
+      this.getUserData();
+    }
   }
+
+  // TODO need to implement these fns! or still need endpoints??
+  getUserData = (userId) => {
+    console.log("this ran: ", userId);
+    GetApiService.getUserCerts(userId)
+      .then(this.setCerts)
+      .catch(this.catchError);
+    GetApiService.getUserDives(userId)
+      .then(this.setDives)
+      .catch(this.catchError);
+  };
+
+  catchError = (err) => {
+    console.error(err);
+  };
 
   render() {
     const value = {
@@ -248,6 +259,7 @@ export default class App extends React.Component {
       deleteCert: this.deleteCert,
       updateDive: this.updateDive,
       logOut: this.logOut,
+      getUserData: this.getUserData,
     };
 
     return (
