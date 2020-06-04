@@ -8,27 +8,27 @@ export default class EditDive extends React.Component {
 
   state = {
     initialFieldsSet: false,
-    date: "",
-    diveSite: "",
+    dive_date: "",
+    dive_site: "",
     country: "",
     region: "",
 
-    maxDepth: "",
+    max_depth: "",
     duration: "",
-    waterTemp: "",
+    water_temp: "",
 
-    diveShop: "",
+    dive_shop: "",
     guide: "",
     buddy: "",
 
     viz: "",
 
-    diveType: "",
-    driftDive: false,
-    nightDive: false,
+    dive_type: "",
+    drift_dive: false,
+    night_dive: false,
 
     description: "",
-    animalsSpotted: [],
+    animals_spotted: [],
 
     rating: "",
   };
@@ -44,29 +44,29 @@ export default class EditDive extends React.Component {
   }
 
   setFieldsInState = (dive) => {
-    let diveDate = dive.date.split("");
+    let diveDate = dive.dive_date.split("");
     diveDate.splice(4, 0, "-");
     diveDate.splice(7, 0, "-");
     diveDate = diveDate.join("");
 
     this.setState({
       initialFieldsSet: true,
-      date: diveDate,
-      diveSite: dive.diveSite,
+      dive_date: diveDate,
+      dive_site: dive.dive_site,
       country: dive.country,
       region: dive.region,
-      maxDepth: dive.maxDepth,
+      max_depth: dive.max_depth,
       duration: dive.duration,
-      waterTemp: dive.waterTemp,
-      diveShop: dive.diveShop,
+      water_temp: dive.water_temp,
+      dive_shop: dive.dive_shop,
       guide: dive.guide,
       buddy: dive.buddy,
       viz: dive.viz,
-      diveType: dive.diveType,
-      driftDive: dive.driftDive,
-      nightDive: dive.nightDive,
+      dive_type: dive.dive_type,
+      drift_dive: dive.drift_dive,
+      night_dive: dive.night_dive,
       description: dive.description,
-      animalsSpotted: dive.animalsSpotted,
+      animals_spotted: dive.animals_spotted,
       rating: dive.rating,
     });
   };
@@ -78,7 +78,7 @@ export default class EditDive extends React.Component {
   }
   updateDiveSite(e) {
     this.setState({
-      diveSite: e.target.value,
+      dive_site: e.target.value,
     });
   }
 
@@ -95,7 +95,7 @@ export default class EditDive extends React.Component {
 
   updateMaxDepth(e) {
     this.setState({
-      maxDepth: e.target.value,
+      max_depth: e.target.value,
     });
   }
 
@@ -107,13 +107,13 @@ export default class EditDive extends React.Component {
 
   updateWaterTemp(e) {
     this.setState({
-      waterTemp: e.target.value,
+      water_temp: e.target.value,
     });
   }
 
   updateDiveShop(e) {
     this.setState({
-      diveShop: e.target.value,
+      dive_shop: e.target.value,
     });
   }
 
@@ -137,31 +137,31 @@ export default class EditDive extends React.Component {
 
   updateDiveType(e) {
     this.setState({
-      diveType: e.target.value,
+      dive_type: e.target.value,
     });
   }
 
   handleDriftDiveChange = (e) => {
     this.setState((prevState) => {
-      let { driftDive } = prevState;
-      if (driftDive === false) {
-        driftDive = true;
-      } else if (driftDive === true) {
-        driftDive = false;
+      let { drift_dive } = prevState;
+      if (drift_dive === false) {
+        drift_dive = true;
+      } else if (drift_dive === true) {
+        drift_dive = false;
       }
-      return { driftDive };
+      return { drift_dive };
     });
   };
 
   handleNightDiveChange = (e) => {
     this.setState((prevState) => {
-      let { nightDive } = prevState;
-      if (nightDive === false) {
-        nightDive = true;
-      } else if (nightDive === true) {
-        nightDive = false;
+      let { night_dive } = prevState;
+      if (night_dive === false) {
+        night_dive = true;
+      } else if (night_dive === true) {
+        night_dive = false;
       }
-      return { nightDive };
+      return { night_dive };
     });
   };
 
@@ -174,14 +174,14 @@ export default class EditDive extends React.Component {
   handleAnimalChange = (e) => {
     if (e.target.checked) {
       this.setState({
-        animalsSpotted: [
-          ...this.state.animalsSpotted,
+        animals_spotted: [
+          ...this.state.animals_spotted,
           parseInt(e.target.getAttribute("id")),
         ],
       });
     } else {
       this.setState({
-        animalsSpotted: this.state.animalsSpotted.filter(
+        animals_spotted: this.state.animals_spotted.filter(
           (a) => a !== parseInt(e.target.getAttribute("id"))
         ),
       });
@@ -194,15 +194,16 @@ export default class EditDive extends React.Component {
     });
   }
 
+  // need to update this fn
   handleSubmit = () => {
     let newDive = this.state;
     newDive.id = Number(this.props.match.params.dive_id);
     newDive.user_id = this.context.user.id;
 
     this.context.updateDive(newDive, newDive.id);
-    this.context.updateWishlistFulfilled(newDive.animalsSpotted);
+    this.context.updateWishlistFulfilled(newDive.animals_spotted);
 
-    let newAnimalsTracked = newDive.animalsSpotted.map((animal, i) => {
+    let newAnimalsTracked = newDive.animals_spotted.map((animal, i) => {
       let newAnimalTracked = {};
       newAnimalTracked.animal = animal;
       newAnimalTracked.country = newDive.country;

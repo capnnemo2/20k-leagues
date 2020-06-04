@@ -20,7 +20,7 @@ import AnimalFinder from "./AnimalFinder/AnimalFinder";
 import PublicOnlyRoute from "./Utils/PublicOnlyRoute";
 import PrivateRoute from "./Utils/PrivateRoute";
 import Context from "./Context";
-import dummyStore from "./dummyStore";
+// import dummyStore from "./dummyStore";
 import "./App.css";
 // import TokenService from "./services/token-service";
 // import IdleService from './services/idle-service'
@@ -214,7 +214,7 @@ export default class App extends React.Component {
     GetApiService.getAllDives().then(this.setDives);
     GetApiService.getAnimalsTracked().then(this.setAnimalTracker);
 
-    this.setUsers(dummyStore.users);
+    // this.setUsers(dummyStore.users);
 
     // this.setDives(dummyStore.dives);
     // this.setCerts(dummyStore.certs);

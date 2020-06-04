@@ -17,19 +17,13 @@ export default class Login extends React.Component {
   };
 
   handleLoginSuccess = (userEmail) => {
-    const { location, history } = this.props;
-    const destination = (location.state || {}).from || "/log";
+    // const { location, history } = this.props;
+    const { history } = this.props;
+    // const destination = (location.state || {}).from || "/log";
 
-    // fetch user by email?
-    GetApiService.getUser(userEmail).then((res) => this.context.setUser(res));
-    // this returns everything? minus password for security?
-    // returns user which gets passed to setUser
-    // this.context.setUser(user);
-
-    // I don't think I need the setLoggedIn() fn anymore because of jwt
-    // this.context.setLoggedIn();
-
-    history.push(destination);
+    GetApiService.getUser(userEmail)
+      .then((res) => this.context.setUser(res))
+      .then(() => history.push("/log"));
   };
 
   // checkUser(email, password) {

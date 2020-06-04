@@ -3,6 +3,7 @@ import "./Profile.css";
 import { Link, Redirect } from "react-router-dom";
 import Context from "../Context";
 import NonGetApiService from "../services/non-get-api-service";
+// import TokenService from "../services/token-service";
 
 export default class Profile extends React.Component {
   static contextType = Context;
@@ -20,7 +21,7 @@ export default class Profile extends React.Component {
     );
     const userCerts = certs.map((cert) => cert.cert_level);
 
-    return user && this.context.loggedIn === true ? (
+    return user ? (
       <div className="Profile">
         <section>
           <h2>{user.first_name}'s Profile</h2>
@@ -76,11 +77,13 @@ export default class Profile extends React.Component {
             ""
           )}
           <ul>
-            {this.context.specialties
-              .filter((spec) => user.instructor_specialties.includes(spec.id))
-              .map((spec, i) => (
-                <li key={i}>{spec.name}</li>
-              ))}
+            {user.instructor_specialties !== null
+              ? this.context.specialties
+                  .filter((spec) =>
+                    user.instructor_specialties.includes(spec.id)
+                  )
+                  .map((spec, i) => <li key={i}>{spec.name}</li>)
+              : ""}
           </ul>
         </fieldset>
         <fieldset>

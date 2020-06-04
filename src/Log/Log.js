@@ -257,9 +257,6 @@ export default class Log extends React.Component {
 
   render() {
     const user = this.context.user;
-
-    console.log(user);
-
     const userId = user.id;
 
     const allUserDives = this.context.dives.filter(

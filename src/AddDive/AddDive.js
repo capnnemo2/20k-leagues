@@ -7,26 +7,26 @@ export default class AddDive extends React.Component {
   static contextType = Context;
   state = {
     date: "",
-    diveSite: "",
+    dive_site: "",
     country: "",
     region: "",
 
-    maxDepth: "",
+    max_depth: "",
     duration: "",
-    waterTemp: "",
+    water_temp: "",
 
-    diveShop: "",
+    dive_dhop: "",
     guide: "",
     buddy: "",
 
     viz: "",
 
-    diveType: "",
-    driftDive: false,
-    nightDive: false,
+    dive_type: "",
+    drift_dive: false,
+    night_dive: false,
 
     description: "",
-    animalsSpotted: [],
+    animals_spotted: [],
 
     rating: "",
   };
@@ -38,7 +38,7 @@ export default class AddDive extends React.Component {
   }
   updateDiveSite(e) {
     this.setState({
-      diveSite: e.target.value,
+      dive_site: e.target.value,
     });
   }
 
@@ -55,7 +55,7 @@ export default class AddDive extends React.Component {
 
   updateMaxDepth(e) {
     this.setState({
-      maxDepth: e.target.value,
+      max_depth: e.target.value,
     });
   }
 
@@ -67,13 +67,13 @@ export default class AddDive extends React.Component {
 
   updateWaterTemp(e) {
     this.setState({
-      waterTemp: e.target.value,
+      water_temp: e.target.value,
     });
   }
 
   updateDiveShop(e) {
     this.setState({
-      diveShop: e.target.value,
+      dive_shop: e.target.value,
     });
   }
 
@@ -97,31 +97,31 @@ export default class AddDive extends React.Component {
 
   updateDiveType(e) {
     this.setState({
-      diveType: e.target.value,
+      dive_type: e.target.value,
     });
   }
 
   handleDriftDiveChange = (e) => {
     this.setState((prevState) => {
-      let { driftDive } = prevState;
-      if (driftDive === false) {
-        driftDive = true;
-      } else if (driftDive === true) {
-        driftDive = false;
+      let { drift_dive } = prevState;
+      if (drift_dive === false) {
+        drift_dive = true;
+      } else if (drift_dive === true) {
+        drift_dive = false;
       }
-      return { driftDive };
+      return { drift_dive };
     });
   };
 
   handleNightDiveChange = (e) => {
     this.setState((prevState) => {
-      let { nightDive } = prevState;
-      if (nightDive === false) {
-        nightDive = true;
-      } else if (nightDive === true) {
-        nightDive = false;
+      let { night_dive } = prevState;
+      if (night_dive === false) {
+        night_dive = true;
+      } else if (night_dive === true) {
+        night_dive = false;
       }
-      return { nightDive };
+      return { night_dive };
     });
   };
 
@@ -134,14 +134,14 @@ export default class AddDive extends React.Component {
   handleAnimalChange = (e) => {
     if (e.target.checked) {
       this.setState({
-        animalsSpotted: [
-          ...this.state.animalsSpotted,
+        animals_spotted: [
+          ...this.state.animals_spotted,
           parseInt(e.target.getAttribute("id")),
         ],
       });
     } else {
       this.setState({
-        animalsSpotted: this.state.animalsSpotted.filter(
+        animals_spotted: this.state.animals_spotted.filter(
           (animal) => animal !== parseInt(e.target.getAttribute("id"))
         ),
       });
@@ -154,15 +154,16 @@ export default class AddDive extends React.Component {
     });
   }
 
+  // need to update this fn
   handleSubmit = () => {
     let newDive = this.state;
-    newDive.id = this.context.dives.length + 1;
+    // newDive.id = this.context.dives.length + 1;
     newDive.user_id = this.context.user.id;
 
     this.context.addDive(newDive);
     this.context.updateWishlistFulfilled(newDive.animalsSpotted);
 
-    let newAnimalsTracked = newDive.animalsSpotted.map((animal, i) => {
+    let newAnimalsTracked = newDive.animals_spotted.map((animal, i) => {
       let newAnimalTracked = {};
       // create the correct id
       newAnimalTracked.id = this.context.animalTracker.length + 1 + i;
