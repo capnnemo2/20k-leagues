@@ -219,13 +219,12 @@ export default class App extends React.Component {
     }
   }
 
-  // TODO need to implement these fns! or still need endpoints??
-  getUserData = (userId) => {
-    console.log("this ran: ", userId);
-    GetApiService.getUserCerts(userId)
+  getUserData = (user) => {
+    this.setUser(user);
+    GetApiService.getUserCerts(user.id)
       .then(this.setCerts)
       .catch(this.catchError);
-    GetApiService.getUserDives(userId)
+    GetApiService.getUserDives(user.id)
       .then(this.setDives)
       .catch(this.catchError);
   };
