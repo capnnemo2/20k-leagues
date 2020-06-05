@@ -4,7 +4,7 @@ import TokenService from "./token-service";
 const NonGetApiService = {
   // USERS
   addUser(newUser) {
-    fetch(`${config.API_ENDPOINT}/users`, {
+    return fetch(`${config.API_ENDPOINT}/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -18,22 +18,21 @@ const NonGetApiService = {
     );
   },
   updateUser(userId, newUser) {
-    fetch(`${config.API_ENDPOINT}/users/${userId}`, {
+    // this works, but throws the same error as deleteCert
+    return fetch(`${config.API_ENDPOINT}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({
-        newUser,
-      }),
+      body: JSON.stringify(newUser),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
   //   DIVES
   addDive(newDive) {
-    fetch(`${config.API_ENDPOINT}/dives`, {
+    return fetch(`${config.API_ENDPOINT}/dives`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -47,7 +46,7 @@ const NonGetApiService = {
     );
   },
   updateDive(diveId, newDive) {
-    fetch(`${config.API_ENDPOINT}/dives/${diveId}`, {
+    return fetch(`${config.API_ENDPOINT}/dives/${diveId}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -61,7 +60,7 @@ const NonGetApiService = {
     );
   },
   deleteDive(diveId) {
-    fetch(`${config.API_ENDPOINT}/dives/${diveId}`, {
+    return fetch(`${config.API_ENDPOINT}/dives/${diveId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -72,30 +71,26 @@ const NonGetApiService = {
     );
   },
   //   CERTS
-  addCert(user_id, agency, cert_level, cert_num, cert_date) {
-    fetch(`${config.API_ENDPOINT}/certs`, {
+  addCert(newCert) {
+    return fetch(`${config.API_ENDPOINT}/certs`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({
-        user_id,
-        agency,
-        cert_level,
-        cert_num,
-        cert_date,
-      }),
+      body: JSON.stringify(newCert),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
   deleteCert(certId) {
-    fetch(`${config.API_ENDPOINT}/certs/${certId}`, {
+    // this works, but also throws an error: SyntaxError: Unexpected end of JSON input
+    // at non-get-api-service.js:113
+    return fetch(`${config.API_ENDPOINT}/certs/${certId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
-        // authorization: `bearer ${TokenService.getAuthToken()}`,
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
@@ -103,7 +98,7 @@ const NonGetApiService = {
   },
   //   ANIMAL TRACKER
   addAnimalTracked(newAnimalTracked) {
-    fetch(`${config.API_ENDPOINT}/animalTracker`, {
+    return fetch(`${config.API_ENDPOINT}/animalTracker`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -117,7 +112,7 @@ const NonGetApiService = {
     );
   },
   updateAnimalsTracked(animal, region) {
-    fetch(`${config.API_ENDPOINT}/animalTracker`, {
+    return fetch(`${config.API_ENDPOINT}/animalTracker`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

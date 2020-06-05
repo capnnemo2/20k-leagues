@@ -90,13 +90,7 @@ export default class AddCert extends React.Component {
     // let id = this.context.certs.length + 1;
     let user_id = this.context.user.id;
     let newCert = { user_id, agency, cert_level, cert_num, cert_date };
-    NonGetApiService.addCert(
-      newCert.user_id,
-      newCert.agency,
-      newCert.cert_level,
-      newCert.cert_num,
-      newCert.cert_date
-    );
+    NonGetApiService.addCert(newCert).then(this.context.addCert);
     // .then(this.context.addCert);
     // this.context.addCert(newCert);
     this.props.history.push("/profile");

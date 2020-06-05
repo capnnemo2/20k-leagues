@@ -9,8 +9,9 @@ export default class Profile extends React.Component {
   static contextType = Context;
 
   handleDelete = (certId) => {
-    NonGetApiService.deleteCert(certId);
-    // this.context.deleteCert(certId);
+    NonGetApiService.deleteCert(certId)
+      .then(this.context.deleteCert(certId))
+      .catch((err) => console.log(err));
   };
 
   render() {

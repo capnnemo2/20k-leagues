@@ -26,6 +26,7 @@ import TokenService from "./services/token-service";
 // import IdleService from './services/idle-service'
 // import AuthApiService from './services/auth-api-service'
 import GetApiService from "./services/get-api-service";
+import NonGetApiService from "./services/non-get-api-service";
 
 export default class App extends React.Component {
   static contextType = Context;
@@ -115,13 +116,18 @@ export default class App extends React.Component {
     });
   };
 
+  updateUser = (newUser) => {
+    this.setState({
+      user: newUser,
+    });
+  };
+
   updateWishlist = (wishlist) => {
-    this.setState((prevState) => ({
-      user: {
-        ...prevState.user,
-        wishlist,
-      },
-    }));
+    const newUser = this.state.user;
+    newUser.wishlist = wishlist;
+    NonGetApiService.updateUser(newUser.id, newUser)
+      .then(this.updateUser(newUser))
+      .catch((err) => console.log(err));
   };
 
   addCert = (newCert) => {
