@@ -39,9 +39,7 @@ const NonGetApiService = {
         "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({
-        newDive,
-      }),
+      body: JSON.stringify(newDive),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
@@ -53,9 +51,7 @@ const NonGetApiService = {
         "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({
-        newDive,
-      }),
+      body: JSON.stringify(newDive),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
@@ -106,9 +102,7 @@ const NonGetApiService = {
         "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({
-        newAnimalTracked,
-      }),
+      body: JSON.stringify(newAnimalTracked),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );

@@ -2,6 +2,7 @@ import React from "react";
 import "./AddDive.css";
 import Context from "../Context";
 import { Redirect } from "react-router-dom";
+import NonGetApiService from "../services/non-get-api-service";
 
 export default class AddDive extends React.Component {
   static contextType = Context;
@@ -154,19 +155,26 @@ export default class AddDive extends React.Component {
     });
   }
 
-  // need to update this fn
+  // !! TODO !!
+  // need to check that this is making all fetches correctly:
+  // addDive, updateWishlist_fulfilled, updateAnimalTracker
   handleSubmit = () => {
     let newDive = this.state;
     // newDive.id = this.context.dives.length + 1;
     newDive.user_id = this.context.user.id;
 
-    this.context.addDive(newDive);
+    NonGetApiService.addDive(newDive)
+      .then(this.context.addDive)
+      .catch((err) => console.log(err));
+
+    // this.context.addDive(newDive);
+
     this.context.updateWishlistFulfilled(newDive.animals_spotted);
 
-    let newAnimalsTracked = newDive.animals_spotted.map((animal, i) => {
+    let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
       let newAnimalTracked = {};
       // create the correct id
-      newAnimalTracked.id = this.context.animalTracker.length + 1 + i;
+      // newAnimalTracked.id = this.context.animalTracker.length + 1 + i;
       newAnimalTracked.animal = this.context.allAnimals.find(
         (a) => a.id === animal
       ).animal;

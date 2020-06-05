@@ -175,26 +175,52 @@ export default class App extends React.Component {
     });
   };
 
-  updateWishlistFulfilled = (animalsSpotted) => {
-    let newAnimalsSpotted = animalsSpotted.filter(
+  updateWishlistFulfilled = (animals_spotted) => {
+    let newAnimalsSpotted = animals_spotted.filter(
       (a) => !this.state.user.wishlist_fulfilled.includes(a)
     );
+    const newUser = this.state.user;
+    newUser.wishlist_fulfilled = [].concat(
+      newUser.wishlist_fulfilled,
+      newAnimalsSpotted
+    );
 
-    this.setState((prevState) => ({
-      user: {
-        ...prevState.user,
-        wishlistFulfilled: [].concat(
-          prevState.user.wishlist_fulfilled,
-          newAnimalsSpotted
-        ),
-      },
-    }));
+    NonGetApiService.updateUser(newUser.id, newUser)
+      .then(this.updateUser(newUser))
+      .catch((err) => console.log(err));
+
+    // this.setState((prevState) => ({
+    //   user: {
+    //     ...prevState.user,
+    //     wishlistFulfilled: [].concat(
+    //       prevState.user.wishlist_fulfilled,
+    //       newAnimalsSpotted
+    //     ),
+    //   },
+    // }));
+  };
+
+  updateAnimalsTracked = (allAnimalsTracked) => {
+    this.setState({
+      animalTracker: allAnimalsTracked,
+    });
   };
 
   updateAnimalTracker = (newAnimals) => {
-    this.setState({
-      animalTracker: [].concat(this.state.animalTracker, newAnimals),
-    });
+    let animalsTracked = [].concat(this.state.animalTracker, newAnimals);
+
+    newAnimals
+      .forEach((animal) => NonGetApiService.addAnimalTracked(animal))
+
+      // !! TODO !!
+      // figure this out
+      // this threw a hissy fit when addDive submitted, but it looks like it worked
+      .then(this.updateAnimalsTracked(animalsTracked))
+      .catch((err) => console.log(err));
+
+    // this.setState({
+    //   animalTracker: [].concat(this.state.animalTracker, newAnimals),
+    // });
   };
 
   deleteDive = (dive_id) => {
