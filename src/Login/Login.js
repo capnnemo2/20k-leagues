@@ -17,23 +17,12 @@ export default class Login extends React.Component {
   };
 
   handleLoginSuccess = () => {
-    GetApiService.getUser().then((res) => {
-      this.context.getUserData(res);
-    });
+    GetApiService.getUser()
+      .then((res) => {
+        this.context.getUserData(res);
+      })
+      .then(() => this.props.history.push("/log"));
   };
-
-  // handleLoginSuccess = (cb) => {
-  //   GetApiService.getUser()
-  //     .then((res) => {
-  //       this.context.setUser(res);
-  //     })
-  //     .then(() => {
-  //       const userId = this.context.user.id;
-  //       console.log("pray: ", userId);
-  //       // this is not working because it needs to pass the newly fetch user id
-  //       cb(userId);
-  //     });
-  // };
 
   handleSubmitJwtAuth = (e) => {
     e.preventDefault();
@@ -46,10 +35,7 @@ export default class Login extends React.Component {
     })
       .then((res) => {
         TokenService.saveAuthToken(res.authToken);
-        this.handleLoginSuccess(() => {
-          this.context.getUserData();
-          this.props.history.push("/log");
-        });
+        this.handleLoginSuccess();
       })
       .catch((res) => {
         this.setState({ error: res.error });
