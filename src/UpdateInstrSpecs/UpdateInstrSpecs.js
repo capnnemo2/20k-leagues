@@ -7,12 +7,12 @@ export default class UpdateInstrSpecs extends React.Component {
   static contextType = Context;
 
   state = {
-    instructorSpecialties: [],
+    instructor_specialties: [],
   };
 
   componentDidMount() {
     this.setState({
-      instructorSpecialties: this.context.user.instructorSpecialties,
+      instructor_specialties: this.context.user.instructor_specialties,
     });
   }
 
@@ -22,13 +22,13 @@ export default class UpdateInstrSpecs extends React.Component {
         <label>
           <input
             type="checkbox"
-            name={spec.name}
+            name={spec.spec_name}
             id={spec.id}
-            value={spec.name}
-            checked={this.state.instructorSpecialties.includes(spec.id)}
+            value={spec.spec_name}
+            checked={this.state.instructor_specialties.includes(spec.id)}
             onChange={this.handleChange}
           />
-          {spec.name}
+          {spec.spec_name}
         </label>
       </div>
     ));
@@ -37,14 +37,14 @@ export default class UpdateInstrSpecs extends React.Component {
   handleChange = (e) => {
     if (e.target.checked) {
       this.setState({
-        instructorSpecialties: [
-          ...this.state.instructorSpecialties,
+        instructor_specialties: [
+          ...this.state.instructor_specialties,
           parseInt(e.target.getAttribute("id")),
         ],
       });
     } else {
       this.setState({
-        instructorSpecialties: this.state.instructorSpecialties.filter(
+        instructor_specialties: this.state.instructor_specialties.filter(
           (spec) => spec !== parseInt(e.target.getAttribute("id"))
         ),
       });
@@ -52,7 +52,7 @@ export default class UpdateInstrSpecs extends React.Component {
   };
 
   handleSubmit = () => {
-    this.context.updateInstrSpecs(this.state.instructorSpecialties);
+    this.context.updateInstrSpecs(this.state.instructor_specialties);
     this.props.history.push("/profile");
   };
 

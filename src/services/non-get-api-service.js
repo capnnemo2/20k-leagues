@@ -18,6 +18,7 @@ const NonGetApiService = {
     );
   },
   updateUser(userId, newUser) {
+    // !! TODO !!
     // this works, but throws the same error as deleteCert
     return fetch(`${config.API_ENDPOINT}/users/${userId}`, {
       method: "PATCH",
@@ -84,6 +85,7 @@ const NonGetApiService = {
     );
   },
   deleteCert(certId) {
+    // !! TODO !!
     // this works, but also throws an error: SyntaxError: Unexpected end of JSON input
     // at non-get-api-service.js:113
     return fetch(`${config.API_ENDPOINT}/certs/${certId}`, {

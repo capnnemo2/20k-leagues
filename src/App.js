@@ -125,6 +125,7 @@ export default class App extends React.Component {
   updateWishlist = (wishlist) => {
     const newUser = this.state.user;
     newUser.wishlist = wishlist;
+
     NonGetApiService.updateUser(newUser.id, newUser)
       .then(this.updateUser(newUser))
       .catch((err) => console.log(err));
@@ -137,21 +138,35 @@ export default class App extends React.Component {
   };
 
   updateSpecialties = (newSpecs) => {
-    this.setState((prevState) => ({
-      user: {
-        ...prevState.user,
-        specialties: newSpecs,
-      },
-    }));
+    const newUser = this.state.user;
+    newUser.specialties = newSpecs;
+
+    NonGetApiService.updateUser(newUser.id, newUser)
+      .then(this.updateUser(newUser))
+      .catch((err) => console.log(err));
+
+    // this.setState((prevState) => ({
+    //   user: {
+    //     ...prevState.user,
+    //     specialties: newSpecs,
+    //   },
+    // }));
   };
 
   updateInstrSpecs = (newInstrSpecs) => {
-    this.setState((prevState) => ({
-      user: {
-        ...prevState.user,
-        instructor_specialties: newInstrSpecs,
-      },
-    }));
+    const newUser = this.state.user;
+    newUser.instructor_specialties = newInstrSpecs;
+
+    NonGetApiService.updateUser(newUser.id, newUser)
+      .then(this.updateUser(newUser))
+      .catch((err) => console.log(err));
+
+    // this.setState((prevState) => ({
+    //   user: {
+    //     ...prevState.user,
+    //     instructor_specialties: newInstrSpecs,
+    //   },
+    // }));
   };
 
   addDive = (newDive) => {

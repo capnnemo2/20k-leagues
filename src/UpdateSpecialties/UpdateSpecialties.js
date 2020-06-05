@@ -22,13 +22,13 @@ export default class UpdateSpecialties extends React.Component {
         <label>
           <input
             type="checkbox"
-            name={spec.name}
+            name={spec.spec_name}
             id={spec.id}
-            value={spec.name}
+            value={spec.spec_name}
             checked={this.state.specialties.includes(spec.id)}
             onChange={this.handleChange}
           />
-          {spec.name}
+          {spec.spec_name}
         </label>
       </div>
     ));

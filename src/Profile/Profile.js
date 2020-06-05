@@ -83,7 +83,7 @@ export default class Profile extends React.Component {
                   .filter((spec) =>
                     user.instructor_specialties.includes(spec.id)
                   )
-                  .map((spec, i) => <li key={i}>{spec.name}</li>)
+                  .map((spec, i) => <li key={i}>{spec.spec_name}</li>)
               : ""}
           </ul>
         </fieldset>
