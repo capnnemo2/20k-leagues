@@ -155,38 +155,26 @@ export default class AddDive extends React.Component {
     });
   }
 
-  // !! TODO !!
-  // need to check that this is making all fetches correctly:
-  // addDive, updateWishlist_fulfilled, updateAnimalTracker
   handleSubmit = () => {
     let newDive = this.state;
-    // newDive.id = this.context.dives.length + 1;
     newDive.user_id = this.context.user.id;
 
-    // !! TODO !!
-    // this one isn't working for some reason:
-    // ERROR:  invalid input syntax for type integer: ""
-    // does this mean that empty integer fields that submit an empty string don't count as integers?
     NonGetApiService.addDive(newDive)
       .then(this.context.addDive)
       .catch((err) => console.log(err));
-
-    // this.context.addDive(newDive);
 
     this.context.updateWishlistFulfilled(newDive.animals_spotted);
 
     let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
       let newAnimalTracked = {};
-      // create the correct id
-      // newAnimalTracked.id = this.context.animalTracker.length + 1 + i;
       newAnimalTracked.animal = this.context.allAnimals.find(
         (a) => a.id === animal
       ).animal;
       newAnimalTracked.country = newDive.country;
       newAnimalTracked.region = newDive.region;
-
       return newAnimalTracked;
     });
+
     this.context.updateAnimalTracker(newAnimalsTracked);
 
     this.props.history.push("/log");

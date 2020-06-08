@@ -88,14 +88,14 @@ const NonGetApiService = {
     );
   },
   //   ANIMAL TRACKER
-  addAnimalTracked(newAnimalTracked) {
+  addAnimalsTracked(newAnimalsTracked) {
     return fetch(`${config.API_ENDPOINT}/animalTracker`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify(newAnimalTracked),
+      body: JSON.stringify(newAnimalsTracked),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );

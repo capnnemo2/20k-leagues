@@ -212,6 +212,10 @@ export default class App extends React.Component {
     console.log("update animal tracker ran");
     let animalsTracked = [].concat(this.state.animalTracker, newAnimals);
 
+    NonGetApiService.addAnimalsTracked(newAnimals)
+      .then(this.updateAnimalsTracked(animalsTracked))
+      .catch((err) => console.log(err));
+
     // newAnimals
     //   .forEach((animal) => NonGetApiService.addAnimalTracked(animal))
 
