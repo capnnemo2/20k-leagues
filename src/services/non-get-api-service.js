@@ -100,14 +100,14 @@ const NonGetApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  updateAnimalsTracked(animal, region) {
+  removeAnimalsTracked(animalsToRemove) {
     return fetch(`${config.API_ENDPOINT}/animalTracker`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({ animal, region }),
+      body: JSON.stringify(animalsToRemove),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );

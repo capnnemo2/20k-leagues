@@ -144,13 +144,6 @@ export default class App extends React.Component {
     NonGetApiService.updateUser(newUser.id, newUser)
       .then(this.updateUser(newUser))
       .catch((err) => console.log(err));
-
-    // this.setState((prevState) => ({
-    //   user: {
-    //     ...prevState.user,
-    //     specialties: newSpecs,
-    //   },
-    // }));
   };
 
   updateInstrSpecs = (newInstrSpecs) => {
@@ -160,13 +153,6 @@ export default class App extends React.Component {
     NonGetApiService.updateUser(newUser.id, newUser)
       .then(this.updateUser(newUser))
       .catch((err) => console.log(err));
-
-    // this.setState((prevState) => ({
-    //   user: {
-    //     ...prevState.user,
-    //     instructor_specialties: newInstrSpecs,
-    //   },
-    // }));
   };
 
   addDive = (newDive) => {
@@ -190,16 +176,6 @@ export default class App extends React.Component {
     NonGetApiService.updateUser(newUser.id, newUser)
       .then(this.updateUser(newUser))
       .catch((err) => console.log(err));
-
-    // this.setState((prevState) => ({
-    //   user: {
-    //     ...prevState.user,
-    //     wishlistFulfilled: [].concat(
-    //       prevState.user.wishlist_fulfilled,
-    //       newAnimalsSpotted
-    //     ),
-    //   },
-    // }));
   };
 
   updateAnimalsTracked = (allAnimalsTracked) => {
@@ -215,19 +191,6 @@ export default class App extends React.Component {
     NonGetApiService.addAnimalsTracked(newAnimals)
       .then(this.updateAnimalsTracked(animalsTracked))
       .catch((err) => console.log(err));
-
-    // newAnimals
-    //   .forEach((animal) => NonGetApiService.addAnimalTracked(animal))
-
-    //   // !! TODO !!
-    //   // figure this out
-    //   // this threw a hissy fit when addDive submitted, but it looks like it worked
-    //   .then(this.updateAnimalsTracked(animalsTracked))
-    //   .catch((err) => console.log(err));
-
-    // this.setState({
-    //   animalTracker: [].concat(this.state.animalTracker, newAnimals),
-    // });
   };
 
   deleteDive = (dive_id) => {

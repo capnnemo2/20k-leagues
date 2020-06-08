@@ -91,26 +91,49 @@ export default class DiveDetails extends React.Component {
 
   handleDelete = (dive_id) => {
     // !! TODO !!
+
+    // delete dive works, but it completely clears animaltracker and user wishlist_fulfilled does not update
+
     // needs to get dive (by id?) select out the wishlist animals that it checks off, then run updateAnimalsTracked for each animal
 
-    // something like this, haven't tested it yet
+    // remove animals_spotted from animaltracker table
     const dive = this.context.dives.find(
       (d) => Number(d.id) === Number(dive_id)
     );
     const region = dive.region;
-    dive.animals_spotted.forEach((animal) =>
-      NonGetApiService.updateAnimalsTracked(animal, region).catch((err) =>
-        console.log(err)
-      )
+    let animals = this.context.allAnimals.filter((a) =>
+      dive.animals_spotted.includes(a.id)
+    );
+    animals.forEach(function (a) {
+      a.region = region;
+    });
+
+    console.log("animals list: ", animals);
+
+    NonGetApiService.removeAnimalsTracked(animals)
+      // .then(this.context.removeAnimalsTracked(animals))
+      .catch((err) => console.log(err));
+
+    // !! TODO !!
+    // this does not filter for some reason
+    let updatedAnimalsSpotted = this.context.user.wishlist_fulfilled.filter(
+      (a) => !animals.includes(a.id)
     );
 
+    console.log(
+      "user wishlist fulfilled: ",
+      this.context.user.wishlist_fulfilled
+    );
+    console.log("animals from this dive: ", animals);
+    console.log("new user wishlist fulfilled: ", updatedAnimalsSpotted);
+
+    this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
+
+    // delete the dive from dives table
     NonGetApiService.deleteDive(dive_id)
       .then(this.context.deleteDive(dive_id))
       .then(this.props.history.push("/log"))
       .catch((err) => console.log(err));
-
-    // this.context.deleteDive(dive_id);
-    // this.props.history.push("/log");
   };
 
   render() {
