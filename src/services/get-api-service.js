@@ -40,7 +40,6 @@ const GetApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-
   getUserCerts(userId) {
     return fetch(`${config.API_ENDPOINT}/certs/user/${userId}`, {
       headers: {
@@ -50,17 +49,6 @@ const GetApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  // OR -----------
-  // getAllCerts() {
-  //   return fetch(`${config.API_ENDPOINT}/certs`, {
-  //     headers: {
-  //       authorization: `bearer ${TokenService.getAuthToken()}`,
-  //     },
-  //   }).then((res) =>
-  //     !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-  //   );
-  // },
-
   getUserDives(userId) {
     return fetch(`${config.API_ENDPOINT}/dives/user/${userId}`, {
       headers: {
@@ -70,16 +58,6 @@ const GetApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  // OR ----------
-  // getAllDives() {
-  //   return fetch(`${config.API_ENDPOINT}/dives`, {
-  //     headers: {
-  //       authorization: `bearer ${TokenService.getAuthToken()}`,
-  //     },
-  //   }).then((res) =>
-  //     !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-  //   );
-  // },
 };
 
 export default GetApiService;

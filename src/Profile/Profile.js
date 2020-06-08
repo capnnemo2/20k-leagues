@@ -1,6 +1,6 @@
 import React from "react";
 import "./Profile.css";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Context from "../Context";
 import NonGetApiService from "../services/non-get-api-service";
 // import TokenService from "../services/token-service";
@@ -22,7 +22,7 @@ export default class Profile extends React.Component {
     );
     const userCerts = certs.map((cert) => cert.cert_level);
 
-    return user ? (
+    return user.hasOwnProperty("id") ? (
       <div className="Profile">
         <section>
           <h2>{user.first_name}'s Profile</h2>
@@ -100,7 +100,7 @@ export default class Profile extends React.Component {
         </fieldset>
       </div>
     ) : (
-      <Redirect to={{ pathname: "/login" }} />
+      <h2>Loading Profile...</h2>
     );
   }
 }

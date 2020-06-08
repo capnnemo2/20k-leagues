@@ -170,12 +170,14 @@ export default class App extends React.Component {
   };
 
   addDive = (newDive) => {
+    console.log("add dive ran");
     this.setState({
       dives: [...this.state.dives, newDive],
     });
   };
 
   updateWishlistFulfilled = (animals_spotted) => {
+    console.log("update wishlist fulfilled ran");
     let newAnimalsSpotted = animals_spotted.filter(
       (a) => !this.state.user.wishlist_fulfilled.includes(a)
     );
@@ -207,16 +209,17 @@ export default class App extends React.Component {
   };
 
   updateAnimalTracker = (newAnimals) => {
+    console.log("update animal tracker ran");
     let animalsTracked = [].concat(this.state.animalTracker, newAnimals);
 
-    newAnimals
-      .forEach((animal) => NonGetApiService.addAnimalTracked(animal))
+    // newAnimals
+    //   .forEach((animal) => NonGetApiService.addAnimalTracked(animal))
 
-      // !! TODO !!
-      // figure this out
-      // this threw a hissy fit when addDive submitted, but it looks like it worked
-      .then(this.updateAnimalsTracked(animalsTracked))
-      .catch((err) => console.log(err));
+    //   // !! TODO !!
+    //   // figure this out
+    //   // this threw a hissy fit when addDive submitted, but it looks like it worked
+    //   .then(this.updateAnimalsTracked(animalsTracked))
+    //   .catch((err) => console.log(err));
 
     // this.setState({
     //   animalTracker: [].concat(this.state.animalTracker, newAnimals),
@@ -251,6 +254,11 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
+    if (TokenService.getAuthToken()) {
+      GetApiService.getUser().then((res) => {
+        this.getUserData(res);
+      });
+    }
     GetApiService.getCountries().then(this.setCountries).catch(this.catchError);
     GetApiService.getAnimals().then(this.setAllAnimals).catch(this.catchError);
     GetApiService.getSpecialties()
@@ -260,10 +268,6 @@ export default class App extends React.Component {
     GetApiService.getAnimalsTracked()
       .then(this.setAnimalTracker)
       .catch(this.catchError);
-
-    if (TokenService.getAuthToken()) {
-      this.getUserData();
-    }
   }
 
   getUserData = (user) => {

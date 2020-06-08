@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Context from "../Context";
+import NonGetApiService from "../services/non-get-api-service";
 import "./DiveDetails.css";
 
 export default class DiveDetails extends React.Component {
@@ -89,8 +90,27 @@ export default class DiveDetails extends React.Component {
   };
 
   handleDelete = (dive_id) => {
-    this.context.deleteDive(dive_id);
-    this.props.history.push("/log");
+    // !! TODO !!
+    // needs to get dive (by id?) select out the wishlist animals that it checks off, then run updateAnimalsTracked for each animal
+
+    // something like this, haven't tested it yet
+    const dive = this.context.dives.find(
+      (d) => Number(d.id) === Number(dive_id)
+    );
+    const region = dive.region;
+    dive.animals_spotted.forEach((animal) =>
+      NonGetApiService.updateAnimalsTracked(animal, region).catch((err) =>
+        console.log(err)
+      )
+    );
+
+    NonGetApiService.deleteDive(dive_id)
+      .then(this.context.deleteDive(dive_id))
+      .then(this.props.history.push("/log"))
+      .catch((err) => console.log(err));
+
+    // this.context.deleteDive(dive_id);
+    // this.props.history.push("/log");
   };
 
   render() {

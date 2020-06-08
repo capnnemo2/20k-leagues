@@ -163,6 +163,10 @@ export default class AddDive extends React.Component {
     // newDive.id = this.context.dives.length + 1;
     newDive.user_id = this.context.user.id;
 
+    // !! TODO !!
+    // this one isn't working for some reason:
+    // ERROR:  invalid input syntax for type integer: ""
+    // does this mean that empty integer fields that submit an empty string don't count as integers?
     NonGetApiService.addDive(newDive)
       .then(this.context.addDive)
       .catch((err) => console.log(err));

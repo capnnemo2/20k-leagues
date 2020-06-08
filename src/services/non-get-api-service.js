@@ -18,8 +18,6 @@ const NonGetApiService = {
     );
   },
   updateUser(userId, newUser) {
-    // !! TODO !!
-    // this works, but throws the same error as deleteCert
     return fetch(`${config.API_ENDPOINT}/users/${userId}`, {
       method: "PATCH",
       headers: {
@@ -28,7 +26,7 @@ const NonGetApiService = {
       },
       body: JSON.stringify(newUser),
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : true
     );
   },
   //   DIVES
@@ -60,11 +58,10 @@ const NonGetApiService = {
     return fetch(`${config.API_ENDPOINT}/dives/${diveId}`, {
       method: "DELETE",
       headers: {
-        "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : true
     );
   },
   //   CERTS
@@ -81,17 +78,13 @@ const NonGetApiService = {
     );
   },
   deleteCert(certId) {
-    // !! TODO !!
-    // this works, but also throws an error: SyntaxError: Unexpected end of JSON input
-    // at non-get-api-service.js:113
     return fetch(`${config.API_ENDPOINT}/certs/${certId}`, {
       method: "DELETE",
       headers: {
-        "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : true
     );
   },
   //   ANIMAL TRACKER
