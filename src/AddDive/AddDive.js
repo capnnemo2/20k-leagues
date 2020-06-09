@@ -163,7 +163,7 @@ export default class AddDive extends React.Component {
       .then(this.context.addDive)
       .catch((err) => console.log(err));
 
-    this.context.updateWishlistFulfilled(newDive.animals_spotted);
+    this.context.addToWishlistFulfilled(newDive.animals_spotted);
 
     let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
       let newAnimalTracked = {};

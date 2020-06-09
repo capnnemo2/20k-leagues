@@ -19,11 +19,12 @@ export default React.createContext({
   updateSpecialties: () => {},
   updateInstrSpecs: () => {},
   addDive: () => {},
-  updateWishlistFulfilled: () => {},
+  addToWishlistFulfilled: () => {},
   updateAnimalTracker: () => {},
   deleteDive: () => {},
   deleteCert: () => {},
   updateDive: () => {},
   logOut: () => {},
   getUserData: () => {},
+  updateWishlistFulfilled: () => {},
 });

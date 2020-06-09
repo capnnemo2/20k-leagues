@@ -156,13 +156,13 @@ export default class App extends React.Component {
   };
 
   addDive = (newDive) => {
-    console.log("add dive ran");
     this.setState({
       dives: [...this.state.dives, newDive],
     });
   };
 
-  updateWishlistFulfilled = (animals_spotted) => {
+  // this only works to add to, not remove from wishlist_fulfilled
+  addToWishlistFulfilled = (animals_spotted) => {
     console.log("update wishlist fulfilled ran");
     let newAnimalsSpotted = animals_spotted.filter(
       (a) => !this.state.user.wishlist_fulfilled.includes(a)
@@ -172,6 +172,15 @@ export default class App extends React.Component {
       newUser.wishlist_fulfilled,
       newAnimalsSpotted
     );
+
+    NonGetApiService.updateUser(newUser.id, newUser)
+      .then(this.updateUser(newUser))
+      .catch((err) => console.log(err));
+  };
+
+  updateWishlistFulfilled = (newWishlistFulfilled) => {
+    const newUser = this.state.user;
+    newUser.wishlist_fulfilled = newWishlistFulfilled;
 
     NonGetApiService.updateUser(newUser.id, newUser)
       .then(this.updateUser(newUser))
@@ -270,13 +279,14 @@ export default class App extends React.Component {
       updateSpecialties: this.updateSpecialties,
       updateInstrSpecs: this.updateInstrSpecs,
       addDive: this.addDive,
-      updateWishlistFulfilled: this.updateWishlistFulfilled,
+      addToWishlistFulfilled: this.addToWishlistFulfilled,
       updateAnimalTracker: this.updateAnimalTracker,
       deleteDive: this.deleteDive,
       deleteCert: this.deleteCert,
       updateDive: this.updateDive,
       logOut: this.logOut,
       getUserData: this.getUserData,
+      updateWishlistFulfilled: this.updateWishlistFulfilled,
     };
 
     return (

@@ -92,9 +92,7 @@ export default class DiveDetails extends React.Component {
   handleDelete = (dive_id) => {
     // !! TODO !!
 
-    // delete dive works, but it completely clears animaltracker and user wishlist_fulfilled does not update
-
-    // needs to get dive (by id?) select out the wishlist animals that it checks off, then run updateAnimalsTracked for each animal
+    // delete dive works, BUT deleting the dive removes the animals spotted from the user wishlist fulfilled, which is great UNLESS the user spotted the same animal on a different dive...
 
     // remove animals_spotted from animaltracker table
     const dive = this.context.dives.find(
@@ -108,24 +106,16 @@ export default class DiveDetails extends React.Component {
       a.region = region;
     });
 
-    console.log("animals list: ", animals);
-
     NonGetApiService.removeAnimalsTracked(animals)
       // .then(this.context.removeAnimalsTracked(animals))
       .catch((err) => console.log(err));
 
-    // !! TODO !!
-    // this does not filter for some reason
-    let updatedAnimalsSpotted = this.context.user.wishlist_fulfilled.filter(
-      (a) => !animals.includes(a.id)
-    );
+    let animalIds = animals.map((a) => a.id);
+    console.log("animal ids: ", animalIds);
 
-    console.log(
-      "user wishlist fulfilled: ",
-      this.context.user.wishlist_fulfilled
+    let updatedAnimalsSpotted = this.context.user.wishlist_fulfilled.filter(
+      (a) => !animalIds.includes(a)
     );
-    console.log("animals from this dive: ", animals);
-    console.log("new user wishlist fulfilled: ", updatedAnimalsSpotted);
 
     this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
 
@@ -195,9 +185,6 @@ export default class DiveDetails extends React.Component {
                   .map((animal, i) => (
                     <li key={i}>{animal.animal}</li>
                   ))}
-                {/* {dive.animalsSpotted.map((animal) => (
-                  <li key={animal}>{animal}</li>
-                ))} */}
               </ul>
             </fieldset>
           </div>

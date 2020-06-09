@@ -219,7 +219,9 @@ export default class EditDive extends React.Component {
       .then(this.context.updateDive(newDive.id, newDive))
       .catch((err) => console.log(err));
 
-    this.context.updateWishlistFulfilled(newDive.animals_spotted);
+    // !! TODO !!
+    // this function might not work properly for removing animals spotted
+    this.context.addToWishlistFulfilled(newDive.animals_spotted);
 
     let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
       let newAnimalTracked = {};
