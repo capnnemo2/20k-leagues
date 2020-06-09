@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import Context from "../Context";
 import "./EditDive.css";
+import NonGetApiService from "../services/non-get-api-service";
 
 export default class EditDive extends React.Component {
   static contextType = Context;
@@ -43,14 +44,28 @@ export default class EditDive extends React.Component {
   }
 
   setFieldsInState = (dive) => {
-    let diveDate = dive.dive_date.split("");
-    diveDate.splice(4, 0, "-");
-    diveDate.splice(7, 0, "-");
-    diveDate = diveDate.join("");
+    let dive_date = dive.dive_date.split("");
+    dive_date.splice(4, 0, "-");
+    dive_date.splice(7, 0, "-");
+    dive_date = dive_date.join("");
+    dive_date = dive_date.slice(0, 10);
+
+    if (dive.max_depth === null) {
+      dive.max_depth = "";
+    }
+    if (dive.duration === null) {
+      dive.duration = "";
+    }
+    if (dive.water_temp === null) {
+      dive.water_temp = "";
+    }
+    if (dive.viz === null) {
+      dive.viz = "";
+    }
 
     this.setState({
       initialFieldsSet: true,
-      dive_date: diveDate,
+      dive_date: dive_date,
       dive_site: dive.dive_site,
       country: dive.country,
       region: dive.region,
@@ -193,21 +208,26 @@ export default class EditDive extends React.Component {
     });
   }
 
-  // need to update this fn
+  // !! TODO !!
+  // check that this works
   handleSubmit = () => {
     let newDive = this.state;
     newDive.id = Number(this.props.match.params.dive_id);
     newDive.user_id = this.context.user.id;
 
-    this.context.updateDive(newDive, newDive.id);
+    NonGetApiService.updateDive(newDive)
+      .then(this.context.updateDive(newDive.id, newDive))
+      .catch((err) => console.log(err));
+
     this.context.updateWishlistFulfilled(newDive.animals_spotted);
 
-    let newAnimalsTracked = newDive.animals_spotted.map((animal, i) => {
+    let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
       let newAnimalTracked = {};
-      newAnimalTracked.animal = animal;
+      newAnimalTracked.animal = this.context.allAnimals.find(
+        (a) => a.id === animal
+      ).animal;
       newAnimalTracked.country = newDive.country;
       newAnimalTracked.region = newDive.region;
-
       return newAnimalTracked;
     });
     this.context.updateAnimalTracker(newAnimalsTracked);
@@ -446,9 +466,8 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="dive-type"
                   value="Shore"
-                  checked={this.state.diveType === "Shore"}
+                  checked={this.state.dive_type === "Shore"}
                   onChange={(e) => this.updateDiveType(e)}
                 />
                 Shore dive
@@ -457,7 +476,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="dive-type"
                   value="Boat"
                   checked={this.state.dive_type === "Boat"}
                   onChange={(e) => this.updateDiveType(e)}

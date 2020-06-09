@@ -51,7 +51,7 @@ const NonGetApiService = {
       },
       body: JSON.stringify(newDive),
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : true
     );
   },
   deleteDive(diveId) {
