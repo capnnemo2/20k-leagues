@@ -98,8 +98,6 @@ export default class DiveDetails extends React.Component {
 
   handleDelete = (dive_id) => {
     // !! TODO !!
-    // need to figure out how to handle if there was more than one different animal spotted
-
     // first, check if there were any animals spotted
     const dive = this.context.dives.find(
       (d) => Number(d.id) === Number(dive_id)
@@ -108,60 +106,102 @@ export default class DiveDetails extends React.Component {
 
     if (dive.animals_spotted.length === 0) {
       console.log("no animals spotted");
-      // simply delete the dive from the dives table
       this.deleteDive(dive_id);
-    } else {
-      console.log("animals were spotted");
-      // there was at least one animal spotted, find out what animal, add the region, find the animal(s) in animal tracker
+    } else if (dive.animals_spotted.length === 1) {
+      console.log("an animal was spotted");
 
-      let animalNames = this.context.allAnimals.filter((a) =>
+      // find the animal
+      let animalName = this.context.allAnimals.filter((a) =>
         dive.animals_spotted.includes(a.id)
       );
-      const animalIds = animalNames.map((a) => a.id);
-      animalNames = animalNames.map((a) => a.animal);
-      console.log("animal names: ", animalNames);
-      console.log("context: ", this.context.animalTracker);
-      const animalsInTracker = this.context.animalTracker.filter((a) =>
-        animalNames.includes(a.animal)
+      // create an id array for later
+      const animalId = animalName.map((a) => a.id);
+      // reduce to just the name
+      animalName = animalName.map((a) => a.animal);
+      // use name to get info from tracker
+      const animalInTracker = this.context.animalTracker.filter((a) =>
+        animalName.includes(a.animal)
       );
-      console.log("animal in tracker without region: ", animalsInTracker);
-      const animalsInTrackerRegion = animalsInTracker.filter(
+      // get animal in region
+      let animalInTrackerRegion = animalInTracker.filter(
         (a) => a.region === region
       );
-      // this might be what needs to be sent to remove from animalTracker, but console log to make sure that the correct info is in this array. We want animal and region only
-      console.log("animals in tracker: ", animalsInTrackerRegion);
+      animalInTrackerRegion.forEach((a) => delete a.country);
 
-      // animalsInTracker should select the animal spotted in the correct region
-
-      if (animalsInTracker.length === 1) {
+      // if only one: remove from tracker AND remove from wishlist fulfilled AND delete dive
+      if (animalInTracker.length === 1) {
         console.log("only one animal sighting");
-        // remove from animalTracker
         // this isn't working...
+        // requires a reload to update context -> add .then(this.context.something to update context)
+        // !! it deletes all, not just one
+        // check api limit(1)
+        // syntax is knex friendly, but doesn't work with postgres?
+        console.log("animal in region: ", animalInTrackerRegion);
         NonGetApiService.removeAnimalsTracked(
-          animalsInTrackerRegion
+          animalInTrackerRegion
         ).catch((err) => console.log(err));
 
         // remove from user wishlist fulfilled
-        console.log("hopefully an array of animal ids: ", animalIds);
+        // this works
+        console.log("hopefully an array of animal ids: ", animalId);
         const updatedAnimalsSpotted = this.context.user.wishlist_fulfilled.filter(
-          (a) => !animalIds.includes(a)
+          (a) => !animalId.includes(a)
         );
-
         this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
 
-        // delete dive from dives table
         this.deleteDive(dive_id);
       } else {
+        // if more than one: remove from tracker AND delete dive
         console.log("there were plenty");
-        // reduce count by 1 --> which means remove one instance from the animal tracker
         // this isn't working...
-        NonGetApiService.removeAnimalsTracked(animalsInTracker).catch((err) =>
-          console.log(err)
-        );
+        console.log("animal in region: ", animalInTrackerRegion);
+        NonGetApiService.removeAnimalsTracked(
+          animalInTrackerRegion
+        ).catch((err) => console.log(err));
 
-        // delete dive from dives table
         this.deleteDive(dive_id);
       }
+    } else {
+      // if animals_spotted > 1
+      console.log("animals were spotted");
+      // need to do a forEach for each animal in dive.animals_spotted
+      // forEach if there is only one animal instance in tracker: remove from tracker AND remove from wishlist fulfilled
+      // if there is more than one instance: remove from tracker
+      // after forEach runs: delete dive
+
+      // find the animals
+      let animalNames = this.context.allAnimals.filter((a) =>
+        dive.animals_spotted.includes(a.id)
+      );
+      console.log("multiple animals: ", animalNames);
+      // this is id and animal
+
+      animalNames.forEach((a) => {
+        const animalId = a.id;
+        const animalAnimal = a.animal;
+        const animalTracked = this.context.animalTracker.filter(
+          (animal) => animal === animalAnimal
+        );
+        const animalInRegion = this.context.animalTracker.filter(
+          (animal) => animal.region === region
+        );
+
+        if (animalTracked === 1) {
+          NonGetApiService.removeAnimalsTracked(animalInRegion).catch((err) =>
+            console.log(err)
+          );
+
+          const updateAnimalsSpottedForWishlist = this.context.user.wishlist_fulfilled.filter(
+            (a) => a !== animalId
+          );
+          this.context.updateWishlistFulfilled(updateAnimalsSpottedForWishlist);
+        } else {
+          NonGetApiService.removeAnimalsTracked(animalInRegion).catch((err) =>
+            console.log(err)
+          );
+        }
+      });
+      this.deleteDive(dive_id);
     }
 
     // check the count in animal tracker

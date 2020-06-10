@@ -196,6 +196,7 @@ export default class App extends React.Component {
     let animalsTracked = [].concat(this.state.animalTracker, newAnimals);
 
     NonGetApiService.addAnimalsTracked(newAnimals)
+      // should this be: .then(this.updateAnimalsTracked(res))? The problem is that context gets updated, but doesn't attach the ids that the backend assigns... (unless you reload)
       .then(this.updateAnimalsTracked(animalsTracked))
       .catch((err) => console.log(err));
   };
