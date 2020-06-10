@@ -89,41 +89,82 @@ export default class DiveDetails extends React.Component {
     return allUserDives.indexOf(thisDive) + 1;
   };
 
-  handleDelete = (dive_id) => {
-    // !! TODO !!
-
-    // delete dive works, BUT deleting the dive removes the animals spotted from the user wishlist fulfilled, which is great UNLESS the user spotted the same animal on a different dive...
-
-    // remove animals_spotted from animaltracker table
-    const dive = this.context.dives.find(
-      (d) => Number(d.id) === Number(dive_id)
-    );
-    const region = dive.region;
-    let animals = this.context.allAnimals.filter((a) =>
-      dive.animals_spotted.includes(a.id)
-    );
-    animals.forEach(function (a) {
-      a.region = region;
-    });
-
-    NonGetApiService.removeAnimalsTracked(animals)
-      // .then(this.context.removeAnimalsTracked(animals))
-      .catch((err) => console.log(err));
-
-    let animalIds = animals.map((a) => a.id);
-    console.log("animal ids: ", animalIds);
-
-    let updatedAnimalsSpotted = this.context.user.wishlist_fulfilled.filter(
-      (a) => !animalIds.includes(a)
-    );
-
-    this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
-
-    // delete the dive from dives table
+  deleteDive = (dive_id) => {
     NonGetApiService.deleteDive(dive_id)
       .then(this.context.deleteDive(dive_id))
       .then(this.props.history.push("/log"))
       .catch((err) => console.log(err));
+  };
+
+  handleDelete = (dive_id) => {
+    // !! TODO !!
+    // need to figure out how to handle if there was more than one different animal spotted
+
+    // first, check if there were any animals spotted
+    const dive = this.context.dives.find(
+      (d) => Number(d.id) === Number(dive_id)
+    );
+    const region = dive.region;
+
+    if (dive.animals_spotted.length === 0) {
+      console.log("no animals spotted");
+      // simply delete the dive from the dives table
+      this.deleteDive(dive_id);
+    } else {
+      console.log("animals were spotted");
+      // there was at least one animal spotted, find out what animal, add the region, find the animal(s) in animal tracker
+
+      let animalNames = this.context.allAnimals.filter((a) =>
+        dive.animals_spotted.includes(a.id)
+      );
+      const animalIds = animalNames.map((a) => a.id);
+      animalNames = animalNames.map((a) => a.animal);
+      console.log("animal names: ", animalNames);
+      console.log("context: ", this.context.animalTracker);
+      const animalsInTracker = this.context.animalTracker.filter((a) =>
+        animalNames.includes(a.animal)
+      );
+      console.log("animal in tracker without region: ", animalsInTracker);
+      const animalsInTrackerRegion = animalsInTracker.filter(
+        (a) => a.region === region
+      );
+      // this might be what needs to be sent to remove from animalTracker, but console log to make sure that the correct info is in this array. We want animal and region only
+      console.log("animals in tracker: ", animalsInTrackerRegion);
+
+      // animalsInTracker should select the animal spotted in the correct region
+
+      if (animalsInTracker.length === 1) {
+        console.log("only one animal sighting");
+        // remove from animalTracker
+        // this isn't working...
+        NonGetApiService.removeAnimalsTracked(
+          animalsInTrackerRegion
+        ).catch((err) => console.log(err));
+
+        // remove from user wishlist fulfilled
+        console.log("hopefully an array of animal ids: ", animalIds);
+        const updatedAnimalsSpotted = this.context.user.wishlist_fulfilled.filter(
+          (a) => !animalIds.includes(a)
+        );
+
+        this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
+
+        // delete dive from dives table
+        this.deleteDive(dive_id);
+      } else {
+        console.log("there were plenty");
+        // reduce count by 1 --> which means remove one instance from the animal tracker
+        // this isn't working...
+        NonGetApiService.removeAnimalsTracked(animalsInTracker).catch((err) =>
+          console.log(err)
+        );
+
+        // delete dive from dives table
+        this.deleteDive(dive_id);
+      }
+    }
+
+    // check the count in animal tracker
   };
 
   render() {

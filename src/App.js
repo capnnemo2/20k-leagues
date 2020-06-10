@@ -163,7 +163,6 @@ export default class App extends React.Component {
 
   // this only works to add to, not remove from wishlist_fulfilled
   addToWishlistFulfilled = (animals_spotted) => {
-    console.log("update wishlist fulfilled ran");
     let newAnimalsSpotted = animals_spotted.filter(
       (a) => !this.state.user.wishlist_fulfilled.includes(a)
     );
@@ -194,7 +193,6 @@ export default class App extends React.Component {
   };
 
   updateAnimalTracker = (newAnimals) => {
-    console.log("update animal tracker ran");
     let animalsTracked = [].concat(this.state.animalTracker, newAnimals);
 
     NonGetApiService.addAnimalsTracked(newAnimals)

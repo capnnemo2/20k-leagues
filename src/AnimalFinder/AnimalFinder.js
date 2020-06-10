@@ -125,13 +125,6 @@ export default class AnimalFinder extends React.Component {
               </p>
             </div>
 
-            {/* <label>
-              Search by:
-              <select onChange={(e) => this.updateSearchBy(e.target.value)}>
-                <option value="animal">Animal</option>
-                <option value="location">Location</option>
-              </select>
-            </label> */}
             <fieldset>
               <legend>Search by</legend>
               <input
@@ -156,11 +149,6 @@ export default class AnimalFinder extends React.Component {
           <div className="filter-box">
             {this.state.searchBy === "location" ? (
               <div>
-                {/* <LocationFilter
-              updateCountry={this.updateCountry}
-              updateRegion={this.updateRegion}
-              country={this.state.country}
-            /> */}
                 <label>
                   Country:
                   <select onChange={(e) => this.updateCountry(e)}>

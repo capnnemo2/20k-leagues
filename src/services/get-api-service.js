@@ -23,7 +23,6 @@ const GetApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  // if this function is implemented in the CDM fn of App component, will the animal tracker list re-render after addAnimalTracked() runs? that fn should return the new animals tracked list, right?
   getAnimalsTracked() {
     return fetch(`${config.API_ENDPOINT}/animalTracker`, {
       headers: {},
