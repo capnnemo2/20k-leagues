@@ -108,7 +108,7 @@ export default class DiveDetails extends React.Component {
       console.log("no animals spotted");
       this.deleteDive(dive_id);
     } else if (dive.animals_spotted.length === 1) {
-      console.log("an animal was spotted");
+      console.log("one animal was spotted");
 
       // find the animal
       let animalName = this.context.allAnimals.filter((a) =>
@@ -130,20 +130,18 @@ export default class DiveDetails extends React.Component {
 
       // if only one: remove from tracker AND remove from wishlist fulfilled AND delete dive
       if (animalInTracker.length === 1) {
-        console.log("only one animal sighting");
+        console.log("one animal, only sighting");
         // this isn't working...
         // requires a reload to update context -> add .then(this.context.something to update context)
         // !! it deletes all, not just one
         // check api limit(1)
         // syntax is knex friendly, but doesn't work with postgres?
-        console.log("animal in region: ", animalInTrackerRegion);
         NonGetApiService.removeAnimalsTracked(
           animalInTrackerRegion
         ).catch((err) => console.log(err));
 
         // remove from user wishlist fulfilled
         // this works
-        console.log("hopefully an array of animal ids: ", animalId);
         const updatedAnimalsSpotted = this.context.user.wishlist_fulfilled.filter(
           (a) => !animalId.includes(a)
         );
@@ -152,9 +150,8 @@ export default class DiveDetails extends React.Component {
         this.deleteDive(dive_id);
       } else {
         // if more than one: remove from tracker AND delete dive
-        console.log("there were plenty");
+        console.log("one animal, multiple sightings");
         // this isn't working...
-        console.log("animal in region: ", animalInTrackerRegion);
         NonGetApiService.removeAnimalsTracked(
           animalInTrackerRegion
         ).catch((err) => console.log(err));
@@ -163,30 +160,24 @@ export default class DiveDetails extends React.Component {
       }
     } else {
       // if animals_spotted > 1
-      console.log("animals were spotted");
-      // need to do a forEach for each animal in dive.animals_spotted
-      // forEach if there is only one animal instance in tracker: remove from tracker AND remove from wishlist fulfilled
-      // if there is more than one instance: remove from tracker
-      // after forEach runs: delete dive
+      console.log("multiple animals were spotted");
 
-      // find the animals
       let animalNames = this.context.allAnimals.filter((a) =>
         dive.animals_spotted.includes(a.id)
       );
-      console.log("multiple animals: ", animalNames);
-      // this is id and animal
 
       animalNames.forEach((a) => {
         const animalId = a.id;
         const animalAnimal = a.animal;
         const animalTracked = this.context.animalTracker.filter(
-          (animal) => animal === animalAnimal
+          (animal) => animal.animal === animalAnimal
         );
-        const animalInRegion = this.context.animalTracker.filter(
+        const animalInRegion = animalTracked.filter(
           (animal) => animal.region === region
         );
 
-        if (animalTracked === 1) {
+        if (animalTracked.length === 1) {
+          // also doesn't work, context doesn't update without reload and deletes all instances...
           NonGetApiService.removeAnimalsTracked(animalInRegion).catch((err) =>
             console.log(err)
           );
