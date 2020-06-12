@@ -13,9 +13,6 @@ export default class Nav extends React.Component {
     TokenService.clearCallbackBeforeExpiry();
     IdleService.unRegisterIdleResets();
     this.context.setUser({});
-
-    // don't think I need this anymore
-    // this.context.logOut();
   };
 
   renderLogout = () => {

@@ -10,9 +10,7 @@ const NonGetApiService = {
         "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({
-        newUser,
-      }),
+      body: JSON.stringify(newUser),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
@@ -100,7 +98,7 @@ const NonGetApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  removeAnimalsTracked(animalsToRemove) {
+  removeAnimalsTracked(animalsToRemove, cb) {
     return fetch(`${config.API_ENDPOINT}/animalTracker`, {
       method: "DELETE",
       headers: {
@@ -109,7 +107,7 @@ const NonGetApiService = {
       },
       body: JSON.stringify(animalsToRemove),
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : true
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : cb()
     );
   },
 };

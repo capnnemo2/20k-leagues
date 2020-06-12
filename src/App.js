@@ -20,7 +20,6 @@ import AnimalFinder from "./AnimalFinder/AnimalFinder";
 import PublicOnlyRoute from "./Utils/PublicOnlyRoute";
 import PrivateRoute from "./Utils/PrivateRoute";
 import Context from "./Context";
-// import dummyStore from "./dummyStore";
 import "./App.css";
 import TokenService from "./services/token-service";
 // import IdleService from './services/idle-service'
@@ -36,7 +35,6 @@ export default class App extends React.Component {
     dives: [],
     certs: [],
     user: {},
-    loggedIn: false,
     allAnimals: [],
     countries: [],
     animalTracker: [],
@@ -98,18 +96,6 @@ export default class App extends React.Component {
     });
   };
 
-  setLoggedIn = () => {
-    this.setState({
-      loggedIn: true,
-    });
-  };
-
-  logOut = () => {
-    this.setState({
-      loggedIn: false,
-    });
-  };
-
   createNewUser = (newUser) => {
     this.setState({
       users: [...this.state.users, newUser],
@@ -161,7 +147,6 @@ export default class App extends React.Component {
     });
   };
 
-  // this only works to add to, not remove from wishlist_fulfilled
   addToWishlistFulfilled = (animals_spotted) => {
     let newAnimalsSpotted = animals_spotted.filter(
       (a) => !this.state.user.wishlist_fulfilled.includes(a)
@@ -193,13 +178,11 @@ export default class App extends React.Component {
   };
 
   updateAnimalTracker = (newAnimals) => {
-    let animalsTracked = [].concat(this.state.animalTracker, newAnimals);
-
     NonGetApiService.addAnimalsTracked(newAnimals)
-      // should this be: .then(this.updateAnimalsTracked(res))? The problem is that context gets updated, but doesn't attach the ids that the backend assigns... (unless you reload)
-      // maybe .then(GetApiService.getAnimalsTracked().then(this.updateAnimalsTracked(res)).catch(err=>console.log(err))).catch(err=>console.log(err))??
-      // this way you 1) add the new animals then 2) get the entire updated list then 3) update state/context
-      .then(this.updateAnimalsTracked(animalsTracked))
+      .then((res) => {
+        const animalsTracked = [].concat(this.state.animalTracker, res);
+        this.updateAnimalsTracked(animalsTracked);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -268,12 +251,10 @@ export default class App extends React.Component {
       setUser: this.setUser,
       dives: this.state.dives,
       certs: this.state.certs,
-      loggedIn: this.state.loggedIn,
       allAnimals: this.state.allAnimals,
       countries: this.state.countries,
       animalTracker: this.state.animalTracker,
       specialties: this.state.specialties,
-      setLoggedIn: this.setLoggedIn,
       createNewUser: this.createNewUser,
       updateWishlist: this.updateWishlist,
       addCert: this.addCert,

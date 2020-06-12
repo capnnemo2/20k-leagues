@@ -1,6 +1,7 @@
 import React from "react";
 import Context from "../Context";
 import "./SignUp.css";
+import NonGetApiService from "../services/non-get-api-service";
 
 export default class SignUp extends React.Component {
   static contextType = Context;
@@ -13,9 +14,9 @@ export default class SignUp extends React.Component {
     password: "",
     agency: "",
     isOtherSelected: true,
-    certLevel: "",
-    certNum: "",
-    certDate: "",
+    cert_level: "",
+    cert_num: "",
+    cert_date: "",
     wishlist: [],
     error: null,
   };
@@ -54,13 +55,13 @@ export default class SignUp extends React.Component {
   // cert handlers
   updateCertLevel(e) {
     this.setState({
-      certLevel: e.target.value,
+      cert_level: e.target.value,
     });
   }
 
   updateCertNum(num) {
     this.setState({
-      certNum: num,
+      cert_num: num,
     });
   }
 
@@ -103,7 +104,7 @@ export default class SignUp extends React.Component {
       dateFormatted = "December " + dateFormatted[0];
     }
     this.setState({
-      certDate: dateFormatted,
+      cert_date: dateFormatted,
     });
   }
 
@@ -148,66 +149,44 @@ export default class SignUp extends React.Component {
     }
   };
 
-  createNewUserCert = (newUserCert) => {
-    newUserCert.id = this.context.certs.length + 1;
-    return newUserCert;
-  };
-
   handleSubmit = () => {
-    // grab all checked animals
-    // let wishlist = this.state.list.filter(
-    //   (animal) => animal.isChecked === true
-    // );
-    // extract animal names
-    // wishlist = wishlist.map((animal) => animal.animal);
-
+    // TODO
+    // this hasn't been checked at all
     let {
       first_name,
       email,
       password,
       agency,
-      certLevel,
-      certNum,
-      certDate,
+      cert_level,
+      cert_num,
+      cert_date,
       wishlist,
     } = this.state;
 
-    let id = this.context.users.length + 1;
-    let specialties = [];
-    let instructorSpecialties = [];
-    let wishlistFulfilled = [];
     let newUser = {
-      id,
       first_name,
       email,
       password,
       wishlist,
-      specialties,
-      instructorSpecialties,
-      wishlistFulfilled,
     };
 
-    let user_id = id;
     let newUserCert = {
-      user_id,
       agency,
-      certLevel,
-      certNum,
-      certDate,
+      cert_level,
+      cert_num,
+      cert_date,
     };
-    this.createNewUserCert(newUserCert);
-    this.setState({ error: null });
 
-    const emailCheck = this.context.users.find(
-      (user) => user.email === newUser.email
-    );
-    if (emailCheck === undefined) {
-      this.context.createNewUser(newUser);
-      this.context.addCert(newUserCert);
-      this.props.history.push("/login");
-    } else {
-      this.setState({ error: "An account already exists for that email" });
-    }
+    NonGetApiService.addUser(newUser)
+      .then((data) => {
+        newUserCert.user_id = data.id;
+        NonGetApiService.addCert(newUserCert).then(this.context.addCert);
+        this.props.history.push("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ error: err.error.message });
+      });
   };
 
   render() {

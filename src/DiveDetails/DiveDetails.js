@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Context from "../Context";
 import NonGetApiService from "../services/non-get-api-service";
 import "./DiveDetails.css";
+import GetApiService from "../services/get-api-service";
 
 export default class DiveDetails extends React.Component {
   static contextType = Context;
@@ -97,7 +98,6 @@ export default class DiveDetails extends React.Component {
   };
 
   handleDelete = (dive_id) => {
-    // !! TODO !!
     // first, check if there were any animals spotted
     const dive = this.context.dives.find(
       (d) => Number(d.id) === Number(dive_id)
@@ -131,17 +131,13 @@ export default class DiveDetails extends React.Component {
       // if only one: remove from tracker AND remove from wishlist fulfilled AND delete dive
       if (animalInTracker.length === 1) {
         console.log("one animal, only sighting");
-        // this isn't working...
-        // requires a reload to update context -> add .then(this.context.something to update context)
-        // !! it deletes all, not just one
-        // check api limit(1)
-        // syntax is knex friendly, but doesn't work with postgres?
-        NonGetApiService.removeAnimalsTracked(
-          animalInTrackerRegion
-        ).catch((err) => console.log(err));
+        NonGetApiService.removeAnimalsTracked(animalInTrackerRegion, () => {
+          GetApiService.getAnimalsTracked()
+            .then(this.context.setAnimalTracker)
+            .catch((err) => console.log(err));
+        });
 
         // remove from user wishlist fulfilled
-        // this works
         const updatedAnimalsSpotted = this.context.user.wishlist_fulfilled.filter(
           (a) => !animalId.includes(a)
         );
@@ -151,15 +147,21 @@ export default class DiveDetails extends React.Component {
       } else {
         // if more than one: remove from tracker AND delete dive
         console.log("one animal, multiple sightings");
-        // this isn't working...
-        NonGetApiService.removeAnimalsTracked(
-          animalInTrackerRegion
-        ).catch((err) => console.log(err));
+
+        NonGetApiService.removeAnimalsTracked(animalInTrackerRegion, () => {
+          // TODO
+          // this should be working, but need to apply it to other delete cases that removeAnimalsTracked
+          // applied it, need to check and make sure it's working in each case
+          GetApiService.getAnimalsTracked()
+            .then((res) => console.log("response: ", res))
+            .then(this.context.setAnimalTracker)
+            .catch((err) => console.log(err));
+        });
 
         this.deleteDive(dive_id);
       }
     } else {
-      // if animals_spotted > 1
+      // if animals_spotted > 1 same as above, but for each animal spotted
       console.log("multiple animals were spotted");
 
       let animalNames = this.context.allAnimals.filter((a) =>
@@ -177,25 +179,26 @@ export default class DiveDetails extends React.Component {
         );
 
         if (animalTracked.length === 1) {
-          // also doesn't work, context doesn't update without reload and deletes all instances...
-          NonGetApiService.removeAnimalsTracked(animalInRegion).catch((err) =>
-            console.log(err)
-          );
+          NonGetApiService.removeAnimalsTracked(animalInRegion, () => {
+            GetApiService.getAnimalsTracked()
+              .then(this.context.setAnimalTracker)
+              .catch((err) => console.log(err));
+          });
 
           const updateAnimalsSpottedForWishlist = this.context.user.wishlist_fulfilled.filter(
             (a) => a !== animalId
           );
           this.context.updateWishlistFulfilled(updateAnimalsSpottedForWishlist);
         } else {
-          NonGetApiService.removeAnimalsTracked(animalInRegion).catch((err) =>
-            console.log(err)
-          );
+          NonGetApiService.removeAnimalsTracked(animalInRegion, () => {
+            GetApiService.getAnimalsTracked()
+              .then(this.context.setAnimalTracker)
+              .catch((err) => console.log(err));
+          });
         }
       });
       this.deleteDive(dive_id);
     }
-
-    // check the count in animal tracker
   };
 
   render() {
