@@ -22,9 +22,9 @@ export default class Home extends React.Component {
         <section>
           <p>
             Not only can you log your dives, but you can keep track of your
-            sightings from your custom wishlist of awesome sea creatures. You
-            can even search the database of dives to see where your wishlist
-            beasts have been spotted.
+            sightings from a custom wishlist of awesome sea creatures. You can
+            even search the database of dives to see where your wishlist beasts
+            have been spotted.
           </p>
           <p>Examples/screenshots coming soon!</p>
         </section>

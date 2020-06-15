@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Context from "../Context";
 import NonGetApiService from "../services/non-get-api-service";
 import "./DiveDetails.css";
@@ -149,9 +149,6 @@ export default class DiveDetails extends React.Component {
         console.log("one animal, multiple sightings");
 
         NonGetApiService.removeAnimalsTracked(animalInTrackerRegion, () => {
-          // TODO
-          // this should be working, but need to apply it to other delete cases that removeAnimalsTracked
-          // applied it, need to check and make sure it's working in each case
           GetApiService.getAnimalsTracked()
             .then((res) => console.log("response: ", res))
             .then(this.context.setAnimalTracker)
@@ -226,11 +223,10 @@ export default class DiveDetails extends React.Component {
           >
             Delete Dive
           </Link>
-          {/* the order of these only makes sense when you turn on flexbox. Need a way to change the order of the fieldsets depending on a media query? */}
           <fieldset className="input-fields sidebar">
             <legend>People</legend>
             <ul className="sign-up-input">
-              {dive.diveShop ? <li>Dive Shop: {dive.diveShop}</li> : ""}
+              {dive.dive_shop ? <li>Dive Shop: {dive.dive_shop}</li> : ""}
               {dive.guide !== "" ? <li>Guide: {dive.guide}</li> : ""}
               {dive.buddy !== "" ? <li>Buddy: {dive.buddy}</li> : ""}
             </ul>
@@ -266,9 +262,9 @@ export default class DiveDetails extends React.Component {
           <fieldset className="input-fields sidebar">
             <legend>Statistics</legend>
             <ul className="sign-up-input">
-              <li>Maximum Depth: {dive.maxDepth} ft.</li>
+              <li>Maximum Depth: {dive.max_depth} ft.</li>
               <li>Bottom Time: {dive.duration} min.</li>
-              <li>Water Temp: {dive.waterTemp} °F</li>
+              <li>Water Temp: {dive.water_temp} °F</li>
               {dive.viz !== "" ? (
                 <li>Visibility: {this.displayViz(dive.viz)}</li>
               ) : (
@@ -279,8 +275,8 @@ export default class DiveDetails extends React.Component {
               ) : (
                 <li>Shore dive</li>
               )}
-              {dive.driftDive === true ? <li>Drift dive</li> : ""}
-              {dive.night === true ? <li>Night dive</li> : ""}
+              {dive.drift_dive === true ? <li>Drift dive</li> : ""}
+              {dive.night_dive === true ? <li>Night dive</li> : ""}
             </ul>
           </fieldset>
         </div>
@@ -288,7 +284,7 @@ export default class DiveDetails extends React.Component {
         <Link to="/log">Back to Log</Link>
       </div>
     ) : (
-      <Redirect to="/login" />
+      <h2>Loading dive details...</h2>
     );
   }
 }

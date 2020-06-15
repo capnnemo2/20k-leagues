@@ -38,7 +38,7 @@ export default class Login extends React.Component {
         this.handleLoginSuccess();
       })
       .catch((res) => {
-        this.setState({ error: res.error });
+        this.setState({ error: res.error.message });
       });
   };
 

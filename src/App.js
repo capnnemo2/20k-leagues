@@ -204,7 +204,7 @@ export default class App extends React.Component {
     });
   };
 
-  updateDive = (newDive, diveId) => {
+  updateDive = (diveId, newDive) => {
     const newDives = this.state.dives.map((dive) =>
       dive.id === diveId ? newDive : dive
     );
@@ -266,7 +266,6 @@ export default class App extends React.Component {
       deleteDive: this.deleteDive,
       deleteCert: this.deleteCert,
       updateDive: this.updateDive,
-      logOut: this.logOut,
       getUserData: this.getUserData,
       updateWishlistFulfilled: this.updateWishlistFulfilled,
     };

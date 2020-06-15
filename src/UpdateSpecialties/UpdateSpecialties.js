@@ -83,7 +83,7 @@ export default class UpdateSpecialties extends React.Component {
         </form>
       </div>
     ) : (
-      <Redirect to="/login" />
+      <Redirect to="/profile" />
     );
   }
 }

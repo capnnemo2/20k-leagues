@@ -150,8 +150,6 @@ export default class SignUp extends React.Component {
   };
 
   handleSubmit = () => {
-    // TODO
-    // this hasn't been checked at all
     let {
       first_name,
       email,

@@ -208,19 +208,54 @@ export default class EditDive extends React.Component {
     });
   }
 
-  // !! TODO !!
-  // check that this works
   handleSubmit = () => {
-    let newDive = this.state;
+    let {
+      dive_date,
+      dive_site,
+      country,
+      region,
+      max_depth,
+      duration,
+      water_temp,
+      dive_shop,
+      guide,
+      buddy,
+      viz,
+      dive_type,
+      drift_dive,
+      night_dive,
+      description,
+      animals_spotted,
+      rating,
+    } = this.state;
+    let newDive = {
+      dive_date,
+      dive_site,
+      country,
+      region,
+      max_depth,
+      duration,
+      water_temp,
+      dive_shop,
+      guide,
+      buddy,
+      viz,
+      dive_type,
+      drift_dive,
+      night_dive,
+      description,
+      animals_spotted,
+      rating,
+    };
     newDive.id = Number(this.props.match.params.dive_id);
     newDive.user_id = this.context.user.id;
 
-    NonGetApiService.updateDive(newDive)
+    console.log("updated dive: ", newDive);
+
+    NonGetApiService.updateDive(newDive.id, newDive)
       .then(this.context.updateDive(newDive.id, newDive))
       .catch((err) => console.log(err));
 
-    // !! TODO !!
-    // this function might not work properly for removing animals spotted
     this.context.addToWishlistFulfilled(newDive.animals_spotted);
 
     let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
@@ -410,7 +445,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="viz"
                   value="1"
                   checked={Number(this.state.viz) === 1}
                   onChange={(e) => this.updateViz(e)}
@@ -421,7 +455,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="viz"
                   value="2"
                   checked={Number(this.state.viz) === 2}
                   onChange={(e) => this.updateViz(e)}
@@ -432,7 +465,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="viz"
                   value="3"
                   checked={Number(this.state.viz) === 3}
                   onChange={(e) => this.updateViz(e)}
@@ -443,7 +475,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="viz"
                   value="4"
                   checked={Number(this.state.viz) === 4}
                   onChange={(e) => this.updateViz(e)}
@@ -454,7 +485,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="viz"
                   value="5"
                   checked={Number(this.state.viz) === 5}
                   onChange={(e) => this.updateViz(e)}
@@ -545,7 +575,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="rating"
                   value="1"
                   checked={Number(this.state.rating) === 1}
                   onChange={(e) => this.updateRating(e)}
@@ -557,7 +586,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="rating"
                   value="2"
                   checked={Number(this.state.rating) === 2}
                   onChange={(e) => this.updateRating(e)}
@@ -569,7 +597,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="rating"
                   value="3"
                   checked={Number(this.state.rating) === 3}
                   onChange={(e) => this.updateRating(e)}
@@ -581,7 +608,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="rating"
                   value="4"
                   checked={Number(this.state.rating) === 4}
                   onChange={(e) => this.updateRating(e)}
@@ -593,7 +619,6 @@ export default class EditDive extends React.Component {
               <label>
                 <input
                   type="radio"
-                  //   name="rating"
                   value="5"
                   checked={Number(this.state.rating) === 5}
                   onChange={(e) => this.updateRating(e)}
@@ -610,7 +635,7 @@ export default class EditDive extends React.Component {
         </form>
       </div>
     ) : (
-      <Redirect to="/login" />
+      <Redirect to="/log" />
     );
   }
 }

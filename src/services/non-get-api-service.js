@@ -41,6 +41,7 @@ const NonGetApiService = {
     );
   },
   updateDive(diveId, newDive) {
+    console.log("id and dive: ", diveId, newDive);
     return fetch(`${config.API_ENDPOINT}/dives/${diveId}`, {
       method: "PATCH",
       headers: {

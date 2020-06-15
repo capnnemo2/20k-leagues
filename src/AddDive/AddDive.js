@@ -1,7 +1,6 @@
 import React from "react";
 import "./AddDive.css";
 import Context from "../Context";
-import { Redirect } from "react-router-dom";
 import NonGetApiService from "../services/non-get-api-service";
 
 export default class AddDive extends React.Component {
@@ -528,7 +527,7 @@ export default class AddDive extends React.Component {
         </form>
       </div>
     ) : (
-      <Redirect to="/login" />
+      <h2>Loading form...</h2>
     );
   }
 }
