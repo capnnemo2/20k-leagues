@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import Context from "../Context";
 import "./UpdateInstrSpecs.css";
 
@@ -8,12 +7,35 @@ export default class UpdateInstrSpecs extends React.Component {
 
   state = {
     instructor_specialties: [],
+    usersSet: false,
   };
 
   componentDidMount() {
+    let instructor_specialties = this.context.user.instructor_specialties
+      ? this.context.user.instructor_specialties
+      : [];
+
     this.setState({
-      instructor_specialties: this.context.user.instructor_specialties,
+      instructor_specialties,
     });
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (
+      this.context.user.instructor_specialties &&
+      this.state.instructor_specialties.length !==
+        this.context.user.instructor_specialties.length &&
+      !this.state.usersSet
+    ) {
+      let instructor_specialties = this.context.user.instructor_specialties
+        ? this.context.user.instructor_specialties
+        : [];
+
+      this.setState({
+        instructor_specialties,
+        usersSet: true,
+      });
+    }
   }
 
   renderList = () => {
@@ -25,7 +47,10 @@ export default class UpdateInstrSpecs extends React.Component {
             name={spec.spec_name}
             id={spec.id}
             value={spec.spec_name}
-            checked={this.state.instructor_specialties.includes(spec.id)}
+            checked={
+              this.state.instructor_specialties &&
+              this.state.instructor_specialties.includes(spec.id)
+            }
             onChange={this.handleChange}
           />
           {spec.spec_name}
@@ -62,7 +87,7 @@ export default class UpdateInstrSpecs extends React.Component {
 
   render() {
     const { user } = this.context;
-    return user.id ? (
+    return user.id && this.state.instructor_specialties ? (
       <div className="AddSpecialty">
         <form
           onSubmit={(e) => {
@@ -83,7 +108,7 @@ export default class UpdateInstrSpecs extends React.Component {
         </form>
       </div>
     ) : (
-      <Redirect to="/profile" />
+      <h2>Loading specialties...</h2>
     );
   }
 }

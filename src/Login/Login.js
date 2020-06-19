@@ -73,7 +73,7 @@ export default class Login extends React.Component {
             </div>
             <p>
               Feel free to login as Bob: email: bob@email.com, password:
-              password.
+              P@sswor1d.
             </p>
           </fieldset>
 

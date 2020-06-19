@@ -22,8 +22,6 @@ import PrivateRoute from "./Utils/PrivateRoute";
 import Context from "./Context";
 import "./App.css";
 import TokenService from "./services/token-service";
-// import IdleService from "./services/idle-service";
-// import AuthApiService from "./services/auth-api-service";
 import GetApiService from "./services/get-api-service";
 import NonGetApiService from "./services/non-get-api-service";
 
@@ -228,31 +226,7 @@ export default class App extends React.Component {
     GetApiService.getAnimalsTracked()
       .then(this.setAnimalTracker)
       .catch(this.catchError);
-
-    // TODO
-    // this stuff is copied directly from the functioning blogful project, but causes big error
-    // IdleService.setIdleCallback(this.logoutFromIdle);
-
-    // if (TokenService.hasAuthToken) {
-    //   IdleService.registerIdleTimerResets();
-
-    //   TokenService.queueCallbackBeforeExpiry(() => {
-    //     AuthApiService.postRefreshToken();
-    //   });
-    // }
   }
-
-  // componentWillUnmount() {
-  //   IdleService.unRegisterIdleResets();
-  //   TokenService.clearCallbackBeforeExpiry();
-  // }
-
-  // logoutFromIdle = () => {
-  //   TokenService.clearAuthToken();
-  //   TokenService.clearCallbackBeforeExpiry();
-  //   IdleService.unRegisterIdleResets();
-  //   this.forceUpdate();
-  // };
 
   getUserData = (user) => {
     this.setUser(user);

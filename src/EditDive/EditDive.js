@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import Context from "../Context";
 import "./EditDive.css";
 import NonGetApiService from "../services/non-get-api-service";
@@ -43,8 +42,22 @@ export default class EditDive extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    const diveId = Number(this.props.match.params.dive_id);
+    const dive = this.context.dives.find((dive) => dive.id === diveId);
+
+    if (!this.state.initialFieldsSet && dive != null) {
+      this.setFieldsInState(dive);
+    }
+  }
+
   setFieldsInState = (dive) => {
+    console.log("1: ", dive.dive_date);
+
     let dive_date = dive.dive_date.split("");
+
+    console.log("2: ", dive_date);
+
     dive_date.splice(4, 0, "-");
     dive_date.splice(7, 0, "-");
     dive_date = dive_date.join("");
@@ -635,7 +648,7 @@ export default class EditDive extends React.Component {
         </form>
       </div>
     ) : (
-      <Redirect to="/log" />
+      <h1>Loading Dive...</h1>
     );
   }
 }

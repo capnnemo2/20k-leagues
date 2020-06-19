@@ -145,18 +145,20 @@ export default class Log extends React.Component {
   };
 
   renderWishlist = (user) => {
-    return this.context.allAnimals
-      .filter((animal) => user.wishlist.includes(animal.id))
-      .map((animal, i) => (
-        <li
-          key={i}
-          className={
-            user.wishlist_fulfilled.includes(animal.id) ? "fulfilled" : ""
-          }
-        >
-          {animal.animal}
-        </li>
-      ));
+    return this.context.allAnimals.length > 0 && user.wishlist
+      ? this.context.allAnimals
+          .filter((animal) => user.wishlist.includes(animal.id))
+          .map((animal, i) => (
+            <li
+              key={i}
+              className={
+                user.wishlist_fulfilled.includes(animal.id) ? "fulfilled" : ""
+              }
+            >
+              {animal.animal}
+            </li>
+          ))
+      : [];
   };
 
   // filter result handlers

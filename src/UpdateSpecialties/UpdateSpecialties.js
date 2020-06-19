@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import Context from "../Context";
 import "./UpdateSpecialties.css";
 
@@ -8,12 +7,38 @@ export default class UpdateSpecialties extends React.Component {
 
   state = {
     specialties: [],
+    usersSet: false,
   };
 
   componentDidMount() {
+    let specialties = this.context.user.specialties
+      ? this.context.user.specialties
+      : this.context.specialties
+      ? this.context.specialties
+      : [];
+
     this.setState({
-      specialties: this.context.user.specialties,
+      specialties,
     });
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (
+      this.context.user.specialties &&
+      this.state.specialties.length !== this.context.user.specialties.length &&
+      !this.state.usersSet
+    ) {
+      let specialties = this.context.user.specialties
+        ? this.context.user.specialties
+        : this.context.specialties
+        ? this.context.specialties
+        : [];
+
+      this.setState({
+        specialties,
+        usersSet: true,
+      });
+    }
   }
 
   renderList = () => {
@@ -25,7 +50,10 @@ export default class UpdateSpecialties extends React.Component {
             name={spec.spec_name}
             id={spec.id}
             value={spec.spec_name}
-            checked={this.state.specialties.includes(spec.id)}
+            checked={
+              this.state.specialties.length &&
+              this.state.specialties.includes(spec.id)
+            }
             onChange={this.handleChange}
           />
           {spec.spec_name}
@@ -62,7 +90,7 @@ export default class UpdateSpecialties extends React.Component {
 
   render() {
     const { user } = this.context;
-    return user.id ? (
+    return user.id && this.state.specialties ? (
       <div className="AddSpecialty">
         <form
           onSubmit={(e) => {
@@ -83,7 +111,7 @@ export default class UpdateSpecialties extends React.Component {
         </form>
       </div>
     ) : (
-      <Redirect to="/profile" />
+      <h2>Loading specialties...</h2>
     );
   }
 }
