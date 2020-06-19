@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import Context from "../Context";
 import "./EditWishlist.css";
 
@@ -8,6 +7,7 @@ export default class EditWishlist extends React.Component {
 
   state = {
     wishlist: [],
+    usersSet: false,
   };
 
   renderList = () => {
@@ -19,7 +19,9 @@ export default class EditWishlist extends React.Component {
             name={animal.animal}
             id={animal.id}
             value={animal.animal}
-            checked={this.state.wishlist.includes(animal.id)}
+            checked={
+              this.state.wishlist && this.state.wishlist.includes(animal.id)
+            }
             onChange={this.handleChange}
           />
           {animal.animal}
@@ -57,6 +59,15 @@ export default class EditWishlist extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    if (!this.state.usersSet && this.context.user.wishlist) {
+      this.setState({
+        wishlist: this.context.user.wishlist,
+        usersSet: true,
+      });
+    }
+  }
+
   handleSubmit = () => {
     const { wishlist } = this.state;
     this.context.updateWishlist(wishlist);
@@ -69,7 +80,7 @@ export default class EditWishlist extends React.Component {
 
   render() {
     const { user } = this.context;
-    return user.id ? (
+    return user.id && this.state.wishlist ? (
       <div className="EditWishlist">
         <section>
           You initially choose your wishlist when you sign up, but here you can
@@ -91,8 +102,9 @@ export default class EditWishlist extends React.Component {
                     type="checkbox"
                     name="checkAll"
                     checked={
+                      this.state.wishlist &&
                       this.state.wishlist.length ===
-                      this.context.allAnimals.length
+                        this.context.allAnimals.length
                     }
                     onChange={this.handleChange}
                   />
@@ -109,7 +121,7 @@ export default class EditWishlist extends React.Component {
         </form>
       </div>
     ) : (
-      <Redirect to="/profile" />
+      <h2>Herding the animals...</h2>
     );
   }
 }
