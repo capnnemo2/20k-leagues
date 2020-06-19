@@ -29,7 +29,6 @@ export default class App extends React.Component {
   static contextType = Context;
 
   state = {
-    users: [],
     dives: [],
     certs: [],
     user: {},
@@ -38,13 +37,6 @@ export default class App extends React.Component {
     animalTracker: [],
     specialties: [],
     error: null,
-  };
-
-  setUsers = (users) => {
-    this.setState({
-      users,
-      error: null,
-    });
   };
 
   setUser = (user) => {
@@ -91,12 +83,6 @@ export default class App extends React.Component {
     this.setState({
       animalTracker,
       error: null,
-    });
-  };
-
-  createNewUser = (newUser) => {
-    this.setState({
-      users: [...this.state.users, newUser],
     });
   };
 
@@ -244,7 +230,6 @@ export default class App extends React.Component {
 
   render() {
     const value = {
-      users: this.state.users,
       user: this.state.user,
       setUser: this.setUser,
       dives: this.state.dives,
@@ -253,7 +238,6 @@ export default class App extends React.Component {
       countries: this.state.countries,
       animalTracker: this.state.animalTracker,
       specialties: this.state.specialties,
-      createNewUser: this.createNewUser,
       updateWishlist: this.updateWishlist,
       addCert: this.addCert,
       updateSpecialties: this.updateSpecialties,

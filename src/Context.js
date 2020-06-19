@@ -1,7 +1,6 @@
 import React from "react";
 
 export default React.createContext({
-  users: [],
   dives: [],
   certs: [],
   user: {},
@@ -10,7 +9,6 @@ export default React.createContext({
   countries: [],
   animalTracker: [],
   specialties: [],
-  createNewUser: () => {},
   updateWishlist: () => {},
   setUser: () => {},
   addCert: () => {},
