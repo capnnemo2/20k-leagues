@@ -94,15 +94,23 @@ export default class UpdateInstrSpecs extends React.Component {
             e.preventDefault();
             this.handleSubmit();
           }}
+          className="form-instr-specs"
         >
           <div className="input-fields">
             <fieldset className="sign-up-input">
-              <legend>Instructor Specialties</legend>
+              <legend className="section-title">Instructor Specialties</legend>
               {this.renderList()}
             </fieldset>
           </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={this.handleClickCancel}>
+          <button type="submit" className="btn-submit">
+            Submit
+          </button>
+          {"  "}
+          <button
+            type="button"
+            onClick={this.handleClickCancel}
+            className="btn-cancel"
+          >
             Cancel
           </button>
         </form>

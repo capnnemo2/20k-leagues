@@ -205,9 +205,138 @@ export default class DiveDetails extends React.Component {
     );
     return dive ? (
       <div className="DiveDetails">
-        <h2>Dive # {this.getDiveNumber(dive.user_id, dive)}</h2>
+        <header>
+          <h2>Dive # {this.getDiveNumber(dive.user_id, dive)}</h2>
+        </header>
+
         <div className="dive-container">
-          <Link to={`/edit-dive/${dive_id}`}>Edit Dive</Link>{" "}
+          <fieldset className="input-fields sidebar">
+            <legend className="section-title">People</legend>
+            <ul className="sign-up-input">
+              {dive.dive_shop ? (
+                <li>
+                  Dive Shop <span className="details-li">{dive.dive_shop}</span>
+                </li>
+              ) : (
+                ""
+              )}
+              {dive.guide !== "" ? (
+                <li>
+                  Guide <span className="details-li">{dive.guide}</span>{" "}
+                </li>
+              ) : (
+                ""
+              )}
+              {dive.buddy !== "" ? (
+                <li>
+                  Buddy <span className="details-li">{dive.buddy}</span>
+                </li>
+              ) : (
+                ""
+              )}
+            </ul>
+          </fieldset>
+
+          <div className="dive-inner-container">
+            <fieldset className="input-fields">
+              <div className="btn-container"></div>
+              <legend className="section-title">Date and Location</legend>
+              <ul className="sign-up-input">
+                <li>
+                  Date{" "}
+                  <span className="details-li">
+                    {this.displayDate(dive.dive_date)}
+                  </span>{" "}
+                </li>
+                <li>
+                  Country <span className="details-li">{dive.country}</span>{" "}
+                </li>
+                <li>
+                  Region <span className="details-li">{dive.region}</span>{" "}
+                </li>
+                <li>
+                  Dive Site <span className="details-li">{dive.dive_site}</span>{" "}
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset className="input-fields">
+              <legend className="section-title">Description</legend>
+              <ul className="sign-up-input">
+                {dive.description !== "" ? <li>{dive.description}</li> : ""}
+                <li className="details-rating">{dive.rating} seastars</li>
+              </ul>
+            </fieldset>
+            <fieldset className="input-fields">
+              <legend className="section-title">Animals Spotted</legend>
+              <ul className="sign-up-input">
+                {this.context.allAnimals
+                  .filter((animal) => dive.animals_spotted.includes(animal.id))
+                  .map((animal, i) => (
+                    <li key={i}>{animal.animal}</li>
+                  ))}
+              </ul>
+            </fieldset>
+          </div>
+
+          <fieldset className="input-fields sidebar">
+            <legend className="section-title">Statistics</legend>
+            <ul className="sign-up-input">
+              <li>
+                Maximum Depth{" "}
+                <span className="details-li">{dive.max_depth} ft.</span>{" "}
+              </li>
+              <li>
+                Bottom Time{" "}
+                <span className="details-li">{dive.duration} min.</span>{" "}
+              </li>
+              <li>
+                Water Temp{" "}
+                <span className="details-li">{dive.water_temp} °F</span>{" "}
+              </li>
+              {dive.viz !== "" ? (
+                <li>
+                  Visibility{" "}
+                  <span className="details-li">
+                    {this.displayViz(dive.viz)}
+                  </span>{" "}
+                </li>
+              ) : (
+                ""
+              )}
+              {dive.diveType === "boat" ? (
+                <li>
+                  {" "}
+                  <span className="details-li">Boat dive</span>{" "}
+                </li>
+              ) : (
+                <li>
+                  <span className="details-li">Shore dive</span>
+                </li>
+              )}
+              {dive.drift_dive === true ? (
+                <li>
+                  <span className="details-li">Drift dive</span>
+                </li>
+              ) : (
+                ""
+              )}
+              {dive.night_dive === true ? (
+                <li>
+                  <span className="details-li">Night dive</span>
+                </li>
+              ) : (
+                ""
+              )}
+            </ul>
+          </fieldset>
+        </div>
+        <div className="btn-container btn-details-back">
+          <Link to={`/edit-dive/${dive_id}`} className="btn-submit">
+            Edit Dive
+          </Link>{" "}
+          <Link to="/log" className="btn-cancel">
+            Back to Log
+          </Link>{" "}
           <Link
             to={"/log"}
             onClick={(e) => {
@@ -220,68 +349,11 @@ export default class DiveDetails extends React.Component {
                 alert(`Whew, that was close!`);
               }
             }}
+            className="btn-delete"
           >
             Delete Dive
           </Link>
-          <fieldset className="input-fields sidebar">
-            <legend>People</legend>
-            <ul className="sign-up-input">
-              {dive.dive_shop ? <li>Dive Shop: {dive.dive_shop}</li> : ""}
-              {dive.guide !== "" ? <li>Guide: {dive.guide}</li> : ""}
-              {dive.buddy !== "" ? <li>Buddy: {dive.buddy}</li> : ""}
-            </ul>
-          </fieldset>
-          <div className="dive-inner-container">
-            <fieldset className="input-fields">
-              <legend>Date and Location</legend>
-              <ul className="sign-up-input">
-                <li>Date: {this.displayDate(dive.dive_date)}</li>
-                <li>Country: {dive.country}</li>
-                <li>Region: {dive.region}</li>
-                <li>Dive Site: {dive.dive_site}</li>
-              </ul>
-            </fieldset>
-            <fieldset className="input-fields">
-              <legend>Description</legend>
-              <ul className="sign-up-input">
-                {dive.description !== "" ? <li>{dive.description}</li> : ""}
-                <li>Rating: {dive.rating} seastars</li>
-              </ul>
-            </fieldset>
-            <fieldset className="input-fields">
-              <legend>Animals Spotted</legend>
-              <ul className="sign-up-input">
-                {this.context.allAnimals
-                  .filter((animal) => dive.animals_spotted.includes(animal.id))
-                  .map((animal, i) => (
-                    <li key={i}>{animal.animal}</li>
-                  ))}
-              </ul>
-            </fieldset>
-          </div>
-          <fieldset className="input-fields sidebar">
-            <legend>Statistics</legend>
-            <ul className="sign-up-input">
-              <li>Maximum Depth: {dive.max_depth} ft.</li>
-              <li>Bottom Time: {dive.duration} min.</li>
-              <li>Water Temp: {dive.water_temp} °F</li>
-              {dive.viz !== "" ? (
-                <li>Visibility: {this.displayViz(dive.viz)}</li>
-              ) : (
-                ""
-              )}
-              {dive.diveType === "boat" ? (
-                <li>Boat dive</li>
-              ) : (
-                <li>Shore dive</li>
-              )}
-              {dive.drift_dive === true ? <li>Drift dive</li> : ""}
-              {dive.night_dive === true ? <li>Night dive</li> : ""}
-            </ul>
-          </fieldset>
         </div>
-
-        <Link to="/log">Back to Log</Link>
       </div>
     ) : (
       <h2>Loading dive details...</h2>

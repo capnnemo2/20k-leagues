@@ -82,20 +82,19 @@ export default class EditWishlist extends React.Component {
     const { user } = this.context;
     return user.id && this.state.wishlist ? (
       <div className="EditWishlist">
-        <section>
-          You initially choose your wishlist when you sign up, but here you can
-          re-select which animals appear on your wishlist.
-        </section>
+        <header>
+          <h2>Animal Wishlist</h2>
+        </header>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             this.handleSubmit();
           }}
+          className="form-wishlist"
         >
           <div className="input-fields">
-            <h2>Animal Wishlist</h2>
             <fieldset className="sing-up-input">
-              <legend>Select animals</legend>
+              <legend className="section-title">Select animals</legend>
               <div>
                 <label>
                   <input
@@ -114,8 +113,15 @@ export default class EditWishlist extends React.Component {
               {this.renderList()}
             </fieldset>
           </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={this.handleClickCancel}>
+          <button type="submit" className="btn-submit">
+            Submit
+          </button>
+          {"  "}
+          <button
+            type="button"
+            onClick={this.handleClickCancel}
+            className="btn-cancel"
+          >
             Cancel
           </button>
         </form>

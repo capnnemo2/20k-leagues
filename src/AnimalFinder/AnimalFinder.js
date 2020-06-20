@@ -126,7 +126,7 @@ export default class AnimalFinder extends React.Component {
             </div>
 
             <fieldset>
-              <legend>Search by</legend>
+              <legend className="section-title">Search by</legend>
               <input
                 type="radio"
                 name="searchBy"

@@ -1,7 +1,48 @@
-/* .dive-container {
-  display: flex;
+.DiveDetails ul {
+  list-style: none;
+  margin-left: 0;
 }
 
-.sidebar {
-  flex: 1;
-} */
+.details-li {
+  font-weight: bold;
+  text-align: right;
+}
+
+.dive-container {
+  background-color: white;
+}
+
+.btn-container {
+  padding: 10px;
+}
+
+.btn-delete {
+  color: white;
+  font-size: 16px;
+  background-color: red;
+  padding: 10px 25px;
+  border-radius: 20px;
+  transition: 0.1s ease-in-out;
+}
+
+.btn-delete:hover {
+  background-color: rgb(224, 57, 57);
+}
+
+.btn-details-back {
+  background-color: white;
+}
+
+.details-rating {
+  font-weight: bold;
+}
+
+@media screen and (min-width: 927px) {
+  .dive-container {
+    display: flex;
+  }
+
+  .sidebar {
+    flex: 1;
+  }
+}

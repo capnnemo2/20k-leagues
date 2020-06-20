@@ -97,15 +97,23 @@ export default class UpdateSpecialties extends React.Component {
             e.preventDefault();
             this.handleSubmit();
           }}
+          className="form-specs"
         >
           <div className="input-fields">
             <fieldset className="sign-up-input">
-              <legend>Specialties</legend>
+              <legend className="section-title">Specialties</legend>
               {this.renderList()}
             </fieldset>
           </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={this.handleClickCancel}>
+          <button type="submit" className="btn-submit">
+            Submit
+          </button>
+          {"  "}
+          <button
+            type="button"
+            onClick={this.handleClickCancel}
+            className="btn-cancel"
+          >
             Cancel
           </button>
         </form>
