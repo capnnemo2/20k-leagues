@@ -285,7 +285,7 @@ export default class Log extends React.Component {
         <h2>{user.first_name}'s Dive Log</h2>
         <div className="log-body">
           <fieldset className="log-stats">
-            <legend>Statistics</legend>
+            <legend className="section-title">Statistics</legend>
             <ul>
               <li>Total Dives: {totalDives}</li>
 
@@ -311,11 +311,6 @@ export default class Log extends React.Component {
             </ul>
           </fieldset>
 
-          <fieldset className="log-wishlist">
-            <legend>Wishlist</legend>
-            <ul>{this.renderWishlist(user)}</ul>
-          </fieldset>
-
           <div className="log-dives">
             <LogFilters
               searchBy={this.state.searchBy}
@@ -329,7 +324,7 @@ export default class Log extends React.Component {
               Add Dive
             </Link>
             <fieldset>
-              <legend>Dives</legend>
+              <legend className="section-title">Dives</legend>
               <ul>
                 {dives
                   ? dives.map((dive) => (
@@ -355,6 +350,11 @@ export default class Log extends React.Component {
               </ul>
             </fieldset>
           </div>
+
+          <fieldset className="log-wishlist">
+            <legend className="section-title">Wishlist</legend>
+            <ul>{this.renderWishlist(user)}</ul>
+          </fieldset>
         </div>
       </div>
     ) : (

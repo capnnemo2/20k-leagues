@@ -102,16 +102,20 @@ export default class AddCert extends React.Component {
   render() {
     return (
       <div className="AddCert">
+        <header>
+          <h2>Add a certification</h2>
+        </header>
+
         <form
           onSubmit={(e) => {
             e.preventDefault();
             this.handleSubmit();
           }}
+          className="form-add-cert"
         >
           <div className="input-fields">
-            <h2>Add a certification</h2>
             <fieldset className="sign-up-input">
-              <legend>Select an agency</legend>
+              <legend className="section-title">Select an agency</legend>
               <label>
                 <input
                   type="radio"
@@ -164,7 +168,7 @@ export default class AddCert extends React.Component {
                 this.updateCertLevel(e);
               }}
             >
-              <legend>Certification Level</legend>
+              <legend className="section-title">Certification Level</legend>
               <label>
                 <input type="radio" name="cert" value="Scuba Diver" required />
                 Scuba Diver
@@ -261,7 +265,7 @@ export default class AddCert extends React.Component {
               </label>
             </fieldset>
             <fieldset className="sign-up-input">
-              <legend>The Numbers</legend>
+              <legend className="section-title">The Numbers</legend>
               <label htmlFor="cert-num">Certification Number: </label>
               <input
                 type="text"
@@ -281,8 +285,14 @@ export default class AddCert extends React.Component {
               />
             </fieldset>
           </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={this.handleClickCancel}>
+          <button type="submit" className="btn-submit">
+            Submit
+          </button>{" "}
+          <button
+            type="button"
+            onClick={this.handleClickCancel}
+            className="btn-cancel"
+          >
             Cancel
           </button>
         </form>

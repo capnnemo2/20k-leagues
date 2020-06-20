@@ -198,15 +198,17 @@ export default class AddDive extends React.Component {
         <header>
           <h2>Log a New Dive</h2>
         </header>
+
         <form
           onSubmit={(e) => {
             e.preventDefault();
             this.handleSubmit();
           }}
+          className="form-add-dive"
         >
           <div className="input-fields">
             <fieldset className="sign-up-input">
-              <legend>Essentials</legend>
+              <legend className="section-title">Essentials</legend>
               <div>
                 <label htmlFor="date">Date: </label>
                 <input
@@ -266,7 +268,7 @@ export default class AddDive extends React.Component {
             </fieldset>
 
             <fieldset className="sign-up-input">
-              <legend>Dive Stats</legend>
+              <legend className="section-title">Dive Stats</legend>
               <div>
                 <label htmlFor="depth">Max depth (ft): </label>
                 <input
@@ -302,7 +304,7 @@ export default class AddDive extends React.Component {
             </fieldset>
 
             <fieldset className="sign-up-input">
-              <legend>People</legend>
+              <legend className="section-title">People</legend>
               <div>
                 <label htmlFor="shop">Dive shop: </label>
                 <input
@@ -336,7 +338,7 @@ export default class AddDive extends React.Component {
             </fieldset>
 
             <fieldset className="sign-up-input">
-              <legend>Visibility</legend>
+              <legend className="section-title">Visibility</legend>
               <label>
                 <input
                   type="radio"
@@ -389,7 +391,7 @@ export default class AddDive extends React.Component {
             </fieldset>
 
             <fieldset className="sign-up-input">
-              <legend>Dive Type</legend>
+              <legend className="section-title">Dive Type</legend>
               <label>
                 <input
                   type="radio"
@@ -443,7 +445,7 @@ export default class AddDive extends React.Component {
               </div>
 
               <fieldset className="sign-up-input">
-                <legend>Animals Spotted</legend>
+                <legend className="section-title">Animals Spotted</legend>
                 {animalList.map((animal) => (
                   <div key={animal.id}>
                     <label>
@@ -463,7 +465,7 @@ export default class AddDive extends React.Component {
             </fieldset>
 
             <fieldset className="sign-up-input">
-              <legend>Rating</legend>
+              <legend className="section-title">Rating</legend>
               <label>
                 <input
                   type="radio"
@@ -520,8 +522,15 @@ export default class AddDive extends React.Component {
               </label>
             </fieldset>
           </div>
-          <button type="submit">Log dive</button>
-          <button type="button" onClick={this.handleClickCancel}>
+          <button type="submit" className="btn-submit">
+            Log dive
+          </button>
+          {"  "}
+          <button
+            type="button"
+            onClick={this.handleClickCancel}
+            className="btn-cancel"
+          >
             Cancel
           </button>
         </form>

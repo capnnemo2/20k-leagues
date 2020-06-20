@@ -258,7 +258,6 @@ export default class App extends React.Component {
           <div className="not-footer">
             <nav>
               <Switch>
-                <Route exact path="/" render={null} />
                 <Route exact path="/login" render={null} />
                 <Route exact path="/sign-up" render={null} />
                 <Route component={Nav} />

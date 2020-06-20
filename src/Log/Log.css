@@ -24,21 +24,21 @@
   margin-top: 10px;
 }
 
-/* this media query is at a somewhat arbitrary min-width */
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 743px) {
   .log-body {
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap;
   }
 
   .log-body :nth-child(1) {
     order: 1;
   }
   .log-body :nth-child(2) {
-    order: 3;
+    order: 2;
   }
   .log-body :nth-child(3) {
-    order: 2;
+    order: 3;
   }
 
   .log-dives {
@@ -47,7 +47,7 @@
 
   .log-stats,
   .log-wishlist {
-    flex: 0.5;
+    flex: 2;
     position: -webkit-sticky;
     position: sticky;
     top: 0;

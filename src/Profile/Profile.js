@@ -3,7 +3,6 @@ import "./Profile.css";
 import { Link } from "react-router-dom";
 import Context from "../Context";
 import NonGetApiService from "../services/non-get-api-service";
-// import TokenService from "../services/token-service";
 
 export default class Profile extends React.Component {
   static contextType = Context;
@@ -24,80 +23,93 @@ export default class Profile extends React.Component {
 
     return user.hasOwnProperty("id") ? (
       <div className="Profile">
-        <section>
+        <header>
           <h2>{user.first_name}'s Profile</h2>
-          <p>My email: {user.email}</p>
-        </section>
-        <fieldset>
-          <legend>Certifications</legend>
-          <Link to="/add-cert">Add cert</Link>
-          <ul className="certifications">
-            {certs.map((cert) => (
-              <li key={cert.id}>
-                <ul>
-                  <li>Agency: {cert.agency}</li>
-                  <li>{cert.cert_level}</li>
-                  <li>{cert.cert_date}</li>
-                  <li>Diver number: {cert.cert_num}</li>
-                  <li>
-                    <button
-                      type="button"
-                      onClick={(e) => this.handleDelete(cert.id)}
-                    >
-                      Delete Cert
-                    </button>{" "}
-                  </li>
-                </ul>
-                <br />
-              </li>
-            ))}
-          </ul>
-        </fieldset>
-        <fieldset>
-          <legend>Diver Specialties</legend>
-          <Link to="/update-specialties">Update</Link>
-          <ul>
-            {this.context.specialties
-              .filter((spec) => user.specialties.includes(spec.id))
-              .map((spec, i) => (
-                <li key={i}>{spec.spec_name}</li>
+        </header>
+
+        <div className="profile-body">
+          <fieldset className="profile-certs">
+            <legend className="section-title">Certifications</legend>
+            <Link to="/add-cert" className="btn-submit">
+              Add cert
+            </Link>
+            <ul className="certifications">
+              {certs.map((cert) => (
+                <li key={cert.id}>
+                  <ul>
+                    <li>Agency: {cert.agency}</li>
+                    <li>{cert.cert_level}</li>
+                    <li>{cert.cert_date}</li>
+                    <li>Diver number: {cert.cert_num}</li>
+                    <li>
+                      <button
+                        type="button"
+                        onClick={(e) => this.handleDelete(cert.id)}
+                        className="btn-cancel"
+                      >
+                        Delete Cert
+                      </button>{" "}
+                    </li>
+                  </ul>
+                  <br />
+                </li>
               ))}
-          </ul>
-        </fieldset>
-        <fieldset>
-          <legend>Instructor Specialties</legend>
-          {userCerts.includes("Divemaster") ||
-          userCerts.includes("Assistant Instructor") ||
-          userCerts.includes("Open Water Scuba Instructor") ||
-          userCerts.includes("Master Scuba Diver Trainer") ||
-          userCerts.includes("IDC Staff Instructor") ||
-          userCerts.includes("Master Scuba Instructor") ||
-          userCerts.includes("Course Director") ? (
-            <Link to="/update-instr-specs">Update</Link>
-          ) : (
-            ""
-          )}
-          <ul>
-            {user.instructor_specialties !== null
-              ? this.context.specialties
-                  .filter((spec) =>
-                    user.instructor_specialties.includes(spec.id)
-                  )
-                  .map((spec, i) => <li key={i}>{spec.spec_name}</li>)
-              : ""}
-          </ul>
-        </fieldset>
-        <fieldset>
-          <legend>Animal Wishlist</legend>
-          <ul>
-            {this.context.allAnimals
-              .filter((a) => user.wishlist.includes(a.id))
-              .map((a, i) => (
-                <li key={i}>{a.animal}</li>
-              ))}
-          </ul>
-          <Link to="/edit-wishlist">Edit Wishlist</Link>
-        </fieldset>
+            </ul>
+          </fieldset>
+          <div className="profile-all-specs">
+            <fieldset className="profile-specs">
+              <legend className="section-title">Diver Specialties</legend>
+              <Link to="/update-specialties" className="btn-submit">
+                Update
+              </Link>
+              <ul>
+                {this.context.specialties
+                  .filter((spec) => user.specialties.includes(spec.id))
+                  .map((spec, i) => (
+                    <li key={i}>{spec.spec_name}</li>
+                  ))}
+              </ul>
+            </fieldset>
+            <fieldset className="profile-instr-specs">
+              <legend className="section-title">Instructor Specialties</legend>
+              {userCerts.includes("Divemaster") ||
+              userCerts.includes("Assistant Instructor") ||
+              userCerts.includes("Open Water Scuba Instructor") ||
+              userCerts.includes("Master Scuba Diver Trainer") ||
+              userCerts.includes("IDC Staff Instructor") ||
+              userCerts.includes("Master Scuba Instructor") ||
+              userCerts.includes("Course Director") ? (
+                <Link to="/update-instr-specs" className="btn-submit">
+                  Update
+                </Link>
+              ) : (
+                ""
+              )}
+              <ul>
+                {user.instructor_specialties !== null
+                  ? this.context.specialties
+                      .filter((spec) =>
+                        user.instructor_specialties.includes(spec.id)
+                      )
+                      .map((spec, i) => <li key={i}>{spec.spec_name}</li>)
+                  : ""}
+              </ul>
+            </fieldset>
+          </div>
+          <fieldset className="profile-wishlist">
+            <legend className="section-title">Animal Wishlist</legend>
+            <ul>
+              {this.context.allAnimals
+                .filter((a) => user.wishlist.includes(a.id))
+                .map((a, i) => (
+                  <li key={i}>{a.animal}</li>
+                ))}
+            </ul>
+            <Link to="/edit-wishlist" className="btn-submit">
+              Edit Wishlist
+            </Link>
+          </fieldset>
+        </div>
       </div>
     ) : (
       <h2>Loading Profile...</h2>

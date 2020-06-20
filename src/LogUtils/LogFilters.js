@@ -11,7 +11,7 @@ export default class LogFilters extends React.Component {
     return (
       <div className="LogFilters">
         <fieldset>
-          <legend>Filter dives</legend>
+          <legend className="section-title">Filter dives</legend>
 
           <label>
             <select onChange={(e) => this.props.updateSearchBy(e.target.value)}>
