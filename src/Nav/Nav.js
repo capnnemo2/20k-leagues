@@ -15,23 +15,35 @@ export default class Nav extends React.Component {
 
   renderLogout = () => {
     return (
-      <Link to="/" onClick={() => this.handleLogOut()}>
+      <Link className="navlink" to="/" onClick={() => this.handleLogOut()}>
         Logout
       </Link>
     );
   };
 
   renderLogin = () => {
-    return <Link to="/login">Login</Link>;
+    return (
+      <Link className="navlink" to="/login">
+        Login
+      </Link>
+    );
   };
 
   render() {
     return (
       <div className="nav-container">
-        <Link to="/">20k Leagues</Link>
-        <Link to="/animal-finder">Animal Finder</Link>
-        <Link to="/log">Log</Link>
-        <Link to="/profile">Profile</Link>
+        <Link className="navlink" to="/">
+          20k Leagues
+        </Link>
+        <Link className="navlink" to="/animal-finder">
+          Animal Finder
+        </Link>
+        <Link className="navlink" to="/log">
+          Log
+        </Link>
+        <Link className="navlink" to="/profile">
+          Profile
+        </Link>
         {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
       </div>
     );

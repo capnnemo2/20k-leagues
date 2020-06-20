@@ -1,3 +1,38 @@
 .error {
   color: red;
 }
+
+.form-login {
+  background-color: white;
+  padding: 10px;
+}
+
+.form-login fieldset {
+  margin-bottom: 20px;
+}
+
+.btn-submit {
+  color: white;
+  font-size: 16px;
+  background-color: #1d8ead;
+  padding: 10px 25px;
+  border-radius: 20px;
+  transition: 0.1s ease-in-out;
+}
+
+.btn-submit:hover {
+  background-color: #5edcff;
+}
+
+.btn-cancel {
+  color: white;
+  font-size: 16px;
+  background-color: #fa9d43;
+  padding: 10px 25px;
+  border-radius: 20px;
+  transition: 0.1s ease-in-out;
+}
+
+.btn-cancel:hover {
+  background-color: #ad5b0c;
+}

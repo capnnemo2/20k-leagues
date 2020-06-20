@@ -7,6 +7,17 @@
 }
 
 .sign-up-input {
-  width: 70%;
+  /* width: 100%; */
   margin: 0 auto;
+}
+
+.form-signup {
+  background-color: white;
+  padding: 10px;
+}
+
+@media screen and (min-width: 468px) {
+  .sign-up-input {
+    width: 80%;
+  }
 }

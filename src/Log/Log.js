@@ -166,7 +166,7 @@ export default class Log extends React.Component {
     let animalDives = [];
     for (let i = 0; i < arr.length; i++) {
       let dive = arr[i];
-      let currentDive = dive.animalsSpotted;
+      let currentDive = dive.animals_spotted;
 
       if (currentDive.length !== 0) {
         let check = currentDive.filter(
@@ -197,7 +197,9 @@ export default class Log extends React.Component {
     let shopDives = [];
     for (let i = 0; i < arr.length; i++) {
       let dive = arr[i];
-      if (dive.diveShop.toUpperCase().includes(this.state.shop.toUpperCase())) {
+      if (
+        dive.dive_shop.toUpperCase().includes(this.state.shop.toUpperCase())
+      ) {
         shopDives.push(dive);
       }
     }
@@ -280,81 +282,80 @@ export default class Log extends React.Component {
 
     return TokenService.hasAuthToken() && user ? (
       <div className="Log">
-        <section>
-          <h2>{user.first_name}'s Dive Log</h2>
-        </section>
-        <LogFilters
-          searchBy={this.state.searchBy}
-          updateSearchBy={this.updateSearchBy}
-          updateCountry={this.updateCountry}
-          updateAnimal={this.updateAnimal}
-          updateSite={this.updateSite}
-          updateShop={this.updateShop}
-        />
-        <Link to="/add-dive">Add new dive</Link>
-        <fieldset>
-          <legend>Dives</legend>
-          <ul>
-            {dives
-              ? dives.map((dive) => (
-                  <li key={dive.id}>
-                    <ul>
-                      <li>{this.displayDate(dive.dive_date)}</li>
-                      <li>{dive.country}</li>
-                      <li>{dive.dive_site}</li>
-                      <li>{dive.rating} seastars</li>
-                      <li>
-                        <Link to={`/dive-details/${dive.id}`}>Details</Link>
-                      </li>
-                      <br />
-                    </ul>
+        <h2>{user.first_name}'s Dive Log</h2>
+        <div className="log-body">
+          <fieldset className="log-stats">
+            <legend>Statistics</legend>
+            <ul>
+              <li>Total Dives: {totalDives}</li>
+
+              {allUserDives.length !== 0 ? (
+                <div>
+                  <li>Deepest Dive: {this.findDeepestDive(allUserDives)}</li>
+                  <li>Avg Dive Depth: {this.findAvgDiveDepth(allUserDives)}</li>
+                  <li>
+                    Shallowest Dive: {this.findShallowestDive(allUserDives)}{" "}
                   </li>
-                ))
-              : ""}
-          </ul>
-        </fieldset>
-        <fieldset>
-          <legend>Statistics</legend>
-          <ul>
-            <li>Total Dives: {totalDives}</li>
 
-            {allUserDives.length !== 0 ? (
-              <div>
-                <li>Deepest Dive: {this.findDeepestDive(allUserDives)}</li>
-                <li>Avg Dive Depth: {this.findAvgDiveDepth(allUserDives)}</li>
-                <li>
-                  Shallowest Dive: {this.findShallowestDive(allUserDives)}{" "}
-                </li>
+                  <li>Longest Dive: {this.findLongestDive(allUserDives)}</li>
+                  <li>Avg Dive Time: {this.findAvgDiveTime(allUserDives)}</li>
+                  <li>Shortest Dive: {this.findShortestDive(allUserDives)}</li>
+                  <li>
+                    Total Time Spent Underwater:{" "}
+                    {this.findTotalDiveTime(allUserDives)}
+                  </li>
+                </div>
+              ) : (
+                ""
+              )}
+            </ul>
+          </fieldset>
 
-                <li>Longest Dive: {this.findLongestDive(allUserDives)}</li>
-                <li>Avg Dive Time: {this.findAvgDiveTime(allUserDives)}</li>
-                <li>Shortest Dive: {this.findShortestDive(allUserDives)}</li>
-                <li>
-                  Total Time Spent Underwater:{" "}
-                  {this.findTotalDiveTime(allUserDives)}
-                </li>
-              </div>
-            ) : (
-              ""
-            )}
-          </ul>
-        </fieldset>
-        <p>
-          In the future this will display your personal wishlist/wishlist
-          fulfilled in some exciting way.
-        </p>
-        {/* <fieldset>
-          <legend>Spotted!</legend>
-          <ul>{this.renderAnimalsSeen(user)}</ul>
-        </fieldset>
-        <fieldset>
-          <legend>Still Seeking</legend>
-          <ul>{this.renderAnimalsToSee(user)}</ul>
-        </fieldset> */}
-        <fieldset>
-          <legend>new and improved wishlist</legend>
-          <ul>{this.renderWishlist(user)}</ul>
-        </fieldset>
+          <fieldset className="log-wishlist">
+            <legend>Wishlist</legend>
+            <ul>{this.renderWishlist(user)}</ul>
+          </fieldset>
+
+          <div className="log-dives">
+            <LogFilters
+              searchBy={this.state.searchBy}
+              updateSearchBy={this.updateSearchBy}
+              updateCountry={this.updateCountry}
+              updateAnimal={this.updateAnimal}
+              updateSite={this.updateSite}
+              updateShop={this.updateShop}
+            />
+            <Link to="/add-dive" className="btn-cancel">
+              Add Dive
+            </Link>
+            <fieldset>
+              <legend>Dives</legend>
+              <ul>
+                {dives
+                  ? dives.map((dive) => (
+                      <li key={dive.id}>
+                        <ul>
+                          <li>{this.displayDate(dive.dive_date)}</li>
+                          <li>{dive.country}</li>
+                          <li>{dive.dive_site}</li>
+                          <li>{dive.rating} seastars</li>
+                          <li>
+                            <Link
+                              to={`/dive-details/${dive.id}`}
+                              className="btn-cancel"
+                            >
+                              Details
+                            </Link>
+                          </li>
+                          <br />
+                        </ul>
+                      </li>
+                    ))
+                  : ""}
+              </ul>
+            </fieldset>
+          </div>
+        </div>
       </div>
     ) : (
       <Redirect to={{ pathname: "/login" }} />

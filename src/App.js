@@ -255,40 +255,50 @@ export default class App extends React.Component {
     return (
       <Context.Provider value={value}>
         <div className="App">
-          <Nav />
-          <main>
-            <Header />
-            <Switch>
-              {/* public routes */}
-              <Route exact path="/" component={Home} />
-              <PublicOnlyRoute path="/sign-up" component={SignUp} />
-              <PublicOnlyRoute path="/login" component={Login} />
-              <Route path="/animal-finder" component={AnimalFinder} />
+          <div className="not-footer">
+            <nav>
+              <Switch>
+                <Route exact path="/" render={null} />
+                <Route exact path="/login" render={null} />
+                <Route exact path="/sign-up" render={null} />
+                <Route component={Nav} />
+              </Switch>
+            </nav>
+            {/* <Nav /> */}
+            <main>
+              <Header />
+              <Switch>
+                {/* public routes */}
+                <Route exact path="/" component={Home} />
+                <PublicOnlyRoute path="/sign-up" component={SignUp} />
+                <PublicOnlyRoute path="/login" component={Login} />
+                <Route path="/animal-finder" component={AnimalFinder} />
 
-              {/* private routes */}
-              <PrivateRoute path="/log" component={Log} />
-              <PrivateRoute path="/add-cert" component={AddCert} />
-              <PrivateRoute path="/profile" component={Profile} />
-              <PrivateRoute
-                path="/update-specialties"
-                component={UpdateSpecialties}
-              />
-              <PrivateRoute
-                path="/update-instr-specs"
-                component={UpdateInstrSpecs}
-              />
-              <PrivateRoute
-                path="/dive-details/:dive_id"
-                component={DiveDetails}
-              />
-              <PrivateRoute path="/add-dive" component={AddDive} />
-              <PrivateRoute path="/edit-dive/:dive_id" component={EditDive} />
-              <PrivateRoute path="/edit-wishlist" component={EditWishlist} />
+                {/* private routes */}
+                <PrivateRoute path="/log" component={Log} />
+                <PrivateRoute path="/add-cert" component={AddCert} />
+                <PrivateRoute path="/profile" component={Profile} />
+                <PrivateRoute
+                  path="/update-specialties"
+                  component={UpdateSpecialties}
+                />
+                <PrivateRoute
+                  path="/update-instr-specs"
+                  component={UpdateInstrSpecs}
+                />
+                <PrivateRoute
+                  path="/dive-details/:dive_id"
+                  component={DiveDetails}
+                />
+                <PrivateRoute path="/add-dive" component={AddDive} />
+                <PrivateRoute path="/edit-dive/:dive_id" component={EditDive} />
+                <PrivateRoute path="/edit-wishlist" component={EditWishlist} />
 
-              {/* public route */}
-              {/* <Route component={NotFoundPage} /> */}
-            </Switch>
-          </main>
+                {/* public route */}
+                {/* <Route component={NotFoundPage} /> */}
+              </Switch>
+            </main>
+          </div>
           <footer>&copy;2020 Ben Hernandez</footer>
         </div>
       </Context.Provider>

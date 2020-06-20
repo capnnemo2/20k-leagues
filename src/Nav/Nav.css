@@ -1,16 +1,19 @@
 .nav-container {
   display: flex;
   flex-direction: column;
+  margin: 5px;
 }
 
-.nav-container a {
+.navlink {
   padding: 10px;
-  font-weight: bold;
+  border-radius: 10px;
+  font-weight: bolder;
   text-transform: uppercase;
+  color: black;
 }
 
-.nav-container a:hover {
-  color: deepskyblue;
+.navlink:hover {
+  background-color: #43d2fa;
 }
 
 @media screen and (min-width: 468px) {

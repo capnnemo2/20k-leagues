@@ -187,6 +187,10 @@ export default class SignUp extends React.Component {
       });
   };
 
+  handleClickCancel = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const { error } = this.state;
     const allAnimals = this.context.allAnimals;
@@ -200,11 +204,12 @@ export default class SignUp extends React.Component {
             e.preventDefault();
             this.handleSubmit();
           }}
+          className="form-signup"
         >
           <div className="error">{error && <p>{error}</p>}</div>
-          <div className="input-fields">
-            <fieldset className="sign-up-input">
-              <legend>User Information</legend>
+          <fieldset className="input-fields">
+            <legend>User Information</legend>
+            <div className="sign-up-input">
               <div>
                 <label htmlFor="first_name">First Name: </label>
                 <input
@@ -245,9 +250,11 @@ export default class SignUp extends React.Component {
                   required
                 />
               </div>
-            </fieldset>
-            <fieldset className="sign-up-input">
-              <legend>Current Certification Level</legend>
+            </div>
+          </fieldset>
+          <fieldset className="input-fields">
+            <legend>Current Certification Level</legend>
+            <div className="sign-up-input">
               <fieldset onChange={(e) => this.updateAgency(e)}>
                 <legend>Agency</legend>
                 <label>
@@ -404,18 +411,17 @@ export default class SignUp extends React.Component {
                   required
                 />
               </fieldset>
-            </fieldset>
-
-            <fieldset className="sign-up-input">
+            </div>
+          </fieldset>
+          <fieldset className="input-fields">
+            <legend>Select Wishlist Animals</legend>
+            <div className="sign-up-input">
               <p>
                 Your dive log will allow you to keep track of some of the
                 amazing sea creatures you encounter. We've collected a list of
                 some of the common 'wishlist' animals that people often want to
                 see. Choose the ones that interest you!
               </p>
-              {/* it would be awesome if there were images for each of these creatures so users would know what it is they are saying they want to see */}
-              {/* need a better explanation of what this is for */}
-              <legend>Select Wishlist Animals</legend>
               <div>
                 <label>
                   <input
@@ -431,11 +437,19 @@ export default class SignUp extends React.Component {
                 </label>
               </div>
               {this.renderList()}
-            </fieldset>
-          </div>
+            </div>
+          </fieldset>
           <div className="error">{error && <p>{error}</p>}</div>
-          <button type="submit">Submit</button>
-          <button type="button">Cancel</button>
+          <button type="submit" className="btn-submit">
+            Submit
+          </button>{" "}
+          <button
+            type="button"
+            onClick={this.handleClickCancel}
+            className="btn-cancel"
+          >
+            Cancel
+          </button>
         </form>
       </div>
     ) : (

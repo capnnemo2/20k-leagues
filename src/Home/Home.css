@@ -1,0 +1,25 @@
+.btn-login {
+  color: white;
+  font-size: 16px;
+  background-color: #fa9d43;
+  padding: 10px 25px;
+  border-radius: 20px;
+  transition: 0.1s ease-in-out;
+}
+
+.btn-login:hover {
+  background-color: #ad5b0c;
+}
+
+.btn-signup {
+  color: white;
+  font-size: 16px;
+  background-color: #1d8ead;
+  padding: 10px 25px;
+  border-radius: 20px;
+  transition: 0.1s ease-in-out;
+}
+
+.btn-signup:hover {
+  background-color: #5edcff;
+}

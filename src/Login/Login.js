@@ -46,7 +46,7 @@ export default class Login extends React.Component {
     const { error } = this.state;
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmitJwtAuth}>
+        <form onSubmit={this.handleSubmitJwtAuth} className="form-login">
           <fieldset className="input-fields">
             <legend>Login</legend>
             <div className="error">{error && <p>{error}</p>}</div>
@@ -76,9 +76,14 @@ export default class Login extends React.Component {
               P@sswor1d.
             </p>
           </fieldset>
-
-          <button type="submit">Login</button>
-          <button type="button" onClick={this.handleClickCancel}>
+          <button type="submit" className="btn-submit">
+            Login
+          </button>{" "}
+          <button
+            type="button"
+            onClick={this.handleClickCancel}
+            className="btn-cancel"
+          >
             Cancel
           </button>
         </form>

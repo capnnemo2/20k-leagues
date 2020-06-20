@@ -1,3 +1,55 @@
+.Log ul {
+  list-style: none inside;
+  margin-left: -40px;
+}
+
 .fulfilled {
   text-decoration: line-through;
+}
+
+.log-body {
+  background-color: white;
+}
+
+.log-stats,
+.log-wishlist {
+  text-align: left;
+}
+
+.LogFilters {
+  margin-bottom: 15px;
+}
+
+.log-dives fieldset {
+  margin-top: 10px;
+}
+
+/* this media query is at a somewhat arbitrary min-width */
+@media screen and (min-width: 600px) {
+  .log-body {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .log-body :nth-child(1) {
+    order: 1;
+  }
+  .log-body :nth-child(2) {
+    order: 3;
+  }
+  .log-body :nth-child(3) {
+    order: 2;
+  }
+
+  .log-dives {
+    flex: 2;
+  }
+
+  .log-stats,
+  .log-wishlist {
+    flex: 0.5;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
 }

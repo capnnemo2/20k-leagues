@@ -1,24 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Home.css";
 
 export default class Home extends React.Component {
   render() {
     return (
       <div className="Home">
         <section>
-          <p>This is a digital dive log.</p>
-        </section>
+          <p>A digital dive log for divers who love marine life.</p>
 
-        <section>
           <p>
-            Have an account?<Link to="/login"> Login</Link>
-          </p>
-          <p>
-            Don't have an account yet?
-            <Link to="/sign-up"> Sign up</Link>
+            <Link className="btn-login" to="/login">
+              Login
+            </Link>{" "}
+            <Link className="btn-signup" to="/sign-up">
+              Sign up
+            </Link>
           </p>
         </section>
-
         <section>
           <p>
             Not only can you log your dives, but you can keep track of your
@@ -28,8 +27,6 @@ export default class Home extends React.Component {
           </p>
           <p>Examples/screenshots coming soon!</p>
         </section>
-
-        <section></section>
       </div>
     );
   }
