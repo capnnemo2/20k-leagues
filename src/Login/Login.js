@@ -76,16 +76,18 @@ export default class Login extends React.Component {
               P@sswor1d.
             </p>
           </fieldset>
-          <button type="submit" className="btn-submit">
-            Login
-          </button>{" "}
-          <button
-            type="button"
-            onClick={this.handleClickCancel}
-            className="btn-cancel"
-          >
-            Cancel
-          </button>
+          <div className="btn-container">
+            <button type="submit" className="btn-submit">
+              Login
+            </button>{" "}
+            <button
+              type="button"
+              onClick={this.handleClickCancel}
+              className="btn-cancel"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     );

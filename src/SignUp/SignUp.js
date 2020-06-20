@@ -440,16 +440,18 @@ export default class SignUp extends React.Component {
             </div>
           </fieldset>
           <div className="error">{error && <p>{error}</p>}</div>
-          <button type="submit" className="btn-submit">
-            Submit
-          </button>{" "}
-          <button
-            type="button"
-            onClick={this.handleClickCancel}
-            className="btn-cancel"
-          >
-            Cancel
-          </button>
+          <div className="btn-container">
+            <button type="submit" className="btn-submit">
+              Submit
+            </button>{" "}
+            <button
+              type="button"
+              onClick={this.handleClickCancel}
+              className="btn-cancel"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     ) : (
