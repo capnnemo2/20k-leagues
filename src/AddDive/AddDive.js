@@ -522,17 +522,19 @@ export default class AddDive extends React.Component {
               </label>
             </fieldset>
           </div>
-          <button type="submit" className="btn-submit">
-            Log dive
-          </button>
-          {"  "}
-          <button
-            type="button"
-            onClick={this.handleClickCancel}
-            className="btn-cancel"
-          >
-            Cancel
-          </button>
+          <div className="btn-container">
+            <button type="submit" className="btn-submit">
+              Log dive
+            </button>
+            {"  "}
+            <button
+              type="button"
+              onClick={this.handleClickCancel}
+              className="btn-cancel"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     ) : (

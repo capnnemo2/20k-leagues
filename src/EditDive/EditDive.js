@@ -38,6 +38,7 @@ export default class EditDive extends React.Component {
     const dive = this.context.dives.find((dive) => dive.id === diveId);
 
     if (!this.state.initialFieldsSet && dive != null) {
+      // maybe insert the date format function here
       this.setFieldsInState(dive);
     }
   }
@@ -47,6 +48,8 @@ export default class EditDive extends React.Component {
     const dive = this.context.dives.find((dive) => dive.id === diveId);
 
     if (!this.state.initialFieldsSet && dive != null) {
+      console.log("update: ", dive.dive_date);
+      // which would mean that there would have to be a different date format function here
       this.setFieldsInState(dive);
     }
   }
@@ -62,6 +65,8 @@ export default class EditDive extends React.Component {
     dive_date.splice(7, 0, "-");
     dive_date = dive_date.join("");
     dive_date = dive_date.slice(0, 10);
+
+    console.log("3: ", dive_date);
 
     if (dive.max_depth === null) {
       dive.max_depth = "";
@@ -311,6 +316,7 @@ export default class EditDive extends React.Component {
             e.preventDefault();
             this.handleSubmit();
           }}
+          className="form-edit-dive"
         >
           <div className="input-fields">
             <fieldset className="sign-up-input">
@@ -641,10 +647,18 @@ export default class EditDive extends React.Component {
               </label>
             </fieldset>
           </div>
-          <button type="submit">Update</button>
-          <button type="button" onClick={this.handleClickCancel}>
-            Cancel
-          </button>
+          <div className="btn-container">
+            <button type="submit" className="btn-submit">
+              Update
+            </button>{" "}
+            <button
+              type="button"
+              onClick={this.handleClickCancel}
+              className="btn-cancel"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     ) : (

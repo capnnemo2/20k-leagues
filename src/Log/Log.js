@@ -287,22 +287,52 @@ export default class Log extends React.Component {
           <fieldset className="log-stats">
             <legend className="section-title">Statistics</legend>
             <ul>
-              <li>Total Dives: {totalDives}</li>
+              <li>
+                Total Dives <span className="details-li">{totalDives}</span>{" "}
+              </li>
 
               {allUserDives.length !== 0 ? (
                 <div>
-                  <li>Deepest Dive: {this.findDeepestDive(allUserDives)}</li>
-                  <li>Avg Dive Depth: {this.findAvgDiveDepth(allUserDives)}</li>
                   <li>
-                    Shallowest Dive: {this.findShallowestDive(allUserDives)}{" "}
+                    Deepest Dive{" "}
+                    <span className="details-li">
+                      {this.findDeepestDive(allUserDives)}
+                    </span>{" "}
+                  </li>
+                  <li>
+                    Avg Dive Depth{" "}
+                    <span className="details-li">
+                      {this.findAvgDiveDepth(allUserDives)}
+                    </span>{" "}
+                  </li>
+                  <li>
+                    Shallowest Dive <span className="details-li"></span>{" "}
+                    {this.findShallowestDive(allUserDives)}{" "}
                   </li>
 
-                  <li>Longest Dive: {this.findLongestDive(allUserDives)}</li>
-                  <li>Avg Dive Time: {this.findAvgDiveTime(allUserDives)}</li>
-                  <li>Shortest Dive: {this.findShortestDive(allUserDives)}</li>
                   <li>
-                    Total Time Spent Underwater:{" "}
-                    {this.findTotalDiveTime(allUserDives)}
+                    Longest Dive{" "}
+                    <span className="details-li">
+                      {this.findLongestDive(allUserDives)}
+                    </span>{" "}
+                  </li>
+                  <li>
+                    Avg Dive Time{" "}
+                    <span className="details-li">
+                      {this.findAvgDiveTime(allUserDives)}
+                    </span>{" "}
+                  </li>
+                  <li>
+                    Shortest Dive{" "}
+                    <span className="details-li">
+                      {this.findShortestDive(allUserDives)}
+                    </span>{" "}
+                  </li>
+                  <li>
+                    Total Time Spent Underwater{" "}
+                    <span className="details-li">
+                      {this.findTotalDiveTime(allUserDives)}
+                    </span>
                   </li>
                 </div>
               ) : (
@@ -320,11 +350,12 @@ export default class Log extends React.Component {
               updateSite={this.updateSite}
               updateShop={this.updateShop}
             />
-            <Link to="/add-dive" className="btn-cancel">
+            <Link to="/add-dive" className="btn-submit">
               Add Dive
             </Link>
             <fieldset>
               <legend className="section-title">Dives</legend>
+
               <ul>
                 {dives
                   ? dives.map((dive) => (

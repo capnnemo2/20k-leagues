@@ -332,10 +332,10 @@ export default class DiveDetails extends React.Component {
         </div>
         <div className="btn-container btn-details-back">
           <Link to={`/edit-dive/${dive_id}`} className="btn-submit">
-            Edit Dive
+            Edit
           </Link>{" "}
           <Link to="/log" className="btn-cancel">
-            Back to Log
+            Back
           </Link>{" "}
           <Link
             to={"/log"}
@@ -351,7 +351,7 @@ export default class DiveDetails extends React.Component {
             }}
             className="btn-delete"
           >
-            Delete Dive
+            Delete
           </Link>
         </div>
       </div>

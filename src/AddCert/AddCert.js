@@ -285,16 +285,18 @@ export default class AddCert extends React.Component {
               />
             </fieldset>
           </div>
-          <button type="submit" className="btn-submit">
-            Submit
-          </button>{" "}
-          <button
-            type="button"
-            onClick={this.handleClickCancel}
-            className="btn-cancel"
-          >
-            Cancel
-          </button>
+          <div className="btn-container">
+            <button type="submit" className="btn-submit">
+              Submit
+            </button>{" "}
+            <button
+              type="button"
+              onClick={this.handleClickCancel}
+              className="btn-cancel"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     );

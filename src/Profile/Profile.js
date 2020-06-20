@@ -37,10 +37,10 @@ export default class Profile extends React.Component {
               {certs.map((cert) => (
                 <li key={cert.id}>
                   <ul>
-                    <li>Agency: {cert.agency}</li>
+                    <li>{cert.agency}</li>
                     <li>{cert.cert_level}</li>
                     <li>{cert.cert_date}</li>
-                    <li>Diver number: {cert.cert_num}</li>
+                    <li>Diver # {cert.cert_num}</li>
                     <li>
                       <button
                         type="button"
@@ -70,6 +70,7 @@ export default class Profile extends React.Component {
                   ))}
               </ul>
             </fieldset>
+
             <fieldset className="profile-instr-specs">
               <legend className="section-title">Instructor Specialties</legend>
               {userCerts.includes("Divemaster") ||
