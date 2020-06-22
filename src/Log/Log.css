@@ -24,6 +24,22 @@
   margin-top: 10px;
 }
 
+.log-dive {
+  background-color: #b1eafa;
+
+  margin: 5px;
+  border-radius: 50px;
+}
+
+.log-dive a {
+  color: black;
+}
+
+.log-details {
+  text-transform: uppercase;
+  font-size: 0.75em;
+}
+
 @media screen and (min-width: 743px) {
   .log-body {
     display: flex;

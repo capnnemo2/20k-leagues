@@ -350,18 +350,31 @@ export default class Log extends React.Component {
               updateSite={this.updateSite}
               updateShop={this.updateShop}
             />
-            <Link to="/add-dive" className="btn-submit">
+            <Link to="/add-dive" className="btn-cancel">
               Add Dive
             </Link>
             <fieldset>
               <legend className="section-title">Dives</legend>
+              <p className="log-details">Click a dive for more details</p>
 
               <ul>
                 {dives
                   ? dives.map((dive) => (
-                      <li key={dive.id}>
+                      <li key={dive.id} className="log-dive">
                         <ul>
-                          <li>{this.displayDate(dive.dive_date)}</li>
+                          <li>
+                            <Link to={`/dive-details/${dive.id}`}>
+                              {this.displayDate(dive.dive_date)}
+                              <br />
+                              {dive.country}
+                              <br />
+                              {dive.dive_site}
+                              <br />
+                              {dive.rating} seastars
+                            </Link>
+                          </li>
+
+                          {/* <li>{this.displayDate(dive.dive_date)}</li>
                           <li>{dive.country}</li>
                           <li>{dive.dive_site}</li>
                           <li>{dive.rating} seastars</li>
@@ -372,7 +385,7 @@ export default class Log extends React.Component {
                             >
                               Details
                             </Link>
-                          </li>
+                          </li> */}
                           <br />
                         </ul>
                       </li>
