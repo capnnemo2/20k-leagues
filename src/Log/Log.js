@@ -3,6 +3,13 @@ import { Link, Redirect } from "react-router-dom";
 import LogFilters from "../LogUtils/LogFilters";
 import Context from "../Context";
 import TokenService from "../services/token-service";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from "react-accessible-accordion";
 import "./Log.css";
 
 export default class Log extends React.Component {
@@ -284,62 +291,76 @@ export default class Log extends React.Component {
       <div className="Log">
         <h2>{user.first_name}'s Dive Log</h2>
         <div className="log-body">
-          <fieldset className="log-stats">
-            <legend className="section-title">Statistics</legend>
-            <ul>
-              <li>
-                Total Dives <span className="details-li">{totalDives}</span>{" "}
-              </li>
+          <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
+            <AccordionItem className="log-stats">
+              <AccordionItemHeading>
+                <AccordionItemButton>Statistics</AccordionItemButton>
+              </AccordionItemHeading>
+              <AccordionItemPanel>
+                {allUserDives.length !== 0 ? (
+                  <div>
+                    <div>
+                      Total Dives{" "}
+                      <span className="details-li">{totalDives}</span>{" "}
+                    </div>
 
-              {allUserDives.length !== 0 ? (
-                <div>
-                  <li>
-                    Deepest Dive{" "}
-                    <span className="details-li">
-                      {this.findDeepestDive(allUserDives)}
-                    </span>{" "}
-                  </li>
-                  <li>
-                    Avg Dive Depth{" "}
-                    <span className="details-li">
-                      {this.findAvgDiveDepth(allUserDives)}
-                    </span>{" "}
-                  </li>
-                  <li>
-                    Shallowest Dive <span className="details-li"></span>{" "}
-                    {this.findShallowestDive(allUserDives)}{" "}
-                  </li>
+                    <div>
+                      Deepest Dive{" "}
+                      <span className="details-li">
+                        {this.findDeepestDive(allUserDives)}
+                      </span>{" "}
+                    </div>
+                    <div>
+                      Avg Dive Depth{" "}
+                      <span className="details-li">
+                        {this.findAvgDiveDepth(allUserDives)}
+                      </span>{" "}
+                    </div>
+                    <div>
+                      Shallowest Dive <span className="details-li"></span>{" "}
+                      {this.findShallowestDive(allUserDives)}{" "}
+                    </div>
 
-                  <li>
-                    Longest Dive{" "}
-                    <span className="details-li">
-                      {this.findLongestDive(allUserDives)}
-                    </span>{" "}
-                  </li>
-                  <li>
-                    Avg Dive Time{" "}
-                    <span className="details-li">
-                      {this.findAvgDiveTime(allUserDives)}
-                    </span>{" "}
-                  </li>
-                  <li>
-                    Shortest Dive{" "}
-                    <span className="details-li">
-                      {this.findShortestDive(allUserDives)}
-                    </span>{" "}
-                  </li>
-                  <li>
-                    Total Time Spent Underwater{" "}
-                    <span className="details-li">
-                      {this.findTotalDiveTime(allUserDives)}
-                    </span>
-                  </li>
-                </div>
-              ) : (
-                ""
-              )}
-            </ul>
-          </fieldset>
+                    <div>
+                      Longest Dive{" "}
+                      <span className="details-li">
+                        {this.findLongestDive(allUserDives)}
+                      </span>{" "}
+                    </div>
+                    <div>
+                      Avg Dive Time{" "}
+                      <span className="details-li">
+                        {this.findAvgDiveTime(allUserDives)}
+                      </span>{" "}
+                    </div>
+                    <div>
+                      Shortest Dive{" "}
+                      <span className="details-li">
+                        {this.findShortestDive(allUserDives)}
+                      </span>{" "}
+                    </div>
+                    <div>
+                      Total Time Spent Underwater{" "}
+                      <span className="details-li">
+                        {this.findTotalDiveTime(allUserDives)}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  "Log dives to get data!"
+                )}
+              </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem className="log-wishlist">
+              <AccordionItemHeading>
+                <AccordionItemButton>Wishlist</AccordionItemButton>
+              </AccordionItemHeading>
+              <AccordionItemPanel>
+                {this.renderWishlist(user)}
+              </AccordionItemPanel>
+            </AccordionItem>
+          </Accordion>
 
           <div className="log-dives">
             <LogFilters
@@ -356,7 +377,6 @@ export default class Log extends React.Component {
             <fieldset>
               <legend className="section-title">Dives</legend>
               <p className="log-details">Click a dive for more details</p>
-
               <ul>
                 {dives
                   ? dives.map((dive) => (
@@ -373,20 +393,6 @@ export default class Log extends React.Component {
                               {dive.rating} seastars
                             </Link>
                           </li>
-
-                          {/* <li>{this.displayDate(dive.dive_date)}</li>
-                          <li>{dive.country}</li>
-                          <li>{dive.dive_site}</li>
-                          <li>{dive.rating} seastars</li>
-                          <li>
-                            <Link
-                              to={`/dive-details/${dive.id}`}
-                              className="btn-cancel"
-                            >
-                              Details
-                            </Link>
-                          </li> */}
-                          <br />
                         </ul>
                       </li>
                     ))
@@ -394,11 +400,6 @@ export default class Log extends React.Component {
               </ul>
             </fieldset>
           </div>
-
-          <fieldset className="log-wishlist">
-            <legend className="section-title">Wishlist</legend>
-            <ul>{this.renderWishlist(user)}</ul>
-          </fieldset>
         </div>
       </div>
     ) : (

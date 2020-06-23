@@ -39,32 +39,74 @@
   font-size: 0.75em;
 }
 
+/* BEGIN ACCORDION STYLE */
+
+.accordion {
+  border: 2px solid #ad5a0c98;
+  /* border: 5px solid rgba(0, 0, 0, 0.5); */
+  border-radius: 2px;
+}
+
+.accordion__item + .accordion__item {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.accordion__button {
+  background-color: #1d8ead;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+}
+
+.accordion__button:hover {
+  background-color: #43d2fa;
+}
+
+.accordion__button:before {
+  display: inline-block;
+  content: "";
+  height: 10px;
+  width: 10px;
+  margin-right: 12px;
+  border-bottom: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.accordion__button[aria-expanded="true"]::before,
+.accordion__button[aria-selected="true"]::before {
+  transform: rotate(45deg);
+}
+
+.accordion *[data-hidden] {
+  display: none;
+}
+
+.accordion__panel {
+  padding: 20px;
+  animation: fadein 0.35s ease-in;
+}
+
+/* END ACCORDION STYLE */
+
 @media screen and (min-width: 743px) {
+  .accordion {
+    min-width: 420px;
+    /* if there are more dives, might want to get sticky to work */
+    /* position: sticky;
+    position: -webkit-sticky;
+    top: 0; */
+  }
+
   .log-body {
     display: flex;
     align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .log-body :nth-child(1) {
-    order: 1;
-  }
-  .log-body :nth-child(2) {
-    order: 2;
-  }
-  .log-body :nth-child(3) {
-    order: 3;
   }
 
   .log-dives {
     flex: 2;
-  }
-
-  .log-stats,
-  .log-wishlist {
-    flex: 2;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
   }
 }
