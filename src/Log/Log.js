@@ -289,7 +289,7 @@ export default class Log extends React.Component {
 
     return TokenService.hasAuthToken() && user ? (
       <div className="Log">
-        <h2>{user.first_name}'s Dive Log</h2>
+        <h2>{user.first_name}'s dive log</h2>
         <div className="log-body">
           <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
             <AccordionItem className="log-stats">

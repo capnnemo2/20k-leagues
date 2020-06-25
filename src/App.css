@@ -11,6 +11,16 @@ body {
   background-color: #43d2fa;
 }
 
+h1 {
+  font-family: "Cinzel Decorative", cursive;
+  font-size: 4em;
+}
+
+h2,
+legend {
+  font-family: "Cinzel", serif;
+}
+
 nav,
 footer {
   padding: 1% 0;

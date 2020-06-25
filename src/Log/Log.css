@@ -59,6 +59,7 @@
   width: 100%;
   text-align: left;
   border: none;
+  font-family: "Cinzel", serif;
 }
 
 .accordion__button:hover {
