@@ -120,6 +120,7 @@ export default class SignUp extends React.Component {
             checked={this.state.wishlist.includes(animal.id)}
             onChange={this.handleChange}
           />
+          {"  "}
           {animal.animal}
         </label>
       </div>
@@ -433,6 +434,7 @@ export default class SignUp extends React.Component {
                     }
                     onChange={this.handleChange}
                   />
+                  {"  "}
                   Check All
                 </label>
               </div>

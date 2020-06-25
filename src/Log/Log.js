@@ -317,8 +317,10 @@ export default class Log extends React.Component {
                       </span>{" "}
                     </div>
                     <div>
-                      Shallowest Dive <span className="details-li"></span>{" "}
-                      {this.findShallowestDive(allUserDives)}{" "}
+                      Shallowest Dive{" "}
+                      <span className="details-li">
+                        {this.findShallowestDive(allUserDives)}
+                      </span>{" "}
                     </div>
 
                     <div>
