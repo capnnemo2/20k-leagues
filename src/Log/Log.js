@@ -299,49 +299,49 @@ export default class Log extends React.Component {
               <AccordionItemPanel>
                 {allUserDives.length !== 0 ? (
                   <div>
-                    <div>
+                    <div className="stats-item">
                       Total Dives{" "}
                       <span className="details-li">{totalDives}</span>{" "}
                     </div>
 
-                    <div>
+                    <div className="stats-item">
                       Deepest Dive{" "}
                       <span className="details-li">
                         {this.findDeepestDive(allUserDives)}
                       </span>{" "}
                     </div>
-                    <div>
+                    <div className="stats-item">
                       Avg Dive Depth{" "}
                       <span className="details-li">
                         {this.findAvgDiveDepth(allUserDives)}
                       </span>{" "}
                     </div>
-                    <div>
+                    <div className="stats-item">
                       Shallowest Dive{" "}
                       <span className="details-li">
                         {this.findShallowestDive(allUserDives)}
                       </span>{" "}
                     </div>
 
-                    <div>
+                    <div className="stats-item">
                       Longest Dive{" "}
                       <span className="details-li">
                         {this.findLongestDive(allUserDives)}
                       </span>{" "}
                     </div>
-                    <div>
+                    <div className="stats-item">
                       Avg Dive Time{" "}
                       <span className="details-li">
                         {this.findAvgDiveTime(allUserDives)}
                       </span>{" "}
                     </div>
-                    <div>
+                    <div className="stats-item">
                       Shortest Dive{" "}
                       <span className="details-li">
                         {this.findShortestDive(allUserDives)}
                       </span>{" "}
                     </div>
-                    <div>
+                    <div className="stats-item">
                       Total Time Spent Underwater{" "}
                       <span className="details-li">
                         {this.findTotalDiveTime(allUserDives)}
@@ -375,7 +375,7 @@ export default class Log extends React.Component {
             />
 
             {/* can I make this hr shorter? make it blue? */}
-            <hr />
+            <hr className="log-hr" />
 
             <div>
               <h3 className="section-title">Dives</h3>

@@ -3,3 +3,9 @@
   width: 60%;
   margin: 0 auto;
 }
+
+.finder-item {
+  background-color: #b1eafa;
+  margin: 5px;
+  border-radius: 50px;
+}

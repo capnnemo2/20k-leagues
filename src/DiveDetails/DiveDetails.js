@@ -213,20 +213,20 @@ export default class DiveDetails extends React.Component {
           <div className="input-fields sidebar">
             <h3 className="section-title">Statistics</h3>
             <ul className="sign-up-input">
-              <li>
+              <li className="stats-item">
                 Maximum Depth{" "}
                 <span className="details-li">{dive.max_depth} ft.</span>{" "}
               </li>
-              <li>
+              <li className="stats-item">
                 Bottom Time{" "}
                 <span className="details-li">{dive.duration} min.</span>{" "}
               </li>
-              <li>
+              <li className="stats-item">
                 Water Temp{" "}
                 <span className="details-li">{dive.water_temp} °F</span>{" "}
               </li>
               {dive.viz !== "" ? (
-                <li>
+                <li className="stats-item">
                   Visibility{" "}
                   <span className="details-li">
                     {this.displayViz(dive.viz)}
@@ -236,24 +236,24 @@ export default class DiveDetails extends React.Component {
                 ""
               )}
               {dive.diveType === "boat" ? (
-                <li>
+                <li className="stats-item">
                   {" "}
                   Access{"  "} <span className="details-li">Boat dive</span>{" "}
                 </li>
               ) : (
-                <li>
+                <li className="stats-item">
                   Access{"  "} <span className="details-li">Shore dive</span>
                 </li>
               )}
               {dive.drift_dive === true ? (
-                <li>
+                <li className="stats-item">
                   Dive Type <span className="details-li">Drift dive</span>
                 </li>
               ) : (
                 ""
               )}
               {dive.night_dive === true ? (
-                <li>
+                <li className="stats-item">
                   Dive Type <span className="details-li">Night dive</span>
                 </li>
               ) : (
@@ -264,22 +264,21 @@ export default class DiveDetails extends React.Component {
 
           <div className="dive-inner-container">
             <div className="input-fields">
-              <div className="btn-container"></div>
               <h3 className="section-title">Date and Location</h3>
               <ul className="sign-up-input">
-                <li>
+                <li className="stats-item">
                   Date{" "}
                   <span className="details-li">
                     {this.displayDate(dive.dive_date)}
                   </span>{" "}
                 </li>
-                <li>
+                <li className="stats-item">
                   Country <span className="details-li">{dive.country}</span>{" "}
                 </li>
-                <li>
+                <li className="stats-item">
                   Region <span className="details-li">{dive.region}</span>{" "}
                 </li>
-                <li>
+                <li className="stats-item">
                   Dive Site <span className="details-li">{dive.dive_site}</span>{" "}
                 </li>
               </ul>
@@ -307,21 +306,21 @@ export default class DiveDetails extends React.Component {
             <h3 className="section-title">People</h3>
             <ul className="sign-up-input">
               {dive.dive_shop ? (
-                <li>
+                <li className="stats-item">
                   Dive Shop <span className="details-li">{dive.dive_shop}</span>
                 </li>
               ) : (
                 ""
               )}
               {dive.guide !== "" ? (
-                <li>
+                <li className="stats-item">
                   Guide <span className="details-li">{dive.guide}</span>{" "}
                 </li>
               ) : (
                 ""
               )}
               {dive.buddy !== "" ? (
-                <li>
+                <li className="stats-item">
                   Buddy <span className="details-li">{dive.buddy}</span>
                 </li>
               ) : (

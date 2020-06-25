@@ -16,6 +16,11 @@
   text-align: left;
 }
 
+.stats-item {
+  display: flex;
+  justify-content: space-between;
+}
+
 .LogFilters {
   margin-bottom: 15px;
 }
@@ -38,6 +43,11 @@
   text-transform: uppercase;
   font-size: 0.75em;
   padding-top: 20px;
+}
+
+.log-hr {
+  border: 1px solid #b1eafa;
+  width: 75%;
 }
 
 /* BEGIN ACCORDION STYLE */

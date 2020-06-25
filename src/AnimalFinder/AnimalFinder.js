@@ -191,11 +191,10 @@ export default class AnimalFinder extends React.Component {
             {regionCount
               ? regionCount.length !== 0
                 ? regionCount.map((animal) => (
-                    <div key={animal.id}>
+                    <div key={animal.id} className="finder-item">
                       <p>{animal.country}</p>
                       <p>{animal.region}</p>
                       <p>Total sightings: {animal.count}</p>
-                      <hr />
                     </div>
                   ))
                 : "Animal hasn't been spotted yet..."
@@ -205,10 +204,9 @@ export default class AnimalFinder extends React.Component {
             {animalCount
               ? animalCount.length !== 0
                 ? animalCount.map((region) => (
-                    <div key={region.id}>
+                    <div key={region.id} className="finder-item">
                       <p>{region.animal}</p>
                       <p>Total sightings: {region.count}</p>
-                      <hr />
                     </div>
                   ))
                 : "Wishlist animals haven't been spotted in this region yet..."
