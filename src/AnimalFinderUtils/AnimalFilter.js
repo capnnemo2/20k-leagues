@@ -9,7 +9,7 @@ export default class AnimalFilter extends React.Component {
     return (
       <div className="AnimalFilter">
         <label>
-          Animal:
+          Animal:{" "}
           <select onChange={(e) => this.props.updateAnimal(e)}>
             <option>Select...</option>
             {animals.map((animal) => (

@@ -150,7 +150,7 @@ export default class AnimalFinder extends React.Component {
             {this.state.searchBy === "location" ? (
               <div>
                 <label>
-                  Country:
+                  Country:{"  "}
                   <select onChange={(e) => this.updateCountry(e)}>
                     <option>Select...</option>
                     {countries.map((country) => (
@@ -165,7 +165,7 @@ export default class AnimalFinder extends React.Component {
                 </label>
                 <br />
                 <label>
-                  Region:
+                  Region:{" "}
                   <select onChange={(e) => this.updateRegion(e)}>
                     <option>Select...</option>
                     {regions.map((region) => (

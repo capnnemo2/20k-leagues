@@ -19,6 +19,8 @@
 .btn-delete {
   color: white;
   font-size: 16px;
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
   background-color: red;
   padding: 10px 25px;
   border-radius: 20px;

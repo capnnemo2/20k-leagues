@@ -113,17 +113,19 @@ export default class EditWishlist extends React.Component {
               {this.renderList()}
             </fieldset>
           </div>
-          <button type="submit" className="btn-submit">
-            Submit
-          </button>
-          {"  "}
-          <button
-            type="button"
-            onClick={this.handleClickCancel}
-            className="btn-cancel"
-          >
-            Cancel
-          </button>
+          <div className="btn-container">
+            <button type="submit" className="btn-submit">
+              Submit
+            </button>
+            {"  "}
+            <button
+              type="button"
+              onClick={this.handleClickCancel}
+              className="btn-cancel"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     ) : (

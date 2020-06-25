@@ -19,7 +19,7 @@ h1 {
 h2 {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
-  font-weight: lighter;
+  font-weight: 600;
   color: #186377;
 }
 
@@ -32,6 +32,10 @@ nav,
 footer {
   padding: 1% 0;
   background-color: #1d8ead;
+}
+
+footer {
+  color: white;
 }
 
 /* header {
