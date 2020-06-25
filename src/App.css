@@ -13,12 +13,19 @@ body {
 
 h1 {
   font-family: "Cinzel Decorative", cursive;
-  font-size: 4em;
+  font-size: 3em;
 }
 
-h2,
+h2 {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: lighter;
+  color: #186377;
+}
+
 legend {
   font-family: "Cinzel", serif;
+  color: #186377;
 }
 
 nav,
@@ -27,9 +34,9 @@ footer {
   background-color: #1d8ead;
 }
 
-header {
+/* header {
   padding: 40px;
-}
+} */
 
 section {
   padding: 10px;

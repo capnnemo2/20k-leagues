@@ -42,7 +42,7 @@
 /* BEGIN ACCORDION STYLE */
 
 .accordion {
-  border: 2px solid #ad5a0c98;
+  border: 2px solid white;
   /* border: 5px solid rgba(0, 0, 0, 0.5); */
   border-radius: 2px;
 }
@@ -53,13 +53,14 @@
 
 .accordion__button {
   background-color: #1d8ead;
-  color: black;
+  color: white;
   cursor: pointer;
   padding: 18px;
   width: 100%;
   text-align: left;
   border: none;
   font-family: "Cinzel", serif;
+  font-weight: bolder;
 }
 
 .accordion__button:hover {

@@ -1,1 +1,7 @@
-
+.Header h1 {
+  background-image: url("./haythem-gataa-glJeHs0beDU-unsplash.jpg");
+  background-size: cover;
+  padding: 40px;
+  margin: 0;
+  color: white;
+}
