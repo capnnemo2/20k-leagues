@@ -37,14 +37,15 @@
 .log-details {
   text-transform: uppercase;
   font-size: 0.75em;
+  padding-top: 20px;
 }
 
 /* BEGIN ACCORDION STYLE */
 
 .accordion {
   border: 2px solid white;
-  /* border: 5px solid rgba(0, 0, 0, 0.5); */
-  border-radius: 2px;
+  /* border radius doesn't work? */
+  /* border-radius: 15px; */
 }
 
 .accordion__item + .accordion__item {
@@ -90,6 +91,7 @@
 .accordion__panel {
   padding: 20px;
   animation: fadein 0.35s ease-in;
+  background-color: #eefbff;
 }
 
 /* END ACCORDION STYLE */

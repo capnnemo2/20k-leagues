@@ -125,8 +125,8 @@ export default class AnimalFinder extends React.Component {
               </p>
             </div>
 
-            <fieldset>
-              <legend className="section-title">Search by</legend>
+            <div>
+              <h3 className="section-title">Search by</h3>
               <input
                 type="radio"
                 name="searchBy"
@@ -144,7 +144,7 @@ export default class AnimalFinder extends React.Component {
                 onChange={(e) => this.updateSearchBy(e.target.value)}
               />
               <label htmlFor="location">Location</label>
-            </fieldset>
+            </div>
           </div>
           <div className="filter-box">
             {this.state.searchBy === "location" ? (

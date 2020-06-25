@@ -28,40 +28,47 @@ export default class Profile extends React.Component {
         </header>
 
         <div className="profile-body">
-          <fieldset className="profile-certs">
-            <legend className="section-title">Certifications</legend>
-            <Link to="/add-cert" className="btn-submit">
-              Add cert
-            </Link>
+          <div className="profile-certs">
+            <h3 className="section-title">Certifications</h3>
+            <div className="btn-container">
+              <Link to="/add-cert" className="btn-submit">
+                Add
+              </Link>
+            </div>
+
             <ul className="certifications">
               {certs.map((cert) => (
-                <li key={cert.id}>
+                <li key={cert.id} className="profile-cert">
                   <ul>
                     <li>{cert.agency}</li>
                     <li>{cert.cert_level}</li>
                     <li>{cert.cert_date}</li>
                     <li>Diver # {cert.cert_num}</li>
                     <li>
-                      <button
-                        type="button"
-                        onClick={(e) => this.handleDelete(cert.id)}
-                        className="btn-cancel"
-                      >
-                        Delete Cert
-                      </button>{" "}
+                      <div className="btn-container">
+                        <button
+                          type="button"
+                          onClick={(e) => this.handleDelete(cert.id)}
+                          className="btn-cancel"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </li>
                   </ul>
-                  <br />
                 </li>
               ))}
             </ul>
-          </fieldset>
+          </div>
           <div className="profile-all-specs">
-            <fieldset className="profile-specs">
-              <legend className="section-title">Diver Specialties</legend>
-              <Link to="/update-specialties" className="btn-submit">
-                Update
-              </Link>
+            <div className="profile-specs">
+              <h3 className="section-title">Diver Specialties</h3>
+              <div className="btn-container">
+                <Link to="/update-specialties" className="btn-submit">
+                  Update
+                </Link>
+              </div>
+
               <ul>
                 {this.context.specialties
                   .filter((spec) => user.specialties.includes(spec.id))
@@ -69,10 +76,10 @@ export default class Profile extends React.Component {
                     <li key={i}>{spec.spec_name}</li>
                   ))}
               </ul>
-            </fieldset>
+            </div>
 
-            <fieldset className="profile-instr-specs">
-              <legend className="section-title">Instructor Specialties</legend>
+            <div className="profile-instr-specs">
+              <h3 className="section-title">Instructor Specialties</h3>
               {userCerts.includes("Divemaster") ||
               userCerts.includes("Assistant Instructor") ||
               userCerts.includes("Open Water Scuba Instructor") ||
@@ -80,9 +87,11 @@ export default class Profile extends React.Component {
               userCerts.includes("IDC Staff Instructor") ||
               userCerts.includes("Master Scuba Instructor") ||
               userCerts.includes("Course Director") ? (
-                <Link to="/update-instr-specs" className="btn-submit">
-                  Update
-                </Link>
+                <div className="btn-container">
+                  <Link to="/update-instr-specs" className="btn-submit">
+                    Update
+                  </Link>
+                </div>
               ) : (
                 ""
               )}
@@ -95,10 +104,15 @@ export default class Profile extends React.Component {
                       .map((spec, i) => <li key={i}>{spec.spec_name}</li>)
                   : ""}
               </ul>
-            </fieldset>
+            </div>
           </div>
-          <fieldset className="profile-wishlist">
-            <legend className="section-title">Animal Wishlist</legend>
+          <div className="profile-wishlist">
+            <h3 className="section-title">Animal Wishlist</h3>
+            <div className="btn-container">
+              <Link to="/edit-wishlist" className="btn-submit">
+                Edit
+              </Link>
+            </div>
             <ul>
               {this.context.allAnimals
                 .filter((a) => user.wishlist.includes(a.id))
@@ -106,10 +120,7 @@ export default class Profile extends React.Component {
                   <li key={i}>{a.animal}</li>
                 ))}
             </ul>
-            <Link to="/edit-wishlist" className="btn-submit">
-              Edit Wishlist
-            </Link>
-          </fieldset>
+          </div>
         </div>
       </div>
     ) : (

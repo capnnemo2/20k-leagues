@@ -10,8 +10,8 @@ export default class LogFilters extends React.Component {
 
     return (
       <div className="LogFilters">
-        <fieldset>
-          <legend className="section-title">Filter dives</legend>
+        <div>
+          <h3 className="section-title">Filter dives</h3>
 
           <label>
             <select onChange={(e) => this.props.updateSearchBy(e.target.value)}>
@@ -28,7 +28,7 @@ export default class LogFilters extends React.Component {
             {this.props.searchBy === "country" ? (
               <div>
                 <label>
-                  Country:
+                  Country:{"  "}
                   <select onChange={(e) => this.props.updateCountry(e)}>
                     <option>Select...</option>
                     {countries.map((country) => (
@@ -49,7 +49,7 @@ export default class LogFilters extends React.Component {
             ) : this.props.searchBy === "site" ? (
               <div>
                 <label>
-                  Dive Site:
+                  Dive Site:{"  "}
                   <input
                     type="text"
                     onChange={(e) => this.props.updateSite(e)}
@@ -59,7 +59,7 @@ export default class LogFilters extends React.Component {
             ) : this.props.searchBy === "shop" ? (
               <div>
                 <label>
-                  Dive Shop:
+                  Dive Shop:{"  "}
                   <input
                     type="text"
                     onChange={(e) => this.props.updateShop(e)}
@@ -70,7 +70,7 @@ export default class LogFilters extends React.Component {
               ""
             )}
           </div>
-        </fieldset>
+        </div>
       </div>
     );
   }

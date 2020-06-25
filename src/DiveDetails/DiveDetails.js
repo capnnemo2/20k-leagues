@@ -210,8 +210,8 @@ export default class DiveDetails extends React.Component {
         </header>
 
         <div className="dive-container">
-          <fieldset className="input-fields sidebar">
-            <legend className="section-title">Statistics</legend>
+          <div className="input-fields sidebar">
+            <h3 className="section-title">Statistics</h3>
             <ul className="sign-up-input">
               <li>
                 Maximum Depth{" "}
@@ -260,12 +260,12 @@ export default class DiveDetails extends React.Component {
                 ""
               )}
             </ul>
-          </fieldset>
+          </div>
 
           <div className="dive-inner-container">
-            <fieldset className="input-fields">
+            <div className="input-fields">
               <div className="btn-container"></div>
-              <legend className="section-title">Date and Location</legend>
+              <h3 className="section-title">Date and Location</h3>
               <ul className="sign-up-input">
                 <li>
                   Date{" "}
@@ -283,16 +283,16 @@ export default class DiveDetails extends React.Component {
                   Dive Site <span className="details-li">{dive.dive_site}</span>{" "}
                 </li>
               </ul>
-            </fieldset>
-            <fieldset className="input-fields">
-              <legend className="section-title">Description</legend>
+            </div>
+            <div className="input-fields">
+              <h3 className="section-title">Description</h3>
               <ul className="sign-up-input">
                 {dive.description !== "" ? <li>{dive.description}</li> : ""}
                 <li className="details-rating">{dive.rating} seastars</li>
               </ul>
-            </fieldset>
-            <fieldset className="input-fields">
-              <legend className="section-title">Animals Spotted</legend>
+            </div>
+            <div className="input-fields">
+              <h3 className="section-title">Animals Spotted</h3>
               <ul className="sign-up-input">
                 {this.context.allAnimals
                   .filter((animal) => dive.animals_spotted.includes(animal.id))
@@ -300,11 +300,11 @@ export default class DiveDetails extends React.Component {
                     <li key={i}>{animal.animal}</li>
                   ))}
               </ul>
-            </fieldset>
+            </div>
           </div>
 
-          <fieldset className="input-fields sidebar">
-            <legend className="section-title">People</legend>
+          <div className="input-fields sidebar">
+            <h3 className="section-title">People</h3>
             <ul className="sign-up-input">
               {dive.dive_shop ? (
                 <li>
@@ -328,7 +328,7 @@ export default class DiveDetails extends React.Component {
                 ""
               )}
             </ul>
-          </fieldset>
+          </div>
         </div>
         <div className="btn-container btn-details-back">
           <Link to={`/edit-dive/${dive_id}`} className="btn-submit">

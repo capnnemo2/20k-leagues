@@ -11,6 +11,26 @@
   background-color: white;
 }
 
+.profile-wishlist ul,
+.profile-all-specs ul {
+  text-align: left;
+}
+
+.profile-cert {
+  background-color: #b1eafa;
+  margin: 5px;
+  border-radius: 50px;
+}
+
+.profile-wishlist li,
+.profile-all-specs li {
+  margin-left: 35px;
+}
+
+/* .profile-list {
+  text-align: left;
+} */
+
 .section-title {
   text-transform: uppercase;
   font-weight: bold;
