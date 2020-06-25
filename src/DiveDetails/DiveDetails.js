@@ -60,19 +60,19 @@ export default class DiveDetails extends React.Component {
     let viz = visibility;
 
     if (Number(viz) === 1) {
-      viz = "I couldn't see my own fins";
+      viz = "Terrible";
     }
     if (Number(viz) === 2) {
-      viz = "My dive buddy was a vague shadow";
+      viz = "Poor";
     }
     if (Number(viz) === 3) {
-      viz = "Anything beyond twenty feet was a theory";
+      viz = "Fair";
     }
     if (Number(viz) === 4) {
-      viz = "I could see just fine";
+      viz = "Good";
     }
     if (Number(viz) === 4) {
-      viz = "I could see two days into the future";
+      viz = "Excellent";
     }
 
     return viz;

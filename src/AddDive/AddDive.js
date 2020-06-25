@@ -346,7 +346,7 @@ export default class AddDive extends React.Component {
                   value="1"
                   onChange={(e) => this.updateViz(e)}
                 />
-                I couldn't see my own fins
+                Terrible
               </label>
               <br />
               <label>
@@ -356,7 +356,7 @@ export default class AddDive extends React.Component {
                   value="2"
                   onChange={(e) => this.updateViz(e)}
                 />
-                My dive buddy was a vague shadow
+                Poor
               </label>
               <br />
               <label>
@@ -366,7 +366,7 @@ export default class AddDive extends React.Component {
                   value="3"
                   onChange={(e) => this.updateViz(e)}
                 />
-                Anything beyond twenty feet was a theory
+                Fair
               </label>
               <br />
               <label>
@@ -376,7 +376,7 @@ export default class AddDive extends React.Component {
                   value="4"
                   onChange={(e) => this.updateViz(e)}
                 />
-                I could see just fine
+                Good
               </label>
               <br />
               <label>
@@ -386,7 +386,7 @@ export default class AddDive extends React.Component {
                   value="5"
                   onChange={(e) => this.updateViz(e)}
                 />
-                I could see two days into the future
+                Excellent
               </label>
             </fieldset>
 
