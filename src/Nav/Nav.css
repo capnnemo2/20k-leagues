@@ -23,6 +23,7 @@
 #ham-nav {
   width: 100%;
   background: #1d8ead;
+  text-align: left;
 
   /* position: sticky;
   position: -webkit-sticky;
