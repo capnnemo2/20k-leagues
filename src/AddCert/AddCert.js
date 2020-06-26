@@ -102,10 +102,6 @@ export default class AddCert extends React.Component {
   render() {
     return (
       <div className="AddCert">
-        <header>
-          <h2>Add a certification</h2>
-        </header>
-
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -116,52 +112,55 @@ export default class AddCert extends React.Component {
           <div className="input-fields">
             <fieldset className="sign-up-input">
               <legend className="section-title">Select an agency</legend>
-              <label>
-                <input
-                  type="radio"
-                  name="agency"
-                  value="PADI"
-                  required
-                  onChange={(e) => {
-                    this.updateAgency(e);
-                  }}
-                />
-                PADI
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="agency"
-                  value="SSI"
-                  required
-                  onChange={(e) => {
-                    this.updateAgency(e);
-                  }}
-                />
-                SSI
-              </label>
-              <br />
-              <label htmlFor="other">
-                <input
-                  type="radio"
-                  name="agency"
-                  value={this.state.otherAgency}
-                  onChange={(e) => this.setOtherSelected(e)}
-                  required
-                />
-                Other:{" "}
-                <input
-                  type="text"
-                  name="other"
-                  id="other"
-                  disabled={this.state.isOtherSelected}
-                  onChange={(e) => {
-                    this.updateAgency(e);
-                  }}
-                />
-              </label>
+              <div className="add-flex">
+                <label>
+                  <input
+                    type="radio"
+                    name="agency"
+                    value="PADI"
+                    required
+                    onChange={(e) => {
+                      this.updateAgency(e);
+                    }}
+                  />
+                  PADI
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="radio"
+                    name="agency"
+                    value="SSI"
+                    required
+                    onChange={(e) => {
+                      this.updateAgency(e);
+                    }}
+                  />
+                  SSI
+                </label>
+                <br />
+                <label htmlFor="other">
+                  <input
+                    type="radio"
+                    name="agency"
+                    value={this.state.otherAgency}
+                    onChange={(e) => this.setOtherSelected(e)}
+                    required
+                  />
+                  Other:{" "}
+                  <input
+                    type="text"
+                    name="other"
+                    id="other"
+                    disabled={this.state.isOtherSelected}
+                    onChange={(e) => {
+                      this.updateAgency(e);
+                    }}
+                  />
+                </label>
+              </div>
             </fieldset>
+
             <fieldset
               className="sign-up-input"
               onChange={(e) => {
@@ -169,120 +168,144 @@ export default class AddCert extends React.Component {
               }}
             >
               <legend className="section-title">Certification Level</legend>
-              <label>
-                <input type="radio" name="cert" value="Scuba Diver" required />
-                Scuba Diver
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="cert"
-                  value="Open Water Diver"
-                  required
-                />
-                Open Water Diver
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="cert"
-                  value="Advanced Open Water Diver"
-                  required
-                />
-                Advanced Open Water Diver
-              </label>
-              <br />
-              <label>
-                <input type="radio" name="cert" value="Rescue Diver" required />
-                Rescue Diver
-              </label>
-              <br />
-              <label>
-                <input type="radio" name="cert" value="Divemaster" required />
-                Divemaster
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="cert"
-                  value="Assistant Instructor"
-                  required
-                />
-                Assistant Instructor
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="cert"
-                  value="Open Water Scuba Instructor"
-                  required
-                />
-                Open Water Scuba Instructor
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="cert"
-                  value="Master Scuba Diver Trainer"
-                  required
-                />
-                Master Scuba Diver Trainer
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="cert"
-                  value="IDC Staff Instructor"
-                  required
-                />
-                IDC Staff Instructor
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="cert"
-                  value="Master Scuba Instructor"
-                  required
-                />
-                Master Scuba Instructor
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="cert"
-                  value="Course Director"
-                  required
-                />
-                Course Director
-              </label>
+              <div className="signup-column-1">
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Scuba Diver"
+                      required
+                    />
+                    Scuba Diver
+                  </label>
+                  <br />
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Open Water Diver"
+                      required
+                    />
+                    Open Water Diver
+                  </label>
+                  <br />
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Advanced Open Water Diver"
+                      required
+                    />
+                    Advanced Open Water Diver
+                  </label>
+                  <br />
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Rescue Diver"
+                      required
+                    />
+                    Rescue Diver
+                  </label>
+                  <br />
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Divemaster"
+                      required
+                    />
+                    Divemaster
+                  </label>
+                  <br />
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Assistant Instructor"
+                      required
+                    />
+                    Assistant Instructor
+                  </label>
+                  <br />
+                </div>
+
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Open Water Scuba Instructor"
+                      required
+                    />
+                    Open Water Scuba Instructor
+                  </label>
+                  <br />
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Master Scuba Diver Trainer"
+                      required
+                    />
+                    Master Scuba Diver Trainer
+                  </label>
+                  <br />
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="IDC Staff Instructor"
+                      required
+                    />
+                    IDC Staff Instructor
+                  </label>
+                  <br />
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Master Scuba Instructor"
+                      required
+                    />
+                    Master Scuba Instructor
+                  </label>
+                  <br />
+                  <label>
+                    <input
+                      type="radio"
+                      name="cert"
+                      value="Course Director"
+                      required
+                    />
+                    Course Director
+                  </label>
+                </div>
+              </div>
             </fieldset>
             <fieldset className="sign-up-input">
               <legend className="section-title">The Numbers</legend>
-              <label htmlFor="cert-num">Certification Number: </label>
-              <input
-                type="text"
-                name="cert-num"
-                id="cert-num"
-                onChange={(e) => this.updateCertNum(e.target.value)}
-                required
-              />
-              <br />
-              <label htmlFor="cert-date">Date certified: </label>
-              <input
-                type="month"
-                name="cert-date"
-                id="cert-date"
-                onChange={(e) => this.updateCertDate(e.target.value)}
-                required
-              />
+              <div className="signup-section">
+                <label htmlFor="cert-num">Certification Number: </label>
+                <input
+                  type="text"
+                  name="cert-num"
+                  id="cert-num"
+                  onChange={(e) => this.updateCertNum(e.target.value)}
+                  required
+                />
+                <br />
+                <label htmlFor="cert-date">Date certified: </label>
+                <input
+                  type="month"
+                  name="cert-date"
+                  id="cert-date"
+                  onChange={(e) => this.updateCertDate(e.target.value)}
+                  required
+                />
+              </div>
             </fieldset>
           </div>
           <div className="btn-container">

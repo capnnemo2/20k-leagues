@@ -283,7 +283,7 @@ export default class SignUp extends React.Component {
               <fieldset onChange={(e) => this.updateCertLevel(e)}>
                 <legend>Certification</legend>
                 <div className="signup-column-1">
-                  <div className="">
+                  <div>
                     <label>
                       <input
                         type="radio"
@@ -345,7 +345,7 @@ export default class SignUp extends React.Component {
                     </label>
                   </div>
 
-                  <div className="">
+                  <div>
                     <label>
                       <input
                         type="radio"
