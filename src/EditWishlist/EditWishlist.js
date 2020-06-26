@@ -82,9 +82,6 @@ export default class EditWishlist extends React.Component {
     const { user } = this.context;
     return user.id && this.state.wishlist ? (
       <div className="EditWishlist">
-        <header>
-          <h2>Animal Wishlist</h2>
-        </header>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -95,22 +92,24 @@ export default class EditWishlist extends React.Component {
           <div className="input-fields">
             <fieldset className="sing-up-input">
               <legend className="section-title">Select animals</legend>
-              <div>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="checkAll"
-                    checked={
-                      this.state.wishlist &&
-                      this.state.wishlist.length ===
-                        this.context.allAnimals.length
-                    }
-                    onChange={this.handleChange}
-                  />
-                  Check All
-                </label>
+              <div className="wishlist-columns">
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="checkAll"
+                      checked={
+                        this.state.wishlist &&
+                        this.state.wishlist.length ===
+                          this.context.allAnimals.length
+                      }
+                      onChange={this.handleChange}
+                    />
+                    Check All
+                  </label>
+                </div>
+                {this.renderList()}
               </div>
-              {this.renderList()}
             </fieldset>
           </div>
           <div className="btn-container">

@@ -1,3 +1,30 @@
-.form-wishlist {
+.EditWishlist {
   background-color: white;
+}
+
+.form-wishlist {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.wishlist-columns {
+  column-count: 1;
+}
+
+@media screen and (min-width: 468px) {
+  .form-wishlist {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .wishlist-columns {
+    column-count: 2;
+  }
+}
+
+@media screen and (min-width: 1315px) {
+  .wishlist-columns {
+    column-count: 4;
+  }
 }
