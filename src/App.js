@@ -257,13 +257,8 @@ export default class App extends React.Component {
         <div className="App">
           <div className="not-footer">
             <nav>
-              <Switch>
-                <Route exact path="/login" render={null} />
-                <Route exact path="/sign-up" render={null} />
-                <Route component={Nav} />
-              </Switch>
+              <Nav />
             </nav>
-            {/* <Nav /> */}
             <main>
               <Header />
               <Switch>

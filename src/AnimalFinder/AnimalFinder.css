@@ -1,11 +1,19 @@
 .finderExplanation {
   text-align: left;
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
 }
 
 .finder-item {
   background-color: #b1eafa;
   margin: 5px;
-  border-radius: 50px;
+  border-radius: 15px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 600px) {
+  .finder-item {
+    width: 70%;
+  }
 }
