@@ -99,7 +99,7 @@ export default class UpdateInstrSpecs extends React.Component {
           <div className="input-fields">
             <fieldset className="sign-up-input">
               <legend className="section-title">Instructor Specialties</legend>
-              {this.renderList()}
+              <div className="wishlist-columns">{this.renderList()}</div>
             </fieldset>
           </div>
           <div className="btn-container">

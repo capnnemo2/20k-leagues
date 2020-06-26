@@ -5,10 +5,12 @@
 .form-add-dive {
   width: 90%;
   margin: 0 auto;
+  text-align: left;
 }
 
-.descrip-field * {
-  vertical-align: middle;
+#description {
+  width: 100%;
+  resize: vertical;
 }
 
 .add-flex-2 {

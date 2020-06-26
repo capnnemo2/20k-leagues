@@ -202,7 +202,7 @@ export default class AddDive extends React.Component {
           }}
           className="form-add-dive"
         >
-          <div className="input-fields">
+          <div>
             <fieldset className="sign-up-input">
               <legend className="section-title">Essentials</legend>
               <div className="add-col-1">
@@ -317,16 +317,6 @@ export default class AddDive extends React.Component {
                   />
                 </div>
                 <div>
-                  <label htmlFor="guide">Divemaster/Guide: </label>
-                  <input
-                    type="text"
-                    name="guide"
-                    id="guide"
-                    aria-label="Enter your dive guide"
-                    onChange={(e) => this.updateGuide(e)}
-                  />
-                </div>
-                <div>
                   <label htmlFor="buddy">Buddy: </label>
                   <input
                     type="text"
@@ -334,6 +324,16 @@ export default class AddDive extends React.Component {
                     id="buddy"
                     aria-label="Enter your dive buddy"
                     onChange={(e) => this.updateBuddy(e)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="guide">Divemaster/Guide: </label>
+                  <input
+                    type="text"
+                    name="guide"
+                    id="guide"
+                    aria-label="Enter your dive guide"
+                    onChange={(e) => this.updateGuide(e)}
                   />
                 </div>
               </div>
@@ -444,8 +444,6 @@ export default class AddDive extends React.Component {
                 <textarea
                   name="description"
                   id="description"
-                  rows="4"
-                  cols="50"
                   aria-label="Describe your dive"
                   onChange={(e) => this.updateDescription(e)}
                 />

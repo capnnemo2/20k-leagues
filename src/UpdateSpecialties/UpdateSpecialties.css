@@ -1,3 +1,15 @@
-.form-specs {
+.AddSpecialty {
   background-color: white;
+}
+
+.form-specs {
+  text-align: left;
+  width: 90%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 468px) {
+  .form-specs {
+    width: 70%;
+  }
 }

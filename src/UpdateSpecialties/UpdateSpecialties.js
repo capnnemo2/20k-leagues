@@ -99,10 +99,10 @@ export default class UpdateSpecialties extends React.Component {
           }}
           className="form-specs"
         >
-          <div className="input-fields">
+          <div>
             <fieldset className="sign-up-input">
               <legend className="section-title">Specialties</legend>
-              {this.renderList()}
+              <div className="wishlist-columns">{this.renderList()}</div>
             </fieldset>
           </div>
           <div className="btn-container">

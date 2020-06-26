@@ -1,33 +1,7 @@
-/* .nav-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: -10px;
-  margin-bottom: -10px;
-} */
-
-/* .navlink {
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: bolder;
-  text-transform: uppercase;
-  color: white;
-  font-family: "Raleway", sans-serif;
-} */
-
-/* .navlink:hover {
-  background-color: #43d2fa;
-} */
-
-/* BEGIN HAMBURGER MENU */
-
 #ham-nav {
   width: 100%;
   background: #1d8ead;
   text-align: left;
-
-  /* position: sticky;
-  position: -webkit-sticky;
-  top: 0; */
 }
 
 #ham-nav label,
@@ -82,15 +56,3 @@
     display: block;
   }
 }
-
-/* END HAMBURGER MENU */
-
-/* @media screen and (min-width: 468px) {
-  .nav-container {
-    flex-direction: row;
-  }
-
-  .nav-container a:first-child {
-    margin-right: auto;
-  }
-} */

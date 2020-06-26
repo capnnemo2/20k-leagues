@@ -374,7 +374,6 @@ export default class Log extends React.Component {
               updateShop={this.updateShop}
             />
 
-            {/* can I make this hr shorter? make it blue? */}
             <hr className="log-hr" />
 
             <div>
