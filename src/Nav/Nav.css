@@ -1,24 +1,90 @@
-.nav-container {
+/* .nav-container {
   display: flex;
   flex-direction: column;
   margin-top: -10px;
   margin-bottom: -10px;
-}
+} */
 
-.navlink {
+/* .navlink {
   padding: 10px;
   border-radius: 10px;
   font-weight: bolder;
   text-transform: uppercase;
   color: white;
   font-family: "Raleway", sans-serif;
-}
+} */
 
-.navlink:hover {
+/* .navlink:hover {
   background-color: #43d2fa;
+} */
+
+/* BEGIN HAMBURGER MENU */
+
+#ham-nav {
+  width: 100%;
+  background: #1d8ead;
+
+  /* position: sticky;
+  position: -webkit-sticky;
+  top: 0; */
 }
 
-@media screen and (min-width: 468px) {
+#ham-nav label,
+#hamburger {
+  display: none;
+}
+
+#ham-items {
+  display: flex;
+}
+
+#ham-items a {
+  width: 20%;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  border-radius: 15px;
+}
+
+#ham-items a:hover {
+  background: #43d2fa;
+}
+
+@media screen and (max-width: 768px) {
+  #ham-nav label {
+    display: inline-block;
+    color: white;
+    background: #fa9d43;
+    font-style: normal;
+    font-size: 1.2em;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  #ham-nav label:hover {
+    background-color: #ad5b0c;
+  }
+
+  #ham-items a {
+    display: block;
+    width: 100%;
+    border-top: 1px solid #333;
+    border-radius: 0;
+  }
+
+  #ham-items {
+    display: none;
+  }
+
+  #ham-nav input:checked ~ #ham-items {
+    display: block;
+  }
+}
+
+/* END HAMBURGER MENU */
+
+/* @media screen and (min-width: 468px) {
   .nav-container {
     flex-direction: row;
   }
@@ -26,4 +92,4 @@
   .nav-container a:first-child {
     margin-right: auto;
   }
-}
+} */

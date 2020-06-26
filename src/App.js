@@ -256,9 +256,8 @@ export default class App extends React.Component {
       <Context.Provider value={value}>
         <div className="App">
           <div className="not-footer">
-            <nav>
-              <Nav />
-            </nav>
+            <Nav />
+
             <main>
               <Header />
               <Switch>

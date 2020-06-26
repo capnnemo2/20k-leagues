@@ -431,7 +431,7 @@ export default class SignUp extends React.Component {
                 some of the common 'wishlist' animals that people often want to
                 see. Choose the ones that interest you!
               </p>
-              <div className="signup-column-2">
+              <div className="wishlist-columns">
                 <div>
                   <label>
                     <input
