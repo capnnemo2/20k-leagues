@@ -308,9 +308,6 @@ export default class EditDive extends React.Component {
 
     return user.id ? (
       <div className="EditDive">
-        <header>
-          <h2>Edit Dive</h2>
-        </header>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -320,243 +317,254 @@ export default class EditDive extends React.Component {
         >
           <div className="input-fields">
             <fieldset className="sign-up-input">
-              <legend>Essentials</legend>
-              <div>
-                <label htmlFor="date">Date: </label>
-                <input
-                  type="date"
-                  name="date"
-                  id="date"
-                  aria-label="Enter the date of the dive"
-                  aria-required="true"
-                  value={this.state.dive_date}
-                  onChange={(e) => this.updateDate(e)}
-                  required
-                />
+              <legend className="section-title">Essentials</legend>
+              <div className="add-col-1">
+                <div>
+                  <label htmlFor="date">Date: </label>
+                  <input
+                    type="date"
+                    name="date"
+                    id="date"
+                    aria-label="Enter the date of the dive"
+                    aria-required="true"
+                    value={this.state.dive_date}
+                    onChange={(e) => this.updateDate(e)}
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="site">Dive site: </label>
+                  <input
+                    type="text"
+                    name="site"
+                    id="site"
+                    aria-label="Enter the name of the dive site"
+                    aria-required="true"
+                    value={this.state.dive_site}
+                    onChange={(e) => this.updateDiveSite(e)}
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="country">Country: </label>
+                  <select
+                    id="country"
+                    value={this.state.country}
+                    onChange={(e) => this.updateCountry(e)}
+                    required
+                  >
+                    <option value="">Select...</option>
+                    {countries.map((country) => (
+                      <option
+                        value={country.country_name}
+                        key={country.country_name}
+                      >
+                        {country.country_name}
+                      </option>
+                    ))}
+                  </select>
+                  <br />
+                  <label htmlFor="region">Region: </label>
+                  <select
+                    id="region"
+                    value={this.state.region}
+                    onChange={(e) => this.updateRegion(e)}
+                    required
+                  >
+                    <option value="">Select...</option>
+                    {regions.map((region) => (
+                      <option value={region} key={region}>
+                        {region}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
-              <div>
-                <label htmlFor="site">Dive site: </label>
-                <input
-                  type="text"
-                  name="site"
-                  id="site"
-                  aria-label="Enter the name of the dive site"
-                  aria-required="true"
-                  value={this.state.dive_site}
-                  onChange={(e) => this.updateDiveSite(e)}
-                  required
-                />
+            </fieldset>
+
+            <fieldset className="sign-up-input">
+              <legend className="section-title">Dive Stats</legend>
+              <div className="add-col-1">
+                <div>
+                  <label htmlFor="depth">Max depth (ft): </label>
+                  <input
+                    type="number"
+                    name="depth"
+                    id="depth"
+                    min="0"
+                    aria-label="Enter the maximum depth"
+                    value={this.state.max_depth}
+                    onChange={(e) => this.updateMaxDepth(e)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="dive-time">Duration (min): </label>
+                  <input
+                    type="number"
+                    name="dive-time"
+                    id="dive-time"
+                    min="0"
+                    aria-label="Enter the dive duration"
+                    value={this.state.duration}
+                    onChange={(e) => this.updateDuration(e)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="temp">Water Temperature (F): </label>
+                  <input
+                    type="number"
+                    name="temp"
+                    id="temp"
+                    aria-label="Enter the water temperature"
+                    value={this.state.water_temp}
+                    onChange={(e) => this.updateWaterTemp(e)}
+                  />
+                </div>
               </div>
-              <div>
-                <label htmlFor="country">Country: </label>
-                <select
-                  id="country"
-                  value={this.state.country}
-                  onChange={(e) => this.updateCountry(e)}
-                  required
-                >
-                  <option value="">Select...</option>
-                  {countries.map((country) => (
-                    <option
-                      value={country.country_name}
-                      key={country.country_name}
-                    >
-                      {country.country_name}
-                    </option>
-                  ))}
-                </select>
+            </fieldset>
+
+            <fieldset className="sign-up-input">
+              <legend className="section-title">People</legend>
+              <div className="add-col-1">
+                <div>
+                  <label htmlFor="shop">Dive shop: </label>
+                  <input
+                    type="text"
+                    name="shop"
+                    id="shop"
+                    aria-label="Enter the dive shop"
+                    value={this.state.dive_shop}
+                    onChange={(e) => this.updateDiveShop(e)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="guide">Divemaster/Guide: </label>
+                  <input
+                    type="text"
+                    name="guide"
+                    id="guide"
+                    aria-label="Enter your dive guide"
+                    value={this.state.guide}
+                    onChange={(e) => this.updateGuide(e)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="buddy">Buddy: </label>
+                  <input
+                    type="text"
+                    name="buddy"
+                    id="buddy"
+                    aria-label="Enter your dive buddy"
+                    value={this.state.buddy}
+                    onChange={(e) => this.updateBuddy(e)}
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset className="sign-up-input">
+              <legend className="section-title">Visibility</legend>
+              <div className="add-flex">
+                <label>
+                  <input
+                    type="radio"
+                    value="1"
+                    checked={Number(this.state.viz) === 1}
+                    onChange={(e) => this.updateViz(e)}
+                  />
+                  Terrible
+                </label>
                 <br />
-                <label htmlFor="region">Region: </label>
-                <select
-                  id="region"
-                  value={this.state.region}
-                  onChange={(e) => this.updateRegion(e)}
-                  required
-                >
-                  <option value="">Select...</option>
-                  {regions.map((region) => (
-                    <option value={region} key={region}>
-                      {region}
-                    </option>
-                  ))}
-                </select>
+                <label>
+                  <input
+                    type="radio"
+                    value="2"
+                    checked={Number(this.state.viz) === 2}
+                    onChange={(e) => this.updateViz(e)}
+                  />
+                  Poor
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="radio"
+                    value="3"
+                    checked={Number(this.state.viz) === 3}
+                    onChange={(e) => this.updateViz(e)}
+                  />
+                  Fair
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="radio"
+                    value="4"
+                    checked={Number(this.state.viz) === 4}
+                    onChange={(e) => this.updateViz(e)}
+                  />
+                  Good
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="radio"
+                    value="5"
+                    checked={Number(this.state.viz) === 5}
+                    onChange={(e) => this.updateViz(e)}
+                  />
+                  Excellent
+                </label>
               </div>
             </fieldset>
 
             <fieldset className="sign-up-input">
-              <legend>Dive Stats</legend>
-              <div>
-                <label htmlFor="depth">Max depth (ft): </label>
-                <input
-                  type="number"
-                  name="depth"
-                  id="depth"
-                  min="0"
-                  aria-label="Enter the maximum depth"
-                  value={this.state.max_depth}
-                  onChange={(e) => this.updateMaxDepth(e)}
-                />
-              </div>
-              <div>
-                <label htmlFor="dive-time">Duration (min): </label>
-                <input
-                  type="number"
-                  name="dive-time"
-                  id="dive-time"
-                  min="0"
-                  aria-label="Enter the dive duration"
-                  value={this.state.duration}
-                  onChange={(e) => this.updateDuration(e)}
-                />
-              </div>
-              <div>
-                <label htmlFor="temp">Water Temperature (F): </label>
-                <input
-                  type="number"
-                  name="temp"
-                  id="temp"
-                  aria-label="Enter the water temperature"
-                  value={this.state.water_temp}
-                  onChange={(e) => this.updateWaterTemp(e)}
-                />
-              </div>
-            </fieldset>
-
-            <fieldset className="sign-up-input">
-              <legend>People</legend>
-              <div>
-                <label htmlFor="shop">Dive shop: </label>
-                <input
-                  type="text"
-                  name="shop"
-                  id="shop"
-                  aria-label="Enter the dive shop"
-                  value={this.state.dive_shop}
-                  onChange={(e) => this.updateDiveShop(e)}
-                />
-              </div>
-              <div>
-                <label htmlFor="guide">Divemaster/Guide: </label>
-                <input
-                  type="text"
-                  name="guide"
-                  id="guide"
-                  aria-label="Enter your dive guide"
-                  value={this.state.guide}
-                  onChange={(e) => this.updateGuide(e)}
-                />
-              </div>
-              <div>
-                <label htmlFor="buddy">Buddy: </label>
-                <input
-                  type="text"
-                  name="buddy"
-                  id="buddy"
-                  aria-label="Enter your dive buddy"
-                  value={this.state.buddy}
-                  onChange={(e) => this.updateBuddy(e)}
-                />
+              <legend className="section-title">Dive Type</legend>
+              <div className="add-col-1">
+                <label>
+                  <input
+                    type="radio"
+                    value="Shore"
+                    checked={this.state.dive_type === "Shore"}
+                    onChange={(e) => this.updateDiveType(e)}
+                  />
+                  Shore dive
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="radio"
+                    value="Boat"
+                    checked={this.state.dive_type === "Boat"}
+                    onChange={(e) => this.updateDiveType(e)}
+                  />
+                  Boat dive
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="checkbox"
+                    name="drift"
+                    checked={this.state.drift_dive}
+                    onChange={this.handleDriftDiveChange}
+                  />
+                  Drift dive
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="checkbox"
+                    name="night"
+                    checked={this.state.night_dive}
+                    onChange={this.handleNightDiveChange}
+                  />
+                  Night dive
+                </label>
               </div>
             </fieldset>
 
             <fieldset className="sign-up-input">
-              <legend>Visibility</legend>
-              <label>
-                <input
-                  type="radio"
-                  value="1"
-                  checked={Number(this.state.viz) === 1}
-                  onChange={(e) => this.updateViz(e)}
-                />
-                I couldn't see my own fins
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  value="2"
-                  checked={Number(this.state.viz) === 2}
-                  onChange={(e) => this.updateViz(e)}
-                />
-                My dive buddy was a vague shadow
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  value="3"
-                  checked={Number(this.state.viz) === 3}
-                  onChange={(e) => this.updateViz(e)}
-                />
-                Anything beyond twenty feet was a theory
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  value="4"
-                  checked={Number(this.state.viz) === 4}
-                  onChange={(e) => this.updateViz(e)}
-                />
-                I could see just fine
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  value="5"
-                  checked={Number(this.state.viz) === 5}
-                  onChange={(e) => this.updateViz(e)}
-                />
-                I could see two days into the future
-              </label>
-            </fieldset>
-
-            <fieldset className="sign-up-input">
-              <legend>Dive Type</legend>
-              <label>
-                <input
-                  type="radio"
-                  value="Shore"
-                  checked={this.state.dive_type === "Shore"}
-                  onChange={(e) => this.updateDiveType(e)}
-                />
-                Shore dive
-              </label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  value="Boat"
-                  checked={this.state.dive_type === "Boat"}
-                  onChange={(e) => this.updateDiveType(e)}
-                />
-                Boat dive
-              </label>
-              <br />
-              <label>
-                <input
-                  type="checkbox"
-                  name="drift"
-                  checked={this.state.drift_dive}
-                  onChange={this.handleDriftDiveChange}
-                />
-                Drift dive
-              </label>
-              <br />
-              <label>
-                <input
-                  type="checkbox"
-                  name="night"
-                  checked={this.state.night_dive}
-                  onChange={this.handleNightDiveChange}
-                />
-                Night dive
-              </label>
-            </fieldset>
-            <fieldset className="sign-up-input">
-              <legend>Sights</legend>
-              <div>
+              <legend className="section-title">Sights</legend>
+              <div className="descrip-field">
                 <label htmlFor="description">Description: </label>
                 <textarea
                   name="description"
@@ -569,82 +577,88 @@ export default class EditDive extends React.Component {
                 />
               </div>
 
-              <fieldset className="sign-up-input">
-                <legend>Animals Spotted</legend>
-                {animalList.map((animal) => (
-                  <div key={animal.id}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        name={animal.animal}
-                        id={animal.id}
-                        value={animal.animal}
-                        checked={this.state.animals_spotted.includes(animal.id)}
-                        onChange={this.handleAnimalChange}
-                      />
-                      {animal.animal}
-                    </label>
-                  </div>
-                ))}
+              <fieldset>
+                <legend className="section-title">Animals Spotted</legend>
+                <div className="add-col-1">
+                  {animalList.map((animal) => (
+                    <div key={animal.id}>
+                      <label>
+                        <input
+                          type="checkbox"
+                          name={animal.animal}
+                          id={animal.id}
+                          value={animal.animal}
+                          checked={this.state.animals_spotted.includes(
+                            animal.id
+                          )}
+                          onChange={this.handleAnimalChange}
+                        />
+                        {animal.animal}
+                      </label>
+                    </div>
+                  ))}
+                </div>
               </fieldset>
             </fieldset>
 
             <fieldset className="sign-up-input">
-              <legend>Rating</legend>
-              <label>
-                <input
-                  type="radio"
-                  value="1"
-                  checked={Number(this.state.rating) === 1}
-                  onChange={(e) => this.updateRating(e)}
-                  required
-                />
-                One seastar
-              </label>
-              {"  "}
-              <label>
-                <input
-                  type="radio"
-                  value="2"
-                  checked={Number(this.state.rating) === 2}
-                  onChange={(e) => this.updateRating(e)}
-                  required
-                />
-                Two seastars
-              </label>
-              {"  "}
-              <label>
-                <input
-                  type="radio"
-                  value="3"
-                  checked={Number(this.state.rating) === 3}
-                  onChange={(e) => this.updateRating(e)}
-                  required
-                />
-                Three seastars
-              </label>
-              {"  "}
-              <label>
-                <input
-                  type="radio"
-                  value="4"
-                  checked={Number(this.state.rating) === 4}
-                  onChange={(e) => this.updateRating(e)}
-                  required
-                />
-                Four seastars
-              </label>
-              {"  "}
-              <label>
-                <input
-                  type="radio"
-                  value="5"
-                  checked={Number(this.state.rating) === 5}
-                  onChange={(e) => this.updateRating(e)}
-                  required
-                />
-                Five seastars
-              </label>
+              <legend className="section-title">Rating</legend>
+              <div className="add-flex-2 add-col-1">
+                <label>
+                  <input
+                    type="radio"
+                    value="1"
+                    checked={Number(this.state.rating) === 1}
+                    onChange={(e) => this.updateRating(e)}
+                    required
+                  />
+                  One seastar
+                </label>
+                {"  "}
+                <label>
+                  <input
+                    type="radio"
+                    value="2"
+                    checked={Number(this.state.rating) === 2}
+                    onChange={(e) => this.updateRating(e)}
+                    required
+                  />
+                  Two seastars
+                </label>
+                {"  "}
+                <label>
+                  <input
+                    type="radio"
+                    value="3"
+                    checked={Number(this.state.rating) === 3}
+                    onChange={(e) => this.updateRating(e)}
+                    required
+                  />
+                  Three seastars
+                </label>
+                {"  "}
+                <label>
+                  <input
+                    type="radio"
+                    value="4"
+                    checked={Number(this.state.rating) === 4}
+                    onChange={(e) => this.updateRating(e)}
+                    required
+                  />
+                  Four seastars
+                </label>
+                {"  "}
+                <label>
+                  <input
+                    type="radio"
+                    value="5"
+                    checked={Number(this.state.rating) === 5}
+                    onChange={(e) => this.updateRating(e)}
+                    required
+                  />
+                  Five seastars
+                </label>
+              </div>
             </fieldset>
           </div>
           <div className="btn-container">

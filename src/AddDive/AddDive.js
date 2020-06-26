@@ -195,10 +195,6 @@ export default class AddDive extends React.Component {
     const animalList = this.context.allAnimals;
     return user.id ? (
       <div className="AddDive">
-        {/* <header>
-          <h2>Log a New Dive</h2>
-        </header> */}
-
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -442,7 +438,7 @@ export default class AddDive extends React.Component {
             </fieldset>
 
             <fieldset className="sign-up-input">
-              <legend>Sights</legend>
+              <legend className="section-title">Sights</legend>
               <div className="descrip-field">
                 <label htmlFor="description">Description: </label>
                 <textarea
