@@ -1,3 +1,7 @@
+.SignUp {
+  background-color: white;
+}
+
 .input-fields {
   display: flex;
   flex-direction: column;
@@ -11,12 +15,38 @@
 }
 
 .form-signup {
-  background-color: white;
   padding: 10px;
+  width: 90%;
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 468px) {
+  .form-signup {
+    width: 70%;
+  }
+
   .sign-up-input {
     width: 80%;
   }
+}
+
+@media screen and (min-width: 1315px) {
+  .signup-section {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .signup-column-1 {
+    column-count: 2;
+  }
+
+  .signup-column-2 {
+    /* display: flex;
+    justify-content: space-between; */
+    column-count: 4;
+  }
+
+  /* .col {
+    display: inline-block;
+  } */
 }

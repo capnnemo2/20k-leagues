@@ -50,7 +50,7 @@ export default class Login extends React.Component {
           <fieldset className="input-fields">
             <legend>Login</legend>
             <div className="error">{error && <p>{error}</p>}</div>
-            <div className="sign-up-input">
+            <div className="sign-up-input login-large">
               <label htmlFor="email">Email: </label>
               <input
                 type="text"

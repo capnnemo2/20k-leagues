@@ -1,10 +1,15 @@
+.Login {
+  background-color: white;
+}
+
 .error {
   color: red;
 }
 
 .form-login {
-  background-color: white;
   padding: 10px;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .btn-submit {
@@ -16,6 +21,7 @@
   padding: 10px 25px;
   border-radius: 20px;
   transition: 0.1s ease-in-out;
+  border: none;
 }
 
 .btn-submit:hover {
@@ -31,8 +37,15 @@
   padding: 10px 25px;
   border-radius: 20px;
   transition: 0.1s ease-in-out;
+  border: none;
 }
 
 .btn-cancel:hover {
   background-color: #ad5b0c;
+}
+
+@media screen and (min-width: 743px) {
+  .form-login {
+    width: 70%;
+  }
 }

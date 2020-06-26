@@ -30,13 +30,17 @@
 }
 
 .log-dive {
-  background-color: #b1eafa;
+  /* background-color: #b1eafa;
   margin: 5px;
-  border-radius: 50px;
+  border-radius: 50px; */
 }
 
 .log-dive a {
   color: black;
+  background-color: #b1eafa;
+  margin: 5px;
+  border-radius: 15px;
+  display: block;
 }
 
 .log-details {
@@ -52,17 +56,15 @@
 
 /* BEGIN ACCORDION STYLE */
 
-.accordion {
-  border: 2px solid white;
-  /* border radius doesn't work? */
-  /* border-radius: 15px; */
-}
+/* .accordion {
+} */
 
 .accordion__item + .accordion__item {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .accordion__button {
+  font-size: 0.9em;
   background-color: #1d8ead;
   color: white;
   cursor: pointer;
