@@ -2,6 +2,15 @@
   background-color: white;
 }
 
+.pass-info {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.small {
+  font-size: 0.8em;
+}
+
 .input-fields {
   display: flex;
   flex-direction: column;
@@ -26,6 +35,10 @@
   }
 
   .sign-up-input {
+    width: 80%;
+  }
+
+  .pass-info {
     width: 80%;
   }
 }

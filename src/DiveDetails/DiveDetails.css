@@ -45,6 +45,10 @@
     display: flex;
   }
 
+  .dive-inner-container {
+    flex: 2;
+  }
+
   .sidebar {
     flex: 1;
   }

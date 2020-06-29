@@ -74,7 +74,7 @@ export default class Log extends React.Component {
 
     let sum = diveDepths.reduce((a, b) => a + b, 0);
     let avg = sum / arr.length;
-    return avg.toFixed(1) + " ft.";
+    return avg.toFixed(0) + " ft.";
   }
 
   findShallowestDive(arr) {
@@ -106,7 +106,7 @@ export default class Log extends React.Component {
 
     let sum = diveTimes.reduce((a, b) => a + b, 0);
     let avg = sum / arr.length;
-    return avg.toFixed(1) + " min.";
+    return avg.toFixed(0) + " min.";
   }
 
   findShortestDive(arr) {
@@ -342,7 +342,7 @@ export default class Log extends React.Component {
                       </span>{" "}
                     </div>
                     <div className="stats-item">
-                      Total Time Spent Underwater{" "}
+                      Total Dive Time{" "}
                       <span className="details-li">
                         {this.findTotalDiveTime(allUserDives)}
                       </span>

@@ -4,6 +4,11 @@
   margin: 0 auto;
 }
 
+.left {
+  display: inline-block;
+  text-align: left;
+}
+
 .finder-item {
   background-color: #b1eafa;
   margin: 5px;

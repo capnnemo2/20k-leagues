@@ -127,23 +127,25 @@ export default class AnimalFinder extends React.Component {
 
             <div>
               <h3 className="section-title">Search by</h3>
-              <input
-                type="radio"
-                name="searchBy"
-                id="animal"
-                value="animal"
-                onChange={(e) => this.updateSearchBy(e.target.value)}
-              />
-              <label htmlFor="animal">Animal</label>
-              <br />
-              <input
-                type="radio"
-                name="searchBy"
-                id="location"
-                value="location"
-                onChange={(e) => this.updateSearchBy(e.target.value)}
-              />
-              <label htmlFor="location">Location</label>
+              <div className="left">
+                <input
+                  type="radio"
+                  name="searchBy"
+                  id="animal"
+                  value="animal"
+                  onChange={(e) => this.updateSearchBy(e.target.value)}
+                />
+                <label htmlFor="animal">Animal</label>
+                <br />
+                <input
+                  type="radio"
+                  name="searchBy"
+                  id="location"
+                  value="location"
+                  onChange={(e) => this.updateSearchBy(e.target.value)}
+                />
+                <label htmlFor="location">Location</label>
+              </div>
             </div>
           </div>
           <div className="filter-box">

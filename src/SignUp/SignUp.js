@@ -247,6 +247,12 @@ export default class SignUp extends React.Component {
                 />
               </div>
             </div>
+            <div className="pass-info">
+              <p className="small">
+                Password must be at least 8 characters long and include one
+                uppercase letter, one special character, and one number
+              </p>
+            </div>
           </fieldset>
           <fieldset className="input-fields">
             <legend>Current Certification Level</legend>
