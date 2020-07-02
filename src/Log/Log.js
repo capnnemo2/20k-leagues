@@ -282,7 +282,12 @@ export default class Log extends React.Component {
         ? this.findShopDives(allUserDives)
         : "";
 
-    dives.map((dive) => (dive.dive_date = dive.dive_date.split("-").join("")));
+    dives.map(
+      (dive) =>
+        (dive.dive_date = dive.dive_date.split("-").join("").slice(0, 8))
+    );
+
+    // TODO this should be putting the dives in chronological order, but isn't
     dives.sort((a, b) => b.dive_date - a.dive_date);
 
     const totalDives = allUserDives.length;

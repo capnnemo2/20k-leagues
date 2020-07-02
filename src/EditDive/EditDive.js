@@ -226,6 +226,32 @@ export default class EditDive extends React.Component {
     });
   }
 
+  // TODO
+  // edit dive currently has issues with the animal tracker. if you edit a dive and submit, it adds whatever animals are checked as spotted, even if there was no change. removing an animal spotted does not remove it from animal tracker.
+  // (1) so handle submit needs to be able to assess if animals spotted was edited. if not: no change to animal tracker.
+
+  // (1) create a new property in state: prev_animals_spotted
+  // (1) this would be set in setFieldsInState and would not have an onChange handler but would just be there for reference during handleSubmit
+  // (1) if animals_spotted === prev_animals_spotted do NOT update user.wishlist and do NOT update animal tracker
+  // (1) if animals_spotted.length === prev_animals_spotted.length && animals_spotted includes prev_animals_spotted
+
+  // (2) if there was an animals spotted change: that needs to be reflected in the animal tracker
+  // possible change scenarios:
+  //    - (A) an animal spotted was removed
+  //    - (B) an additional animal was spotted
+  //    - (C) combo of those two, or multiple instances of those two
+
+  // (2)(A) if(animals_spotted.length !== prev_animals_spotted.length && animals_spotted does NOT include prev_animals_spotted)
+  // (2)(A) then remove prev_animals_spotted AND add any new animals_spotted
+  // (2)(A) then we need to update animal tracker AND update user.wishlist
+
+  // (2)(B) if(animals_spotted.length !== prev_animals_spotted.length && animals_spotted includes prev_animals_spotted)
+  // (2)(B) then add any new animals_spotted
+  // (2)(B) then update animal tracker without adding repeats AND update user.wishlist with any new animals_spotted
+
+  // (2)(C) if(animals_spotted.length === prev_animals_spotted.length && animals_spotted does NOT include prev_animals_spotted)
+  // (2)(C) ...and more...
+
   handleSubmit = () => {
     let {
       dive_date,
