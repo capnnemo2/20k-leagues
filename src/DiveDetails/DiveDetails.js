@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Context from "../Context";
 import NonGetApiService from "../services/non-get-api-service";
 import "./DiveDetails.css";
-import GetApiService from "../services/get-api-service";
 
 export default class DiveDetails extends React.Component {
   static contextType = Context;
@@ -98,102 +97,31 @@ export default class DiveDetails extends React.Component {
   };
 
   handleDelete = (dive_id) => {
-    // first, check if there were any animals spotted
     const dive = this.context.dives.find(
       (d) => Number(d.id) === Number(dive_id)
     );
-    const region = dive.region;
 
-    if (dive.animals_spotted.length === 0) {
+    if (!dive.animals_spotted.length) {
       console.log("no animals spotted");
       this.deleteDive(dive_id);
-    } else if (dive.animals_spotted.length === 1) {
+    } else if (dive.animals_spotted.length) {
       console.log("one animal was spotted");
 
-      // find the animal
-      let animalName = this.context.allAnimals.filter((a) =>
-        dive.animals_spotted.includes(a.id)
-      );
-      // create an id array for later
-      const animalId = animalName.map((a) => a.id);
-      // reduce to just the name
-      animalName = animalName.map((a) => a.animal);
-      // use name to get info from tracker
-      const animalInTracker = this.context.animalTracker.filter((a) =>
-        animalName.includes(a.animal)
-      );
-      // get animal in region
-      let animalInTrackerRegion = animalInTracker.filter(
-        (a) => a.region === region
-      );
-      animalInTrackerRegion.forEach((a) => delete a.country);
+      // updates user wishlist fulfilled
+      const updatedAnimalsSpotted = [
+        ...new Set(
+          [].concat(
+            ...this.context.dives
+              .filter(
+                (dive) =>
+                  dive.user_id === this.context.user.id && dive.id !== dive_id
+              )
+              .map((dive) => dive.animals_spotted)
+          )
+        ),
+      ];
+      this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
 
-      // if only one: remove from tracker AND remove from wishlist fulfilled AND delete dive
-      if (animalInTracker.length === 1) {
-        console.log("one animal, only sighting");
-        NonGetApiService.removeAnimalsTracked(animalInTrackerRegion, () => {
-          GetApiService.getAnimalsTracked()
-            .then(this.context.setAnimalTracker)
-            .catch((err) => console.log(err));
-        });
-
-        // remove from user wishlist fulfilled
-        const updatedAnimalsSpotted = this.context.user.wishlist_fulfilled.filter(
-          (a) => !animalId.includes(a)
-        );
-        this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
-
-        this.deleteDive(dive_id);
-      } else {
-        // if more than one: remove from tracker AND delete dive
-        console.log("one animal, multiple sightings");
-
-        NonGetApiService.removeAnimalsTracked(animalInTrackerRegion, () => {
-          GetApiService.getAnimalsTracked()
-            .then((res) => console.log("response: ", res))
-            .then(this.context.setAnimalTracker)
-            .catch((err) => console.log(err));
-        });
-
-        this.deleteDive(dive_id);
-      }
-    } else {
-      // if animals_spotted > 1 same as above, but for each animal spotted
-      console.log("multiple animals were spotted");
-
-      let animalNames = this.context.allAnimals.filter((a) =>
-        dive.animals_spotted.includes(a.id)
-      );
-
-      animalNames.forEach((a) => {
-        const animalId = a.id;
-        const animalAnimal = a.animal;
-        const animalTracked = this.context.animalTracker.filter(
-          (animal) => animal.animal === animalAnimal
-        );
-        const animalInRegion = animalTracked.filter(
-          (animal) => animal.region === region
-        );
-
-        if (animalTracked.length === 1) {
-          NonGetApiService.removeAnimalsTracked(animalInRegion, () => {
-            GetApiService.getAnimalsTracked()
-              .then(this.context.setAnimalTracker)
-              .catch((err) => console.log(err));
-          });
-
-          const updateAnimalsSpottedForWishlist = this.context.user.wishlist_fulfilled.filter(
-            (a) => a !== animalId
-          );
-          this.context.updateWishlistFulfilled(updateAnimalsSpottedForWishlist);
-        } else {
-          NonGetApiService.removeAnimalsTracked(animalInRegion, () => {
-            GetApiService.getAnimalsTracked()
-              .then(this.context.setAnimalTracker)
-              .catch((err) => console.log(err));
-          });
-        }
-      });
       this.deleteDive(dive_id);
     }
   };

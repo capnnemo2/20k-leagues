@@ -171,6 +171,8 @@ export default class AddDive extends React.Component {
       ).animal;
       newAnimalTracked.country = newDive.country;
       newAnimalTracked.region = newDive.region;
+      // TODO add user id
+      // newAnimalTracked.user_id = newDive.user_id
       return newAnimalTracked;
     });
 

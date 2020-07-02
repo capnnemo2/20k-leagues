@@ -29,6 +29,7 @@ export default class EditDive extends React.Component {
 
     description: "",
     animals_spotted: [],
+    prev_animals_spotted: [],
 
     rating: "",
   };
@@ -99,6 +100,7 @@ export default class EditDive extends React.Component {
       night_dive: dive.night_dive,
       description: dive.description,
       animals_spotted: dive.animals_spotted,
+      prev_animals_spotted: dive.animals_spotted,
       rating: dive.rating,
     });
   };
@@ -270,6 +272,7 @@ export default class EditDive extends React.Component {
       night_dive,
       description,
       animals_spotted,
+      prev_animals_spotted,
       rating,
     } = this.state;
     let newDive = {
@@ -300,6 +303,68 @@ export default class EditDive extends React.Component {
       .then(this.context.updateDive(newDive.id, newDive))
       .catch((err) => console.log(err));
 
+    // BEGIN animal stuff
+    const arrays_equal =
+      animals_spotted.sort().toString() ===
+      prev_animals_spotted.sort().toString();
+
+    const combined_array = [].concat(prev_animals_spotted, animals_spotted);
+
+    const findDupes = (arr) => {
+      let sorted_arr = arr.sort();
+      let results = [];
+      for (let i = 0; i < sorted_arr.length - 1; i++) {
+        if (sorted_arr[i + 1] === sorted_arr[i]) {
+          results.push(sorted_arr[i]);
+        }
+      }
+      return results;
+    };
+
+    const dupes = findDupes(combined_array);
+
+    if (arrays_equal) {
+      //
+      // if the arrays are the same, do NOT update the tracker, do NOT update the wishlist
+      // this should probably be the last else statement in this if block, or not mentioned as the neutral option
+    } else if (!arrays_equal && dupes.length) {
+      // for animal tracker
+      const animalsToAddTracker = animals_spotted.filter(
+        (a) => !dupes.includes(a)
+      );
+      const animalsToRemoveTracker = prev_animals_spotted.filter(
+        (a) => !dupes.includes(a)
+      );
+
+      // for wishlist fulfilled
+      const wishlist_fulfilled = this.context.user.wishlist_fulfilled;
+      const animalsToAddWishlist = animals_spotted.filter(
+        (a) => !wishlist_fulfilled.includes(a)
+      );
+      const animalsToRemoveWishlist = wishlist_fulfilled.filter(
+        (a) => !dupes.includes(a)
+      );
+      // TODO
+      // have to check that animalsToRemoveWishlist aren't included in a different dive first
+      const updatedWishlistFulfilled = [].concat(
+        wishlist_fulfilled.filter((a) => !animalsToRemoveWishlist.includes(a)),
+        animalsToAddWishlist
+      );
+
+      this.context.updatedWishlistFulfilled(updatedWishlistFulfilled);
+      //
+      // if the arrays are not the same, but prev_animals_spotted is included in animals_spotted, remove prev_animals_spotted
+      // then update animal tracker with (animals_spotted - dupes)
+      // then subtract from animal tracker (prev_animals_spotted - dupes)
+      // then update use wishlist if animals_spotted are first time spots for user
+    } else if (!arrays_equal && !dupes.length) {
+      // if the arrays are not the same AND prev_animals_spotted is NOT included in animals_spotted
+      // remove prev_animals_spotted from animal tracker x1 AND check to see if prev_animals_spotted need to be removed from user wishlist fulfilled
+      // then add animals_spotted to animal tracker
+      // then update user wishlist if animals_spotted are first time spots for the user
+    }
+
+    // BEGIN conditional stuff
     this.context.addToWishlistFulfilled(newDive.animals_spotted);
 
     let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
@@ -312,6 +377,7 @@ export default class EditDive extends React.Component {
       return newAnimalTracked;
     });
     this.context.updateAnimalTracker(newAnimalsTracked);
+    // END conditional stuff
 
     this.props.history.push("/log");
   };
