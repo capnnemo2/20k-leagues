@@ -229,31 +229,7 @@ export default class EditDive extends React.Component {
   }
 
   // TODO
-  // edit dive currently has issues with the animal tracker. if you edit a dive and submit, it adds whatever animals are checked as spotted, even if there was no change. removing an animal spotted does not remove it from animal tracker.
-  // (1) so handle submit needs to be able to assess if animals spotted was edited. if not: no change to animal tracker.
-
-  // (1) create a new property in state: prev_animals_spotted
-  // (1) this would be set in setFieldsInState and would not have an onChange handler but would just be there for reference during handleSubmit
-  // (1) if animals_spotted === prev_animals_spotted do NOT update user.wishlist and do NOT update animal tracker
-  // (1) if animals_spotted.length === prev_animals_spotted.length && animals_spotted includes prev_animals_spotted
-
-  // (2) if there was an animals spotted change: that needs to be reflected in the animal tracker
-  // possible change scenarios:
-  //    - (A) an animal spotted was removed
-  //    - (B) an additional animal was spotted
-  //    - (C) combo of those two, or multiple instances of those two
-
-  // (2)(A) if(animals_spotted.length !== prev_animals_spotted.length && animals_spotted does NOT include prev_animals_spotted)
-  // (2)(A) then remove prev_animals_spotted AND add any new animals_spotted
-  // (2)(A) then we need to update animal tracker AND update user.wishlist
-
-  // (2)(B) if(animals_spotted.length !== prev_animals_spotted.length && animals_spotted includes prev_animals_spotted)
-  // (2)(B) then add any new animals_spotted
-  // (2)(B) then update animal tracker without adding repeats AND update user.wishlist with any new animals_spotted
-
-  // (2)(C) if(animals_spotted.length === prev_animals_spotted.length && animals_spotted does NOT include prev_animals_spotted)
-  // (2)(C) ...and more...
-
+  // need to test if this is working
   handleSubmit = () => {
     let {
       dive_date,
@@ -323,61 +299,102 @@ export default class EditDive extends React.Component {
 
     const dupes = findDupes(combined_array);
 
-    if (arrays_equal) {
-      //
-      // if the arrays are the same, do NOT update the tracker, do NOT update the wishlist
-      // this should probably be the last else statement in this if block, or not mentioned as the neutral option
-    } else if (!arrays_equal && dupes.length) {
-      // for animal tracker
+    // if(array_equal) do NOT update the tracker, do NOT update the wishlist
+
+    if (!arrays_equal && dupes.length) {
+      // add new animals spotted
       const animalsToAddTracker = animals_spotted.filter(
         (a) => !dupes.includes(a)
       );
+      let newAnimalsTracked = animalsToAddTracker.map((animal) => {
+        let newAnimalTracked = {};
+        newAnimalTracked.animal = this.context.allAnimals.find(
+          (a) => a.id === animal
+        ).animal;
+        newAnimalTracked.country = newDive.country;
+        newAnimalTracked.region = newDive.region;
+        newAnimalTracked.dive_id = newDive.id;
+        return newAnimalTracked;
+      });
+      this.context.updateAnimalTracker(newAnimalsTracked);
+
+      // remove prev animals spotted
       const animalsToRemoveTracker = prev_animals_spotted.filter(
         (a) => !dupes.includes(a)
       );
+      let oldAnimalsTracked = animalsToRemoveTracker.map((animal) => {
+        let oldAnimalTracked = {};
+        oldAnimalTracked.animal = this.context.allAnimals.find(
+          (a) => a.id === animal
+        ).animal;
+        oldAnimalTracked.country = newDive.country;
+        oldAnimalTracked.region = newDive.region;
+        oldAnimalTracked.dive_id = newDive.id;
+        return oldAnimalTracked;
+      });
+      this.context.removeFromAnimalTracker(oldAnimalsTracked);
 
-      // for wishlist fulfilled
-      const wishlist_fulfilled = this.context.user.wishlist_fulfilled;
-      const animalsToAddWishlist = animals_spotted.filter(
-        (a) => !wishlist_fulfilled.includes(a)
-      );
-      const animalsToRemoveWishlist = wishlist_fulfilled.filter(
-        (a) => !dupes.includes(a)
-      );
-      // TODO
-      // have to check that animalsToRemoveWishlist aren't included in a different dive first
-      const updatedWishlistFulfilled = [].concat(
-        wishlist_fulfilled.filter((a) => !animalsToRemoveWishlist.includes(a)),
-        animalsToAddWishlist
-      );
-
-      this.context.updatedWishlistFulfilled(updatedWishlistFulfilled);
-      //
-      // if the arrays are not the same, but prev_animals_spotted is included in animals_spotted, remove prev_animals_spotted
-      // then update animal tracker with (animals_spotted - dupes)
-      // then subtract from animal tracker (prev_animals_spotted - dupes)
-      // then update use wishlist if animals_spotted are first time spots for user
+      // update wishlist fulfilled
+      const diveId = this.props.match.params.dive_id;
+      const updatedAnimalsSpotted = [
+        ...new Set(
+          [].concat(
+            ...this.context.dives
+              .filter(
+                (dive) =>
+                  dive.user_id === this.context.user.id && dive.id !== diveId
+              )
+              .map((dive) => dive.animals_spotted),
+            this.state.animals_spotted
+          )
+        ),
+      ];
+      this.context.updatedWishlistFulfilled(updatedAnimalsSpotted);
     } else if (!arrays_equal && !dupes.length) {
-      // if the arrays are not the same AND prev_animals_spotted is NOT included in animals_spotted
-      // remove prev_animals_spotted from animal tracker x1 AND check to see if prev_animals_spotted need to be removed from user wishlist fulfilled
-      // then add animals_spotted to animal tracker
-      // then update user wishlist if animals_spotted are first time spots for the user
+      // add new animals spotted
+      let newAnimalsTracked = animals_spotted.map((animal) => {
+        let newAnimalTracked = {};
+        newAnimalTracked.animal = this.context.allAnimals.find(
+          (a) => a.id === animal
+        ).animal;
+        newAnimalTracked.country = newDive.country;
+        newAnimalTracked.region = newDive.region;
+        newAnimalTracked.dive_id = newDive.id;
+        return newAnimalTracked;
+      });
+
+      this.context.updateAnimalTracker(newAnimalsTracked);
+
+      // remove previous animals spotted
+      let oldAnimalsTracked = prev_animals_spotted.map((animal) => {
+        let oldAnimalTracked = {};
+        oldAnimalTracked.animal = this.context.allAnimals.find(
+          (a) => a.id === animal
+        ).animal;
+        oldAnimalTracked.country = newDive.country;
+        oldAnimalTracked.region = newDive.region;
+        oldAnimalTracked.dive_id = newDive.id;
+        return oldAnimalTracked;
+      });
+      this.context.removeFromAnimalTracker(oldAnimalsTracked);
+
+      // update user wishlist fulfilled
+      const diveId = this.props.match.params.dive_id;
+      const updatedAnimalsSpotted = [
+        ...new Set(
+          [].concat(
+            ...this.context.dives
+              .filter(
+                (dive) =>
+                  dive.user_id === this.context.user.id && dive.id !== diveId
+              )
+              .map((dive) => dive.animals_spotted),
+            this.state.animals_spotted
+          )
+        ),
+      ];
+      this.context.updatedWishlistFulfilled(updatedAnimalsSpotted);
     }
-
-    // BEGIN conditional stuff
-    this.context.addToWishlistFulfilled(newDive.animals_spotted);
-
-    let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
-      let newAnimalTracked = {};
-      newAnimalTracked.animal = this.context.allAnimals.find(
-        (a) => a.id === animal
-      ).animal;
-      newAnimalTracked.country = newDive.country;
-      newAnimalTracked.region = newDive.region;
-      return newAnimalTracked;
-    });
-    this.context.updateAnimalTracker(newAnimalsTracked);
-    // END conditional stuff
 
     this.props.history.push("/log");
   };

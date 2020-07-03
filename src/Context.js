@@ -22,4 +22,5 @@ export default React.createContext({
   updateDive: () => {},
   getUserData: () => {},
   updateWishlistFulfilled: () => {},
+  removeFromAnimalTracker: () => {},
 });

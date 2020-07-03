@@ -170,6 +170,17 @@ export default class App extends React.Component {
       .catch((err) => console.log(err));
   };
 
+  // TODO this is completely untested
+  removeFromAnimalTracker = (oldAnimals) => {
+    NonGetApiService.removeAnimalsTracked(oldAnimals)
+      .then(() => {
+        GetApiService.getAnimalsTracked()
+          .then(this.setAnimalTracker)
+          .catch(this.catchError);
+      })
+      .catch((err) => console.log(err));
+  };
+
   deleteDive = (dive_id) => {
     const newDives = this.state.dives.filter(
       (dive) => Number(dive.id) !== Number(dive_id)
@@ -250,6 +261,7 @@ export default class App extends React.Component {
       updateDive: this.updateDive,
       getUserData: this.getUserData,
       updateWishlistFulfilled: this.updateWishlistFulfilled,
+      removeFromAnimalTracker: this.removeFromAnimalTracker,
     };
 
     return (

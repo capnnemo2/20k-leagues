@@ -171,8 +171,9 @@ export default class AddDive extends React.Component {
       ).animal;
       newAnimalTracked.country = newDive.country;
       newAnimalTracked.region = newDive.region;
-      // TODO add user id
-      // newAnimalTracked.user_id = newDive.user_id
+      // TODO add dive id
+      // dive id won't be assigned until after it gets POSTED to backend, right? does this need to be changed into a then statement/promise for the POST dive fetch somehow?
+      newAnimalTracked.dive_id = newDive.id;
       return newAnimalTracked;
     });
 
