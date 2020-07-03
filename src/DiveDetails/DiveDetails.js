@@ -102,12 +102,11 @@ export default class DiveDetails extends React.Component {
     );
 
     if (!dive.animals_spotted.length) {
-      console.log("no animals spotted");
       this.deleteDive(dive_id);
     } else if (dive.animals_spotted.length) {
-      console.log("one animal was spotted");
-
       // updates user wishlist fulfilled
+      // TODO this is untested
+      // this does not remove the animal spotted from the last deleted dive with an animal spotted
       const updatedAnimalsSpotted = [
         ...new Set(
           [].concat(

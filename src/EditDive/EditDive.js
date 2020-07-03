@@ -316,6 +316,7 @@ export default class EditDive extends React.Component {
         newAnimalTracked.dive_id = newDive.id;
         return newAnimalTracked;
       });
+      // this takes care of things server side, but the local context isn't updated
       this.context.updateAnimalTracker(newAnimalsTracked);
 
       // remove prev animals spotted
@@ -332,6 +333,7 @@ export default class EditDive extends React.Component {
         oldAnimalTracked.dive_id = newDive.id;
         return oldAnimalTracked;
       });
+      // this takes care of things server side, but the local context isn't updated
       this.context.removeFromAnimalTracker(oldAnimalsTracked);
 
       // update wishlist fulfilled
@@ -349,7 +351,7 @@ export default class EditDive extends React.Component {
           )
         ),
       ];
-      this.context.updatedWishlistFulfilled(updatedAnimalsSpotted);
+      this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
     } else if (!arrays_equal && !dupes.length) {
       // add new animals spotted
       let newAnimalsTracked = animals_spotted.map((animal) => {
@@ -362,7 +364,7 @@ export default class EditDive extends React.Component {
         newAnimalTracked.dive_id = newDive.id;
         return newAnimalTracked;
       });
-
+      // this takes care of things server side, but the local context isn't updated
       this.context.updateAnimalTracker(newAnimalsTracked);
 
       // remove previous animals spotted
@@ -376,6 +378,7 @@ export default class EditDive extends React.Component {
         oldAnimalTracked.dive_id = newDive.id;
         return oldAnimalTracked;
       });
+      // this takes care of things server side, but the local context isn't updated
       this.context.removeFromAnimalTracker(oldAnimalsTracked);
 
       // update user wishlist fulfilled

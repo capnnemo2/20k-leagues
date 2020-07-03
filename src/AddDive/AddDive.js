@@ -29,6 +29,8 @@ export default class AddDive extends React.Component {
     animals_spotted: [],
 
     rating: "",
+
+    dive_id: "",
   };
 
   updateDate(e) {
@@ -159,27 +161,26 @@ export default class AddDive extends React.Component {
     newDive.user_id = this.context.user.id;
 
     NonGetApiService.addDive(newDive)
-      .then(this.context.addDive)
+      .then((res) => {
+        this.context.addDive(res);
+        const diveId = res.id;
+        let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
+          let newAnimalTracked = {};
+          newAnimalTracked.animal = this.context.allAnimals.find(
+            (a) => a.id === animal
+          ).animal;
+          newAnimalTracked.country = newDive.country;
+          newAnimalTracked.region = newDive.region;
+          newAnimalTracked.dive_id = diveId;
+          return newAnimalTracked;
+        });
+
+        this.context.updateAnimalTracker(newAnimalsTracked);
+      })
+      .then(this.props.history.push("/log"))
       .catch((err) => console.log(err));
 
     this.context.addToWishlistFulfilled(newDive.animals_spotted);
-
-    let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
-      let newAnimalTracked = {};
-      newAnimalTracked.animal = this.context.allAnimals.find(
-        (a) => a.id === animal
-      ).animal;
-      newAnimalTracked.country = newDive.country;
-      newAnimalTracked.region = newDive.region;
-      // TODO add dive id
-      // dive id won't be assigned until after it gets POSTED to backend, right? does this need to be changed into a then statement/promise for the POST dive fetch somehow?
-      newAnimalTracked.dive_id = newDive.id;
-      return newAnimalTracked;
-    });
-
-    this.context.updateAnimalTracker(newAnimalsTracked);
-
-    this.props.history.push("/log");
   };
 
   handleClickCancel = () => {
