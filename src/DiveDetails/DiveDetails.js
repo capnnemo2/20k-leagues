@@ -105,15 +105,14 @@ export default class DiveDetails extends React.Component {
       this.deleteDive(dive_id);
     } else if (dive.animals_spotted.length) {
       // updates user wishlist fulfilled
-      // TODO this is untested
-      // this does not remove the animal spotted from the last deleted dive with an animal spotted
       const updatedAnimalsSpotted = [
         ...new Set(
           [].concat(
             ...this.context.dives
               .filter(
                 (dive) =>
-                  dive.user_id === this.context.user.id && dive.id !== dive_id
+                  dive.user_id === this.context.user.id &&
+                  Number(dive.id) !== Number(dive_id)
               )
               .map((dive) => dive.animals_spotted)
           )
