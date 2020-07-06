@@ -302,6 +302,10 @@ export default class EditDive extends React.Component {
     // if(array_equal) do NOT update the tracker, do NOT update the wishlist
 
     if (!arrays_equal && dupes.length) {
+      console.log(
+        "prev animals spotted and animals spotted are not equal, but there is overlap: ",
+        dupes
+      );
       // add new animals spotted
       const animalsToAddTracker = animals_spotted.filter(
         (a) => !dupes.includes(a)
@@ -316,7 +320,7 @@ export default class EditDive extends React.Component {
         newAnimalTracked.dive_id = newDive.id;
         return newAnimalTracked;
       });
-      // this takes care of things server side, but the local context isn't updated
+      // this takes care of things server side, but the local context isn't updated (is it?)
       this.context.updateAnimalTracker(newAnimalsTracked);
 
       // remove prev animals spotted
@@ -344,7 +348,8 @@ export default class EditDive extends React.Component {
             ...this.context.dives
               .filter(
                 (dive) =>
-                  dive.user_id === this.context.user.id && dive.id !== diveId
+                  dive.user_id === this.context.user.id &&
+                  Number(dive.id) !== Number(diveId)
               )
               .map((dive) => dive.animals_spotted),
             this.state.animals_spotted
@@ -353,6 +358,13 @@ export default class EditDive extends React.Component {
       ];
       this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
     } else if (!arrays_equal && !dupes.length) {
+      console.log(
+        "prev and animals_spotted are not equal, but there is no overlap.",
+        "prev: ",
+        prev_animals_spotted,
+        "animals spotted: ",
+        animals_spotted
+      );
       // add new animals spotted
       let newAnimalsTracked = animals_spotted.map((animal) => {
         let newAnimalTracked = {};
@@ -389,14 +401,15 @@ export default class EditDive extends React.Component {
             ...this.context.dives
               .filter(
                 (dive) =>
-                  dive.user_id === this.context.user.id && dive.id !== diveId
+                  dive.user_id === this.context.user.id &&
+                  Number(dive.id) !== Number(diveId)
               )
               .map((dive) => dive.animals_spotted),
             this.state.animals_spotted
           )
         ),
       ];
-      this.context.updatedWishlistFulfilled(updatedAnimalsSpotted);
+      this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
     }
 
     this.props.history.push("/log");
