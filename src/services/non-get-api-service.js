@@ -99,7 +99,8 @@ const NonGetApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  removeAnimalsTracked(animalsToRemove, cb) {
+  // this used to have a cb as a second parameter and was returned instead of true
+  removeAnimalsTracked(animalsToRemove) {
     return fetch(`${config.API_ENDPOINT}/animalTracker`, {
       method: "DELETE",
       headers: {
@@ -108,7 +109,7 @@ const NonGetApiService = {
       },
       body: JSON.stringify(animalsToRemove),
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : cb()
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : true
     );
   },
 };

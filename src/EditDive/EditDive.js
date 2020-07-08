@@ -56,18 +56,12 @@ export default class EditDive extends React.Component {
   }
 
   setFieldsInState = (dive) => {
-    console.log("1: ", dive.dive_date);
-
     let dive_date = dive.dive_date.split("");
-
-    console.log("2: ", dive_date);
 
     dive_date.splice(4, 0, "-");
     dive_date.splice(7, 0, "-");
     dive_date = dive_date.join("");
     dive_date = dive_date.slice(0, 10);
-
-    console.log("3: ", dive_date);
 
     if (dive.max_depth === null) {
       dive.max_depth = "";
@@ -272,6 +266,18 @@ export default class EditDive extends React.Component {
     };
     newDive.id = Number(this.props.match.params.dive_id);
     newDive.user_id = this.context.user.id;
+    if (newDive.max_depth === "") {
+      newDive.max_depth = null;
+    }
+    if (newDive.duration === "") {
+      newDive.duration = null;
+    }
+    if (newDive.water_temp === "") {
+      newDive.water_temp = null;
+    }
+    if (newDive.viz === "") {
+      newDive.viz = null;
+    }
 
     console.log("updated dive: ", newDive);
 
@@ -327,6 +333,7 @@ export default class EditDive extends React.Component {
       const animalsToRemoveTracker = prev_animals_spotted.filter(
         (a) => !dupes.includes(a)
       );
+      console.log("animals to remove: ", animalsToRemoveTracker);
       let oldAnimalsTracked = animalsToRemoveTracker.map((animal) => {
         let oldAnimalTracked = {};
         oldAnimalTracked.animal = this.context.allAnimals.find(
@@ -357,9 +364,43 @@ export default class EditDive extends React.Component {
         ),
       ];
       this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
+    } else if (!arrays_equal && !dupes.length && !prev_animals_spotted.length) {
+      console.log("no prev_animals_spotted, but added animals_spotted");
+
+      // add new animal spotted
+      let newAnimalsTracked = animals_spotted.map((animal) => {
+        let newAnimalTracked = {};
+        newAnimalTracked.animal = this.context.allAnimals.find(
+          (a) => a.id === animal
+        ).animal;
+        newAnimalTracked.country = newDive.country;
+        newAnimalTracked.region = newDive.region;
+        newAnimalTracked.dive_id = newDive.id;
+        return newAnimalTracked;
+      });
+      // this takes care of things server side, but the local context isn't updated
+      this.context.updateAnimalTracker(newAnimalsTracked);
+
+      // update user wishlist fulfilled
+      const diveId = this.props.match.params.dive_id;
+      const updatedAnimalsSpotted = [
+        ...new Set(
+          [].concat(
+            ...this.context.dives
+              .filter(
+                (dive) =>
+                  dive.user_id === this.context.user.id &&
+                  Number(dive.id) !== Number(diveId)
+              )
+              .map((dive) => dive.animals_spotted),
+            this.state.animals_spotted
+          )
+        ),
+      ];
+      this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
     } else if (!arrays_equal && !dupes.length) {
       console.log(
-        "prev and animals_spotted are not equal, but there is no overlap.",
+        "prev and animals_spotted are not equal, there is no overlap.",
         "prev: ",
         prev_animals_spotted,
         "animals spotted: ",
@@ -390,6 +431,7 @@ export default class EditDive extends React.Component {
         oldAnimalTracked.dive_id = newDive.id;
         return oldAnimalTracked;
       });
+      console.log("old animals tracked: ", oldAnimalsTracked);
       // this takes care of things server side, but the local context isn't updated
       this.context.removeFromAnimalTracker(oldAnimalsTracked);
 
