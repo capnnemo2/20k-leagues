@@ -1,3 +1,7 @@
+.Home {
+  background-color: white;
+}
+
 .btn-login {
   color: white;
   font-size: 16px;
@@ -26,4 +30,57 @@
 
 .btn-signup:hover {
   background-color: #5edcff;
+}
+
+.home-background {
+  background-color: black;
+  height: 80vh;
+  background-image: url("/images/blue-ringed.jpg");
+  background-size: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.home-intro {
+  color: white;
+  padding-top: 5vh;
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+.home-screenshot {
+  padding-top: 40px;
+  margin-top: 40px;
+}
+
+.home-last {
+  padding-bottom: 60px;
+}
+
+.home-screenshot img {
+  width: 95%;
+}
+
+@media screen and (min-width: 900px) {
+  .home-screenshot img {
+    width: 50%;
+  }
+
+  .home-screenshot {
+    display: flex;
+    text-align: left;
+    width: 80%;
+    margin: 0 auto;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
+  .home-info {
+    padding-top: 10%;
+  }
+
+  .home-order-1 {
+    order: 2;
+    padding-left: 2%;
+  }
 }

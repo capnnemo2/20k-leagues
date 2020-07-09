@@ -6,27 +6,53 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className="Home">
-        <section>
-          <p>A digital dive log for divers who love marine life.</p>
+        <div className="home-background">
+          <p className="home-intro">
+            A digital dive log for divers who love marine life.
+          </p>
+          <Link className="btn-login" to="/login">
+            Login
+          </Link>{" "}
+          <Link className="btn-signup" to="/sign-up">
+            Sign up
+          </Link>
+        </div>
 
-          <p>
-            <Link className="btn-login" to="/login">
-              Login
-            </Link>{" "}
-            <Link className="btn-signup" to="/sign-up">
-              Sign up
-            </Link>
-          </p>
-        </section>
-        <section>
-          <p>
-            Not only can you log your dives, but you can keep track of your
-            sightings from a custom wishlist of awesome sea creatures. You can
-            even search the database of dives to see where your wishlist beasts
-            have been spotted.
-          </p>
-          <p>Examples/screenshots coming soon!</p>
-        </section>
+        <div>
+          <div className="home-screenshot">
+            <div className="home-info">
+              Your dive log will track your dives, dive stats, and wishlist
+              animals that you have spotted.
+            </div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/Log.png"}
+              alt="user dive log"
+            />
+          </div>
+
+          <div className="home-screenshot">
+            <p className="home-order-1 home-info">
+              Your profile will track your certifications, specialties, and
+              allow you to edit your personal animal wishlist.
+            </p>
+            <img
+              src={process.env.PUBLIC_URL + "/images/Profile.png"}
+              alt="user profile"
+            />
+          </div>
+
+          <div className="home-screenshot home-last">
+            <p className="home-info">
+              The animal finder allows you to search for animal sightings either
+              by animal or location.
+            </p>
+            <img
+              src={process.env.PUBLIC_URL + "/images/aFinder.png"}
+              alt="animal finder"
+              width="300px"
+            />
+          </div>
+        </div>
       </div>
     );
   }
