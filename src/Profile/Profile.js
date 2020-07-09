@@ -78,33 +78,34 @@ export default class Profile extends React.Component {
               </ul>
             </div>
 
-            <div className="profile-instr-specs">
-              <h3 className="section-title">Instructor Specialties</h3>
-              {userCerts.includes("Divemaster") ||
-              userCerts.includes("Assistant Instructor") ||
-              userCerts.includes("Open Water Scuba Instructor") ||
-              userCerts.includes("Master Scuba Diver Trainer") ||
-              userCerts.includes("IDC Staff Instructor") ||
-              userCerts.includes("Master Scuba Instructor") ||
-              userCerts.includes("Course Director") ? (
+            {userCerts.includes("Divemaster") ||
+            userCerts.includes("Assistant Instructor") ||
+            userCerts.includes("Open Water Scuba Instructor") ||
+            userCerts.includes("Master Scuba Diver Trainer") ||
+            userCerts.includes("IDC Staff Instructor") ||
+            userCerts.includes("Master Scuba Instructor") ||
+            userCerts.includes("Course Director") ? (
+              <div className="profile-instr-specs">
+                <h3 className="section-title">Instructor Specialties</h3>
+
                 <div className="btn-container">
                   <Link to="/update-instr-specs" className="btn-submit">
                     Update
                   </Link>
                 </div>
-              ) : (
-                ""
-              )}
-              <ul>
-                {user.instructor_specialties !== null
-                  ? this.context.specialties
-                      .filter((spec) =>
-                        user.instructor_specialties.includes(spec.id)
-                      )
-                      .map((spec, i) => <li key={i}>{spec.spec_name}</li>)
-                  : ""}
-              </ul>
-            </div>
+                <ul>
+                  {user.instructor_specialties !== null
+                    ? this.context.specialties
+                        .filter((spec) =>
+                          user.instructor_specialties.includes(spec.id)
+                        )
+                        .map((spec, i) => <li key={i}>{spec.spec_name}</li>)
+                    : ""}
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="profile-wishlist">
             <h3 className="section-title">Animal Wishlist</h3>
