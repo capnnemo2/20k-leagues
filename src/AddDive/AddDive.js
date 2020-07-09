@@ -164,18 +164,20 @@ export default class AddDive extends React.Component {
       .then((res) => {
         this.context.addDive(res);
         const diveId = res.id;
-        let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
-          let newAnimalTracked = {};
-          newAnimalTracked.animal = this.context.allAnimals.find(
-            (a) => a.id === animal
-          ).animal;
-          newAnimalTracked.country = newDive.country;
-          newAnimalTracked.region = newDive.region;
-          newAnimalTracked.dive_id = diveId;
-          return newAnimalTracked;
-        });
+        if (newDive.animals_spotted.length) {
+          let newAnimalsTracked = newDive.animals_spotted.map((animal) => {
+            let newAnimalTracked = {};
+            newAnimalTracked.animal = this.context.allAnimals.find(
+              (a) => a.id === animal
+            ).animal;
+            newAnimalTracked.country = newDive.country;
+            newAnimalTracked.region = newDive.region;
+            newAnimalTracked.dive_id = diveId;
+            return newAnimalTracked;
+          });
 
-        this.context.updateAnimalTracker(newAnimalsTracked);
+          this.context.updateAnimalTracker(newAnimalsTracked);
+        }
       })
       .then(this.props.history.push("/log"))
       .catch((err) => console.log(err));

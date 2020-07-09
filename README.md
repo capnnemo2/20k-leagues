@@ -1,8 +1,8 @@
 # 20K Leagues
 
-[LIVE APP](link goes here)
+[LIVE APP](https://20k-leagues.now.sh/)
 
-[API REPO](link goes here)
+[API REPO](https://github.com/capnnemo2/20k-leagues-api)
 
 ## Summary
 
@@ -16,9 +16,15 @@ But most importantly, 20K Leagues gives you the ability to track where you spott
 
 ### Log
 
+![Log](/public/images/Log.png "User Dive Log")
+
 ### Profile
 
-### Animal Tracker
+![Profile](/public/images/Profile.png "User Profile")
+
+### Animal Finder
+
+![Animal Finder](/public/images/aFinder.png "Animal Finder")
 
 ## Technologies Used
 

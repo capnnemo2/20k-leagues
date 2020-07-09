@@ -290,84 +290,12 @@ export default class EditDive extends React.Component {
       animals_spotted.sort().toString() ===
       prev_animals_spotted.sort().toString();
 
-    const combined_array = [].concat(prev_animals_spotted, animals_spotted);
-
-    const findDupes = (arr) => {
-      let sorted_arr = arr.sort();
-      let results = [];
-      for (let i = 0; i < sorted_arr.length - 1; i++) {
-        if (sorted_arr[i + 1] === sorted_arr[i]) {
-          results.push(sorted_arr[i]);
-        }
-      }
-      return results;
-    };
-
-    const dupes = findDupes(combined_array);
-
     // if(array_equal) do NOT update the tracker, do NOT update the wishlist
 
-    if (!arrays_equal && dupes.length) {
-      console.log(
-        "prev animals spotted and animals spotted are not equal, but there is overlap: ",
-        dupes
-      );
-      // add new animals spotted
-      const animalsToAddTracker = animals_spotted.filter(
-        (a) => !dupes.includes(a)
-      );
-      let newAnimalsTracked = animalsToAddTracker.map((animal) => {
-        let newAnimalTracked = {};
-        newAnimalTracked.animal = this.context.allAnimals.find(
-          (a) => a.id === animal
-        ).animal;
-        newAnimalTracked.country = newDive.country;
-        newAnimalTracked.region = newDive.region;
-        newAnimalTracked.dive_id = newDive.id;
-        return newAnimalTracked;
-      });
-      // this takes care of things server side, but the local context isn't updated (is it?)
-      this.context.updateAnimalTracker(newAnimalsTracked);
-
-      // remove prev animals spotted
-      const animalsToRemoveTracker = prev_animals_spotted.filter(
-        (a) => !dupes.includes(a)
-      );
-      console.log("animals to remove: ", animalsToRemoveTracker);
-      let oldAnimalsTracked = animalsToRemoveTracker.map((animal) => {
-        let oldAnimalTracked = {};
-        oldAnimalTracked.animal = this.context.allAnimals.find(
-          (a) => a.id === animal
-        ).animal;
-        oldAnimalTracked.country = newDive.country;
-        oldAnimalTracked.region = newDive.region;
-        oldAnimalTracked.dive_id = newDive.id;
-        return oldAnimalTracked;
-      });
-      // this takes care of things server side, but the local context isn't updated
-      this.context.removeFromAnimalTracker(oldAnimalsTracked);
-
-      // update wishlist fulfilled
-      const diveId = this.props.match.params.dive_id;
-      const updatedAnimalsSpotted = [
-        ...new Set(
-          [].concat(
-            ...this.context.dives
-              .filter(
-                (dive) =>
-                  dive.user_id === this.context.user.id &&
-                  Number(dive.id) !== Number(diveId)
-              )
-              .map((dive) => dive.animals_spotted),
-            this.state.animals_spotted
-          )
-        ),
-      ];
-      this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
-    } else if (!arrays_equal && !dupes.length && !prev_animals_spotted.length) {
+    if (!arrays_equal && !prev_animals_spotted.length) {
       console.log("no prev_animals_spotted, but added animals_spotted");
 
-      // add new animal spotted
+      // add new animals spotted
       let newAnimalsTracked = animals_spotted.map((animal) => {
         let newAnimalTracked = {};
         newAnimalTracked.animal = this.context.allAnimals.find(
@@ -378,7 +306,7 @@ export default class EditDive extends React.Component {
         newAnimalTracked.dive_id = newDive.id;
         return newAnimalTracked;
       });
-      // this takes care of things server side, but the local context isn't updated
+      // this takes care of things server side, but local context updated?
       this.context.updateAnimalTracker(newAnimalsTracked);
 
       // update user wishlist fulfilled
@@ -398,14 +326,8 @@ export default class EditDive extends React.Component {
         ),
       ];
       this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
-    } else if (!arrays_equal && !dupes.length) {
-      console.log(
-        "prev and animals_spotted are not equal, there is no overlap.",
-        "prev: ",
-        prev_animals_spotted,
-        "animals spotted: ",
-        animals_spotted
-      );
+    } else if (!arrays_equal) {
+      console.log("prev animals spotted and animals spotted are not equal");
       // add new animals spotted
       let newAnimalsTracked = animals_spotted.map((animal) => {
         let newAnimalTracked = {};
@@ -417,10 +339,11 @@ export default class EditDive extends React.Component {
         newAnimalTracked.dive_id = newDive.id;
         return newAnimalTracked;
       });
-      // this takes care of things server side, but the local context isn't updated
+      // this takes care of things server side, but local context updated?
       this.context.updateAnimalTracker(newAnimalsTracked);
 
-      // remove previous animals spotted
+      // remove prev animals spotted
+      console.log("animals to remove: ", prev_animals_spotted);
       let oldAnimalsTracked = prev_animals_spotted.map((animal) => {
         let oldAnimalTracked = {};
         oldAnimalTracked.animal = this.context.allAnimals.find(
@@ -431,11 +354,11 @@ export default class EditDive extends React.Component {
         oldAnimalTracked.dive_id = newDive.id;
         return oldAnimalTracked;
       });
-      console.log("old animals tracked: ", oldAnimalsTracked);
-      // this takes care of things server side, but the local context isn't updated
+      // this takes care of things server side, but local context updated?
+      // not working
       this.context.removeFromAnimalTracker(oldAnimalsTracked);
 
-      // update user wishlist fulfilled
+      // update wishlist fulfilled
       const diveId = this.props.match.params.dive_id;
       const updatedAnimalsSpotted = [
         ...new Set(
