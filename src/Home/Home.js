@@ -21,6 +21,7 @@ export default class Home extends React.Component {
         <div>
           <div className="home-screenshot">
             <div className="home-info">
+              <h3>Dive Log</h3>
               Your dive log will track your dives, dive stats, and wishlist
               animals that you have spotted.
             </div>
@@ -31,10 +32,11 @@ export default class Home extends React.Component {
           </div>
 
           <div className="home-screenshot">
-            <p className="home-order-1 home-info">
+            <div className="home-order-1 home-info">
+              <h3>User Profile</h3>
               Your profile will track your certifications, specialties, and
               allow you to edit your personal animal wishlist.
-            </p>
+            </div>
             <img
               src={process.env.PUBLIC_URL + "/images/Profile.png"}
               alt="user profile"
@@ -42,16 +44,22 @@ export default class Home extends React.Component {
           </div>
 
           <div className="home-screenshot home-last">
-            <p className="home-info">
+            <div className="home-info">
+              <h3>Animal Finder</h3>
               The animal finder allows you to search for animal sightings either
               by animal or location.
-            </p>
+            </div>
             <img
               src={process.env.PUBLIC_URL + "/images/aFinder.png"}
               alt="animal finder"
               width="300px"
             />
           </div>
+        </div>
+        <div className="btn-container">
+          <Link className="btn-signup" to="/sign-up">
+            Sign up
+          </Link>
         </div>
       </div>
     );

@@ -36,20 +36,21 @@
   background-color: black;
   height: 80vh;
   background-image: url("/images/blue-ringed.jpg");
-  background-size: 400px;
+  background-size: 120%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .home-intro {
   color: white;
+  font-weight: bold;
   padding-top: 5vh;
   padding-bottom: 10px;
   margin: 0;
 }
 
 .home-screenshot {
-  padding-top: 40px;
+  padding-top: 60px;
   margin-top: 40px;
 }
 
@@ -76,7 +77,7 @@
   }
 
   .home-info {
-    padding-top: 10%;
+    padding-top: 5%;
   }
 
   .home-order-1 {
