@@ -89,7 +89,6 @@ export default class DiveDetails extends React.Component {
     return allUserDives.indexOf(thisDive) + 1;
   };
 
-  // TODO have to reload for a tracker to update
   deleteDive = (dive_id) => {
     NonGetApiService.deleteDive(dive_id)
       .then(this.context.deleteDive(dive_id))

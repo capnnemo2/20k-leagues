@@ -170,14 +170,12 @@ export default class App extends React.Component {
       .catch((err) => console.log(err));
   };
 
-  // TODO this is completely untested
   removeFromAnimalTracker = (oldAnimals, cb) => {
-    console.log("animals to remove: ", oldAnimals);
     NonGetApiService.removeAnimalsTracked(oldAnimals)
       .then(() => {
         const dive_id = oldAnimals[0].dive_id;
         const animals = oldAnimals.map((animal) => animal.animal);
-        console.log({ dive_id, animals });
+
         this.setState(
           {
             animalTracker: this.state.animalTracker.filter(
@@ -191,7 +189,6 @@ export default class App extends React.Component {
       .catch((err) => console.log(err));
   };
 
-  // TODO update animal tracker in context here?
   deleteDive = (dive_id) => {
     const newDives = this.state.dives.filter(
       (dive) => Number(dive.id) !== Number(dive_id)

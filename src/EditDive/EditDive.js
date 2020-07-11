@@ -39,7 +39,6 @@ export default class EditDive extends React.Component {
     const dive = this.context.dives.find((dive) => dive.id === diveId);
 
     if (!this.state.initialFieldsSet && dive != null) {
-      // maybe insert the date format function here
       this.setFieldsInState(dive);
     }
   }
@@ -49,8 +48,6 @@ export default class EditDive extends React.Component {
     const dive = this.context.dives.find((dive) => dive.id === diveId);
 
     if (!this.state.initialFieldsSet && dive != null) {
-      console.log("update: ", dive.dive_date);
-      // which would mean that there would have to be a different date format function here
       this.setFieldsInState(dive);
     }
   }
@@ -289,9 +286,6 @@ export default class EditDive extends React.Component {
     // if(array_equal) do NOT update the tracker, do NOT update the wishlist
 
     if (!arrays_equal && !prev_animals_spotted.length) {
-      // this works!
-      console.log("no prev_animals_spotted, but added animals_spotted");
-
       // add new animals spotted
       let newAnimalsTracked = animals_spotted.map((animal) => {
         let newAnimalTracked = {};
@@ -324,7 +318,6 @@ export default class EditDive extends React.Component {
       this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
     } else if (!arrays_equal) {
       // remove prev animals spotted
-      console.log("animals to remove: ", prev_animals_spotted);
       let oldAnimalsTracked = prev_animals_spotted.map((animal) => {
         let oldAnimalTracked = {};
         oldAnimalTracked.animal = this.context.allAnimals.find(
@@ -336,11 +329,7 @@ export default class EditDive extends React.Component {
         return oldAnimalTracked;
       });
 
-      console.log({ oldAnimalsTracked });
-
-      // TODO not working
       this.context.removeFromAnimalTracker(oldAnimalsTracked, () => {
-        console.log("prev animals spotted and animals spotted are not equal");
         // add new animals spotted
         let newAnimalsTracked = animals_spotted.map((animal) => {
           let newAnimalTracked = {};
@@ -352,7 +341,6 @@ export default class EditDive extends React.Component {
           newAnimalTracked.dive_id = newDive.id;
           return newAnimalTracked;
         });
-        console.log({ newAnimalsTracked });
         this.context.updateAnimalTracker(newAnimalsTracked);
       });
 
