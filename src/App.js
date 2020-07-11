@@ -171,22 +171,36 @@ export default class App extends React.Component {
   };
 
   // TODO this is completely untested
-  removeFromAnimalTracker = (oldAnimals) => {
+  removeFromAnimalTracker = (oldAnimals, cb) => {
+    console.log("animals to remove: ", oldAnimals);
     NonGetApiService.removeAnimalsTracked(oldAnimals)
       .then(() => {
-        GetApiService.getAnimalsTracked()
-          .then(this.setAnimalTracker)
-          .catch(this.catchError);
+        const dive_id = oldAnimals[0].dive_id;
+        const animals = oldAnimals.map((animal) => animal.animal);
+        console.log({ dive_id, animals });
+        this.setState(
+          {
+            animalTracker: this.state.animalTracker.filter(
+              (animal) =>
+                !(animal.dive_id === dive_id && animals.includes(animal.animal))
+            ),
+          },
+          cb
+        );
       })
       .catch((err) => console.log(err));
   };
 
+  // TODO update animal tracker in context here?
   deleteDive = (dive_id) => {
     const newDives = this.state.dives.filter(
       (dive) => Number(dive.id) !== Number(dive_id)
     );
     this.setState({
       dives: newDives,
+      animalTracker: this.state.animalTracker.filter(
+        (animal) => animal.dive_id !== Number(dive_id)
+      ),
     });
   };
 

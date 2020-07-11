@@ -222,8 +222,6 @@ export default class EditDive extends React.Component {
     });
   }
 
-  // TODO
-  // need to test if this is working
   handleSubmit = () => {
     let {
       dive_date,
@@ -279,8 +277,6 @@ export default class EditDive extends React.Component {
       newDive.viz = null;
     }
 
-    console.log("updated dive: ", newDive);
-
     NonGetApiService.updateDive(newDive.id, newDive)
       .then(this.context.updateDive(newDive.id, newDive))
       .catch((err) => console.log(err));
@@ -293,6 +289,7 @@ export default class EditDive extends React.Component {
     // if(array_equal) do NOT update the tracker, do NOT update the wishlist
 
     if (!arrays_equal && !prev_animals_spotted.length) {
+      // this works!
       console.log("no prev_animals_spotted, but added animals_spotted");
 
       // add new animals spotted
@@ -306,7 +303,6 @@ export default class EditDive extends React.Component {
         newAnimalTracked.dive_id = newDive.id;
         return newAnimalTracked;
       });
-      // this takes care of things server side, but local context updated?
       this.context.updateAnimalTracker(newAnimalsTracked);
 
       // update user wishlist fulfilled
@@ -327,21 +323,6 @@ export default class EditDive extends React.Component {
       ];
       this.context.updateWishlistFulfilled(updatedAnimalsSpotted);
     } else if (!arrays_equal) {
-      console.log("prev animals spotted and animals spotted are not equal");
-      // add new animals spotted
-      let newAnimalsTracked = animals_spotted.map((animal) => {
-        let newAnimalTracked = {};
-        newAnimalTracked.animal = this.context.allAnimals.find(
-          (a) => a.id === animal
-        ).animal;
-        newAnimalTracked.country = newDive.country;
-        newAnimalTracked.region = newDive.region;
-        newAnimalTracked.dive_id = newDive.id;
-        return newAnimalTracked;
-      });
-      // this takes care of things server side, but local context updated?
-      this.context.updateAnimalTracker(newAnimalsTracked);
-
       // remove prev animals spotted
       console.log("animals to remove: ", prev_animals_spotted);
       let oldAnimalsTracked = prev_animals_spotted.map((animal) => {
@@ -354,9 +335,26 @@ export default class EditDive extends React.Component {
         oldAnimalTracked.dive_id = newDive.id;
         return oldAnimalTracked;
       });
-      // this takes care of things server side, but local context updated?
-      // not working
-      this.context.removeFromAnimalTracker(oldAnimalsTracked);
+
+      console.log({ oldAnimalsTracked });
+
+      // TODO not working
+      this.context.removeFromAnimalTracker(oldAnimalsTracked, () => {
+        console.log("prev animals spotted and animals spotted are not equal");
+        // add new animals spotted
+        let newAnimalsTracked = animals_spotted.map((animal) => {
+          let newAnimalTracked = {};
+          newAnimalTracked.animal = this.context.allAnimals.find(
+            (a) => a.id === animal
+          ).animal;
+          newAnimalTracked.country = newDive.country;
+          newAnimalTracked.region = newDive.region;
+          newAnimalTracked.dive_id = newDive.id;
+          return newAnimalTracked;
+        });
+        console.log({ newAnimalsTracked });
+        this.context.updateAnimalTracker(newAnimalsTracked);
+      });
 
       // update wishlist fulfilled
       const diveId = this.props.match.params.dive_id;
