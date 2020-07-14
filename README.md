@@ -6,11 +6,9 @@
 
 ## Summary
 
-20K Leagues is a digital scuba dive log for divers who are interested in marine life. While there may be digital dive logs that provide more features, we have found that too many features can often be distracting. Instead, 20K Leagues provides the features that divers who are interested in seeing unique and fascinating marine life care about.
+20K Leagues is a digital dive log for scuba divers who are interested in marine life. While there are dive logs that provide more features, we have found that too many features can often be distracting. Instead, 20k Leagues provides the features that divers who are interested in seeing unique and fascinating marine life care about.
 
-With 20K Leagues you can log all of your dives and get some interesting fast facts: how many days have you spent underwater, how deep was your deepest dive, how long was your longest dive?
-
-But most importantly, 20K Leagues gives you the ability to track where you spotted some of the most elusive creatures. Not only that, but you have access to where all of our divers have seen these animals. This allows you to records memories of amazing experiences and to get an idea of where to go to see something new.
+With 20k Leagues you can log all of your dives and manage your certifications. In addition, 20k Leagues gives you the ability to track where you spotted some of the most elusive creatures. Not only that, but you have access to where all of our divers have seen these animals. This allows you to record memories of amazing experiences and to get an idea of where to go to see something new.
 
 ## Screenshots
 
