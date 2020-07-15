@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "alias": "20k Leagues",
+  "name": "20k Leagues",
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
+  ]
+}
