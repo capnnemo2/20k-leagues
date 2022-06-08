@@ -1,6 +1,6 @@
 # 20K Leagues
 
-[LIVE APP](https://20k-leagues.now.sh/)
+<!-- [LIVE APP](https://20k-leagues.now.sh/) -->
 
 [API REPO](https://github.com/capnnemo2/20k-leagues-api)
 

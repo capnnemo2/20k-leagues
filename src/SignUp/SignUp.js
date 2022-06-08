@@ -459,7 +459,8 @@ export default class SignUp extends React.Component {
           </fieldset>
           <div className="error">{error && <p>{error}</p>}</div>
           <div className="btn-container">
-            <button type="submit" className="btn-submit">
+            <p>This project is being updated, thank you for your patience!</p>
+            <button type="submit" className="btn-submit" disabled="true">
               Submit
             </button>{" "}
             <button

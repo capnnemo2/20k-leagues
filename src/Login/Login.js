@@ -75,9 +75,10 @@ export default class Login extends React.Component {
               Feel free to login as Bob: email: bob@email.com, password:
               P@sswor1d.
             </p>
+            <p>This project is being updated, thank you for your patience!</p>
           </fieldset>
           <div className="btn-container">
-            <button type="submit" className="btn-submit">
+            <button type="submit" className="btn-submit" disabled="true">
               Login
             </button>{" "}
             <button
